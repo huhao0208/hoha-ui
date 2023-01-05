@@ -7,6 +7,8 @@ const nav: DefaultTheme.NavItem[] = [
   { text: '组件', link: '/components/foo' }
 ]
 
+// @ts-ignore
+// @ts-ignore
 const sidebar: DefaultTheme.Sidebar = {
   '/guide': [
     {
@@ -19,6 +21,7 @@ const sidebar: DefaultTheme.Sidebar = {
   ],
   '/components': [{
     items: [
+      // @ts-ignore
       ...components
     ]
   }]

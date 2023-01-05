@@ -14,8 +14,7 @@ const updateComponentLibIndex = (libPath: string, componentInfo: ComponentInfo) 
 
   const result = `${content.substring(0, index1)}` +
     `import ${componentInfo.upCamelName} from '${componentInfo.nameWithLib}'\n` +
-    content.substring(index1, index2 - 1) +
-    `,\n  ${componentInfo.upCamelName}\n` +
+    content.substring(index1, index2 - 1) + `,\n  ${componentInfo.upCamelName}\n` +
     content.substring(index2)
 
   fs.writeFileSync(indexPath, result)

@@ -16,8 +16,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, './index.ts'),
-      name: 'hoha-ui-lib'
-      // fileName: format => `hoha-ui-lib.${format}.js`
+      name: 'hohaUiLib',
+      fileName: format => `hoha-ui-lib.${format}.js`
     },
     outDir: path.resolve(__dirname, '../../lib'),
     rollupOptions: {

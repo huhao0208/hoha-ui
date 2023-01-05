@@ -13,8 +13,8 @@ export default defineComponent({
     }
     return () => (
       <div class={NAME}>
-        <h1>h-Admin-UI Demo</h1>
-        <p class={NAME + '__description'}>{ props.msg }</p>
+        <h1>Demo</h1>
+        <p class={NAME + '__description'}>{props.msg}</p>
         <el-button type='primary' onClick={onBtnClick}>点击我</el-button>
       </div>
     )

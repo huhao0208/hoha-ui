@@ -28,6 +28,9 @@ export default defineConfig({
     port: 3000,
     cors: true,
     proxy: {}
+    // hmr: {
+    //   overlay: false
+    // }
   },
   envDir: path.resolve(__dirname, 'env'),
   build: {

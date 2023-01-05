@@ -34,7 +34,7 @@
     "gen:component": "pnpm run -C cli gen",
     "start:verdaccio": "pnpm verdaccio",
     "pub:local": "pnpm publish --registry http://localhost:4873/ --no-git-checks",
-    "publist": "npm publish --registry http://registry.npmjs.org --no-git-checks",
+    "publish": "npm publish --registry http://registry.npmjs.org --no-git-checks",
     "lint": "eslint \"{cli,packages,docs,example}/**/*.{js,ts,vue,jsx,tsx}\" --fix"
   },
   "keywords": [],

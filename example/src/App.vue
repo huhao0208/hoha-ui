@@ -1,19 +1,26 @@
 <template>
   <div class="site">
-    <h1>组件库测试站点</h1>
-    <p>测试站点主要用于开发过程中测试组件，即在开发过程中由业务驱动组件开发。</p>
-    <img src="/logo.png" width="200">
-    <img src="/qrcode.jpg" width="200">
-    <h-foo :msg="msg"></h-foo>
+    <h1>组件测试</h1>
+
+    选中的值: {{ seVal }}
+    <h-select v-model="seVal" :list="list" :multiple="true" :clearable="true" @blur="onBlur">
+      <div>111</div>
+    </h-select>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
 
-const msg = ref('hello world')
+const seVal = ref('')
+
+const list = ref(['1', { label: 'A1', value: '1' }])
+
+const onBlur = (e: any) => {
+  console.log('onBlur', e)
+}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .site {
   padding: 20px;
 }

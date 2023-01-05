@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hoha-ui-lib/foo": "workspace:^1.0.0"
+    "@hoha-ui-lib/foo": "workspace:^1.0.0",
+    "@hoha-ui-lib/select": "workspace:^1.0.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
