@@ -11,7 +11,7 @@ export const sfcTemplate = (lineNameWithPrefix: string, lowCamelName: string): s
 </template>
 
 <script lang="ts" setup name="${lineNameWithPrefix}">
-import { defineProps } from 'vue'
+// import { defineProps } from 'vue'
 import { ${lowCamelName}Props } from './types'
 
 defineProps(${lowCamelName}Props)
