@@ -31,6 +31,7 @@
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs serve",
+    "docs:deploy":"pnpm run -C docs deploy",
     "gen:component": "pnpm run -C cli gen",
     "start:verdaccio": "pnpm verdaccio",
     "pub:local": "pnpm publish --registry http://localhost:4873/ --no-git-checks",
