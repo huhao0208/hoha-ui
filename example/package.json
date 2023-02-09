@@ -1,25 +1,26 @@
 {
-  "name": "@hoha-ui-lib/example",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
-  "scripts": {
-    "dev:dev": "vite --mode dev",
-    "dev:uat": "vite --mode uat",
-    "dev:prod": "vite --mode prod",
-    "build:dev": "vue-tsc --noEmit && vite build --mode dev",
-    "build:uat": "vue-tsc --noEmit && vite build --mode uat",
-    "build:prod": "vue-tsc --noEmit && vite build --mode prod",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "sass": "^1.55.0",
-    "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-setup-extend": "^0.4.0"
-  },
-  "dependencies": {
-    "@element-plus/icons-vue": "^2.0.10",
-    "@hoha-ui-lib/hoha-ui-lib": "workspace:^1.0.0",
-    "element-plus": "^2.2.19"
-  }
+    "name": "@hoha-ui-lib/example",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "scripts": {
+        "dev:dev": "vite --mode dev",
+        "dev:uat": "vite --mode uat",
+        "dev:prod": "vite --mode prod",
+        "build:dev": "vue-tsc --noEmit && vite build --mode dev",
+        "build:uat": "vue-tsc --noEmit && vite build --mode uat",
+        "build:prod": "vue-tsc --noEmit && vite build --mode prod",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "sass": "^1.55.0",
+        "vite-plugin-svg-icons": "^2.0.1",
+        "vite-plugin-vue-setup-extend": "^0.4.0",
+        "vite-plugin-checker": "^0.5.1"
+    },
+    "dependencies": {
+        "@element-plus/icons-vue": "^2.0.10",
+        "@hoha-ui-lib/hoha-ui-lib": "workspace:^1.0.0",
+        "element-plus": "^2.2.19"
+    }
 }

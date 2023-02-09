@@ -12,7 +12,7 @@ import { computed, useAttrs, watch } from 'vue'
 import { selectProps } from './types'
 
 const props = defineProps(selectProps)
-console.log(props)
+// console.log(props)
 const attrs = useAttrs()
 const list = computed(() => {
   // console.log(attrs, 'attrs')
@@ -22,7 +22,7 @@ const list = computed(() => {
 const modelValue = computed(() => attrs.modelValue)
 watch(modelValue, function (e, old) {
   // 对比新旧值 判断最新变化的是否为全选
-  console.log(e, old, 'eeeeeeeeee')
+  // console.log(e, old, 'eeeeeeeeee')
 }, {
   deep: true,
   immediate: true

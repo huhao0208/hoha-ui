@@ -82,7 +82,7 @@ const searchColumns = ref([
 
 const loading = ref(false)
 
-const searchHandler = e => {
+const searchHandler = (e:any) => {
     loading.value = true
     console.log(e, 'searchHandler')
     setTimeout(_ => {

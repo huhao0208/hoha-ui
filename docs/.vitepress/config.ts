@@ -31,7 +31,7 @@ export default defineConfig({
   title: '浏览器标题',
   description: '浏览器描述',
   lang: 'cn-ZH',
-  base: '/',
+  base: '',
   lastUpdated: true,
   themeConfig: {
     logo: '/logo.png',

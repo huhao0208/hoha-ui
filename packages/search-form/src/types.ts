@@ -1,11 +1,13 @@
 import { ExtractPropTypes, PropType } from 'vue'
 
-export interface attrsItem {}
+export interface attrsItem {
+  [name: string]: any;
+}
 export interface ColumnsItem {
   type: 'input'| 'select'
   key:string|number
   label: string
-  children?:[]
+  children?: any[]
   attrs?: attrsItem
 }
 
@@ -19,7 +21,7 @@ export const searchFormProps = {
     default: () => ({ search: '', reset: '' })
   },
   searchParam: {
-    type: Object,
+    type: Object as PropType<attrsItem>,
     default: () => ({})
   },
   columns: {

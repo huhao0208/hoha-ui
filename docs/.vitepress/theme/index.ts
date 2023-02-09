@@ -6,14 +6,11 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import DemoUiLib from '@hoha-ui-lib/hoha-ui-lib'
 
-
 export default {
   // @ts-ignore
   ...DefaultTheme,
   enhanceApp(ctx: EnhanceAppContext) {
-    // @ts-ignore
     ctx.app.use(ElementPlus)
-    // @ts-ignore
     ctx.app.use(DemoUiLib)
     ctx.app.component('demo-preview', AntDesignContainer)
   }
