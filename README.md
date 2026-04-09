@@ -5,7 +5,7 @@ Vue 2/3 组件库，支持 npm 引入和浏览器直接引入。
 ## 安装
 
 ```bash
-npm install @hoha/components @hoha/utils
+npm install @hohaya/hoho @hohaya/hoho-utils
 ```
 
 ## 使用
@@ -13,15 +13,15 @@ npm install @hoha/components @hoha/utils
 ```javascript
 // Vue 3
 import { createApp } from 'vue'
-import HohaUI from '@hoha/components'
-import '@hoha/components/dist/style.css'
+import HohaUI from '@hohaya/hoho'
+import '@hohaya/hoho/dist/style.css'
 
 createApp().use(HohaUI)
 
 // Vue 2
 import Vue from 'vue'
-import HohaUI from '@hoha/components'
-import '@hoha/components/dist/style.css'
+import HohaUI from '@hohaya/hoho'
+import '@hohaya/hoho/dist/style.css'
 
 Vue.use(HohaUI)
 ```

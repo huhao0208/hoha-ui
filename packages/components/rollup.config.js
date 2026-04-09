@@ -27,7 +27,7 @@ export default [
       vue(),
       less({ output: 'dist/style.css' })
     ],
-    external: ['vue', '@vue/composition-api', '@hoha/utils', '@hoha/shared']
+    external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared']
   },
 
   // CJS build
@@ -46,7 +46,7 @@ export default [
       vue(),
       less({ output: 'dist/style.css' })
     ],
-    external: ['vue', '@vue/composition-api', '@hoha/utils', '@hoha/shared']
+    external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared']
   },
 
   // UMD build

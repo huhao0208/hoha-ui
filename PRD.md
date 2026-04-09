@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-**项目名称**: @hoha/components & @hoha/utils  
+**项目名称**: @hohaya/hoho & @hohaya/hoho-utils  
 **项目定位**: 跨框架前端组件库 + 工具函数库  
 **目标用户**: 前端开发者（Vue2/Vue3/原生浏览器环境）
 
@@ -10,7 +10,7 @@
 
 ## 核心目标
 
-1. **双包架构**: 组件库 (`@hoha/components`) 与工具库 (`@hoha/utils`) 独立发布
+1. **双包架构**: 组件库 (`@hohaya/hoho`) 与工具库 (`@hohaya/hoho-utils`) 独立发布
 2. **多环境支持**: 
    - Vue 2.x 项目（通过 npm 引入）
    - Vue 3.x 项目（通过 npm 引入）
@@ -51,7 +51,7 @@
 ```
 hoha-ui/
 ├── packages/
-│   ├── components/          # @hoha/components
+│   ├── components/          # @hohaya/hoho
 │   │   ├── src/
 │   │   │   ├── button/
 │   │   │   ├── input/
@@ -61,7 +61,7 @@ hoha-ui/
 │   │   │   └── index.ts
 │   │   └── package.json
 │   │
-│   ├── utils/               # @hoha/utils
+│   ├── utils/               # @hohaya/hoho-utils
 │   │   ├── src/
 │   │   │   ├── dom/
 │   │   │   ├── format/
@@ -157,13 +157,13 @@ hoha-ui/
 ### npm 包
 ```json
 {
-  "@hoha/components": {
+  "@hohaya/hoho": {
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "browser": "dist/index.umd.js",
     "style": "dist/style.css"
   },
-  "@hoha/utils": {
+  "@hohaya/hoho-utils": {
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
     "browser": "dist/index.umd.js"
@@ -174,37 +174,37 @@ hoha-ui/
 ### CDN 引入
 ```html
 <!-- 组件库 -->
-<link rel="stylesheet" href="https://unpkg.com/@hoha/components/dist/style.css">
-<script src="https://unpkg.com/@hoha/components/dist/index.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@hohaya/hoho/dist/style.css">
+<script src="https://unpkg.com/@hohaya/hoho/dist/index.umd.js"></script>
 
 <!-- 工具库 -->
-<script src="https://unpkg.com/@hoha/utils/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@hohaya/hoho-utils/dist/index.umd.js"></script>
 ```
 
 ### 使用方式
 ```javascript
 // Vue 3 项目
 import { createApp } from 'vue'
-import HohaComponents from '@hoha/components'
-import '@hoha/components/dist/style.css'
+import HohaComponents from '@hohaya/hoho'
+import '@hohaya/hoho/dist/style.css'
 
 app.use(HohaComponents)
 
 // Vue 2 项目
 import Vue from 'vue'
-import HohaComponents from '@hoha/components'
-import '@hoha/components/dist/style.css'
+import HohaComponents from '@hohaya/hoho'
+import '@hohaya/hoho/dist/style.css'
 
 Vue.use(HohaComponents)
 
 // 浏览器环境
-<script src="https://unpkg.com/@hoha/components/dist/index.umd.js"></script>
+<script src="https://unpkg.com/@hohaya/hoho/dist/index.umd.js"></script>
 <script>
   Vue.use(HohaComponents.default)
 </script>
 
 // 工具库
-import { formatDate, localStorage } from '@hoha/utils'
+import { formatDate, localStorage } from '@hohaya/hoho-utils'
 ```
 
 ---

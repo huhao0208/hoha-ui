@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "pnpm -F playground dev",
     "build": "pnpm -r build",
-    "build:components": "pnpm -F @hoha/components build",
-    "build:utils": "pnpm -F @hoha/utils build",
+    "build:components": "pnpm -F @hohaya/hoho build",
+    "build:utils": "pnpm -F @hohaya/hoho-utils build",
     "docs:dev": "pnpm -F docs dev",
     "docs:build": "pnpm -F docs build",
     "lint": "eslint packages --ext .js,.ts,.vue",

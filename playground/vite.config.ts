@@ -7,8 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@hoha/components': resolve(__dirname, '../packages/components/src'),
-      '@hoha/utils': resolve(__dirname, '../packages/utils/src'),
+      '@hohaya/hoho': resolve(__dirname, '../packages/components/src'),
+      '@hohaya/hoho-utils': resolve(__dirname, '../packages/utils/src'),
     },
   },
   css: {

@@ -1,7 +1,7 @@
 # 任务执行计划表
 
 ## 总需求
-开发前端组件库 `@hoha/components` 和工具函数库 `@hoha/utils`，支持 Vue2/Vue3/浏览器直接引入，包含交互式文档站点。
+开发前端组件库 `@hohaya/hoho` 和工具函数库 `@hohaya/hoho-utils`，支持 Vue2/Vue3/浏览器直接引入，包含交互式文档站点。
 
 ## 目标工作区
 `/root/.openclaw/projects/hoha-ui/`

@@ -7,15 +7,15 @@
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hoha/components @hoha/utils
+pnpm add @hohaya/hoho @hohaya/hoho-utils
 ```
 
 ```bash [npm]
-npm install @hoha/components @hoha/utils
+npm install @hohaya/hoho @hohaya/hoho-utils
 ```
 
 ```bash [yarn]
-yarn add @hoha/components @hoha/utils
+yarn add @hohaya/hoho @hohaya/hoho-utils
 ```
 
 :::
@@ -29,7 +29,7 @@ yarn add @hoha/components @hoha/utils
 ```typescript
 // Vue 3
 import { createApp } from 'vue'
-import HohaUI from '@hoha/components'
+import HohaUI from '@hohaya/hoho'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -40,7 +40,7 @@ app.mount('#app')
 ```typescript
 // Vue 2
 import Vue from 'vue'
-import HohaUI from '@hoha/components'
+import HohaUI from '@hohaya/hoho'
 import App from './App.vue'
 
 Vue.use(HohaUI)
@@ -62,7 +62,7 @@ Hoha UI 支持 Tree Shaking，你可以只引入需要的组件：
 </template>
 
 <script setup>
-import { HoButton } from '@hoha/components'
+import { HoButton } from '@hohaya/hoho'
 
 const handleClick = () => {
   console.log('Button clicked!')
@@ -72,10 +72,10 @@ const handleClick = () => {
 
 ### 工具函数
 
-工具函数可以单独从 `@hoha/utils` 引入：
+工具函数可以单独从 `@hohaya/hoho-utils` 引入：
 
 ```typescript
-import { formatDate, formatNumber, localStorage } from '@hoha/utils'
+import { formatDate, formatNumber, localStorage } from '@hohaya/hoho-utils'
 
 // 使用格式化函数
 const date = formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss')
@@ -116,7 +116,7 @@ console.log(user) // { name: 'Hoha' }
 
 <script setup>
 import { ref } from 'vue'
-import { HoButton, HoInput } from '@hoha/components'
+import { HoButton, HoInput } from '@hohaya/hoho'
 
 const inputValue = ref('')
 </script>

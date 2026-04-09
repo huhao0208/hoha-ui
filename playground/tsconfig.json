@@ -18,8 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@hoha/components": ["../packages/components/src"],
-      "@hoha/utils": ["../packages/utils/src"]
+      "@hohaya/hoho": ["../packages/components/src"],
+      "@hohaya/hoho-utils": ["../packages/utils/src"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

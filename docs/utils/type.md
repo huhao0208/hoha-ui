@@ -17,7 +17,7 @@ import {
   isUndefined,
   isEmpty,
   isPlainObject
-} from '@hoha/utils'
+} from '@hohaya/hoho-utils'
 ```
 
 ## 方法列表
@@ -44,7 +44,7 @@ function isType(value: unknown, type: string): boolean
 **示例**
 
 ```typescript
-import { isType } from '@hoha/utils'
+import { isType } from '@hohaya/hoho-utils'
 
 isType([1, 2, 3], 'Array') // true
 isType({}, 'Object') // true
@@ -65,7 +65,7 @@ function isArray(value: unknown): value is unknown[]
 **示例**
 
 ```typescript
-import { isArray } from '@hoha/utils'
+import { isArray } from '@hohaya/hoho-utils'
 
 isArray([1, 2, 3]) // true
 isArray('hello') // false
@@ -93,7 +93,7 @@ function isObject(value: unknown): value is Record<string, unknown>
 **示例**
 
 ```typescript
-import { isObject } from '@hoha/utils'
+import { isObject } from '@hohaya/hoho-utils'
 
 isObject({}) // true
 isObject({ name: 'Hoha' }) // true
@@ -115,7 +115,7 @@ function isFunction(value: unknown): value is Function
 **示例**
 
 ```typescript
-import { isFunction } from '@hoha/utils'
+import { isFunction } from '@hohaya/hoho-utils'
 
 isFunction(() => {}) // true
 isFunction(function() {}) // true
@@ -137,7 +137,7 @@ function isString(value: unknown): value is string
 **示例**
 
 ```typescript
-import { isString } from '@hoha/utils'
+import { isString } from '@hohaya/hoho-utils'
 
 isString('hello') // true
 isString('') // true
@@ -159,7 +159,7 @@ function isNumber(value: unknown): value is number
 **示例**
 
 ```typescript
-import { isNumber } from '@hoha/utils'
+import { isNumber } from '@hohaya/hoho-utils'
 
 isNumber(123) // true
 isNumber(0) // true
@@ -182,7 +182,7 @@ function isBoolean(value: unknown): value is boolean
 **示例**
 
 ```typescript
-import { isBoolean } from '@hoha/utils'
+import { isBoolean } from '@hohaya/hoho-utils'
 
 isBoolean(true) // true
 isBoolean(false) // true
@@ -204,7 +204,7 @@ function isNull(value: unknown): value is null
 **示例**
 
 ```typescript
-import { isNull } from '@hoha/utils'
+import { isNull } from '@hohaya/hoho-utils'
 
 isNull(null) // true
 isNull(undefined) // false
@@ -225,7 +225,7 @@ function isUndefined(value: unknown): value is undefined
 **示例**
 
 ```typescript
-import { isUndefined } from '@hoha/utils'
+import { isUndefined } from '@hohaya/hoho-utils'
 
 isUndefined(undefined) // true
 isUndefined(null) // false
@@ -252,7 +252,7 @@ function isEmpty(value: unknown): boolean
 **示例**
 
 ```typescript
-import { isEmpty } from '@hoha/utils'
+import { isEmpty } from '@hohaya/hoho-utils'
 
 // null 和 undefined
 isEmpty(null) // true
@@ -289,7 +289,7 @@ function isPlainObject(value: unknown): value is Record<string, unknown>
 **示例**
 
 ```typescript
-import { isPlainObject } from '@hoha/utils'
+import { isPlainObject } from '@hohaya/hoho-utils'
 
 isPlainObject({}) // true
 isPlainObject({ name: 'Hoha' }) // true
@@ -313,7 +313,7 @@ isPlainObject(instance) // false
 ### 参数校验
 
 ```typescript
-import { isString, isNumber, isObject, isArray, isFunction } from '@hoha/utils'
+import { isString, isNumber, isObject, isArray, isFunction } from '@hohaya/hoho-utils'
 
 interface User {
   name: string
@@ -353,7 +353,7 @@ const user = createUser({
 ### 深拷贝中的类型判断
 
 ```typescript
-import { isArray, isPlainObject } from '@hoha/utils'
+import { isArray, isPlainObject } from '@hohaya/hoho-utils'
 
 function deepClone<T>(value: T): T {
   // 基本类型直接返回
@@ -385,7 +385,7 @@ function deepClone<T>(value: T): T {
 ### 条件处理
 
 ```typescript
-import { isEmpty, isString, isNumber } from '@hoha/utils'
+import { isEmpty, isString, isNumber } from '@hohaya/hoho-utils'
 
 function formatValue(value: unknown): string {
   // 空值处理
@@ -417,7 +417,7 @@ formatValue([1, 2, 3]) // '1,2,3'
 ### API 响应处理
 
 ```typescript
-import { isObject, isArray, isString } from '@hoha/utils'
+import { isObject, isArray, isString } from '@hohaya/hoho-utils'
 
 interface ApiResponse<T> {
   code: number
@@ -450,7 +450,7 @@ async function fetchUser(id: number): Promise<User | null> {
 这些类型判断函数都可以作为 TypeScript 的类型守卫使用：
 
 ```typescript
-import { isString, isNumber } from '@hoha/utils'
+import { isString, isNumber } from '@hohaya/hoho-utils'
 
 function process(value: unknown) {
   if (isString(value)) {

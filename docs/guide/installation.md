@@ -32,15 +32,15 @@ npm install -g yarn
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hoha/components
+pnpm add @hohaya/hoho
 ```
 
 ```bash [npm]
-npm install @hoha/components
+npm install @hohaya/hoho
 ```
 
 ```bash [yarn]
-yarn add @hoha/components
+yarn add @hohaya/hoho
 ```
 
 :::
@@ -50,15 +50,15 @@ yarn add @hoha/components
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hoha/utils
+pnpm add @hohaya/hoho-utils
 ```
 
 ```bash [npm]
-npm install @hoha/utils
+npm install @hohaya/hoho-utils
 ```
 
 ```bash [yarn]
-yarn add @hoha/utils
+yarn add @hohaya/hoho-utils
 ```
 
 :::
@@ -107,7 +107,7 @@ export default defineNuxtConfig({
   ],
   vite: {
     optimizeDeps: {
-      include: ['@hoha/components', '@hoha/utils']
+      include: ['@hohaya/hoho', '@hohaya/hoho-utils']
     }
   }
 })

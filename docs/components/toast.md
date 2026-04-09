@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { HoToast } from '@hoha/components'
+import { HoToast } from '@hohaya/hoho'
 
 const showToast = () => {
   HoToast('这是一条提示信息')
@@ -65,7 +65,7 @@ const showLoading = () => {
 </template>
 
 <script setup>
-import { HoToast } from '@hoha/components'
+import { HoToast } from '@hohaya/hoho'
 
 const showCustomIcon = () => {
   HoToast({
@@ -96,7 +96,7 @@ const showCustomIcon = () => {
 </template>
 
 <script setup>
-import { HoToast } from '@hoha/components'
+import { HoToast } from '@hohaya/hoho'
 
 const showDynamicToast = () => {
   const toast = HoToast.loading({
@@ -165,7 +165,7 @@ Toast 组件提供以下方法：
 ### 使用示例
 
 ```typescript
-import { toast } from '@hoha/components'
+import { toast } from '@hohaya/hoho'
 
 // 显示文本提示
 toast.text('这是一条提示')

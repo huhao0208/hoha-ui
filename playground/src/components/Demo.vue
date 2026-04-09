@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 // 组件占位符 - 实际组件开发完成后替换为真实组件
-// import { Button, Input, Icon } from '@hoha/components'
+// import { Button, Input, Icon } from '@hohaya/hoho'
 </script>
 
 <style lang="less" scoped>

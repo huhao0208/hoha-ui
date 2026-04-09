@@ -65,15 +65,15 @@ features:
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hoha/components @hoha/utils
+pnpm add @hohaya/hoho @hohaya/hoho-utils
 ```
 
 ```bash [npm]
-npm install @hoha/components @hoha/utils
+npm install @hohaya/hoho @hohaya/hoho-utils
 ```
 
 ```bash [yarn]
-yarn add @hoha/components @hoha/utils
+yarn add @hohaya/hoho @hohaya/hoho-utils
 ```
 
 :::
@@ -83,7 +83,7 @@ yarn add @hoha/components @hoha/utils
 ```typescript
 // 完整引入
 import { createApp } from 'vue'
-import HohaUI from '@hoha/components'
+import HohaUI from '@hohaya/hoho'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -100,7 +100,7 @@ app.mount('#app')
 
 <script setup>
 import { ref } from 'vue'
-import { HoButton, HoInput } from '@hoha/components'
+import { HoButton, HoInput } from '@hohaya/hoho'
 
 const value = ref('')
 </script>

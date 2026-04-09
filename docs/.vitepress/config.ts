@@ -169,8 +169,8 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@hoha/components': '/root/.openclaw/projects/hoha-ui/packages/components/src/index.ts',
-        '@hoha/utils': '/root/.openclaw/projects/hoha-ui/packages/utils/src/index.ts'
+        '@hohaya/hoho': '/root/.openclaw/projects/hoha-ui/packages/components/src/index.ts',
+        '@hohaya/hoho-utils': '/root/.openclaw/projects/hoha-ui/packages/utils/src/index.ts'
       }
     }
   },

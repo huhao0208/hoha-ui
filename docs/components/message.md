@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { HoMessage } from '@hoha/components'
+import { HoMessage } from '@hohaya/hoho'
 
 const showMessage = () => {
   HoMessage('这是一条消息提示')
@@ -65,7 +65,7 @@ const showInfo = () => {
 </template>
 
 <script setup>
-import { HoMessage } from '@hoha/components'
+import { HoMessage } from '@hohaya/hoho'
 
 const showClosable = () => {
   HoMessage({
@@ -98,7 +98,7 @@ const showClosable = () => {
 </template>
 
 <script setup>
-import { HoMessage } from '@hoha/components'
+import { HoMessage } from '@hohaya/hoho'
 
 const showHtml = () => {
   HoMessage({
@@ -144,7 +144,7 @@ Message 组件提供以下方法：
 调用 Message 方法会返回当前 Message 的实例。如果需要手动关闭实例，可以调用 `close` 方法：
 
 ```typescript
-import { message } from '@hoha/components'
+import { message } from '@hohaya/hoho'
 
 const msg = message.success('这是一条消息')
 msg.close()

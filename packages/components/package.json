@@ -49,7 +49,7 @@
     "vue": "^2.6.0 || ^3.0.0"
   },
   "dependencies": {
-    "@hoha/utils": "workspace:*",
+    "@hohaya/hoho-utils": "workspace:*",
     "@vue/composition-api": "^1.7.0"
   },
   "devDependencies": {

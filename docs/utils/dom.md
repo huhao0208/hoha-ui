@@ -5,7 +5,7 @@
 ## 安装
 
 ```typescript
-import { hasClass, addClass, removeClass, getStyle, setStyle, scrollTo, scrollToTop } from '@hoha/utils'
+import { hasClass, addClass, removeClass, getStyle, setStyle, scrollTo, scrollToTop } from '@hohaya/hoho-utils'
 ```
 
 ## 方法列表
@@ -32,7 +32,7 @@ function hasClass(el: Element, className: string): boolean
 **示例**
 
 ```typescript
-import { hasClass } from '@hoha/utils'
+import { hasClass } from '@hohaya/hoho-utils'
 
 const el = document.getElementById('my-element')
 
@@ -61,7 +61,7 @@ function addClass(el: Element, className: string): void
 **示例**
 
 ```typescript
-import { addClass } from '@hoha/utils'
+import { addClass } from '@hohaya/hoho-utils'
 
 const el = document.getElementById('my-element')
 addClass(el, 'active')
@@ -88,7 +88,7 @@ function removeClass(el: Element, className: string): void
 **示例**
 
 ```typescript
-import { removeClass } from '@hoha/utils'
+import { removeClass } from '@hohaya/hoho-utils'
 
 const el = document.getElementById('my-element')
 removeClass(el, 'active')
@@ -118,7 +118,7 @@ function getStyle(el: Element, prop: string): string
 **示例**
 
 ```typescript
-import { getStyle } from '@hoha/utils'
+import { getStyle } from '@hohaya/hoho-utils'
 
 const el = document.getElementById('my-element')
 const color = getStyle(el, 'color')
@@ -148,7 +148,7 @@ function setStyle(el: HTMLElement, styles: Record<string, string>): void
 **示例**
 
 ```typescript
-import { setStyle } from '@hoha/utils'
+import { setStyle } from '@hohaya/hoho-utils'
 
 const el = document.getElementById('my-element')
 
@@ -180,7 +180,7 @@ function scrollTo(top: number, behavior?: 'smooth' | 'auto'): void
 **示例**
 
 ```typescript
-import { scrollTo } from '@hoha/utils'
+import { scrollTo } from '@hohaya/hoho-utils'
 
 // 平滑滚动到顶部
 scrollTo(0)
@@ -205,7 +205,7 @@ function scrollToTop(): void
 **示例**
 
 ```typescript
-import { scrollToTop } from '@hoha/utils'
+import { scrollToTop } from '@hohaya/hoho-utils'
 
 // 滚动到顶部
 scrollToTop()
@@ -230,7 +230,7 @@ scrollToTop()
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { hasClass, addClass, removeClass, setStyle, scrollToTop } from '@hoha/utils'
+import { hasClass, addClass, removeClass, setStyle, scrollToTop } from '@hohaya/hoho-utils'
 
 const box = ref(null)
 const isActive = ref(false)

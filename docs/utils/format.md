@@ -5,7 +5,7 @@
 ## 安装
 
 ```typescript
-import { formatDate, formatNumber, formatSize } from '@hoha/utils'
+import { formatDate, formatNumber, formatSize } from '@hohaya/hoho-utils'
 ```
 
 ## 方法列表
@@ -39,7 +39,7 @@ function formatDate(date: Date | string | number, format?: string): string
 **示例**
 
 ```typescript
-import { formatDate } from '@hoha/utils'
+import { formatDate } from '@hohaya/hoho-utils'
 
 // 使用 Date 对象
 formatDate(new Date()) // '2024-01-15'
@@ -77,7 +77,7 @@ function formatNumber(num: number, decimals?: number): string
 **示例**
 
 ```typescript
-import { formatNumber } from '@hoha/utils'
+import { formatNumber } from '@hohaya/hoho-utils'
 
 // 基本用法
 formatNumber(1234567) // '1,234,567'
@@ -116,7 +116,7 @@ function formatSize(bytes: number): string
 **示例**
 
 ```typescript
-import { formatSize } from '@hoha/utils'
+import { formatSize } from '@hohaya/hoho-utils'
 
 formatSize(0) // '0 B'
 formatSize(500) // '500 B'
@@ -159,7 +159,7 @@ console.log(`文件大小: ${formatSize(file.size)}`)
 
 <script setup>
 import { computed } from 'vue'
-import { formatDate, formatNumber, formatSize } from '@hoha/utils'
+import { formatDate, formatNumber, formatSize } from '@hohaya/hoho-utils'
 
 // 日期
 const currentDate = computed(() => formatDate(new Date()))
@@ -205,7 +205,7 @@ const formattedSize = computed(() => formatSize(bytes))
 ### 显示文章发布时间
 
 ```typescript
-import { formatDate } from '@hoha/utils'
+import { formatDate } from '@hohaya/hoho-utils'
 
 interface Article {
   title: string
@@ -224,7 +224,7 @@ console.log(`发布于 ${publishTime}`)
 ### 显示金额
 
 ```typescript
-import { formatNumber } from '@hoha/utils'
+import { formatNumber } from '@hohaya/hoho-utils'
 
 const price = 99999.99
 const displayPrice = formatNumber(price, 2)
@@ -234,7 +234,7 @@ console.log(`¥${displayPrice}`) // ¥99,999.99
 ### 文件上传进度
 
 ```typescript
-import { formatSize } from '@hoha/utils'
+import { formatSize } from '@hohaya/hoho-utils'
 
 const file = {
   name: 'video.mp4',

@@ -8,8 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hoha/components": "workspace:*",
-    "@hoha/utils": "workspace:*",
+    "@hohaya/hoho": "workspace:*",
+    "@hohaya/hoho-utils": "workspace:*",
     "vue": "^3.4.0"
   },
   "devDependencies": {

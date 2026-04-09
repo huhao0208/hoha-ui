@@ -5,7 +5,7 @@
 ## 安装
 
 ```typescript
-import { localStorage, sessionStorage, cookie } from '@hoha/utils'
+import { localStorage, sessionStorage, cookie } from '@hohaya/hoho-utils'
 ```
 
 ## localStorage
@@ -25,7 +25,7 @@ localStorage.get<T>(key: string): T | null
 **示例**
 
 ```typescript
-import { localStorage } from '@hoha/utils'
+import { localStorage } from '@hohaya/hoho-utils'
 
 // 获取字符串
 const name = localStorage.get<string>('name')
@@ -62,7 +62,7 @@ localStorage.set<T>(key: string, value: T, options?: { expire?: number }): void
 **示例**
 
 ```typescript
-import { localStorage } from '@hoha/utils'
+import { localStorage } from '@hohaya/hoho-utils'
 
 // 存储字符串
 localStorage.set('name', 'Hoha UI')
@@ -88,7 +88,7 @@ localStorage.remove(key: string): void
 **示例**
 
 ```typescript
-import { localStorage } from '@hoha/utils'
+import { localStorage } from '@hohaya/hoho-utils'
 
 localStorage.remove('name')
 localStorage.remove('user')
@@ -105,7 +105,7 @@ localStorage.clear(): void
 **示例**
 
 ```typescript
-import { localStorage } from '@hoha/utils'
+import { localStorage } from '@hohaya/hoho-utils'
 
 localStorage.clear()
 ```
@@ -135,7 +135,7 @@ sessionStorage.clear(): void
 **示例**
 
 ```typescript
-import { sessionStorage } from '@hoha/utils'
+import { sessionStorage } from '@hohaya/hoho-utils'
 
 // 存储表单草稿
 sessionStorage.set('form-draft', {
@@ -169,7 +169,7 @@ cookie.get(key: string): string | null
 **示例**
 
 ```typescript
-import { cookie } from '@hoha/utils'
+import { cookie } from '@hohaya/hoho-utils'
 
 const sessionId = cookie.get('session_id')
 const theme = cookie.get('theme')
@@ -194,7 +194,7 @@ cookie.set(key: string, value: string, days?: number): void
 **示例**
 
 ```typescript
-import { cookie } from '@hoha/utils'
+import { cookie } from '@hohaya/hoho-utils'
 
 // 设置 Cookie，默认 365 天后过期
 cookie.set('theme', 'dark')
@@ -217,7 +217,7 @@ cookie.remove(key: string): void
 **示例**
 
 ```typescript
-import { cookie } from '@hoha/utils'
+import { cookie } from '@hohaya/hoho-utils'
 
 // 删除 Cookie
 cookie.remove('theme')
@@ -231,7 +231,7 @@ cookie.remove('session_id')
 ### 用户登录状态管理
 
 ```typescript
-import { localStorage, cookie } from '@hoha/utils'
+import { localStorage, cookie } from '@hohaya/hoho-utils'
 
 interface User {
   id: number
@@ -283,7 +283,7 @@ function logout() {
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { localStorage } from '@hoha/utils'
+import { localStorage } from '@hohaya/hoho-utils'
 
 const isDark = ref(false)
 
@@ -318,7 +318,7 @@ function toggleTheme() {
 
 <script setup>
 import { reactive, onMounted } from 'vue'
-import { sessionStorage } from '@hoha/utils'
+import { sessionStorage } from '@hohaya/hoho-utils'
 
 const form = reactive({
   title: '',
