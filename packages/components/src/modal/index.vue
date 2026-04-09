@@ -165,6 +165,11 @@ export default defineComponent({
     watch(() => computedVisible.value, (val) => {
       if (val) {
         position.value = { x: 0, y: 0 }
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden'
+      } else {
+        // Restore body scroll when modal is closed
+        document.body.style.overflow = ''
       }
     })
 
@@ -174,6 +179,8 @@ export default defineComponent({
 
     onUnmounted(() => {
       document.removeEventListener('keydown', handleKeydown)
+      // Ensure body scroll is restored when component is unmounted
+      document.body.style.overflow = ''
     })
 
     return {
@@ -191,16 +198,19 @@ export default defineComponent({
 
 <style lang="less">
 .ho-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  overflow: hidden;
 
   &__dialog {
     background: white;

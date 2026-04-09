@@ -214,67 +214,8 @@
   height: 100%;
 }
 
-/* Modal 弹窗样式 */
-.ho-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.ho-modal {
-  background: white;
-  border-radius: var(--hoho-radius-lg);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: auto;
-}
-
-.ho-modal__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.ho-modal__title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-}
-
-.ho-modal__close {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #6b7280;
-}
-
-.ho-modal__close:hover {
-  color: #111827;
-}
-
-.ho-modal__body {
-  padding: 20px;
-}
-
-.ho-modal__footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 16px 20px;
-  border-top: 1px solid #e5e7eb;
-}
+/* Modal 弹窗样式 - 由组件内部样式管理 */
+/* 注意：Modal 样式在 modal/index.vue 的 <style> 中定义 */
 
 /* Message 消息样式 */
 .ho-message-container {
