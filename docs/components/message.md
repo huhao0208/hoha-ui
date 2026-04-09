@@ -4,119 +4,57 @@
 
 ## 基础用法
 
-从顶部出现，3 秒后自动消失。
+点击按钮显示不同类型的消息。
 
-::: demo
+<div class="demo-preview">
+  <HoButton @click="$message.success('操作成功！')">成功消息</HoButton>
+  <HoButton type="danger" @click="$message.error('操作失败！')">错误消息</HoButton>
+  <HoButton type="warning" @click="$message.warning('请注意！')">警告消息</HoButton>
+  <HoButton type="info" @click="$message.info('这是一条提示')">信息消息</HoButton>
+</div>
+
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
-  <div class="message-demo">
-    <HoButton type="primary" @click="showMessage">显示消息</HoButton>
-    <HoButton type="success" @click="showSuccess">成功消息</HoButton>
-    <HoButton type="warning" @click="showWarning">警告消息</HoButton>
-    <HoButton type="danger" @click="showError">错误消息</HoButton>
-    <HoButton type="info" @click="showInfo">信息消息</HoButton>
-  </div>
+  <HoButton @click="$message.success('操作成功！')">成功消息</HoButton>
+  <HoButton type="danger" @click="$message.error('操作失败！')">错误消息</HoButton>
+  <HoButton type="warning" @click="$message.warning('请注意！')">警告消息</HoButton>
+  <HoButton type="info" @click="$message.info('这是一条提示')">信息消息</HoButton>
 </template>
-
-<script setup>
-import { HoMessage } from '@hohaya/hoho'
-
-const showMessage = () => {
-  HoMessage('这是一条消息提示')
-}
-
-const showSuccess = () => {
-  HoMessage.success('操作成功！')
-}
-
-const showWarning = () => {
-  HoMessage.warning('这是一条警告信息')
-}
-
-const showError = () => {
-  HoMessage.error('操作失败，请重试')
-}
-
-const showInfo = () => {
-  HoMessage.info('这是一条提示信息')
-}
-</script>
-
-<style scoped>
-.message-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
+
+</details>
 
 ## 可关闭的消息
 
-可以添加关闭按钮。
+设置 duration 为 0 可以手动关闭。
 
-::: demo
+<div class="demo-preview">
+  <HoButton type="primary" @click="showPersistent">持久消息</HoButton>
+</div>
+
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
-  <div class="message-demo">
-    <HoButton type="primary" @click="showClosable">显示可关闭的消息</HoButton>
-  </div>
+  <HoButton type="primary" @click="showPersistent">持久消息</HoButton>
 </template>
 
 <script setup>
-import { HoMessage } from '@hohaya/hoho'
+import { message } from '@hohaya/hoho'
 
-const showClosable = () => {
-  HoMessage({
-    message: '这是一条可以手动关闭的消息',
-    showClose: true
-  })
+const showPersistent = () => {
+  const msg = message.success('点击关闭按钮可关闭', 0)
+  // 3秒后自动关闭
+  setTimeout(() => msg.close(), 3000)
 }
 </script>
-
-<style scoped>
-.message-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
 
-## 使用 HTML 片段
-
-`message` 属性支持传入 HTML 片段。
-
-::: demo
-```vue
-<template>
-  <div class="message-demo">
-    <HoButton type="primary" @click="showHtml">显示 HTML 消息</HoButton>
-  </div>
-</template>
-
-<script setup>
-import { HoMessage } from '@hohaya/hoho'
-
-const showHtml = () => {
-  HoMessage({
-    message: '<strong>这是加粗的</strong> 消息内容',
-    dangerouslyUseHTMLString: true
-  })
-}
-</script>
-
-<style scoped>
-.message-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
-```
-:::
+</details>
 
 ## API
 
@@ -137,15 +75,17 @@ Message 组件提供以下方法：
 | --- | --- | --- | --- |
 | message | 消息文字 | `string` | — |
 | type | 消息类型 | `'success' \| 'warning' \| 'error' \| 'info'` | `'info'` |
-| duration | 显示时间，毫秒。设为 0 则不会自动关闭 | `number` | `3000` |
+| duration | 显示时间（毫秒），设为 0 则不自动关闭 | `number` | `3000` |
 
 ### 返回值
 
-调用 Message 方法会返回当前 Message 的实例。如果需要手动关闭实例，可以调用 `close` 方法：
+调用 Message 方法会返回当前 Message 的实例，可以调用 `close` 方法手动关闭。
 
-```typescript
+<script setup>
 import { message } from '@hohaya/hoho'
 
-const msg = message.success('这是一条消息')
-msg.close()
-```
+const showPersistent = () => {
+  const msg = message.success('点击关闭按钮可关闭', 0)
+  setTimeout(() => msg.close(), 3000)
+}
+</script>
