@@ -9,6 +9,8 @@ import pkg from './package.json' assert { type: 'json' }
 
 const input = 'src/index.ts'
 
+const extensions = ['.mjs', '.js', '.ts', '.tsx', '.json', '.vue']
+
 export default [
   // ESM build
   {
@@ -19,9 +21,7 @@ export default [
       sourcemap: true
     },
     plugins: [
-      resolve({
-        extensions: ['.js', '.ts', '.vue']
-      }),
+      resolve({ extensions }),
       commonjs(),
       typescript({ tsconfig: '../../tsconfig.json' }),
       vue(),
@@ -40,9 +40,7 @@ export default [
       exports: 'named'
     },
     plugins: [
-      resolve({
-        extensions: ['.js', '.ts', '.vue']
-      }),
+      resolve({ extensions }),
       commonjs(),
       typescript({ tsconfig: '../../tsconfig.json' }),
       vue(),
@@ -65,9 +63,7 @@ export default [
       }
     },
     plugins: [
-      resolve({
-        extensions: ['.js', '.ts', '.vue']
-      }),
+      resolve({ extensions }),
       commonjs(),
       typescript({ tsconfig: '../../tsconfig.json' }),
       vue(),
