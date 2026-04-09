@@ -135,6 +135,10 @@ const showToast = (options: ToastOptions): ToastInstance => {
   const div = document.createElement('div')
   div.className = 'ho-toast-wrapper'
   
+  // 位置类应用到 wrapper 上
+  const position = options.position || 'middle'
+  div.classList.add(`ho-toast-wrapper--${position}`)
+  
   if (options.forbidClick) {
     div.classList.add('ho-toast-wrapper--forbid')
   }
