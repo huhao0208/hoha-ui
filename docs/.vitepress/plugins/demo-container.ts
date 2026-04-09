@@ -1,23 +1,14 @@
 import type { MarkdownRenderer } from 'vitepress'
 
 /**
- * 自定义 ::: demo 容器插件
- * 用法:
- * ::: demo
- * <template>
- *   <ho-button type="primary">点击我</ho-button>
- * </template>
- * :::
+ * 简化版 demo 容器 - 直接渲染为可展开的代码块
  */
 export function demoContainer(md: MarkdownRenderer) {
-  const fence = md.renderer.rules.fence!
-  
   // 匹配 ::: demo ... :::
   md.block.ruler.before('paragraph', 'demo_container', (state, startLine, endLine, silent) => {
     const start = state.bMarks[startLine] + state.tShift[startLine]
     const max = state.eMarks[startLine]
     
-    // 检查是否以 ::: demo 开头
     if (state.src.slice(start, max).trim() !== '::: demo') {
       return false
     }
@@ -26,7 +17,6 @@ export function demoContainer(md: MarkdownRenderer) {
       return true
     }
     
-    // 查找结束的 :::
     let nextLine = startLine + 1
     let content = ''
     
@@ -43,27 +33,13 @@ export function demoContainer(md: MarkdownRenderer) {
       nextLine++
     }
     
-    // 创建 token
-    const token = state.push('demo_container', 'div', 0)
+    // 创建一个代码块 token
+    const token = state.push('fence', 'code', 0)
+    token.info = 'vue'
     token.content = content.trim()
     token.map = [startLine, nextLine]
     
     state.line = nextLine + 1
     return true
   })
-  
-  // 渲染 demo 容器
-  md.renderer.rules.demo_container = (tokens, idx) => {
-    const content = tokens[idx].content
-    
-    return `<DemoBlock>
-<template>
-${content}
-</template>
-<template #code>
-${content}
-</template>
-</DemoBlock>
-`
-  }
 }

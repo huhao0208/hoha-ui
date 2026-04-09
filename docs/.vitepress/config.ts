@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { demoContainer } from './plugins/demo-container'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -153,7 +154,11 @@ export default defineConfig({
       dark: 'github-dark'
     },
     // 行号
-    lineNumbers: true
+    lineNumbers: true,
+    // 自定义 markdown-it 插件
+    config: (md) => {
+      md.use(demoContainer)
+    }
   },
 
   // Head 配置
