@@ -29,7 +29,7 @@ export default {
       }
     }
   ],
-  external: ['vue', '@vue/composition-api', '@hoha/utils'],
+  external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared'],
   plugins: [
     {
       name: 'typescript-transform',
