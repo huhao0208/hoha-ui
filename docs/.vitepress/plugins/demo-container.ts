@@ -1,45 +1,34 @@
 import type { MarkdownRenderer } from 'vitepress'
 
 /**
- * 简化版 demo 容器 - 直接渲染为可展开的代码块
+ * 简化版 Demo 容器 - 直接渲染 Vue 代码块
  */
 export function demoContainer(md: MarkdownRenderer) {
-  // 匹配 ::: demo ... :::
-  md.block.ruler.before('paragraph', 'demo_container', (state, startLine, endLine, silent) => {
-    const start = state.bMarks[startLine] + state.tShift[startLine]
-    const max = state.eMarks[startLine]
+  const defaultFence = md.renderer.rules.fence!
+  
+  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    const token = tokens[idx]
     
-    if (state.src.slice(start, max).trim() !== '::: demo') {
-      return false
-    }
-    
-    if (silent) {
-      return true
-    }
-    
-    let nextLine = startLine + 1
-    let content = ''
-    
-    while (nextLine < endLine) {
-      const lineStart = state.bMarks[nextLine] + state.tShift[nextLine]
-      const lineMax = state.eMarks[nextLine]
-      const line = state.src.slice(lineStart, lineMax)
+    // 只处理 vue 代码块
+    if (token.info === 'vue') {
+      const code = token.content.trim()
+      const escapedCode = code
+        .replace(/`/g, '\\`')
+        .replace(/\$/g, '\\$')
       
-      if (line.trim() === ':::') {
-        break
-      }
-      
-      content += line + '\n'
-      nextLine++
+      return `
+<div class="demo-preview">
+  ${code}
+</div>
+<div class="demo-code">
+  <details>
+    <summary>显示代码</summary>
+    <pre><code class="language-vue">${md.utils.escapeHtml(code)}</code></pre>
+  </details>
+</div>
+`
     }
     
-    // 创建一个代码块 token
-    const token = state.push('fence', 'code', 0)
-    token.info = 'vue'
-    token.content = content.trim()
-    token.map = [startLine, nextLine]
-    
-    state.line = nextLine + 1
-    return true
-  })
+    return defaultFence(tokens, idx, options, env, self)
+  }
 }

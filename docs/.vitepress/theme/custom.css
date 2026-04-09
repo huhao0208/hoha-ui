@@ -1,0 +1,76 @@
+/* Demo 预览样式 */
+.demo-preview {
+  padding: 24px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px 8px 0 0;
+  background: var(--vp-c-bg);
+  margin: 16px 0 0 0;
+}
+
+.demo-code {
+  border: 1px solid var(--vp-c-divider);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: var(--vp-c-bg-soft);
+  margin: 0 0 16px 0;
+}
+
+.demo-code details {
+  padding: 12px 16px;
+}
+
+.demo-code summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  user-select: none;
+}
+
+.demo-code summary:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.demo-code pre {
+  margin: 16px 0 0 0;
+  padding: 16px;
+  background: var(--vp-code-block-bg);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.demo-code code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 13px;
+}
+
+/* 组件样式 */
+.ho-button {
+  margin: 4px;
+}
+
+.ho-input {
+  margin: 4px;
+  max-width: 300px;
+}
+
+/* 按钮示例 */
+.button-demo {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* 输入框示例 */
+.input-demo {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* 模态框示例 */
+.modal-demo {
+  display: flex;
+  gap: 12px;
+}

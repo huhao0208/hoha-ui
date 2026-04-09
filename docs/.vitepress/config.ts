@@ -154,11 +154,7 @@ export default defineConfig({
       dark: 'github-dark'
     },
     // 行号
-    lineNumbers: true,
-    // 自定义 markdown-it 插件
-    config: (md) => {
-      md.use(demoContainer)
-    }
+    lineNumbers: true
   },
 
   // Head 配置

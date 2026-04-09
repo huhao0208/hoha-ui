@@ -6,7 +6,6 @@
 
 使用 `type` 属性来定义按钮的样式。
 
-::: demo
 ```vue
 <template>
   <div class="button-demo">
@@ -19,22 +18,12 @@
     <HoButton type="info">信息按钮</HoButton>
   </div>
 </template>
-
-<style scoped>
-.button-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
 
 ## 按钮尺寸
 
 Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
-::: demo
 ```vue
 <template>
   <div class="button-demo">
@@ -43,23 +32,12 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
     <HoButton size="large" type="primary">大型按钮</HoButton>
   </div>
 </template>
-
-<style scoped>
-.button-demo {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
 
 ## 禁用状态
 
 使用 `disabled` 属性来控制按钮是否禁用。
 
-::: demo
 ```vue
 <template>
   <div class="button-demo">
@@ -68,55 +46,21 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
     <HoButton type="danger" disabled>危险按钮</HoButton>
   </div>
 </template>
-
-<style scoped>
-.button-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
 
 ## 加载状态
 
 通过设置 `loading` 属性为 `true` 来显示加载中状态。
 
-::: demo
 ```vue
 <template>
   <div class="button-demo">
-    <HoButton type="primary" :loading="loading" @click="handleClick">
-      {{ loading ? '加载中...' : '点击加载' }}
-    </HoButton>
+    <HoButton type="primary" loading>加载中</HoButton>
     <HoButton type="success" loading>加载中</HoButton>
     <HoButton type="warning" loading>加载中</HoButton>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-
-const loading = ref(false)
-
-const handleClick = () => {
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-  }, 2000)
-}
-</script>
-
-<style scoped>
-.button-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-</style>
 ```
-:::
 
 ## API
 
