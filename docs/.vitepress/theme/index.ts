@@ -2,6 +2,8 @@ import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
 import DemoBlock from '../components/DemoBlock.vue'
 import './custom.css'
+// 引入组件库样式
+import '../../../packages/components/src/styles/index.css'
 
 // 导入所有组件
 import HoButton from '../../../packages/components/src/button/index.vue'

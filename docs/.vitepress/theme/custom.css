@@ -1,4 +1,4 @@
-/* Demo 预览样式 - 类似 Vant */
+/* 文档布局样式 */
 .demo-preview {
   padding: 24px;
   border: 1px solid var(--vp-c-divider);
@@ -8,21 +8,11 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
-/* 暗色模式 */
 html.dark .demo-preview {
   background: var(--vp-c-bg-soft);
-}
-
-/* 组件样式增强 */
-.ho-button {
-  margin: 4px;
-}
-
-.ho-input {
-  margin: 4px;
 }
 
 /* 代码块样式 */
@@ -34,4 +24,12 @@ html.dark .demo-preview {
 /* 标题样式 */
 .vp-doc h2 {
   margin-top: 32px;
+}
+
+/* Icon 示例 */
+.icon-demo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
 }
