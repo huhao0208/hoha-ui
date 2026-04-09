@@ -1,0 +1,23 @@
+{
+  "name": "docs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Documentation site for hoha-ui",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "dependencies": {
+    "@hoha/components": "workspace:*",
+    "@hoha/utils": "workspace:*",
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "shiki": "^4.0.2",
+    "vite": "^5.0.0",
+    "vitepress": "^1.0.0"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@hoha/shared",
+  "version": "0.0.1",
+  "description": "Shared types and constants",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "shared",
+    "types"
+  ],
+  "author": "hoha",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-typescript": "^7.28.5",
+    "@rollup/plugin-commonjs": "^29.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@types/node": "^20.11.0",
+    "rollup": "^4.9.0",
+    "rollup-plugin-dts": "^6.4.1",
+    "typescript": "^5.3.0"
+  },
+  "scripts": {
+    "prebuild": "tsc --declaration --declarationMap --emitDeclarationOnly --outDir temp src/index.ts && echo 'TypeScript declarations generated'",
+    "build": "rollup -c rollup.config.mjs",
+    "postbuild": "cp temp/index.d.ts dist/ && rm -rf temp"
+  }
+}

@@ -1,0 +1,177 @@
+.ho-toast-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ho-toast-wrapper {
+  pointer-events: auto;
+
+  &--forbid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: auto;
+  }
+}
+
+.ho-toast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  animation: ho-toast-fade-in 0.2s ease forwards;
+
+  &--top {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &--middle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--bottom {
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 12px;
+    color: white;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    color: white;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  // Loading spinner (12 segments)
+  &__spinner {
+    position: relative;
+    width: 30px;
+    height: 30px;
+
+    div {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 3px;
+      height: 8px;
+      margin-left: -1.5px;
+      margin-top: -14px;
+      background: white;
+      border-radius: 1px;
+      transform-origin: 50% 14px;
+      opacity: 0.2;
+      animation: ho-toast-spinner 1.2s linear infinite;
+
+      @for $i from 1 through 12 {
+        &:nth-child(@{i}) {
+          transform: rotate(@{i * 30}deg);
+          animation-delay: -@{i * 0.1}s;
+        }
+      }
+    }
+  }
+
+  // Circular loader
+  &__circular {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: ho-toast-circular 0.8s linear infinite;
+  }
+
+  // Success/Fail icons with animation
+  &--success,
+  &--fail {
+    .ho-toast__icon {
+      animation: ho-toast-icon-in 0.3s ease forwards;
+    }
+  }
+
+  // Leave animation
+  &--leave {
+    animation: ho-toast-fade-out 0.2s ease forwards;
+  }
+}
+
+@keyframes ho-toast-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ho-toast-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ho-toast-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes ho-toast-circular {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ho-toast-icon-in {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
