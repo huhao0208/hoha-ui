@@ -2,7 +2,7 @@
   <Teleport to="body">
     <Transition name="ho-modal">
       <div
-        v-if="visible"
+        v-if="computedVisible"
         class="ho-modal"
         @click.self="handleMaskClick"
       >
@@ -48,6 +48,10 @@ import type { PropType, CSSProperties } from 'vue'
 export default defineComponent({
   name: 'HoModal',
   props: {
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
     visible: {
       type: Boolean,
       default: false
@@ -73,8 +77,18 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['update:visible', 'close', 'confirm'],
+  emits: ['update:modelValue', 'update:visible', 'close', 'confirm'],
   setup(props, { emit, slots }) {
+    const computedVisible = computed(() => props.modelValue || props.visible)
+    
+    // Watch for external visible changes
+    watch(() => props.modelValue, (val) => {
+      emit('update:visible', val)
+    })
+    watch(() => props.visible, (val) => {
+      emit('update:modelValue', val)
+    })
+    
     const modalRef = ref<HTMLElement | null>(null)
     const position = ref({ x: 0, y: 0 })
     const isDragging = ref(false)
@@ -98,6 +112,7 @@ export default defineComponent({
     }
 
     const handleClose = () => {
+      emit('update:modelValue', false)
       emit('update:visible', false)
       emit('close')
     }
@@ -108,7 +123,7 @@ export default defineComponent({
 
     // ESC key support
     const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && props.visible && props.closable) {
+      if (e.key === 'Escape' && computedVisible.value && props.closable) {
         handleClose()
       }
     }
@@ -147,7 +162,7 @@ export default defineComponent({
     }
 
     // Reset position when modal opens
-    watch(() => props.visible, (val) => {
+    watch(() => computedVisible.value, (val) => {
       if (val) {
         position.value = { x: 0, y: 0 }
       }
@@ -164,6 +179,7 @@ export default defineComponent({
     return {
       modalRef,
       dialogStyle,
+      computedVisible,
       handleMaskClick,
       handleClose,
       handleConfirm,
