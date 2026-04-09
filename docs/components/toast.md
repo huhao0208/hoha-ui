@@ -5,10 +5,10 @@
 ## 基础用法
 
 <div class="demo-preview">
-  <HoButton type="primary" @click="$toast('提示内容')">文字提示</HoButton>
-  <HoButton type="success" @click="$toast.success('操作成功')">成功提示</HoButton>
-  <HoButton type="danger" @click="$toast.fail('操作失败')">失败提示</HoButton>
-  <HoButton type="warning" @click="$toast.loading('加载中...')">加载提示</HoButton>
+  <HoButton type="primary" @click="showText">文字提示</HoButton>
+  <HoButton type="success" @click="showSuccess">成功提示</HoButton>
+  <HoButton type="danger" @click="showFail">失败提示</HoButton>
+  <HoButton type="warning" @click="showLoading">加载提示</HoButton>
 </div>
 
 <details>
@@ -28,9 +28,9 @@
 ## 自定义位置
 
 <div class="demo-preview">
-  <HoButton @click="$toast({ message: '顶部提示', position: 'top' })">顶部</HoButton>
-  <HoButton @click="$toast({ message: '中间提示', position: 'middle' })">中间</HoButton>
-  <HoButton @click="$toast({ message: '底部提示', position: 'bottom' })">底部</HoButton>
+  <HoButton @click="showTop">顶部</HoButton>
+  <HoButton @click="showMiddle">中间</HoButton>
+  <HoButton @click="showBottom">底部</HoButton>
 </div>
 
 <details>
@@ -79,3 +79,16 @@ const t = toast.loading('加载中...')
 // 手动关闭
 t.close()
 ```
+
+<script setup>
+import { toast } from '@hohaya/hoho'
+
+const showText = () => toast('提示内容')
+const showSuccess = () => toast.success('操作成功')
+const showFail = () => toast.fail('操作失败')
+const showLoading = () => toast.loading('加载中...')
+
+const showTop = () => toast({ message: '顶部提示', position: 'top' })
+const showMiddle = () => toast({ message: '中间提示', position: 'middle' })
+const showBottom = () => toast({ message: '底部提示', position: 'bottom' })
+</script>

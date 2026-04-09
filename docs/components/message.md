@@ -7,10 +7,10 @@
 点击按钮显示不同类型的消息。
 
 <div class="demo-preview">
-  <HoButton @click="$message.success('操作成功！')">成功消息</HoButton>
-  <HoButton type="danger" @click="$message.error('操作失败！')">错误消息</HoButton>
-  <HoButton type="warning" @click="$message.warning('请注意！')">警告消息</HoButton>
-  <HoButton type="info" @click="$message.info('这是一条提示')">信息消息</HoButton>
+  <HoButton @click="showSuccess">成功消息</HoButton>
+  <HoButton type="danger" @click="showError">错误消息</HoButton>
+  <HoButton type="warning" @click="showWarning">警告消息</HoButton>
+  <HoButton type="info" @click="showInfo">信息消息</HoButton>
 </div>
 
 <details>
@@ -48,7 +48,6 @@ import { message } from '@hohaya/hoho'
 
 const showPersistent = () => {
   const msg = message.success('点击关闭按钮可关闭', 0)
-  // 3秒后自动关闭
   setTimeout(() => msg.close(), 3000)
 }
 </script>
@@ -84,8 +83,13 @@ Message 组件提供以下方法：
 <script setup>
 import { message } from '@hohaya/hoho'
 
+const showSuccess = () => message.success('操作成功！')
+const showError = () => message.error('操作失败！')
+const showWarning = () => message.warning('请注意！')
+const showInfo = () => message.info('这是一条提示')
+
 const showPersistent = () => {
-  const msg = message.success('点击关闭按钮可关闭', 0)
+  const msg = message.success('3秒后自动关闭', 0)
   setTimeout(() => msg.close(), 3000)
 }
 </script>
