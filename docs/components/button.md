@@ -16,6 +16,9 @@
   <HoButton type="info">信息按钮</HoButton>
 </div>
 
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
   <HoButton>默认按钮</HoButton>
@@ -28,6 +31,8 @@
 </template>
 ```
 
+</details>
+
 ## 按钮尺寸
 
 Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
@@ -38,6 +43,9 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton size="large" type="primary">大型按钮</HoButton>
 </div>
 
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
   <HoButton size="small" type="primary">小型按钮</HoButton>
@@ -45,6 +53,8 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton size="large" type="primary">大型按钮</HoButton>
 </template>
 ```
+
+</details>
 
 ## 禁用状态
 
@@ -56,6 +66,9 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton type="danger" disabled>危险按钮</HoButton>
 </div>
 
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
   <HoButton type="primary" disabled>主要按钮</HoButton>
@@ -63,6 +76,8 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton type="danger" disabled>危险按钮</HoButton>
 </template>
 ```
+
+</details>
 
 ## 加载状态
 
@@ -74,6 +89,9 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton type="warning" loading>加载中</HoButton>
 </div>
 
+<details>
+<summary>显示代码</summary>
+
 ```vue
 <template>
   <HoButton type="primary" loading>加载中</HoButton>
@@ -81,6 +99,8 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
   <HoButton type="warning" loading>加载中</HoButton>
 </template>
 ```
+
+</details>
 
 ## API
 
