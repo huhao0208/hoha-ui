@@ -1,5 +1,5 @@
 {
-  "name": "@hoha/components",
+  "name": "@hoha0208/components",
   "version": "0.0.1",
   "description": "Vue 2/3 component library",
   "main": "dist/index.cjs.js",

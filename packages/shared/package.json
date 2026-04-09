@@ -1,5 +1,5 @@
 {
-  "name": "@hoha/shared",
+  "name": "@hoha0208/shared",
   "version": "0.0.1",
   "description": "Shared types and constants",
   "main": "dist/index.cjs.js",
