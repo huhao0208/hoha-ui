@@ -5,6 +5,7 @@ export default defineConfig({
   title: 'Hoha UI',
   description: '一个现代化的 Vue 2/3 组件库，提供丰富的 UI 组件和实用工具函数',
   lang: 'zh-CN',
+  base: '/hoha-ui/',
 
   // 主题配置
   themeConfig: {
