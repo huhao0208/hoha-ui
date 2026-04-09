@@ -6,17 +6,25 @@
 
 使用 `type` 属性来定义按钮的样式。
 
+<div class="demo-preview">
+  <HoButton>默认按钮</HoButton>
+  <HoButton type="primary">主要按钮</HoButton>
+  <HoButton type="secondary">次要按钮</HoButton>
+  <HoButton type="success">成功按钮</HoButton>
+  <HoButton type="warning">警告按钮</HoButton>
+  <HoButton type="danger">危险按钮</HoButton>
+  <HoButton type="info">信息按钮</HoButton>
+</div>
+
 ```vue
 <template>
-  <div class="button-demo">
-    <HoButton>默认按钮</HoButton>
-    <HoButton type="primary">主要按钮</HoButton>
-    <HoButton type="secondary">次要按钮</HoButton>
-    <HoButton type="success">成功按钮</HoButton>
-    <HoButton type="warning">警告按钮</HoButton>
-    <HoButton type="danger">危险按钮</HoButton>
-    <HoButton type="info">信息按钮</HoButton>
-  </div>
+  <HoButton>默认按钮</HoButton>
+  <HoButton type="primary">主要按钮</HoButton>
+  <HoButton type="secondary">次要按钮</HoButton>
+  <HoButton type="success">成功按钮</HoButton>
+  <HoButton type="warning">警告按钮</HoButton>
+  <HoButton type="danger">危险按钮</HoButton>
+  <HoButton type="info">信息按钮</HoButton>
 </template>
 ```
 
@@ -24,13 +32,17 @@
 
 Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
+<div class="demo-preview">
+  <HoButton size="small" type="primary">小型按钮</HoButton>
+  <HoButton size="medium" type="primary">中型按钮</HoButton>
+  <HoButton size="large" type="primary">大型按钮</HoButton>
+</div>
+
 ```vue
 <template>
-  <div class="button-demo">
-    <HoButton size="small" type="primary">小型按钮</HoButton>
-    <HoButton size="medium" type="primary">中型按钮</HoButton>
-    <HoButton size="large" type="primary">大型按钮</HoButton>
-  </div>
+  <HoButton size="small" type="primary">小型按钮</HoButton>
+  <HoButton size="medium" type="primary">中型按钮</HoButton>
+  <HoButton size="large" type="primary">大型按钮</HoButton>
 </template>
 ```
 
@@ -38,13 +50,17 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
 使用 `disabled` 属性来控制按钮是否禁用。
 
+<div class="demo-preview">
+  <HoButton type="primary" disabled>主要按钮</HoButton>
+  <HoButton type="success" disabled>成功按钮</HoButton>
+  <HoButton type="danger" disabled>危险按钮</HoButton>
+</div>
+
 ```vue
 <template>
-  <div class="button-demo">
-    <HoButton type="primary" disabled>主要按钮</HoButton>
-    <HoButton type="success" disabled>成功按钮</HoButton>
-    <HoButton type="danger" disabled>危险按钮</HoButton>
-  </div>
+  <HoButton type="primary" disabled>主要按钮</HoButton>
+  <HoButton type="success" disabled>成功按钮</HoButton>
+  <HoButton type="danger" disabled>危险按钮</HoButton>
 </template>
 ```
 
@@ -52,13 +68,17 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
 通过设置 `loading` 属性为 `true` 来显示加载中状态。
 
+<div class="demo-preview">
+  <HoButton type="primary" loading>加载中</HoButton>
+  <HoButton type="success" loading>加载中</HoButton>
+  <HoButton type="warning" loading>加载中</HoButton>
+</div>
+
 ```vue
 <template>
-  <div class="button-demo">
-    <HoButton type="primary" loading>加载中</HoButton>
-    <HoButton type="success" loading>加载中</HoButton>
-    <HoButton type="warning" loading>加载中</HoButton>
-  </div>
+  <HoButton type="primary" loading>加载中</HoButton>
+  <HoButton type="success" loading>加载中</HoButton>
+  <HoButton type="warning" loading>加载中</HoButton>
 </template>
 ```
 

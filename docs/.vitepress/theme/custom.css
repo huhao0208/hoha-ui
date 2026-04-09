@@ -1,76 +1,37 @@
-/* Demo 预览样式 */
+/* Demo 预览样式 - 类似 Vant */
 .demo-preview {
   padding: 24px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   background: var(--vp-c-bg);
-  margin: 16px 0 0 0;
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
-.demo-code {
-  border: 1px solid var(--vp-c-divider);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+/* 暗色模式 */
+html.dark .demo-preview {
   background: var(--vp-c-bg-soft);
-  margin: 0 0 16px 0;
 }
 
-.demo-code details {
-  padding: 12px 16px;
-}
-
-.demo-code summary {
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--vp-c-text-2);
-  user-select: none;
-}
-
-.demo-code summary:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.demo-code pre {
-  margin: 16px 0 0 0;
-  padding: 16px;
-  background: var(--vp-code-block-bg);
-  border-radius: 6px;
-  overflow-x: auto;
-}
-
-.demo-code code {
-  font-family: var(--vp-font-family-mono);
-  font-size: 13px;
-}
-
-/* 组件样式 */
+/* 组件样式增强 */
 .ho-button {
   margin: 4px;
 }
 
 .ho-input {
   margin: 4px;
-  max-width: 300px;
 }
 
-/* 按钮示例 */
-.button-demo {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
+/* 代码块样式 */
+.vp-doc [class*='language-'] {
+  margin-top: 0;
+  border-radius: 8px;
 }
 
-/* 输入框示例 */
-.input-demo {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-/* 模态框示例 */
-.modal-demo {
-  display: flex;
-  gap: 12px;
+/* 标题样式 */
+.vp-doc h2 {
+  margin-top: 32px;
 }

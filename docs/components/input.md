@@ -4,12 +4,13 @@
 
 ## 基础用法
 
+<div class="demo-preview">
+  <HoInput v-model="value1" placeholder="请输入内容" style="max-width: 300px;" />
+</div>
+
 ```vue
 <template>
-  <div class="input-demo">
-    <HoInput v-model="value" placeholder="请输入内容" />
-    <span>输入值: {{ value }}</span>
-  </div>
+  <HoInput v-model="value" placeholder="请输入内容" />
 </template>
 
 <script setup>
@@ -20,11 +21,13 @@ const value = ref('')
 
 ## 禁用状态
 
+<div class="demo-preview">
+  <HoInput v-model="value2" placeholder="禁用状态" disabled style="max-width: 300px;" />
+</div>
+
 ```vue
 <template>
-  <div class="input-demo">
-    <HoInput v-model="value" placeholder="禁用状态" disabled />
-  </div>
+  <HoInput v-model="value" placeholder="禁用状态" disabled />
 </template>
 
 <script setup>
@@ -35,13 +38,17 @@ const value = ref('')
 
 ## 不同尺寸
 
+<div class="demo-preview" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+  <HoInput v-model="value3" size="small" placeholder="小型输入框" style="max-width: 300px;" />
+  <HoInput v-model="value4" size="medium" placeholder="中型输入框" style="max-width: 300px;" />
+  <HoInput v-model="value5" size="large" placeholder="大型输入框" style="max-width: 300px;" />
+</div>
+
 ```vue
 <template>
-  <div class="input-demo" style="flex-direction: column; align-items: flex-start;">
-    <HoInput v-model="v1" size="small" placeholder="小型输入框" />
-    <HoInput v-model="v2" size="medium" placeholder="中型输入框" />
-    <HoInput v-model="v3" size="large" placeholder="大型输入框" />
-  </div>
+  <HoInput v-model="v1" size="small" placeholder="小型输入框" />
+  <HoInput v-model="v2" size="medium" placeholder="中型输入框" />
+  <HoInput v-model="v3" size="large" placeholder="大型输入框" />
 </template>
 
 <script setup>
@@ -79,3 +86,12 @@ const v3 = ref('')
 | --- | --- |
 | prefix | 输入框头部内容 |
 | suffix | 输入框尾部内容 |
+
+<script setup>
+import { ref } from 'vue'
+const value1 = ref('')
+const value2 = ref('')
+const value3 = ref('')
+const value4 = ref('')
+const value5 = ref('')
+</script>
