@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import path from 'path'
 import { demoContainer } from './plugins/demo-container'
 
 // https://vitepress.dev/reference/site-config
@@ -169,8 +170,8 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@hohaya/hoho': '/root/.openclaw/projects/hoha-ui/packages/components/src/index.ts',
-        '@hohaya/hoho-utils': '/root/.openclaw/projects/hoha-ui/packages/utils/src/index.ts'
+        '@hohaya/hoho': path.resolve(__dirname, '../../packages/components/src/index.ts'),
+        '@hohaya/hoho-utils': path.resolve(__dirname, '../../packages/utils/src/index.ts')
       }
     }
   },
