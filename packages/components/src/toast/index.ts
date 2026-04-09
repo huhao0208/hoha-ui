@@ -81,7 +81,8 @@ const ToastComponent = defineComponent({
 })
 
 let toastContainer: HTMLDivElement | null = null
-let toastInstance: { app: App; el: HTMLDivElement; closeTimer: number | null } | null = null
+let currentTimer: number | null = null
+let currentInstance: { app: App; el: HTMLDivElement } | null = null
 
 const getContainer = (): HTMLDivElement => {
   if (!toastContainer) {
@@ -92,18 +93,23 @@ const getContainer = (): HTMLDivElement => {
   return toastContainer
 }
 
+const clearCurrentTimer = () => {
+  if (currentTimer) {
+    clearTimeout(currentTimer)
+    currentTimer = null
+  }
+}
+
 const closeToast = () => {
-  if (toastInstance) {
-    if (toastInstance.closeTimer) {
-      clearTimeout(toastInstance.closeTimer)
-    }
-    
-    toastInstance.el.classList.add('ho-toast--leave')
+  clearCurrentTimer()
+  
+  if (currentInstance) {
+    currentInstance.el.classList.add('ho-toast--leave')
     
     setTimeout(() => {
-      toastInstance?.app.unmount()
-      toastInstance?.el.remove()
-      toastInstance = null
+      currentInstance?.app.unmount()
+      currentInstance?.el.remove()
+      currentInstance = null
       
       if (toastContainer && !toastContainer.hasChildNodes()) {
         toastContainer.remove()
@@ -114,8 +120,15 @@ const closeToast = () => {
 }
 
 const showToast = (options: ToastOptions): ToastInstance => {
-  // Close existing toast first
-  closeToast()
+  // Clear previous timer first (but don't animate close yet)
+  clearCurrentTimer()
+  
+  // Close previous instance immediately without animation
+  if (currentInstance) {
+    currentInstance.app.unmount()
+    currentInstance.el.remove()
+    currentInstance = null
+  }
   
   const container = getContainer()
   
@@ -137,16 +150,15 @@ const showToast = (options: ToastOptions): ToastInstance => {
   
   app.mount(div)
   
+  currentInstance = { app, el: div }
+  
   const duration = options.duration ?? (options.type === 'loading' ? 0 : 2000)
-  let closeTimer: number | null = null
   
   if (duration > 0) {
-    closeTimer = window.setTimeout(() => {
+    currentTimer = window.setTimeout(() => {
       closeToast()
     }, duration)
   }
-  
-  toastInstance = { app, el: div, closeTimer }
   
   return {
     close: closeToast
