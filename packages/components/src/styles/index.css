@@ -1,7 +1,10 @@
 /**
- * Hoho UI 组件库样式入口
+ * Hoha UI 组件库样式入口
  * 引入所有组件样式
  */
+
+/* 设计规范 - 基于 750px 设计稿的 rem 适配 */
+@import './design-tokens.css';
 
 /* 基础变量 */
 :root {

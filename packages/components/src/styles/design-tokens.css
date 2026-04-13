@@ -1,0 +1,294 @@
+/**
+ * Hoha UI 设计规范样式
+ * 基于 750px 设计稿，使用 rem 适配
+ */
+
+/* ========================================
+   设计稿基准
+   设计稿宽度: 750px
+   根字体大小: 37.5px (750 / 20)
+   单位转换: 1rem = 37.5px (设计稿)
+   ======================================== */
+
+:root {
+  /* ===== 颜色系统 ===== */
+  
+  /* 品牌色 */
+  --hoho-color-primary: #3b82f6;
+  --hoho-color-success: #10b981;
+  --hoho-color-warning: #f59e0b;
+  --hoho-color-danger: #ef4444;
+  --hoho-color-info: #06b6d4;
+  --hoho-color-secondary: #6b7280;
+  
+  /* 背景色 */
+  --hoho-bg-primary: #ffffff;
+  --hoho-bg-secondary: #f9fafb;
+  --hoho-bg-tertiary: #f3f4f6;
+  --hoho-bg-mask: rgba(0, 0, 0, 0.5);
+  --hoho-bg-toast: rgba(0, 0, 0, 0.75);
+  --hoho-bg-overlay: rgba(0, 0, 0, 0.7);
+  
+  /* 文字颜色 */
+  --hoho-text-primary: #111827;
+  --hoho-text-secondary: #4b5563;
+  --hoho-text-tertiary: #6b7280;
+  --hoho-text-placeholder: #9ca3af;
+  --hoho-text-inverse: #ffffff;
+  
+  /* 边框颜色 */
+  --hoho-border-primary: #d1d5db;
+  --hoho-border-secondary: #e5e7eb;
+  
+  /* ===== 字体系统 (基于 750px 设计稿) ===== */
+  
+  /* 字体大小 - rem 值基于 37.5px 根字体 */
+  --hoho-font-xs: 0.64rem;      /* 24px @ 750px */
+  --hoho-font-sm: 0.747rem;     /* 28px @ 750px */
+  --hoho-font-md: 0.853rem;     /* 32px @ 750px */
+  --hoho-font-lg: 0.96rem;      /* 36px @ 750px */
+  --hoho-font-xl: 1.067rem;     /* 40px @ 750px */
+  --hoho-font-2xl: 1.28rem;     /* 48px @ 750px */
+  --hoho-font-3xl: 1.6rem;      /* 60px @ 750px */
+  
+  /* 字重 */
+  --hoho-font-normal: 400;
+  --hoho-font-medium: 500;
+  --hoho-font-semibold: 600;
+  --hoho-font-bold: 700;
+  
+  /* 行高 */
+  --hoho-line-height-tight: 1.25;
+  --hoho-line-height-normal: 1.5;
+  --hoho-line-height-relaxed: 1.75;
+  
+  /* ===== 间距系统 (基于 750px 设计稿) ===== */
+  
+  --hoho-spacing-0: 0;
+  --hoho-spacing-xs: 0.133rem;   /* 5px @ 750px */
+  --hoho-spacing-sm: 0.267rem;   /* 10px @ 750px */
+  --hoho-spacing-md: 0.4rem;     /* 15px @ 750px */
+  --hoho-spacing-lg: 0.533rem;   /* 20px @ 750px */
+  --hoho-spacing-xl: 0.8rem;     /* 30px @ 750px */
+  --hoho-spacing-2xl: 1.067rem;  /* 40px @ 750px */
+  --hoho-spacing-3xl: 1.6rem;    /* 60px @ 750px */
+  
+  /* ===== 圆角系统 ===== */
+  
+  --hoho-radius-none: 0;
+  --hoho-radius-sm: 0.107rem;    /* 4px @ 750px */
+  --hoho-radius-md: 0.16rem;     /* 6px @ 750px */
+  --hoho-radius-lg: 0.213rem;    /* 8px @ 750px */
+  --hoho-radius-xl: 0.4rem;      /* 15px @ 750px */
+  --hoho-radius-2xl: 0.8rem;     /* 30px @ 750px */
+  --hoho-radius-full: 9999px;
+  
+  /* ===== 阴影系统 ===== */
+  
+  --hoho-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --hoho-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --hoho-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --hoho-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  
+  /* ===== 动画系统 ===== */
+  
+  --hoho-duration-fast: 0.15s;
+  --hoho-duration-normal: 0.25s;
+  --hoho-duration-slow: 0.35s;
+  --hoho-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hoho-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --hoho-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --hoho-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* ===== 层级系统 ===== */
+  
+  --hoho-z-dropdown: 1000;
+  --hoho-z-sticky: 1020;
+  --hoho-z-fixed: 1030;
+  --hoho-z-modal-backdrop: 1040;
+  --hoho-z-modal: 1050;
+  --hoho-z-popover: 1060;
+  --hoho-z-tooltip: 1070;
+  --hoho-z-toast: 1080;
+  
+  /* ===== 安全区域 ===== */
+  
+  --hoho-safe-area-top: env(safe-area-inset-top, 0px);
+  --hoho-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --hoho-safe-area-left: env(safe-area-inset-left, 0px);
+  --hoho-safe-area-right: env(safe-area-inset-right, 0px);
+  
+  /* ===== 组件尺寸 ===== */
+  
+  /* 按钮高度 */
+  --hoho-button-height-sm: 0.853rem;   /* 32px @ 750px */
+  --hoho-button-height-md: 1.173rem;   /* 44px @ 750px */
+  --hoho-button-height-lg: 1.387rem;   /* 52px @ 750px */
+  
+  /* 输入框高度 */
+  --hoho-input-height-sm: 0.853rem;    /* 32px @ 750px */
+  --hoho-input-height-md: 1.067rem;    /* 40px @ 750px */
+  --hoho-input-height-lg: 1.28rem;     /* 48px @ 750px */
+  
+  /* 导航栏高度 */
+  --hoho-navbar-height: 1.227rem;      /* 46px @ 750px */
+  --hoho-tabbar-height: 1.333rem;      /* 50px @ 750px */
+  
+  /* 最小点击区域 */
+  --hoho-touch-target: 1.173rem;       /* 44px @ 750px (iOS 标准) */
+}
+
+/* ===== 暗色模式 ===== */
+
+html.dark {
+  /* 品牌色增强对比度 */
+  --hoho-color-primary: #60a5fa;
+  --hoho-color-success: #34d399;
+  --hoho-color-warning: #fbbf24;
+  --hoho-color-danger: #f87171;
+  --hoho-color-info: #22d3ee;
+  
+  /* 背景色 */
+  --hoho-bg-primary: #1f2937;
+  --hoho-bg-secondary: #111827;
+  --hoho-bg-tertiary: #374151;
+  --hoho-bg-mask: rgba(0, 0, 0, 0.7);
+  --hoho-bg-toast: rgba(31, 41, 55, 0.95);
+  --hoho-bg-overlay: rgba(0, 0, 0, 0.8);
+  
+  /* 文字颜色 */
+  --hoho-text-primary: #f9fafb;
+  --hoho-text-secondary: #e5e7eb;
+  --hoho-text-tertiary: #d1d5db;
+  --hoho-text-placeholder: #6b7280;
+  --hoho-text-inverse: #111827;
+  
+  /* 边框颜色 */
+  --hoho-border-primary: #374151;
+  --hoho-border-secondary: #4b5563;
+  
+  /* 阴影 - 暗色模式增强 */
+  --hoho-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --hoho-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --hoho-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== 移动端适配 ===== */
+
+@media screen and (max-width: 767px) {
+  :root {
+    /* 移动端增大圆角 */
+    --hoho-radius-md: 0.213rem;   /* 8px */
+    --hoho-radius-lg: 0.32rem;    /* 12px */
+    
+    /* 移动端增大最小点击区域 */
+    --hoho-touch-target: 1.28rem; /* 48px (Android 标准) */
+  }
+}
+
+/* ===== 小屏手机适配 (<= 375px) ===== */
+
+@media screen and (max-width: 375px) {
+  :root {
+    /* 进一步增大点击区域 */
+    --hoho-touch-target: 1.333rem; /* 50px */
+  }
+}
+
+/* ===== 全局基础样式 ===== */
+
+/* 禁用移动端默认点击高亮 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 优化触摸滚动 */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 文字继承颜色 */
+body {
+  color: var(--hoho-text-primary);
+  background-color: var(--hoho-bg-primary);
+  font-size: var(--hoho-font-md);
+  line-height: var(--hoho-line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 工具类 ===== */
+
+/* 文字省略 */
+.hoho-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行省略 */
+.hoho-ellipsis--2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.hoho-ellipsis--3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* 安全区域适配 */
+.hoho-safe-area-top {
+  padding-top: var(--hoho-safe-area-top);
+}
+
+.hoho-safe-area-bottom {
+  padding-bottom: var(--hoho-safe-area-bottom);
+}
+
+/* 清除按钮默认样式 */
+.hoho-reset-button {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* 1px 边框解决方案 */
+.hoho-hairline {
+  position: relative;
+}
+
+.hoho-hairline::after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  border: 0 solid var(--hoho-border-primary);
+  transform: scale(0.5);
+}
+
+.hoho-hairline--top::after {
+  border-top-width: 1px;
+}
+
+.hoho-hairline--bottom::after {
+  border-bottom-width: 1px;
+}
+
+.hoho-hairline--surround::after {
+  border-width: 1px;
+}

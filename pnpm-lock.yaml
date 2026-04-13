@@ -51,6 +51,9 @@ importers:
       postcss:
         specifier: ^8.5.9
         version: 8.5.9
+      postcss-pxtorem:
+        specifier: ^6.1.0
+        version: 6.1.0(postcss@8.5.9)
       prettier:
         specifier: ^3.2.0
         version: 3.8.1
@@ -2787,6 +2790,11 @@ packages:
     engines: {node: ^10 || ^12 || >=14.0}
     peerDependencies:
       postcss: ^8.2.15
+
+  postcss-pxtorem@6.1.0:
+    resolution: {integrity: sha512-ROODSNci9ADal3zUcPHOF/K83TiCgNSPXQFSbwyPHNV8ioHIE4SaC+FPOufd8jsr5jV2uIz29v1Uqy1c4ov42g==}
+    peerDependencies:
+      postcss: ^8.0.0
 
   postcss-reduce-initial@5.1.2:
     resolution: {integrity: sha512-dE/y2XRaqAi6OvjzD22pjTUQ8eOfc6m/natGHgKFBK9DxFmIm69YmaRVQrGgFlEfc1HePIurY0TmDeROK05rIg==}
@@ -6203,6 +6211,10 @@ snapshots:
       cssnano-utils: 3.1.0(postcss@8.5.9)
       postcss: 8.5.9
       postcss-value-parser: 4.2.0
+
+  postcss-pxtorem@6.1.0(postcss@8.5.9):
+    dependencies:
+      postcss: 8.5.9
 
   postcss-reduce-initial@5.1.2(postcss@8.5.9):
     dependencies:
