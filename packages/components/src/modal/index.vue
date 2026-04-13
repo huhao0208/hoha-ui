@@ -215,7 +215,7 @@ export default defineComponent({
   bottom: 0 !important;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--hoho-bg-mask, rgba(0, 0, 0, 0.5));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,9 +223,9 @@ export default defineComponent({
   overflow: hidden;
 
   &__dialog {
-    background: white;
+    background: var(--hoho-bg-primary, white);
     border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--hoho-shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.15));
     max-height: 90vh;
     display: flex;
     flex-direction: column;
@@ -237,7 +237,7 @@ export default defineComponent({
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--hoho-border-secondary, #e5e7eb);
     cursor: move;
     user-select: none;
   }
@@ -245,7 +245,7 @@ export default defineComponent({
   &__title {
     font-size: 16px;
     font-weight: 600;
-    color: #1f2937;
+    color: var(--hoho-text-primary, #1f2937);
   }
 
   &__close {
@@ -256,14 +256,14 @@ export default defineComponent({
     height: 28px;
     border: none;
     background: transparent;
-    color: #9ca3af;
+    color: var(--hoho-text-tertiary, #9ca3af);
     cursor: pointer;
     border-radius: 6px;
     transition: all 0.2s;
 
     &:hover {
-      background: #f3f4f6;
-      color: #4b5563;
+      background: var(--hoho-bg-tertiary, #f3f4f6);
+      color: var(--hoho-text-secondary, #4b5563);
     }
   }
 
@@ -271,34 +271,178 @@ export default defineComponent({
     padding: 20px;
     overflow-y: auto;
     flex: 1;
+    color: var(--hoho-text-primary, #1f2937);
   }
 
   &__footer {
     padding: 16px 20px;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--hoho-border-secondary, #e5e7eb);
     display: flex;
     justify-content: flex-end;
     gap: 12px;
   }
 }
 
-// Transitions
-.ho-modal-enter-active,
-.ho-modal-leave-active {
-  transition: opacity 0.25s ease;
+// Mobile adaptations
+@media screen and (max-width: 768px) {
+  .ho-modal {
+    align-items: flex-end;
+    justify-content: stretch;
 
-  .ho-modal__dialog {
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    &__dialog {
+      width: 100% !important;
+      max-width: 100% !important;
+      max-height: 85vh;
+      border-radius: 20px 20px 0 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    &__header {
+      padding: 16px 20px;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 36px;
+        height: 4px;
+        background: var(--hoho-border-secondary, #e5e7eb);
+        border-radius: 2px;
+      }
+    }
+
+    &__close {
+      width: 44px;
+      height: 44px;
+      margin: -8px -12px -8px 0;
+      padding: 10px;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__body {
+      padding: 16px 20px;
+      max-height: calc(85vh - 60px - 80px);
+    }
+
+    &__footer {
+      padding: 12px 20px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+      
+      &:deep(.ho-button) {
+        flex: 1;
+        min-height: 44px;
+      }
+    }
+  }
+
+  .ho-modal-enter-active,
+  .ho-modal-leave-active {
+    transition: opacity 0.3s ease;
+
+    .ho-modal__dialog {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  .ho-modal-enter-from,
+  .ho-modal-leave-to {
+    opacity: 0;
+
+    .ho-modal__dialog {
+      transform: translateY(100%);
+    }
   }
 }
 
-.ho-modal-enter-from,
-.ho-modal-leave-to {
-  opacity: 0;
+// Small screen optimization
+@media screen and (max-width: 375px) {
+  .ho-modal {
+    &__dialog {
+      max-height: 90vh;
+    }
 
-  .ho-modal__dialog {
-    transform: scale(0.95);
+    &__header {
+      padding: 12px 16px;
+    }
+
+    &__body {
+      padding: 12px 16px;
+    }
+
+    &__footer {
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    }
+  }
+}
+
+// Desktop transitions
+@media screen and (min-width: 769px) {
+  .ho-modal-enter-active,
+  .ho-modal-leave-active {
+    transition: opacity 0.25s ease;
+
+    .ho-modal__dialog {
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+  }
+
+  .ho-modal-enter-from,
+  .ho-modal-leave-to {
     opacity: 0;
+
+    .ho-modal__dialog {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+  }
+}
+
+// Dark mode specific styles
+html.dark {
+  .ho-modal {
+    &__dialog {
+      background: var(--hoho-bg-primary);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    &__header::before {
+      background: var(--hoho-border-secondary);
+    }
+    
+    &__close:active {
+      background: var(--hoho-bg-tertiary);
+    }
+  }
+}
+
+// Mobile + Dark mode combination
+@media screen and (max-width: 768px) {
+  html.dark .ho-modal {
+    background: rgba(0, 0, 0, 0.75);
+    
+    &__dialog {
+      background: var(--hoho-bg-primary);
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6);
+    }
+    
+    &__header::before {
+      background: var(--hoho-border-secondary);
+    }
+    
+    &__close:active {
+      background: var(--hoho-bg-tertiary);
+    }
   }
 }
 </style>
