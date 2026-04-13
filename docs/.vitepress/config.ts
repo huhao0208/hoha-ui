@@ -51,7 +51,23 @@ export default defineConfig({
           items: [
             { text: 'Button 按钮', link: '/components/button' },
             { text: 'Input 输入框', link: '/components/input' },
-            { text: 'Icon 图标', link: '/components/icon' }
+            { text: 'Icon 图标', link: '/components/icon' },
+            { text: 'Image 图片', link: '/components/image' },
+            { text: 'Cell 单元格', link: '/components/cell' }
+          ]
+        },
+        {
+          text: '导航组件',
+          items: [
+            { text: 'NavBar 导航栏', link: '/components/navbar' },
+            { text: 'TabBar 底部导航', link: '/components/tabbar' },
+            { text: 'Tabs 标签页', link: '/components/tabs' }
+          ]
+        },
+        {
+          text: '展示组件',
+          items: [
+            { text: 'Carousel 轮播', link: '/components/carousel' }
           ]
         },
         {
