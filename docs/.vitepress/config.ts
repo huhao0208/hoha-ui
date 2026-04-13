@@ -196,7 +196,7 @@ export default defineConfig({
   vue: {
     template: {
       compilerOptions: {
-        // 将 demo-block 标签视为自定义元素
+        // 只有 demo-block 是自定义元素，ho- 开头的都是 Vue 组件
         isCustomElement: (tag) => tag === 'demo-block'
       }
     }

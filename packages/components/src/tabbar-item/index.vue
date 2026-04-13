@@ -42,9 +42,7 @@
 
     <!-- 文字 -->
     <div class="ho-tabbar-item__text">
-      <slot name="text">
-        {{ title }}
-      </slot>
+      <slot />
     </div>
   </component>
 </template>

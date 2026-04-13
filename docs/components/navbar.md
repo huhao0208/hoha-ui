@@ -7,9 +7,7 @@
 通过 `title` 属性设置导航栏标题。
 
 <div class="demo-preview">
-
-<ho-navbar title="标题" />
-
+  <HoNavBar title="标题" />
 </div>
 
 <details>
@@ -28,14 +26,7 @@
 设置 `left-arrow` 显示返回箭头，通过 `left-text` 设置左侧文字。点击左侧区域触发 `click-left` 事件。
 
 <div class="demo-preview">
-
-<ho-navbar 
-  title="标题" 
-  left-arrow 
-  left-text="返回" 
-  @click-left="onClickLeft" 
-/>
-
+  <HoNavBar title="标题" left-arrow left-text="返回" @click-left="onClickLeft" />
 </div>
 
 <details>
@@ -66,13 +57,7 @@ const onClickLeft = () => {
 通过 `right-text` 设置右侧文字，或使用 `right` 插槽自定义内容。点击右侧区域触发 `click-right` 事件。
 
 <div class="demo-preview">
-
-<ho-navbar 
-  title="标题" 
-  right-text="按钮" 
-  @click-right="onClickRight" 
-/>
-
+  <HoNavBar title="标题" right-text="按钮" @click-right="onClickRight" />
 </div>
 
 <details>
@@ -98,19 +83,16 @@ const onClickRight = () => {
 
 ## 自定义样式
 
-可以通过 `background` 设置背景色，`title-color` 设置标题颜色，`text-color` 设置两侧文字颜色。
+可以通过 `background` 设置背景色，`text-color` 设置文字颜色。
 
 <div class="demo-preview">
-
-<ho-navbar 
-  title="自定义样式" 
-  background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
-  title-color="#fff" 
-  text-color="#fff" 
-  left-arrow 
-  left-text="返回" 
-/>
-
+  <HoNavBar 
+    title="自定义样式" 
+    background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
+    text-color="#fff" 
+    left-arrow 
+    left-text="返回" 
+  />
 </div>
 
 <details>
@@ -121,7 +103,6 @@ const onClickRight = () => {
   <ho-navbar 
     title="自定义样式" 
     background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
-    title-color="#fff" 
     text-color="#fff" 
     left-arrow 
     left-text="返回" 
@@ -136,13 +117,7 @@ const onClickRight = () => {
 设置 `fixed` 使导航栏固定在顶部，配合 `placeholder` 在文档流中占位。
 
 <div class="demo-preview">
-
-<ho-navbar 
-  title="固定导航栏" 
-  fixed 
-  placeholder 
-/>
-
+  <HoNavBar title="固定导航栏" fixed placeholder />
 </div>
 
 <details>
@@ -174,8 +149,7 @@ const onClickRight = () => {
 | placeholder | 固定定位时是否在文档流中占位 | `boolean` | `false` |
 | border | 是否显示下边框 | `boolean` | `true` |
 | background | 背景色 | `string` | `#fff` |
-| title-color | 标题颜色 | `string` | `#323233` |
-| text-color | 左右两侧文字颜色 | `string` | `#646566` |
+| text-color | 文字颜色 | `string` | `#323233` |
 | z-index | 元素层级 | `number` | `100` |
 | safe-area-inset-top | 是否开启顶部安全区域适配 | `boolean` | `true` |
 
