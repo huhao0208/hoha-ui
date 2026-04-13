@@ -2,8 +2,6 @@
  * Format utility functions
  */
 
-const DATE_FORMATS: Record<string, Intl.DateTimeFormat> = {}
-
 export function formatDate(date: Date | string | number, format = 'YYYY-MM-DD'): string {
   const d = new Date(date)
   const year = d.getFullYear()

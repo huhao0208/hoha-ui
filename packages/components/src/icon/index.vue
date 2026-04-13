@@ -1,15 +1,21 @@
 <template>
-  <i class="ho-icon" :class="iconClasses" :style="iconStyle">
-    <svg v-if="icon" aria-hidden="true">
-      <use :xlink:href="`#${icon}`"></use>
+  <i
+    class="ho-icon"
+    :class="iconClasses"
+    :style="iconStyle"
+  >
+    <svg
+      v-if="icon"
+      aria-hidden="true"
+    >
+      <use :xlink:href="`#${icon}`" />
     </svg>
-    <slot v-else></slot>
+    <slot v-else />
   </i>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import type { PropType } from 'vue'
 
 export default defineComponent({
   name: 'HoIcon',

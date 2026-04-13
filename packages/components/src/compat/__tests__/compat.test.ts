@@ -2,6 +2,8 @@
  * Vue 2/3 兼容层测试
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { describe, it, expect, vi } from 'vitest'
 
 // Mock Vue 3 环境

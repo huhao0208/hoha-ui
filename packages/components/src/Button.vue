@@ -4,13 +4,25 @@
     :disabled="disabled || loading"
     @click="handleClick"
   >
-    <span v-if="loading" class="hoha-button__loading">
-      <svg class="hoha-button__spinner" viewBox="0 0 50 50">
-        <circle class="path" cx="25" cy="25" r="20" fill="none"></circle>
+    <span
+      v-if="loading"
+      class="hoha-button__loading"
+    >
+      <svg
+        class="hoha-button__spinner"
+        viewBox="0 0 50 50"
+      >
+        <circle
+          class="path"
+          cx="25"
+          cy="25"
+          r="20"
+          fill="none"
+        />
       </svg>
     </span>
     <span class="hoha-button__content">
-      <slot></slot>
+      <slot />
     </span>
   </button>
 </template>

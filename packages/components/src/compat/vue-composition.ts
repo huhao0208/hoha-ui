@@ -11,6 +11,7 @@ let vueVersion: string = '3'
 // 尝试检测 Vue 版本
 try {
   // 在运行时环境检测 Vue 版本
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const vuePkg = require('vue/package.json')
   vueVersion = vuePkg.version || '3'
   isVue2 = vueVersion.startsWith('2')
@@ -26,6 +27,7 @@ export { isVue2, isVue3, vueVersion }
 
 // Composition API 导出
 // Vue 3 原生支持，Vue 2 使用 @vue/composition-api
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let compositionApi: any
 
 if (isVue2) {

@@ -1,6 +1,8 @@
 import { createApp, h, defineComponent } from 'vue'
 import type { App } from 'vue'
 
+/* eslint-disable vue/one-component-per-file */
+
 export type ToastType = 'loading' | 'success' | 'fail' | 'text'
 export type ToastPosition = 'top' | 'middle' | 'bottom'
 

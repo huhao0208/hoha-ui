@@ -1,6 +1,8 @@
 import { createApp, h, defineComponent } from 'vue'
 import type { App } from 'vue'
 
+/* eslint-disable vue/one-component-per-file */
+
 export type MessageType = 'success' | 'error' | 'warning' | 'info'
 
 export interface MessageOptions {
@@ -47,7 +49,7 @@ const MessageComponent = defineComponent({
 })
 
 let messageContainer: HTMLDivElement | null = null
-let messageInstances: { id: number; app: App; el: HTMLDivElement }[] = []
+const messageInstances: { id: number; app: App; el: HTMLDivElement }[] = []
 let messageId = 0
 
 const getContainer = (): HTMLDivElement => {

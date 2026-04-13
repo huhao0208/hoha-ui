@@ -7,7 +7,9 @@
           <span class="placeholder-text">Button 组件占位符</span>
           <span class="placeholder-status">待开发</span>
         </div>
-        <p class="description">基础的按钮组件，支持多种类型和尺寸</p>
+        <p class="description">
+          基础的按钮组件，支持多种类型和尺寸
+        </p>
       </div>
     </section>
     
@@ -18,7 +20,9 @@
           <span class="placeholder-text">Input 组件占位符</span>
           <span class="placeholder-status">待开发</span>
         </div>
-        <p class="description">输入框组件，支持多种输入类型和状态</p>
+        <p class="description">
+          输入框组件，支持多种输入类型和状态
+        </p>
       </div>
     </section>
     
@@ -29,7 +33,9 @@
           <span class="placeholder-text">Icon 组件占位符</span>
           <span class="placeholder-status">待开发</span>
         </div>
-        <p class="description">图标组件，支持多种图标库</p>
+        <p class="description">
+          图标组件，支持多种图标库
+        </p>
       </div>
     </section>
   </div>

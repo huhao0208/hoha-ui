@@ -15,7 +15,9 @@ export function removeClass(el: Element, className: string): void {
 }
 
 export function getStyle(el: Element, prop: string): string {
-  return getComputedStyle(el)[prop as any] || ''
+  const style = getComputedStyle(el)
+  const value = style.getPropertyValue(prop)
+  return value || ''
 }
 
 export function setStyle(el: HTMLElement, styles: Record<string, string>): void {

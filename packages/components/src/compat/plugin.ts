@@ -7,21 +7,27 @@ import { isVue2, isVue3, vueVersion } from './vue-composition'
 
 // 插件安装类型定义
 export interface PluginInstallOptions {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export interface Vue2Constructor {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   use: (plugin: any, options?: PluginInstallOptions) => void
   version: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   prototype: Record<string, any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component?: (name: string, component: any) => Vue2Constructor
 }
 
 export interface Vue3App {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   use: (plugin: any, options?: PluginInstallOptions) => void
   version: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: (name: string, component: any) => Vue3App
   config: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     globalProperties: Record<string, any>
   }
 }
@@ -119,14 +125,15 @@ export function warnVue3Only(feature: string): void {
 export function registerGlobalProperty(
   app: Vue3App | Vue2Constructor,
   key: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any
 ): void {
   if (isVue2) {
     // Vue 2: 挂载到原型
-    ;(app as Vue2Constructor).prototype[key] = value
+    (app as Vue2Constructor).prototype[key] = value
   } else {
     // Vue 3: 挂载到 globalProperties
-    ;(app as Vue3App).config.globalProperties[key] = value
+    (app as Vue3App).config.globalProperties[key] = value
   }
 }
 
@@ -137,13 +144,15 @@ export function registerGlobalProperty(
 export function registerComponent(
   app: Vue3App | Vue2Constructor,
   name: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: any
 ): void {
   if (isVue2) {
     // Vue 2: 使用 Vue.component
-    ;(app as any).component(name, component)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (app as any).component(name, component)
   } else {
     // Vue 3: 使用 app.component
-    ;(app as Vue3App).component(name, component)
+    (app as Vue3App).component(name, component)
   }
 }

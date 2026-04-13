@@ -81,7 +81,7 @@ t.close()
 ```
 
 <script setup>
-import { toast } from '@hohaya/hoho'
+import { toast } from '../../packages/components/src/index'
 
 const showText = () => toast('提示内容')
 const showSuccess = () => toast.success('操作成功')

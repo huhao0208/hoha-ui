@@ -1,7 +1,13 @@
 <template>
-  <div class="ho-input" :class="inputClasses">
-    <span v-if="$slots.prefix" class="ho-input__prefix">
-      <slot name="prefix"></slot>
+  <div
+    class="ho-input"
+    :class="inputClasses"
+  >
+    <span
+      v-if="$slots.prefix"
+      class="ho-input__prefix"
+    >
+      <slot name="prefix" />
     </span>
     <input
       ref="inputRef"
@@ -14,9 +20,12 @@
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
-    />
-    <span v-if="$slots.suffix" class="ho-input__suffix">
-      <slot name="suffix"></slot>
+    >
+    <span
+      v-if="$slots.suffix"
+      class="ho-input__suffix"
+    >
+      <slot name="suffix" />
     </span>
   </div>
 </template>

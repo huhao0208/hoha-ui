@@ -20,20 +20,30 @@
               class="ho-modal__close"
               @click="handleClose"
             >
-              <svg viewBox="0 0 24 24" width="14" height="14">
-                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                />
               </svg>
             </button>
           </div>
 
           <!-- Body -->
           <div class="ho-modal__body">
-            <slot></slot>
+            <slot />
           </div>
 
           <!-- Footer -->
-          <div v-if="$slots.footer" class="ho-modal__footer">
-            <slot name="footer"></slot>
+          <div
+            v-if="$slots.footer"
+            class="ho-modal__footer"
+          >
+            <slot name="footer" />
           </div>
         </div>
       </div>
@@ -43,7 +53,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch, onMounted, onUnmounted } from 'vue'
-import type { PropType, CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue'
 
 export default defineComponent({
   name: 'HoModal',
@@ -78,7 +88,7 @@ export default defineComponent({
     }
   },
   emits: ['update:modelValue', 'update:visible', 'close', 'confirm'],
-  setup(props, { emit, slots }) {
+  setup(props, { emit }) {
     const computedVisible = computed(() => props.modelValue || props.visible)
     
     // Watch for external visible changes

@@ -2,7 +2,9 @@
   <div class="playground-container">
     <header class="header">
       <h1>Hoha UI Playground</h1>
-      <p class="subtitle">组件库开发调试环境</p>
+      <p class="subtitle">
+        组件库开发调试环境
+      </p>
     </header>
     
     <main class="main">
