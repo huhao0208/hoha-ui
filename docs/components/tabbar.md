@@ -7,7 +7,7 @@
 通过 `v-model` 绑定当前选中项的索引或标识符，使用 `HoTabBarItem` 定义导航项。
 
 <div class="demo-preview">
-  <HoTabBar v-model="active">
+  <HoTabBar v-model="active" :fixed="false">
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:magnify">搜索</HoTabBarItem>
     <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
@@ -19,7 +19,7 @@
 
 ```vue
 <template>
-  <ho-tab-bar v-model="active">
+  <ho-tab-bar v-model="active" :fixed="false">
     <ho-tab-bar-item icon="mdi:home">首页</ho-tab-bar-item>
     <ho-tab-bar-item icon="mdi:magnify">搜索</ho-tab-bar-item>
     <ho-tab-bar-item icon="mdi:account">我的</ho-tab-bar-item>
@@ -40,7 +40,7 @@ const active = ref(0)
 通过 `badge` 属性设置数字徽标，通过 `dot` 属性显示红点。
 
 <div class="demo-preview">
-  <HoTabBar v-model="active2">
+  <HoTabBar v-model="active2" :fixed="false">
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:message" :badge="5">消息</HoTabBarItem>
     <HoTabBarItem icon="mdi:bell" dot>通知</HoTabBarItem>
@@ -53,10 +53,42 @@ const active = ref(0)
 
 ```vue
 <template>
-  <ho-tab-bar v-model="active">
+  <ho-tab-bar v-model="active" :fixed="false">
     <ho-tab-bar-item icon="mdi:home">首页</ho-tab-bar-item>
     <ho-tab-bar-item icon="mdi:message" :badge="5">消息</ho-tab-bar-item>
     <ho-tab-bar-item icon="mdi:bell" dot>通知</ho-tab-bar-item>
+    <ho-tab-bar-item icon="mdi:account">我的</ho-tab-bar-item>
+  </ho-tab-bar>
+</template>
+```
+
+</details>
+
+## 自定义颜色
+
+通过 `active-color` 和 `inactive-color` 设置选中/未选中的颜色。
+
+<div class="demo-preview">
+  <HoTabBar v-model="active5" :fixed="false" active-color="#ee0a24" inactive-color="#999">
+    <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
+    <HoTabBarItem icon="mdi:apps">分类</HoTabBarItem>
+    <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
+  </HoTabBar>
+</div>
+
+<details>
+<summary>显示代码</summary>
+
+```vue
+<template>
+  <ho-tab-bar 
+    v-model="active" 
+    :fixed="false"
+    active-color="#ee0a24" 
+    inactive-color="#999" 
+  >
+    <ho-tab-bar-item icon="mdi:home">首页</ho-tab-bar-item>
+    <ho-tab-bar-item icon="mdi:apps">分类</ho-tab-bar-item>
     <ho-tab-bar-item icon="mdi:account">我的</ho-tab-bar-item>
   </ho-tab-bar>
 </template>
@@ -68,7 +100,10 @@ const active = ref(0)
 
 设置 `fixed` 使导航栏固定在底部，配合 `placeholder` 在文档流中占位。
 
-<div class="demo-preview">
+<div class="demo-preview" style="min-height: 120px;">
+  <p style="color: var(--vp-c-text-2); font-size: 14px; margin-bottom: 8px;">
+    下方 TabBar 固定在页面底部（此预览框仅作示意）
+  </p>
   <HoTabBar v-model="active3" fixed placeholder>
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:apps">分类</HoTabBarItem>
@@ -93,37 +128,6 @@ const active = ref(0)
 
 </details>
 
-## 自定义颜色
-
-通过 `active-color` 和 `inactive-color` 设置选中/未选中的颜色。
-
-<div class="demo-preview">
-  <HoTabBar v-model="active5" active-color="#ee0a24" inactive-color="#999">
-    <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
-    <HoTabBarItem icon="mdi:apps">分类</HoTabBarItem>
-    <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
-  </HoTabBar>
-</div>
-
-<details>
-<summary>显示代码</summary>
-
-```vue
-<template>
-  <ho-tab-bar 
-    v-model="active" 
-    active-color="#ee0a24" 
-    inactive-color="#999" 
-  >
-    <ho-tab-bar-item icon="mdi:home">首页</ho-tab-bar-item>
-    <ho-tab-bar-item icon="mdi:apps">分类</ho-tab-bar-item>
-    <ho-tab-bar-item icon="mdi:account">我的</ho-tab-bar-item>
-  </ho-tab-bar>
-</template>
-```
-
-</details>
-
 ## API
 
 ### TabBar Props
@@ -131,7 +135,7 @@ const active = ref(0)
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | v-model | 当前选中项的索引或标识符 | `number \| string` | `0` |
-| fixed | 是否固定在底部 | `boolean` | `true` |
+| fixed | 是否固定在底部 | `boolean` | `false` |
 | placeholder | 固定定位时是否在文档流中占位 | `boolean` | `false` |
 | border | 是否显示上边框 | `boolean` | `true` |
 | active-color | 选中项的颜色 | `string` | `#1989fa` |

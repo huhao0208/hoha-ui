@@ -29,7 +29,7 @@ export default defineComponent({
     },
     fixed: {
       type: Boolean,
-      default: true
+      default: false
     },
     placeholder: {
       type: Boolean,
