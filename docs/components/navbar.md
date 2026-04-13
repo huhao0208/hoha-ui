@@ -193,3 +193,8 @@ const onClickRight = () => {
 | title | 自定义标题 |
 | left | 自定义左侧内容 |
 | right | 自定义右侧内容 |
+
+<script setup>
+const onClickLeft = () => console.log('click left')
+const onClickRight = () => console.log('click right')
+</script>
