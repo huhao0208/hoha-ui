@@ -266,6 +266,9 @@ export default defineComponent({
       
       if (props.effect === '3d') {
         return {
+          position: 'relative',
+          width: '100%',
+          height: '100%',
           transformStyle: 'preserve-3d'
         }
       }
@@ -639,6 +642,7 @@ export default defineComponent({
   &__container {
     position: relative;
     width: 100%;
+    height: 200px;
     overflow: hidden;
     border-radius: var(--hoho-radius-lg);
   }
@@ -661,6 +665,16 @@ export default defineComponent({
   &__item {
     flex-shrink: 0;
     width: 100%;
+    
+    .ho-carousel--3d & {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
     
     &--clone {
       visibility: visible;
