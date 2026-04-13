@@ -16,7 +16,7 @@
 
 ```vue
 <template>
-  <HoButton type="primary" @click="$toast.show('提示内容')">文字提示</HoButton>
+  <HoButton type="primary" @click="$toast('提示内容')">文字提示</HoButton>
   <HoButton type="success" @click="$toast.success('操作成功')">成功提示</HoButton>
   <HoButton type="danger" @click="$toast.fail('操作失败')">失败提示</HoButton>
   <HoButton type="warning" @click="$toast.loading('加载中...')">加载提示</HoButton>
@@ -38,9 +38,9 @@
 
 ```vue
 <template>
-  <HoButton @click="$toast.show({ message: '顶部提示', position: 'top' })">顶部</HoButton>
-  <HoButton @click="$toast.show({ message: '中间提示', position: 'middle' })">中间</HoButton>
-  <HoButton @click="$toast.show({ message: '底部提示', position: 'bottom' })">底部</HoButton>
+  <HoButton @click="$toast({ message: '顶部提示', position: 'top' })">顶部</HoButton>
+  <HoButton @click="$toast({ message: '中间提示', position: 'middle' })">中间</HoButton>
+  <HoButton @click="$toast({ message: '底部提示', position: 'bottom' })">底部</HoButton>
 </template>
 ```
 
@@ -54,7 +54,7 @@ Toast 组件提供以下方法：
 
 | 方法名 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| `toast.show(options)` | 显示提示 | `ToastOptions \| string` | `ToastInstance` |
+| `toast(options)` | 显示提示 | `ToastOptions \| string` | `ToastInstance` |
 | `toast.success(message)` | 显示成功提示 | `string` | `ToastInstance` |
 | `toast.fail(message)` | 显示失败提示 | `string` | `ToastInstance` |
 | `toast.loading(message)` | 显示加载提示 | `string` | `ToastInstance` |
@@ -83,12 +83,12 @@ t.close()
 <script setup>
 import { toast } from '../../packages/components/src/toast/index.ts'
 
-const showText = () => toast.show('提示内容')
+const showText = () => toast('提示内容')
 const showSuccess = () => toast.success('操作成功')
 const showFail = () => toast.fail('操作失败')
 const showLoading = () => toast.loading('加载中...')
 
-const showTop = () => toast.show({ message: '顶部提示', position: 'top' })
-const showMiddle = () => toast.show({ message: '中间提示', position: 'middle' })
-const showBottom = () => toast.show({ message: '底部提示', position: 'bottom' })
+const showTop = () => toast({ message: '顶部提示', position: 'top' })
+const showMiddle = () => toast({ message: '中间提示', position: 'middle' })
+const showBottom = () => toast({ message: '底部提示', position: 'bottom' })
 </script>

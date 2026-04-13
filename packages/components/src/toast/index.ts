@@ -171,31 +171,35 @@ const showToast = (options: ToastOptions): ToastInstance => {
   }
 }
 
-// API methods
-const toast = {
-  show: (options: ToastOptions | string): ToastInstance => {
-    const opts = typeof options === 'string' ? { message: options } : options
-    return showToast(opts)
-  },
-  
-  loading: (message: string, options?: Partial<ToastOptions>): ToastInstance => 
-    showToast({ message, type: 'loading', duration: 0, ...options }),
-  
-  success: (message: string, options?: Partial<ToastOptions>): ToastInstance => 
-    showToast({ message, type: 'success', ...options }),
-  
-  fail: (message: string, options?: Partial<ToastOptions>): ToastInstance => 
-    showToast({ message, type: 'fail', ...options }),
-  
-  text: (message: string, options?: Partial<ToastOptions>): ToastInstance => 
-    showToast({ message, type: 'text', ...options }),
-  
-  clear: closeToast,
-  
-  install: (app: App) => {
-    app.config.globalProperties.$toast = toast
-    app.provide('$toast', toast)
-  }
+// 创建可调用的 toast 函数
+function toast(options: ToastOptions | string): ToastInstance {
+  const opts = typeof options === 'string' ? { message: options } : options
+  return showToast(opts)
+}
+
+// 添加方法到 toast 函数
+toast.show = (options: ToastOptions | string): ToastInstance => {
+  const opts = typeof options === 'string' ? { message: options } : options
+  return showToast(opts)
+}
+
+toast.loading = (message: string, options?: Partial<ToastOptions>): ToastInstance => 
+  showToast({ message, type: 'loading', duration: 0, ...options })
+
+toast.success = (message: string, options?: Partial<ToastOptions>): ToastInstance => 
+  showToast({ message, type: 'success', ...options })
+
+toast.fail = (message: string, options?: Partial<ToastOptions>): ToastInstance => 
+  showToast({ message, type: 'fail', ...options })
+
+toast.text = (message: string, options?: Partial<ToastOptions>): ToastInstance => 
+  showToast({ message, type: 'text', ...options })
+
+toast.clear = closeToast
+
+toast.install = (app: App) => {
+  app.config.globalProperties.$toast = toast
+  app.provide('$toast', toast)
 }
 
 export default toast
