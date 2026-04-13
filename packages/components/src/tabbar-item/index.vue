@@ -23,8 +23,13 @@
         name="icon"
         :active="isActive"
       />
-      <!-- 默认使用 emoji 图标 -->
-      <span v-else-if="icon" class="ho-tabbar-item__emoji">{{ emojiIcon }}</span>
+      <!-- HoIcon 组件 -->
+      <ho-icon
+        v-else-if="icon"
+        :name="icon"
+        :size="24"
+        :color="currentColor"
+      />
       <!-- 默认 slot（图标） -->
       <slot v-else />
 
@@ -176,22 +181,6 @@ export default defineComponent({
       return 'div'
     })
 
-    // Emoji 图标映射
-    const emojiIconMap: Record<string, string> = {
-      home: '🏠',
-      search: '🔍',
-      user: '👤',
-      message: '💬',
-      notification: '🔔',
-      category: '📁',
-      cart: '🛒',
-      settings: '⚙️',
-      profile: '👤',
-      favorite: '❤️'
-    }
-    
-    const emojiIcon = computed(() => emojiIconMap[props.icon] || props.icon)
-
     // 样式
     const itemStyle = computed(() => ({
       color: currentColor.value
@@ -225,14 +214,12 @@ export default defineComponent({
     return {
       isActive,
       currentColor,
-      currentIconColor,
       showBadge,
       badgeContent,
       badgeClasses,
       componentTag,
       itemStyle,
       tabBarItemClasses,
-      emojiIcon,
       handleClick
     }
   }
@@ -308,11 +295,6 @@ export default defineComponent({
     background: var(--hoho-color-danger);
     border-radius: 50%;
     z-index: 1;
-  }
-  
-  &__emoji {
-    font-size: 24px;
-    line-height: 1;
   }
 }
 

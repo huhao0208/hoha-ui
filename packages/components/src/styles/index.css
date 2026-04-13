@@ -2216,6 +2216,7 @@ html.dark .ho-tabbar-item--active {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 46px;
   background: var(--hoho-bg-primary);
   color: var(--hoho-text-primary);
   box-sizing: content-box;

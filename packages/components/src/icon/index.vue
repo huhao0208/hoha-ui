@@ -1,51 +1,90 @@
 <template>
-  <i
-    class="ho-icon"
+  <Icon
+    :icon="name"
+    :width="computedSize"
+    :height="computedSize"
+    :color="color"
+    :rotate="rotate"
+    :flip="flip"
+    :inline="inline"
     :class="iconClasses"
-    :style="iconStyle"
-  >
-    <svg
-      v-if="icon"
-      aria-hidden="true"
-    >
-      <use :xlink:href="`#${icon}`" />
-    </svg>
-    <slot v-else />
-  </i>
+    @click="handleClick"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
+import { Icon } from '@iconify/vue'
+import type { PropType } from 'vue'
+
+type IconSize = 'small' | 'medium' | 'large' | number
 
 export default defineComponent({
   name: 'HoIcon',
+  components: {
+    Icon
+  },
   props: {
-    icon: {
+    name: {
       type: String,
-      default: ''
+      required: true
     },
     size: {
-      type: [String, Number],
-      default: '1em'
+      type: [String, Number] as PropType<IconSize>,
+      default: 'medium'
     },
     color: {
       type: String,
       default: ''
+    },
+    rotate: {
+      type: [Number, String],
+      default: undefined
+    },
+    flip: {
+      type: String as PropType<'horizontal' | 'vertical' | 'both'>,
+      default: undefined
+    },
+    inline: {
+      type: Boolean,
+      default: false
+    },
+    clickable: {
+      type: Boolean,
+      default: false
     }
   },
-  setup(props) {
-    const iconClasses = computed(() => ({
-      'ho-icon--custom': !!props.icon
-    }))
+  emits: ['click'],
+  setup(props, { emit }) {
+    const computedSize = computed(() => {
+      if (typeof props.size === 'number') {
+        return props.size
+      }
+      const sizeMap: Record<string, string> = {
+        small: '16',
+        medium: '24',
+        large: '32'
+      }
+      return sizeMap[props.size] || '24'
+    })
 
-    const iconStyle = computed(() => ({
-      fontSize: typeof props.size === 'number' ? `${props.size}px` : props.size,
-      color: props.color
-    }))
+    const iconClasses = computed(() => [
+      'ho-icon',
+      {
+        'ho-icon--clickable': props.clickable
+      }
+    ])
+
+    const handleClick = (e: MouseEvent) => {
+      if (props.clickable) {
+        emit('click', e)
+      }
+    }
 
     return {
+      computedSize,
       iconClasses,
-      iconStyle
+      handleClick
     }
   }
 })
@@ -56,14 +95,20 @@ export default defineComponent({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  overflow: hidden;
+  vertical-align: middle;
 
-  svg {
-    width: 100%;
-    height: 100%;
+  &--clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 </style>
