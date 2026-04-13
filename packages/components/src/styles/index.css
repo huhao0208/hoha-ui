@@ -17,6 +17,34 @@
   --hoho-radius-lg: 8px;
   
   --hoho-transition: all 0.2s ease;
+  
+  /* 移动端安全区域 */
+  --hoho-safe-area-top: env(safe-area-inset-top, 0px);
+  --hoho-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 移动端基础适配 */
+@media screen and (max-width: 768px) {
+  :root {
+    --hoho-radius-md: 8px;
+    --hoho-radius-lg: 12px;
+  }
+}
+
+/* 禁止移动端长按弹出菜单 */
+.ho-button,
+.ho-input,
+.ho-toast,
+.ho-message {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 移动端点击高亮清除 */
+.ho-button,
+.ho-input {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Button 按钮样式 */
@@ -29,24 +57,54 @@
   font-weight: 500;
   transition: var(--hoho-transition);
   font-family: inherit;
+  /* 移动端最小点击区域 44px */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .ho-button--small {
-  padding: 4px 12px;
-  font-size: 12px;
+  padding: 6px 14px;
+  font-size: 13px;
   border-radius: var(--hoho-radius-sm);
+  min-height: 32px;
+  min-width: 32px;
 }
 
 .ho-button--medium {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 10px 18px;
+  font-size: 15px;
   border-radius: var(--hoho-radius-md);
+  min-height: 44px;
 }
 
 .ho-button--large {
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 14px 28px;
+  font-size: 17px;
   border-radius: var(--hoho-radius-lg);
+  min-height: 52px;
+}
+
+/* 移动端按钮增大触摸区域 */
+@media screen and (max-width: 768px) {
+  .ho-button {
+    min-height: 48px;
+  min-width: 48px;
+  padding: 12px 20px;
+  font-size: 16px;
+  }
+  
+  .ho-button--small {
+    min-height: 36px;
+    min-width: 36px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .ho-button--large {
+    min-height: 56px;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
 }
 
 .ho-button--primary {
@@ -198,6 +256,27 @@
   margin-left: 8px;
 }
 
+/* 移动端 Input 适配 */
+@media screen and (max-width: 768px) {
+  .ho-input {
+    min-height: 44px;
+  }
+  
+  .ho-input--medium {
+    padding: 10px 14px;
+    min-height: 48px;
+  }
+  
+  .ho-input--large {
+    padding: 14px 16px;
+    min-height: 52px;
+  }
+  
+  .ho-input__inner {
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+  }
+}
+
 /* Icon 图标样式 */
 .ho-icon {
   display: inline-flex;
@@ -227,6 +306,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-width: calc(100vw - 32px);
 }
 
 .ho-message {
@@ -244,6 +324,24 @@
 .ho-message--error { color: var(--hoho-color-danger); }
 .ho-message--warning { color: var(--hoho-color-warning); }
 .ho-message--info { color: var(--hoho-color-info); }
+
+/* 移动端 Message 适配 */
+@media screen and (max-width: 768px) {
+  .ho-message-container {
+    top: calc(16px + var(--hoho-safe-area-top));
+    left: 16px;
+    right: 16px;
+    transform: none;
+    max-width: none;
+  }
+  
+  .ho-message {
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: var(--hoho-radius-lg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  }
+}
 
 @keyframes hoho-message-in {
   from {
@@ -295,15 +393,16 @@
 }
 
 .ho-toast {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   color: white;
   padding: 16px 24px;
-  border-radius: var(--hoho-radius-md);
+  border-radius: var(--hoho-radius-lg);
   pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  max-width: calc(100vw - 48px);
 }
 
 .ho-toast__content {
@@ -320,6 +419,32 @@
 .ho-toast__text {
   font-size: 14px;
   text-align: center;
+  line-height: 1.5;
+}
+
+/* 移动端 Toast 适配 */
+@media screen and (max-width: 768px) {
+  .ho-toast-wrapper--top {
+    padding-top: calc(60px + var(--hoho-safe-area-top));
+  }
+  
+  .ho-toast-wrapper--bottom {
+    padding-bottom: calc(80px + var(--hoho-safe-area-bottom));
+  }
+  
+  .ho-toast {
+    padding: 20px 28px;
+    border-radius: 12px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  .ho-toast__icon {
+    font-size: 42px;
+  }
+  
+  .ho-toast__text {
+    font-size: 15px;
+  }
 }
 
 /* 加载动画 */
