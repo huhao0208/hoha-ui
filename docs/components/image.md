@@ -273,3 +273,12 @@
 | --- | --- |
 | loading | 自定义加载中提示 |
 | error | 自定义加载失败提示 |
+
+<script setup>
+const imageUrl = 'https://picsum.photos/400/200?random=1'
+const imageUrls = [
+  'https://picsum.photos/400/200?random=1',
+  'https://picsum.photos/400/200?random=2',
+  'https://picsum.photos/400/200?random=3'
+]
+</script>

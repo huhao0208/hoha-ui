@@ -273,3 +273,6 @@
 | --- | --- |
 | default | 默认插槽，放置 Cell 组件 |
 | title | 自定义分组标题 |
+
+<script setup>
+</script>

@@ -201,3 +201,10 @@ const active = ref(0)
 | --- | --- |
 | default | 自定义 TabBarItem 内容 |
 | icon | 自定义图标 |
+
+<script setup>
+import { ref } from 'vue'
+
+const active = ref(0)
+const active2 = ref(0)
+</script>
