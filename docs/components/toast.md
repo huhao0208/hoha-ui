@@ -38,9 +38,9 @@
 
 ```vue
 <template>
-  <HoButton @click="$toast({ message: '顶部提示', position: 'top' })">顶部</HoButton>
-  <HoButton @click="$toast({ message: '中间提示', position: 'middle' })">中间</HoButton>
-  <HoButton @click="$toast({ message: '底部提示', position: 'bottom' })">底部</HoButton>
+  <HoButton @click="$toast.show({ message: '顶部提示', position: 'top' })">顶部</HoButton>
+  <HoButton @click="$toast.show({ message: '中间提示', position: 'middle' })">中间</HoButton>
+  <HoButton @click="$toast.show({ message: '底部提示', position: 'bottom' })">底部</HoButton>
 </template>
 ```
 
@@ -88,7 +88,7 @@ const showSuccess = () => toast.success('操作成功')
 const showFail = () => toast.fail('操作失败')
 const showLoading = () => toast.loading('加载中...')
 
-const showTop = () => toast({ message: '顶部提示', position: 'top' })
-const showMiddle = () => toast({ message: '中间提示', position: 'middle' })
-const showBottom = () => toast({ message: '底部提示', position: 'bottom' })
+const showTop = () => toast.show({ message: '顶部提示', position: 'top' })
+const showMiddle = () => toast.show({ message: '中间提示', position: 'middle' })
+const showBottom = () => toast.show({ message: '底部提示', position: 'bottom' })
 </script>
