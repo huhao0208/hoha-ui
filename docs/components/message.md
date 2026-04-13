@@ -47,7 +47,7 @@
 import { message } from '@hohaya/hoho'
 
 const showPersistent = () => {
-  const msg = message.success('点击关闭按钮可关闭', 0)
+  const msg = message.success('3秒后自动关闭', 0)
   setTimeout(() => msg.close(), 3000)
 }
 </script>
@@ -81,7 +81,7 @@ Message 组件提供以下方法：
 调用 Message 方法会返回当前 Message 的实例，可以调用 `close` 方法手动关闭。
 
 <script setup>
-import { message } from '@hohaya/hoho'
+import { message } from '../../packages/components/src/message/index.ts'
 
 const showSuccess = () => message.success('操作成功！')
 const showError = () => message.error('操作失败！')
