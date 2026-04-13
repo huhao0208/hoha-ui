@@ -81,7 +81,7 @@ t.close()
 ```
 
 <script setup>
-import { toast } from '../../packages/components/src/index'
+import { toast } from '../../packages/components/src/toast/index.ts'
 
 const showText = () => toast('提示内容')
 const showSuccess = () => toast.success('操作成功')
