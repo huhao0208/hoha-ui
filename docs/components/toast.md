@@ -16,7 +16,7 @@
 
 ```vue
 <template>
-  <HoButton type="primary" @click="$toast('提示内容')">文字提示</HoButton>
+  <HoButton type="primary" @click="$toast.show('提示内容')">文字提示</HoButton>
   <HoButton type="success" @click="$toast.success('操作成功')">成功提示</HoButton>
   <HoButton type="danger" @click="$toast.fail('操作失败')">失败提示</HoButton>
   <HoButton type="warning" @click="$toast.loading('加载中...')">加载提示</HoButton>
@@ -54,7 +54,7 @@ Toast 组件提供以下方法：
 
 | 方法名 | 说明 | 参数 | 返回值 |
 | --- | --- | --- | --- |
-| `toast(options)` | 显示提示 | `ToastOptions \| string` | `ToastInstance` |
+| `toast.show(options)` | 显示提示 | `ToastOptions \| string` | `ToastInstance` |
 | `toast.success(message)` | 显示成功提示 | `string` | `ToastInstance` |
 | `toast.fail(message)` | 显示失败提示 | `string` | `ToastInstance` |
 | `toast.loading(message)` | 显示加载提示 | `string` | `ToastInstance` |
@@ -83,7 +83,7 @@ t.close()
 <script setup>
 import { toast } from '../../packages/components/src/toast/index.ts'
 
-const showText = () => toast('提示内容')
+const showText = () => toast.show('提示内容')
 const showSuccess = () => toast.success('操作成功')
 const showFail = () => toast.fail('操作失败')
 const showLoading = () => toast.loading('加载中...')
