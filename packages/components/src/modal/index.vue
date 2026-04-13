@@ -286,35 +286,20 @@ export default defineComponent({
 // Mobile adaptations
 @media screen and (max-width: 768px) {
   .ho-modal {
-    align-items: flex-end;
-    justify-content: stretch;
+    align-items: center;
+    justify-content: center;
 
     &__dialog {
-      width: 100% !important;
-      max-width: 100% !important;
+      width: 90% !important;
+      max-width: 90% !important;
       max-height: 85vh;
-      border-radius: 20px 20px 0 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      border-radius: 12px;
       padding-bottom: env(safe-area-inset-bottom, 0);
-      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
     }
 
     &__header {
       padding: 16px 20px;
-      position: relative;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 36px;
-        height: 4px;
-        background: var(--hoho-border-secondary, #e5e7eb);
-        border-radius: 2px;
-      }
     }
 
     &__close {
@@ -359,7 +344,7 @@ export default defineComponent({
     opacity: 0;
 
     .ho-modal__dialog {
-      transform: translateY(100%);
+      transform: scale(0.9);
     }
   }
 }

@@ -982,3 +982,1372 @@ html.dark .ho-modal__close {
 html.dark .ho-input__inner::placeholder {
   color: #6b7280; /* 对比度 4.6:1 在 #1f2937 背景上 */
 }
+
+/* ============================================
+   Carousel 轮播组件样式
+   ============================================ */
+
+/* Carousel 基础样式 */
+.ho-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.ho-carousel__container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--hoho-radius-lg);
+}
+
+.ho-carousel__track {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+}
+
+.ho-carousel--vertical .ho-carousel__track {
+  flex-direction: column;
+}
+
+.ho-carousel--3d .ho-carousel__track {
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.ho-carousel__item {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.ho-carousel__item--clone {
+  visibility: visible;
+}
+
+.ho-carousel__item-content {
+  width: 100%;
+  height: 100%;
+}
+
+.ho-carousel__item-content img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  display: block;
+}
+
+.ho-carousel__item-content img[loading="lazy"] {
+  background: var(--hoho-bg-tertiary, #f3f4f6);
+}
+
+/* Carousel Indicators */
+.ho-carousel__indicators {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  padding: 8px 12px;
+}
+
+.ho-carousel__indicators--top {
+  top: 16px;
+}
+
+.ho-carousel__indicators:not(.ho-carousel__indicators--top) {
+  bottom: 16px;
+}
+
+.ho-carousel__indicators--bar {
+  gap: 4px;
+}
+
+.ho-carousel__indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.ho-carousel__indicator:hover {
+  opacity: 0.8;
+}
+
+.ho-carousel__indicators--bar .ho-carousel__indicator {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+  -webkit-transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ho-carousel__indicators--bar .ho-carousel__indicator--active {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+/* Carousel Navigation Arrows */
+.ho-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.ho-carousel__arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.ho-carousel__arrow--left {
+  left: 16px;
+}
+
+.ho-carousel__arrow--right {
+  right: 16px;
+}
+
+/* Carousel Fade Effect */
+.ho-carousel--fade .ho-carousel__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+
+.ho-carousel--fade .ho-carousel__item--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Carousel Dragging State */
+.ho-carousel--dragging .ho-carousel__track {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+/* ============================================
+   Carousel 移动端适配
+   ============================================ */
+
+@media screen and (max-width: 768px) {
+  .ho-carousel__container {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .ho-carousel__indicators {
+    padding: 6px 10px;
+    gap: 6px;
+  }
+  
+  .ho-carousel__indicators:not(.ho-carousel__indicators--top) {
+    bottom: calc(16px + var(--hoho-safe-area-bottom));
+  }
+  
+  .ho-carousel__indicator {
+    width: 10px;
+    height: 10px;
+    min-width: 24px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ho-carousel__indicator::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: inherit;
+  }
+  
+  .ho-carousel__indicators--bar .ho-carousel__indicator {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+  
+  .ho-carousel__indicators--bar .ho-carousel__indicator::after {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  
+  .ho-carousel__arrow {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .ho-carousel__arrow--left {
+    left: 12px;
+  }
+  
+  .ho-carousel__arrow--right {
+    right: 12px;
+  }
+  
+  .ho-carousel__arrow svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  /* Touch feedback */
+  .ho-carousel__indicator:active {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  
+  .ho-carousel__arrow:active {
+    -webkit-transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+/* ============================================
+   Carousel 暗色模式
+   ============================================ */
+
+html.dark .ho-carousel__arrow {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+html.dark .ho-carousel__arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+html.dark .ho-carousel__item-content img[loading="lazy"] {
+  background: var(--hoho-bg-tertiary);
+}
+
+/* Mobile + Dark mode touch feedback */
+@media screen and (max-width: 768px) {
+  html.dark .ho-carousel__arrow:active {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ============================================
+   Image 图片样式
+   ============================================ */
+
+.ho-image {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  background: var(--hoho-bg-secondary);
+}
+
+.ho-image--round {
+  border-radius: var(--hoho-radius-lg);
+}
+
+.ho-image--circle {
+  border-radius: 50%;
+}
+
+.ho-image__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.ho-image__img--contain { object-fit: contain; }
+.ho-image__img--cover { object-fit: cover; }
+.ho-image__img--fill { object-fit: fill; }
+.ho-image__img--none { object-fit: none; }
+.ho-image__img--scale-down { object-fit: scale-down; }
+
+.ho-image__placeholder,
+.ho-image__error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hoho-bg-secondary);
+}
+
+.ho-image__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ho-image__loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--hoho-border-secondary);
+  border-top-color: var(--hoho-color-primary);
+  border-radius: 50%;
+  animation: hoho-image-spin 0.8s linear infinite;
+}
+
+@keyframes hoho-image-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ho-image__error {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ho-image__error-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--hoho-text-placeholder);
+}
+
+.ho-image__error-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ho-image__error-text {
+  font-size: 14px;
+  color: var(--hoho-text-placeholder);
+}
+
+/* 预览样式 */
+.ho-image__preview-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  background: var(--hoho-bg-mask);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hoho-image-preview-in 0.3s ease;
+}
+
+@keyframes hoho-image-preview-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ho-image__preview-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.ho-image__preview-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ho-image__preview-close svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.ho-image__preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ho-image__preview-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  transition: transform 0.1s ease;
+  cursor: grab;
+}
+
+.ho-image__preview-img:active {
+  cursor: grabbing;
+}
+
+.ho-image__preview-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.ho-image__preview-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.ho-image__preview-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ho-image__preview-btn:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ho-image__preview-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ho-image__preview-scale {
+  font-size: 14px;
+  color: white;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* 移动端 Image 适配 */
+@media screen and (max-width: 768px) {
+  .ho-image__loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .ho-image__error-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .ho-image__error-text {
+    font-size: 16px;
+  }
+
+  .ho-image__preview-close {
+    top: calc(16px + var(--hoho-safe-area-top));
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .ho-image__preview-close svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ho-image__preview-img {
+    max-width: 95%;
+    max-height: 85%;
+  }
+
+  .ho-image__preview-controls {
+    bottom: calc(20px + var(--hoho-safe-area-bottom));
+    padding: 12px 20px;
+    gap: 20px;
+  }
+
+  .ho-image__preview-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ho-image__preview-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ho-image__preview-scale {
+    font-size: 16px;
+    min-width: 56px;
+  }
+}
+
+/* 暗色模式 Image */
+html.dark .ho-image__placeholder,
+html.dark .ho-image__error {
+  background: var(--hoho-bg-tertiary);
+}
+
+html.dark .ho-image__loading-spinner {
+  border-color: var(--hoho-border-primary);
+  border-top-color: var(--hoho-color-primary);
+}
+
+html.dark .ho-image__error-icon {
+  color: var(--hoho-text-tertiary);
+}
+
+html.dark .ho-image__error-text {
+  color: var(--hoho-text-tertiary);
+}
+
+/* ============================================
+   Cell 单元格样式
+   ============================================ */
+
+/* Cell Group 单元格分组 */
+.ho-cell-group {
+  background: var(--hoho-bg-primary);
+  border-radius: var(--hoho-radius-md);
+  overflow: hidden;
+}
+
+.ho-cell-group--border {
+  border: 1px solid var(--hoho-border-secondary);
+}
+
+.ho-cell-group--inset {
+  margin: 0 16px;
+  border-radius: var(--hoho-radius-lg);
+}
+
+/* Cell 单元格 */
+.ho-cell {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  min-height: 44px;
+  background: var(--hoho-bg-primary);
+  position: relative;
+  transition: var(--hoho-transition);
+  box-sizing: border-box;
+}
+
+/* 边框 - 使用伪元素实现精确 1px 边框 */
+.ho-cell--border::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hoho-border-secondary);
+  transform: scaleY(0.5);
+  transform-origin: bottom;
+}
+
+/* 可点击状态 */
+.ho-cell--clickable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ho-cell--clickable:active {
+  background: var(--hoho-bg-secondary);
+}
+
+/* 禁用状态 */
+.ho-cell--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ho-cell--disabled:active {
+  background: var(--hoho-bg-primary);
+}
+
+/* 左侧图标 */
+.ho-cell__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: var(--hoho-color-primary);
+}
+
+/* 主内容区域 */
+.ho-cell__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 标题 */
+.ho-cell__title {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--hoho-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 描述/标签 */
+.ho-cell__label {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--hoho-text-secondary);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 右侧内容 */
+.ho-cell__value {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--hoho-text-secondary);
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* 右侧箭头 */
+.ho-cell__arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  color: var(--hoho-text-tertiary);
+}
+
+/* 移动端 Cell 适配 */
+@media screen and (max-width: 768px) {
+  .ho-cell {
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+  
+  .ho-cell__title {
+    font-size: 16px;
+  }
+  
+  .ho-cell__label {
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  
+  .ho-cell__value {
+    font-size: 15px;
+  }
+  
+  .ho-cell--border::after {
+    left: 16px;
+  }
+  
+  /* 移动端安全区域适配 */
+  .ho-cell-group--inset {
+    margin: 0 12px;
+  }
+  
+  /* 增强移动端触摸反馈 */
+  .ho-cell--clickable:active {
+    background: var(--hoho-bg-tertiary);
+  }
+}
+
+/* 暗色模式 Cell */
+html.dark .ho-cell-group {
+  background: var(--hoho-bg-primary);
+}
+
+html.dark .ho-cell-group--border {
+  border-color: var(--hoho-border-primary);
+}
+
+html.dark .ho-cell {
+  background: var(--hoho-bg-primary);
+}
+
+html.dark .ho-cell--border::after {
+  background: var(--hoho-border-primary);
+}
+
+html.dark .ho-cell--clickable:active {
+  background: var(--hoho-bg-tertiary);
+}
+
+html.dark .ho-cell__icon {
+  color: var(--hoho-color-primary);
+}
+
+html.dark .ho-cell__title {
+  color: var(--hoho-text-primary);
+}
+
+html.dark .ho-cell__label {
+  color: var(--hoho-text-secondary);
+}
+
+html.dark .ho-cell__value {
+  color: var(--hoho-text-tertiary);
+}
+
+html.dark .ho-cell__arrow {
+  color: var(--hoho-text-tertiary);
+}
+
+/* 移动端 + 暗色模式 Cell 适配 */
+@media screen and (max-width: 768px) {
+  html.dark .ho-cell--clickable:active {
+    background: var(--hoho-bg-tertiary);
+  }
+}
+
+/* ============================================
+   Tabs 标签页样式
+   ============================================ */
+
+.ho-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* 粘性定位 */
+.ho-tabs--sticky .ho-tabs__nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* 标签导航 */
+.ho-tabs__nav {
+  background: var(--hoho-bg-primary);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.ho-tabs__nav--scrollable {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 隐藏滚动条但保持滚动功能 */
+.ho-tabs__nav--scrollable::-webkit-scrollbar {
+  display: none;
+}
+.ho-tabs__nav--scrollable {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.ho-tabs__nav-wrap {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  min-width: 100%;
+  padding: 0 4px;
+}
+
+/* 标签项 */
+.ho-tabs__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--hoho-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+  /* 移动端最小点击区域 44px */
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.ho-tabs__tab:hover:not(.ho-tabs__tab--disabled) {
+  color: var(--hoho-color-primary);
+}
+
+.ho-tabs__tab--active {
+  color: var(--hoho-color-primary);
+  font-weight: 600;
+}
+
+.ho-tabs__tab--disabled {
+  color: var(--hoho-text-placeholder);
+  cursor: not-allowed;
+}
+
+.ho-tabs__tab-title {
+  line-height: 20px;
+}
+
+/* 数字徽标 */
+.ho-tabs__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  background: var(--hoho-color-danger);
+  border-radius: 9px;
+  line-height: 1;
+}
+
+/* 红点徽标 */
+.ho-tabs__dot {
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+  background: var(--hoho-color-danger);
+  border-radius: 50%;
+}
+
+/* 滑动指示器 */
+.ho-tabs__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--hoho-color-primary);
+  border-radius: 3px 3px 0 0;
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+/* 内容区域 */
+.ho-tabs__content {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ho-tabs__content--animated {
+  transition: transform 0.3s ease;
+}
+
+/* 标签页内容 */
+.ho-tabs__pane {
+  display: none;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.ho-tabs__pane--active {
+  display: block;
+  animation: hoho-tab-fade-in 0.3s ease;
+}
+
+@keyframes hoho-tab-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   移动端 Tabs 适配
+   ============================================ */
+@media screen and (max-width: 768px) {
+  .ho-tabs__tab {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+
+  /* 增大徽标 */
+  .ho-tabs__badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  .ho-tabs__dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* 指示器稍粗 */
+  .ho-tabs__indicator {
+    height: 3px;
+  border-radius: 3px 3px 0 0;
+  }
+
+  /* 粘性定位适配安全区域 */
+  .ho-tabs--sticky .ho-tabs__nav {
+    top: var(--hoho-safe-area-top, 0px);
+  }
+}
+
+/* ============================================
+   暗色模式 Tabs
+   ============================================ */
+html.dark .ho-tabs__nav {
+  background: var(--hoho-bg-primary);
+}
+
+html.dark .ho-tabs__tab {
+  color: var(--hoho-text-secondary);
+}
+
+html.dark .ho-tabs__tab:hover:not(.ho-tabs__tab--disabled) {
+  color: var(--hoho-color-primary);
+}
+
+html.dark .ho-tabs__tab--active {
+  color: var(--hoho-color-primary);
+}
+
+html.dark .ho-tabs__tab--disabled {
+  color: var(--hoho-text-placeholder);
+}
+
+html.dark .ho-tabs__indicator {
+  background: var(--hoho-color-primary);
+}
+
+html.dark .ho-tabs__badge {
+  background: var(--hoho-color-danger);
+}
+
+html.dark .ho-tabs__dot {
+  background: var(--hoho-color-danger);
+}
+
+/* ============================================
+   Tab 单个标签样式 (配合 Tabs 使用)
+   ============================================ */
+
+.ho-tab {
+  display: none;
+}
+
+.ho-tab--active {
+  display: block;
+}
+
+.ho-tab--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* 移动端暗色模式组合优化 */
+@media screen and (max-width: 768px) {
+  html.dark .ho-tabs__nav {
+    border-bottom: 1px solid var(--hoho-border-primary);
+  }
+
+  /* 暗色模式下触摸反馈 */
+  html.dark .ho-tabs__tab:active:not(.ho-tabs__tab--disabled) {
+    background: var(--hoho-bg-tertiary);
+  }
+
+  /* 暗色模式下内容区域背景 */
+  html.dark .ho-tabs__content {
+    background: var(--hoho-bg-secondary);
+  }
+}
+
+/* 小屏幕优化 */
+@media screen and (max-width: 375px) {
+  .ho-tabs__tab {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .ho-tabs__badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   TabBar 底部导航样式
+   ============================================ */
+
+.ho-tabbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background: var(--hoho-bg-primary);
+  box-sizing: border-box;
+}
+
+.ho-tabbar--fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.ho-tabbar--border {
+  border-top: 1px solid var(--hoho-border-secondary);
+}
+
+.ho-tabbar--safe-area {
+  padding-bottom: var(--hoho-safe-area-bottom);
+}
+
+.ho-tabbar__placeholder {
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* TabBar Item 样式 */
+.ho-tabbar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  color: var(--hoho-text-secondary);
+  transition: var(--hoho-transition);
+  position: relative;
+  /* 移动端最小点击区域 44px */
+  min-height: 44px;
+  padding: 6px 0;
+}
+
+.ho-tabbar-item--active {
+  color: var(--hoho-color-primary);
+}
+
+.ho-tabbar-item__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  font-size: 22px;
+}
+
+.ho-tabbar-item__text {
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 徽标样式 */
+.ho-tabbar-item__badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  color: #fff;
+  background: var(--hoho-color-danger);
+  border-radius: 8px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.ho-tabbar-item__badge--large {
+  padding: 0 5px;
+  min-width: 18px;
+}
+
+/* 红点样式 */
+.ho-tabbar-item__dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--hoho-color-danger);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* 移动端 TabBar 适配 */
+@media screen and (max-width: 768px) {
+  .ho-tabbar {
+    height: 50px;
+  }
+  
+  .ho-tabbar-item {
+    padding: 6px 0;
+    min-height: 50px;
+  }
+  
+  .ho-tabbar-item__icon {
+    margin-bottom: 2px;
+    font-size: 24px;
+  }
+  
+  .ho-tabbar-item__text {
+    font-size: 10px;
+  }
+  
+  .ho-tabbar-item__badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 12px;
+    line-height: 18px;
+    border-radius: 9px;
+  }
+  
+  .ho-tabbar-item__badge--large {
+    padding: 0 6px;
+    min-width: 20px;
+  }
+  
+  .ho-tabbar-item__dot {
+    width: 8px;
+    height: 8px;
+    top: -1px;
+    right: -1px;
+  }
+}
+
+/* TabBar 触摸反馈 */
+.ho-tabbar-item:active {
+  opacity: 0.7;
+  background: var(--hoho-bg-tertiary);
+}
+
+@media (hover: hover) {
+  .ho-tabbar-item:hover {
+    opacity: 0.8;
+  }
+}
+
+/* TabBar 暗色模式 */
+html.dark .ho-tabbar {
+  background: var(--hoho-bg-primary);
+}
+
+html.dark .ho-tabbar--border {
+  border-top-color: var(--hoho-border-primary);
+}
+
+html.dark .ho-tabbar-item {
+  color: var(--hoho-text-secondary);
+}
+
+html.dark .ho-tabbar-item--active {
+  color: var(--hoho-color-primary);
+}
+
+/* NavBar 导航栏样式 */
+.ho-navbar {
+  position: relative;
+  width: 100%;
+}
+
+.ho-navbar--fixed .ho-navbar__inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.ho-navbar--border .ho-navbar__inner {
+  border-bottom: 1px solid var(--hoho-border-secondary);
+}
+
+.ho-navbar__placeholder {
+  width: 100%;
+  box-sizing: content-box;
+}
+
+.ho-navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--hoho-bg-primary);
+  color: var(--hoho-text-primary);
+  box-sizing: content-box;
+}
+
+.ho-navbar__left,
+.ho-navbar__right {
+  display: flex;
+  align-items: center;
+  min-width: 60px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.ho-navbar__left:active,
+.ho-navbar__right:active {
+  opacity: 0.7;
+}
+
+.ho-navbar__left {
+  justify-content: flex-start;
+  padding-left: 12px;
+}
+
+.ho-navbar__right {
+  justify-content: flex-end;
+  padding-right: 12px;
+}
+
+.ho-navbar__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+}
+
+.ho-navbar__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ho-navbar__text {
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.ho-navbar__title {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 8px;
+}
+
+.ho-navbar__title-text {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 移动端 NavBar 适配 */
+@media screen and (max-width: 768px) {
+  .ho-navbar__left,
+  .ho-navbar__right {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
+  }
+
+  .ho-navbar__left {
+    padding-left: 8px;
+  }
+
+  .ho-navbar__right {
+    padding-right: 8px;
+  }
+
+  .ho-navbar__arrow {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ho-navbar__arrow svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ho-navbar__text {
+    font-size: 15px;
+  }
+
+  .ho-navbar__title-text {
+    font-size: 17px;
+    font-weight: 600;
+  }
+}
+
+/* 小屏幕 NavBar 适配 (<=375px) */
+@media screen and (max-width: 375px) {
+  .ho-navbar__left,
+  .ho-navbar__right {
+    min-width: 40px;
+    padding: 0 8px;
+  }
+
+  .ho-navbar__title-text {
+    font-size: 16px;
+  }
+
+  .ho-navbar__text {
+    font-size: 14px;
+  }
+}
+
+/* NavBar 暗色模式 */
+html.dark .ho-navbar__inner {
+  background: var(--hoho-bg-primary);
+  color: var(--hoho-text-primary);
+}
+
+html.dark .ho-navbar--border .ho-navbar__inner {
+  border-bottom-color: var(--hoho-border-primary);
+}
+
+html.dark .ho-navbar__left:active,
+html.dark .ho-navbar__right:active {
+  opacity: 0.8;
+}
