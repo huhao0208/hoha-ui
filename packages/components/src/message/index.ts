@@ -49,7 +49,7 @@ const MessageComponent = defineComponent({
 })
 
 let messageContainer: HTMLDivElement | null = null
-const messageInstances: { id: number; app: App; el: HTMLDivElement }[] = []
+const messageInstances: Map<number, { app: App; el: HTMLDivElement; timer?: number }> = new Map()
 let messageId = 0
 
 const getContainer = (): HTMLDivElement => {
@@ -62,26 +62,30 @@ const getContainer = (): HTMLDivElement => {
 }
 
 const closeMessage = (id: number) => {
-  const index = messageInstances.findIndex(item => item.id === id)
-  if (index !== -1) {
-    const instance = messageInstances[index]
-    const el = instance.el
-    
-    // Add leave animation
-    el.classList.add('ho-message--leave')
-    
-    setTimeout(() => {
-      instance.app.unmount()
-      el.remove()
-      messageInstances.splice(index, 1)
-      
-      // Remove container if no messages left
-      if (messageInstances.length === 0 && messageContainer) {
-        messageContainer.remove()
-        messageContainer = null
-      }
-    }, 250)
+  const instance = messageInstances.get(id)
+  if (!instance) return
+  
+  // Clear timer if exists
+  if (instance.timer) {
+    clearTimeout(instance.timer)
   }
+  
+  const el = instance.el
+  
+  // Add leave animation
+  el.classList.add('ho-message--leave')
+  
+  setTimeout(() => {
+    instance.app.unmount()
+    el.remove()
+    messageInstances.delete(id)
+    
+    // Remove container if no messages left
+    if (messageInstances.size === 0 && messageContainer) {
+      messageContainer.remove()
+      messageContainer = null
+    }
+  }, 250)
 }
 
 const showMessage = (options: MessageOptions): MessageInstance => {
@@ -98,15 +102,17 @@ const showMessage = (options: MessageOptions): MessageInstance => {
   })
   
   app.mount(div)
-  messageInstances.push({ id, app, el: div })
   
   const duration = options.duration ?? 3000
+  let timer: number | undefined
   
   if (duration > 0) {
-    setTimeout(() => {
+    timer = window.setTimeout(() => {
       closeMessage(id)
     }, duration)
   }
+  
+  messageInstances.set(id, { app, el: div, timer })
   
   return {
     close: () => closeMessage(id)
