@@ -1,0 +1,39 @@
+{
+  "name": "@hohaya/ui",
+  "version": "0.0.1",
+  "description": "Hoha UI - Vue 2/3 component library with utilities (meta package)",
+  "keywords": [
+    "vue",
+    "vue2",
+    "vue3",
+    "components",
+    "ui",
+    "utils",
+    "hoha"
+  ],
+  "author": "hoha",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huhao0208/hoha-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/huhao0208/hoha-ui/issues"
+  },
+  "homepage": "https://huhao0208.github.io/hoha-ui/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@hohaya/hoho": "workspace:*",
+    "@hohaya/hoho-utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.0 || ^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": false
+    }
+  }
+}

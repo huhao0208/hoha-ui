@@ -8,6 +8,7 @@
     "build": "pnpm -r build",
     "build:components": "pnpm -F @hohaya/hoho build",
     "build:utils": "pnpm -F @hohaya/hoho-utils build",
+    "build:ui": "pnpm -F @hohaya/ui build",
     "docs:dev": "pnpm -F docs dev",
     "docs:build": "pnpm -F docs build",
     "lint": "eslint packages --ext .js,.ts,.vue",

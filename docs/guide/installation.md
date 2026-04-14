@@ -7,22 +7,51 @@
 - Node.js 18.0 或更高版本
 - Vue 2.6+ 或 Vue 3.0+
 
-## 安装
+## 安装方式
 
-### Vue 3 项目
+### 方式一：完整安装（推荐）
+
+一次性安装组件库和工具库：
 
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hohaya/hoho
+pnpm add @hohaya/ui
 ```
 
 ```bash [npm]
-npm install @hohaya/hoho
+npm install @hohaya/ui
 ```
 
 ```bash [yarn]
-yarn add @hohaya/hoho
+yarn add @hohaya/ui
+```
+
+:::
+
+### 方式二：独立安装
+
+只需安装需要的包：
+
+::: code-group
+
+```bash [pnpm]
+# 只安装组件库
+pnpm add @hohaya/hoho
+
+# 只安装工具库
+pnpm add @hohaya/hoho-utils
+
+# 同时安装两者
+pnpm add @hohaya/hoho @hohaya/hoho-utils
+```
+
+```bash [npm]
+# 只安装组件库
+npm install @hohaya/hoho
+
+# 只安装工具库
+npm install @hohaya/hoho-utils
 ```
 
 :::
@@ -34,15 +63,11 @@ Vue 2 需要额外安装 `@vue/composition-api`：
 ::: code-group
 
 ```bash [pnpm]
-pnpm add @hohaya/hoho @vue/composition-api
+pnpm add @hohaya/ui @vue/composition-api
 ```
 
 ```bash [npm]
-npm install @hohaya/hoho @vue/composition-api
-```
-
-```bash [yarn]
-yarn add @hohaya/hoho @vue/composition-api
+npm install @hohaya/ui @vue/composition-api
 ```
 
 :::
@@ -52,24 +77,37 @@ yarn add @hohaya/hoho @vue/composition-api
 - Vue 2.6 及以下版本必须安装 `@vue/composition-api` v1.7.0+
 :::
 
+## 包结构
+
+| 包名 | 说明 | 包含内容 |
+|------|------|----------|
+| `@hohaya/ui` | 完整包 | 组件库 + 工具库 |
+| `@hohaya/hoho` | 组件库 | Vue 组件 + 样式 |
+| `@hohaya/hoho-utils` | 工具库 | 工具函数 |
+
 ## 快速开始
 
-### 完整引入
+### Vue 3
 
 ```typescript
 // main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import HohaUI from '@hohaya/hoho'
+// 完整安装方式
+import HohaUI from '@hohaya/ui'
 import '@hohaya/hoho/style.css'
+
+// 或独立安装方式
+// import HohaUI from '@hohaya/hoho'
+// import '@hohaya/hoho/style.css'
 
 const app = createApp(App)
 app.use(HohaUI)
 app.mount('#app')
 ```
 
-### Vue 2 完整引入
+### Vue 2
 
 ```javascript
 // main.js
@@ -80,7 +118,7 @@ import App from './App.vue'
 import VueCompositionAPI from '@vue/composition-api'
 Vue.use(VueCompositionAPI)
 
-import HohaUI from '@hohaya/hoho'
+import HohaUI from '@hohaya/ui'
 import '@hohaya/hoho/style.css'
 
 Vue.use(HohaUI)
@@ -93,8 +131,12 @@ new Vue({
 ### 按需引入
 
 ```typescript
+// 只引入需要的组件
 import { HoButton, HoInput, HoToast } from '@hohaya/hoho'
 import '@hohaya/hoho/style.css'
+
+// 使用工具函数
+import { formatDate, debounce, throttle } from '@hohaya/hoho-utils'
 ```
 
 ## rem 适配
@@ -143,30 +185,10 @@ export default defineConfig({
 export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
-      include: ['@hohaya/hoho']
+      include: ['@hohaya/ui']
     }
   }
 })
-```
-
-## 工具函数
-
-Hoha UI 还提供了独立的工具函数包：
-
-::: code-group
-
-```bash [pnpm]
-pnpm add @hohaya/hoho-utils
-```
-
-```bash [npm]
-npm install @hohaya/hoho-utils
-```
-
-:::
-
-```typescript
-import { formatDate, debounce, throttle } from '@hohaya/hoho-utils'
 ```
 
 ## 版本说明
