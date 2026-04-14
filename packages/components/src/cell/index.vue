@@ -1,57 +1,26 @@
 <template>
-  <div
-    :class="cellClasses"
-    @click="handleClick"
-  >
-    <!-- 左侧图标 -->
-    <div
-      v-if="icon || $slots.icon"
-      class="ho-cell__icon"
-    >
+  <div :class="cellClasses" @click="handleClick">
+    <div v-if="icon || $slots.icon" class="ho-cell__icon">
       <slot name="icon">
-        <HoIcon
-          :icon="icon"
-          :size="iconSize"
-        />
+        <HoIcon :name="icon" :size="iconSize" />
       </slot>
     </div>
 
-    <!-- 主内容区域 -->
     <div class="ho-cell__content">
-      <!-- 标题 -->
-      <div
-        v-if="title || $slots.title"
-        class="ho-cell__title"
-      >
+      <div v-if="title || $slots.title" class="ho-cell__title">
         <slot name="title">{{ title }}</slot>
       </div>
-
-      <!-- 标签/描述 -->
-      <div
-        v-if="label || $slots.label"
-        class="ho-cell__label"
-      >
+      <div v-if="label || $slots.label" class="ho-cell__label">
         <slot name="label">{{ label }}</slot>
       </div>
     </div>
 
-    <!-- 右侧内容 -->
-    <div
-      v-if="hasValue"
-      class="ho-cell__value"
-    >
+    <div v-if="hasValue" class="ho-cell__value">
       <slot name="value">{{ value }}</slot>
     </div>
 
-    <!-- 右侧箭头 -->
-    <div
-      v-if="isLink || arrowDirection"
-      class="ho-cell__arrow"
-    >
-      <HoIcon
-        :icon="arrowIcon"
-        :size="14"
-      />
+    <div v-if="isLink || arrowDirection" class="ho-cell__arrow">
+      <HoIcon :name="arrowIcon" :size="14" />
     </div>
   </div>
 </template>
@@ -65,70 +34,20 @@ type CellArrowDirection = 'left' | 'right' | 'up' | 'down'
 
 export default defineComponent({
   name: 'HoCell',
-  components: {
-    HoIcon
-  },
+  components: { HoIcon },
   props: {
-    // 标题
-    title: {
-      type: String,
-      default: ''
-    },
-    // 描述/标签
-    label: {
-      type: String,
-      default: ''
-    },
-    // 右侧值
-    value: {
-      type: [String, Number],
-      default: ''
-    },
-    // 图标名称
-    icon: {
-      type: String,
-      default: ''
-    },
-    // 图标大小
-    iconSize: {
-      type: [String, Number],
-      default: 18
-    },
-    // 是否显示箭头
-    isLink: {
-      type: Boolean,
-      default: false
-    },
-    // 箭头方向
-    arrowDirection: {
-      type: String as PropType<CellArrowDirection>,
-      default: ''
-    },
-    // 是否禁用
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // 是否显示边框
-    border: {
-      type: Boolean,
-      default: true
-    },
-    // 点击态
-    clickable: {
-      type: Boolean,
-      default: null
-    },
-    // 标题宽度
-    titleWidth: {
-      type: [String, Number],
-      default: ''
-    },
-    // 标题样式
-    titleStyle: {
-      type: Object,
-      default: () => ({})
-    }
+    title: { type: String, default: '' },
+    label: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
+    icon: { type: String, default: '' },
+    iconSize: { type: [String, Number], default: 18 },
+    isLink: { type: Boolean, default: false },
+    arrowDirection: { type: String as PropType<CellArrowDirection>, default: '' },
+    disabled: { type: Boolean, default: false },
+    border: { type: Boolean, default: true },
+    clickable: { type: Boolean, default: null },
+    titleWidth: { type: [String, Number], default: '' },
+    titleStyle: { type: Object, default: () => ({}) }
   },
   emits: ['click'],
   setup(props, { slots, emit }) {
@@ -142,34 +61,114 @@ export default defineComponent({
       }
     ])
 
-    const hasValue = computed(() => {
-      return props.value !== '' || slots.value
-    })
+    const hasValue = computed(() => props.value !== '' || slots.value)
 
     const arrowIcon = computed(() => {
       if (!props.arrowDirection && !props.isLink) return ''
       const direction = props.arrowDirection || 'right'
-      const iconMap = {
-        left: 'arrow-left',
-        right: 'arrow-right',
-        up: 'arrow-up',
-        down: 'arrow-down'
-      }
-      return iconMap[direction] || 'arrow-right'
+      const iconMap = { left: 'mdi:arrow-left', right: 'mdi:arrow-right', up: 'mdi:arrow-up', down: 'mdi:arrow-down' }
+      return iconMap[direction] || 'mdi:arrow-right'
     })
 
     const handleClick = (e: MouseEvent) => {
-      if (!props.disabled) {
-        emit('click', e)
-      }
+      if (!props.disabled) emit('click', e)
     }
 
-    return {
-      cellClasses,
-      hasValue,
-      arrowIcon,
-      handleClick
-    }
+    return { cellClasses, hasValue, arrowIcon, handleClick }
   }
 })
 </script>
+
+<style lang="less">
+.ho-cell {
+  display: flex;
+  align-items: center;
+  padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-4, 16px);
+  font-size: var(--hoho-font-md, 14px);
+  line-height: var(--hoho-line-height-normal, 1.5);
+  background: var(--hoho-bg-primary, #fff);
+  position: relative;
+  
+  &--clickable {
+    cursor: pointer;
+    
+    &:active {
+      background: var(--hoho-bg-secondary, #f9fafb);
+    }
+  }
+  
+  &--disabled {
+    opacity: var(--hoho-opacity-disabled, 0.5);
+    cursor: not-allowed;
+  }
+  
+  &--border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--hoho-spacing-4, 16px);
+    right: 0;
+    height: 1px;
+    background: var(--hoho-divider, #e5e7eb);
+    transform: scaleY(0.5);
+  }
+  
+  &__icon {
+    flex-shrink: 0;
+    margin-right: var(--hoho-spacing-3, 12px);
+    color: var(--hoho-text-tertiary, #6b7280);
+  }
+  
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  &__title {
+    color: var(--hoho-text-primary, #111827);
+    font-size: var(--hoho-font-md, 14px);
+    line-height: var(--hoho-line-height-normal, 1.5);
+  }
+  
+  &__label {
+    margin-top: var(--hoho-spacing-1, 4px);
+    color: var(--hoho-text-tertiary, #6b7280);
+    font-size: var(--hoho-font-sm, 12px);
+    line-height: var(--hoho-line-height-normal, 1.5);
+  }
+  
+  &__value {
+    flex-shrink: 0;
+    color: var(--hoho-text-secondary, #4b5563);
+    font-size: var(--hoho-font-md, 14px);
+    margin-right: var(--hoho-spacing-2, 8px);
+  }
+  
+  &__arrow {
+    flex-shrink: 0;
+    color: var(--hoho-text-placeholder, #9ca3af);
+    margin-left: var(--hoho-spacing-1, 4px);
+  }
+}
+
+/* 暗色模式 */
+html.dark .ho-cell {
+  background: var(--hoho-bg-primary, #1f2937);
+  
+  &--clickable:active {
+    background: var(--hoho-bg-tertiary, #374151);
+  }
+  
+  &--border::after {
+    background: var(--hoho-divider, #374151);
+  }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 767px) {
+  .ho-cell {
+    padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-3, 12px);
+    min-height: var(--hoho-touch-target, 44px);
+  }
+}
+</style>
