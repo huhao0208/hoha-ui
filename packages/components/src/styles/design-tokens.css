@@ -1,107 +1,311 @@
 /**
  * Hoha UI 设计规范样式
  * 基于 750px 设计稿，使用 rem 适配
+ * 
+ * 设计稿基准：
+ * - 设计稿宽度: 750px
+ * - 根字体大小: 37.5px (750 / 20)
+ * - 单位转换: 1rem = 37.5px (设计稿)
  */
 
-/* ========================================
-   设计稿基准
-   设计稿宽度: 750px
-   根字体大小: 37.5px (750 / 20)
-   单位转换: 1rem = 37.5px (设计稿)
-   ======================================== */
-
 :root {
-  /* ===== 颜色系统 ===== */
+  /* ========================================
+     颜色系统
+     ======================================== */
   
   /* 品牌色 */
   --hoho-color-primary: #3b82f6;
+  --hoho-color-primary-light: #60a5fa;
+  --hoho-color-primary-dark: #2563eb;
+  --hoho-color-primary-bg: rgba(59, 130, 246, 0.1);
+  
   --hoho-color-success: #10b981;
+  --hoho-color-success-light: #34d399;
+  --hoho-color-success-dark: #059669;
+  --hoho-color-success-bg: rgba(16, 185, 129, 0.1);
+  
   --hoho-color-warning: #f59e0b;
+  --hoho-color-warning-light: #fbbf24;
+  --hoho-color-warning-dark: #d97706;
+  --hoho-color-warning-bg: rgba(245, 158, 11, 0.1);
+  
   --hoho-color-danger: #ef4444;
+  --hoho-color-danger-light: #f87171;
+  --hoho-color-danger-dark: #dc2626;
+  --hoho-color-danger-bg: rgba(239, 68, 68, 0.1);
+  
   --hoho-color-info: #06b6d4;
+  --hoho-color-info-light: #22d3ee;
+  --hoho-color-info-dark: #0891b2;
+  --hoho-color-info-bg: rgba(6, 182, 212, 0.1);
+  
   --hoho-color-secondary: #6b7280;
+  --hoho-color-secondary-light: #9ca3af;
+  --hoho-color-secondary-dark: #4b5563;
+  
+  /* 中性色 */
+  --hoho-color-white: #ffffff;
+  --hoho-color-black: #000000;
+  --hoho-color-transparent: transparent;
+  
+  /* 灰度色阶 */
+  --hoho-gray-50: #f9fafb;
+  --hoho-gray-100: #f3f4f6;
+  --hoho-gray-200: #e5e7eb;
+  --hoho-gray-300: #d1d5db;
+  --hoho-gray-400: #9ca3af;
+  --hoho-gray-500: #6b7280;
+  --hoho-gray-600: #4b5563;
+  --hoho-gray-700: #374151;
+  --hoho-gray-800: #1f2937;
+  --hoho-gray-900: #111827;
   
   /* 背景色 */
   --hoho-bg-primary: #ffffff;
   --hoho-bg-secondary: #f9fafb;
   --hoho-bg-tertiary: #f3f4f6;
+  --hoho-bg-inverse: #1f2937;
   --hoho-bg-mask: rgba(0, 0, 0, 0.5);
+  --hoho-bg-mask-light: rgba(0, 0, 0, 0.3);
+  --hoho-bg-mask-dark: rgba(0, 0, 0, 0.7);
   --hoho-bg-toast: rgba(0, 0, 0, 0.75);
   --hoho-bg-overlay: rgba(0, 0, 0, 0.7);
+  --hoho-bg-disabled: #f3f4f6;
   
   /* 文字颜色 */
   --hoho-text-primary: #111827;
   --hoho-text-secondary: #4b5563;
   --hoho-text-tertiary: #6b7280;
   --hoho-text-placeholder: #9ca3af;
+  --hoho-text-disabled: #d1d5db;
   --hoho-text-inverse: #ffffff;
+  --hoho-text-link: #3b82f6;
+  --hoho-text-link-hover: #2563eb;
   
   /* 边框颜色 */
   --hoho-border-primary: #d1d5db;
   --hoho-border-secondary: #e5e7eb;
+  --hoho-border-light: #f3f4f6;
+  --hoho-border-dark: #9ca3af;
+  --hoho-border-focus: #3b82f6;
   
-  /* ===== 字体系统 (基于 750px 设计稿) ===== */
+  /* 分割线颜色 */
+  --hoho-divider: #e5e7eb;
+  
+  /* ========================================
+     字体系统 (基于 750px 设计稿)
+     ======================================== */
+  
+  /* 字体族 */
+  --hoho-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --hoho-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
   
   /* 字体大小 - rem 值基于 37.5px 根字体 */
   --hoho-font-xs: 0.64rem;      /* 24px @ 750px */
   --hoho-font-sm: 0.747rem;     /* 28px @ 750px */
+  --hoho-font-base: 0.853rem;   /* 32px @ 750px - 基准字号 */
   --hoho-font-md: 0.853rem;     /* 32px @ 750px */
   --hoho-font-lg: 0.96rem;      /* 36px @ 750px */
   --hoho-font-xl: 1.067rem;     /* 40px @ 750px */
   --hoho-font-2xl: 1.28rem;     /* 48px @ 750px */
   --hoho-font-3xl: 1.6rem;      /* 60px @ 750px */
+  --hoho-font-4xl: 2.133rem;    /* 80px @ 750px */
   
   /* 字重 */
+  --hoho-font-thin: 100;
+  --hoho-font-light: 300;
   --hoho-font-normal: 400;
   --hoho-font-medium: 500;
   --hoho-font-semibold: 600;
   --hoho-font-bold: 700;
+  --hoho-font-extrabold: 800;
+  --hoho-font-black: 900;
   
   /* 行高 */
+  --hoho-line-height-none: 1;
   --hoho-line-height-tight: 1.25;
+  --hoho-line-height-snug: 1.375;
   --hoho-line-height-normal: 1.5;
-  --hoho-line-height-relaxed: 1.75;
+  --hoho-line-height-relaxed: 1.625;
+  --hoho-line-height-loose: 2;
   
-  /* ===== 间距系统 (基于 750px 设计稿) ===== */
+  /* 字间距 */
+  --hoho-letter-spacing-tighter: -0.05em;
+  --hoho-letter-spacing-tight: -0.025em;
+  --hoho-letter-spacing-normal: 0;
+  --hoho-letter-spacing-wide: 0.025em;
+  --hoho-letter-spacing-wider: 0.05em;
+  
+  /* ========================================
+     间距系统 (基于 750px 设计稿)
+     ======================================== */
   
   --hoho-spacing-0: 0;
-  --hoho-spacing-xs: 0.133rem;   /* 5px @ 750px */
-  --hoho-spacing-sm: 0.267rem;   /* 10px @ 750px */
-  --hoho-spacing-md: 0.4rem;     /* 15px @ 750px */
-  --hoho-spacing-lg: 0.533rem;   /* 20px @ 750px */
-  --hoho-spacing-xl: 0.8rem;     /* 30px @ 750px */
-  --hoho-spacing-2xl: 1.067rem;  /* 40px @ 750px */
-  --hoho-spacing-3xl: 1.6rem;    /* 60px @ 750px */
+  --hoho-spacing-px: 1px;
+  --hoho-spacing-0-5: 0.053rem;   /* 2px @ 750px */
+  --hoho-spacing-1: 0.107rem;     /* 4px @ 750px */
+  --hoho-spacing-1-5: 0.16rem;    /* 6px @ 750px */
+  --hoho-spacing-2: 0.213rem;     /* 8px @ 750px */
+  --hoho-spacing-2-5: 0.267rem;   /* 10px @ 750px */
+  --hoho-spacing-3: 0.32rem;      /* 12px @ 750px */
+  --hoho-spacing-3-5: 0.373rem;   /* 14px @ 750px */
+  --hoho-spacing-4: 0.427rem;     /* 16px @ 750px */
+  --hoho-spacing-5: 0.533rem;     /* 20px @ 750px */
+  --hoho-spacing-6: 0.64rem;      /* 24px @ 750px */
+  --hoho-spacing-7: 0.747rem;     /* 28px @ 750px */
+  --hoho-spacing-8: 0.853rem;     /* 32px @ 750px */
+  --hoho-spacing-9: 0.96rem;      /* 36px @ 750px */
+  --hoho-spacing-10: 1.067rem;    /* 40px @ 750px */
+  --hoho-spacing-11: 1.173rem;    /* 44px @ 750px */
+  --hoho-spacing-12: 1.28rem;     /* 48px @ 750px */
+  --hoho-spacing-14: 1.493rem;    /* 56px @ 750px */
+  --hoho-spacing-16: 1.707rem;    /* 64px @ 750px */
+  --hoho-spacing-20: 2.133rem;    /* 80px @ 750px */
+  --hoho-spacing-24: 2.56rem;     /* 96px @ 750px */
+  --hoho-spacing-28: 2.987rem;    /* 112px @ 750px */
+  --hoho-spacing-32: 3.413rem;    /* 128px @ 750px */
   
-  /* ===== 圆角系统 ===== */
+  /* 语义化间距别名 */
+  --hoho-spacing-xs: 0.16rem;     /* 6px */
+  --hoho-spacing-sm: 0.267rem;    /* 10px */
+  --hoho-spacing-md: 0.4rem;      /* 15px */
+  --hoho-spacing-lg: 0.533rem;    /* 20px */
+  --hoho-spacing-xl: 0.8rem;      /* 30px */
+  --hoho-spacing-2xl: 1.067rem;   /* 40px */
+  --hoho-spacing-3xl: 1.6rem;     /* 60px */
+  
+  /* ========================================
+     尺寸系统
+     ======================================== */
+  
+  --hoho-size-0: 0;
+  --hoho-size-px: 1px;
+  --hoho-size-0-5: 0.053rem;      /* 2px */
+  --hoho-size-1: 0.107rem;        /* 4px */
+  --hoho-size-1-5: 0.16rem;       /* 6px */
+  --hoho-size-2: 0.213rem;        /* 8px */
+  --hoho-size-2-5: 0.267rem;      /* 10px */
+  --hoho-size-3: 0.32rem;         /* 12px */
+  --hoho-size-3-5: 0.373rem;      /* 14px */
+  --hoho-size-4: 0.427rem;        /* 16px */
+  --hoho-size-5: 0.533rem;        /* 20px */
+  --hoho-size-6: 0.64rem;         /* 24px */
+  --hoho-size-7: 0.747rem;        /* 28px */
+  --hoho-size-8: 0.853rem;        /* 32px */
+  --hoho-size-9: 0.96rem;         /* 36px */
+  --hoho-size-10: 1.067rem;       /* 40px */
+  --hoho-size-11: 1.173rem;       /* 44px */
+  --hoho-size-12: 1.28rem;        /* 48px */
+  --hoho-size-14: 1.493rem;       /* 56px */
+  --hoho-size-16: 1.707rem;       /* 64px */
+  --hoho-size-20: 2.133rem;       /* 80px */
+  --hoho-size-24: 2.56rem;        /* 96px */
+  --hoho-size-28: 2.987rem;       /* 112px */
+  --hoho-size-32: 3.413rem;       /* 128px */
+  --hoho-size-36: 3.84rem;        /* 144px */
+  --hoho-size-40: 4.267rem;       /* 160px */
+  --hoho-size-44: 4.693rem;       /* 176px */
+  --hoho-size-48: 5.12rem;        /* 192px */
+  --hoho-size-52: 5.547rem;       /* 208px */
+  --hoho-size-56: 5.973rem;       /* 224px */
+  --hoho-size-60: 6.4rem;         /* 240px */
+  --hoho-size-64: 6.827rem;       /* 256px */
+  --hoho-size-72: 7.68rem;        /* 288px */
+  --hoho-size-80: 8.533rem;       /* 320px */
+  --hoho-size-96: 10.24rem;       /* 384px */
+  
+  /* 最小/最大尺寸 */
+  --hoho-size-min: min-content;
+  --hoho-size-max: max-content;
+  --hoho-size-fit: fit-content;
+  --hoho-size-full: 100%;
+  --hoho-size-screen: 100vw;
+  --hoho-size-screen-w: 100vw;
+  --hoho-size-screen-h: 100vh;
+  
+  /* ========================================
+     圆角系统
+     ======================================== */
   
   --hoho-radius-none: 0;
-  --hoho-radius-sm: 0.107rem;    /* 4px @ 750px */
-  --hoho-radius-md: 0.16rem;     /* 6px @ 750px */
-  --hoho-radius-lg: 0.213rem;    /* 8px @ 750px */
-  --hoho-radius-xl: 0.4rem;      /* 15px @ 750px */
-  --hoho-radius-2xl: 0.8rem;     /* 30px @ 750px */
+  --hoho-radius-sm: 0.107rem;      /* 4px @ 750px */
+  --hoho-radius-md: 0.16rem;       /* 6px @ 750px */
+  --hoho-radius-lg: 0.213rem;      /* 8px @ 750px */
+  --hoho-radius-xl: 0.4rem;        /* 15px @ 750px */
+  --hoho-radius-2xl: 0.8rem;       /* 30px @ 750px */
+  --hoho-radius-3xl: 1.6rem;       /* 60px @ 750px */
   --hoho-radius-full: 9999px;
   
-  /* ===== 阴影系统 ===== */
+  /* ========================================
+     边框系统
+     ======================================== */
+  
+  --hoho-border-width: 1px;
+  --hoho-border-width-0: 0;
+  --hoho-border-width-2: 2px;
+  --hoho-border-width-4: 4px;
+  --hoho-border-width-8: 8px;
+  
+  --hoho-border-style-solid: solid;
+  --hoho-border-style-dashed: dashed;
+  --hoho-border-style-dotted: dotted;
+  --hoho-border-style-none: none;
+  
+  /* ========================================
+     阴影系统
+     ======================================== */
   
   --hoho-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --hoho-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --hoho-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --hoho-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --hoho-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --hoho-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --hoho-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --hoho-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  --hoho-shadow-none: none;
   
-  /* ===== 动画系统 ===== */
+  /* 焦点阴影 */
+  --hoho-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  --hoho-shadow-focus-danger: 0 0 0 3px rgba(239, 68, 68, 0.3);
+  --hoho-shadow-focus-success: 0 0 0 3px rgba(16, 185, 129, 0.3);
   
-  --hoho-duration-fast: 0.15s;
-  --hoho-duration-normal: 0.25s;
-  --hoho-duration-slow: 0.35s;
-  --hoho-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* ========================================
+     动画系统
+     ======================================== */
+  
+  /* 动画时长 */
+  --hoho-duration-75: 75ms;
+  --hoho-duration-100: 100ms;
+  --hoho-duration-150: 150ms;
+  --hoho-duration-200: 200ms;
+  --hoho-duration-300: 300ms;
+  --hoho-duration-500: 500ms;
+  --hoho-duration-700: 700ms;
+  --hoho-duration-1000: 1000ms;
+  
+  /* 语义化时长 */
+  --hoho-duration-fast: 150ms;
+  --hoho-duration-normal: 250ms;
+  --hoho-duration-slow: 350ms;
+  
+  /* 缓动函数 */
+  --hoho-ease-linear: linear;
   --hoho-ease-in: cubic-bezier(0.4, 0, 1, 1);
   --hoho-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --hoho-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --hoho-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hoho-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --hoho-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
-  /* ===== 层级系统 ===== */
+  /* ========================================
+     层级系统
+     ======================================== */
   
+  --hoho-z-0: 0;
+  --hoho-z-10: 10;
+  --hoho-z-20: 20;
+  --hoho-z-30: 30;
+  --hoho-z-40: 40;
+  --hoho-z-50: 50;
   --hoho-z-dropdown: 1000;
   --hoho-z-sticky: 1020;
   --hoho-z-fixed: 1030;
@@ -110,92 +314,208 @@
   --hoho-z-popover: 1060;
   --hoho-z-tooltip: 1070;
   --hoho-z-toast: 1080;
+  --hoho-z-top: 9999;
   
-  /* ===== 安全区域 ===== */
+  /* ========================================
+     透明度系统
+     ======================================== */
+  
+  --hoho-opacity-0: 0;
+  --hoho-opacity-5: 0.05;
+  --hoho-opacity-10: 0.1;
+  --hoho-opacity-20: 0.2;
+  --hoho-opacity-25: 0.25;
+  --hoho-opacity-30: 0.3;
+  --hoho-opacity-40: 0.4;
+  --hoho-opacity-50: 0.5;
+  --hoho-opacity-60: 0.6;
+  --hoho-opacity-70: 0.7;
+  --hoho-opacity-75: 0.75;
+  --hoho-opacity-80: 0.8;
+  --hoho-opacity-90: 0.9;
+  --hoho-opacity-95: 0.95;
+  --hoho-opacity-100: 1;
+  
+  /* 禁用状态透明度 */
+  --hoho-opacity-disabled: 0.5;
+  --hoho-opacity-hover: 0.8;
+  --hoho-opacity-active: 0.7;
+  
+  /* ========================================
+     安全区域
+     ======================================== */
   
   --hoho-safe-area-top: env(safe-area-inset-top, 0px);
   --hoho-safe-area-bottom: env(safe-area-inset-bottom, 0px);
   --hoho-safe-area-left: env(safe-area-inset-left, 0px);
   --hoho-safe-area-right: env(safe-area-inset-right, 0px);
   
-  /* ===== 组件尺寸 ===== */
+  /* ========================================
+     组件尺寸
+     ======================================== */
   
   /* 按钮高度 */
+  --hoho-button-height-xs: 0.64rem;    /* 24px @ 750px */
   --hoho-button-height-sm: 0.853rem;   /* 32px @ 750px */
   --hoho-button-height-md: 1.173rem;   /* 44px @ 750px */
   --hoho-button-height-lg: 1.387rem;   /* 52px @ 750px */
+  --hoho-button-height-xl: 1.6rem;     /* 60px @ 750px */
   
   /* 输入框高度 */
   --hoho-input-height-sm: 0.853rem;    /* 32px @ 750px */
-  --hoho-input-height-md: 1.067rem;    /* 40px @ 750px */
-  --hoho-input-height-lg: 1.28rem;     /* 48px @ 750px */
+  --hoho-input-height-md: 1.173rem;    /* 44px @ 750px */
+  --hoho-input-height-lg: 1.387rem;    /* 52px @ 750px */
   
   /* 导航栏高度 */
   --hoho-navbar-height: 1.227rem;      /* 46px @ 750px */
   --hoho-tabbar-height: 1.333rem;      /* 50px @ 750px */
   
   /* 最小点击区域 */
-  --hoho-touch-target: 1.173rem;       /* 44px @ 750px (iOS 标准) */
+  --hoho-touch-target-sm: 1.067rem;    /* 40px */
+  --hoho-touch-target: 1.173rem;       /* 44px (iOS 标准) */
+  --hoho-touch-target-lg: 1.28rem;     /* 48px (Android 标准) */
+  
+  /* 图标尺寸 */
+  --hoho-icon-xs: 0.427rem;            /* 16px @ 750px */
+  --hoho-icon-sm: 0.533rem;            /* 20px @ 750px */
+  --hoho-icon-md: 0.64rem;             /* 24px @ 750px */
+  --hoho-icon-lg: 0.853rem;            /* 32px @ 750px */
+  --hoho-icon-xl: 1.067rem;            /* 40px @ 750px */
+  --hoho-icon-2xl: 1.28rem;            /* 48px @ 750px */
+  
+  /* 头像尺寸 */
+  --hoho-avatar-xs: 0.533rem;          /* 20px @ 750px */
+  --hoho-avatar-sm: 0.853rem;          /* 32px @ 750px */
+  --hoho-avatar-md: 1.067rem;          /* 40px @ 750px */
+  --hoho-avatar-lg: 1.28rem;           /* 48px @ 750px */
+  --hoho-avatar-xl: 1.6rem;            /* 60px @ 750px */
+  --hoho-avatar-2xl: 2.133rem;         /* 80px @ 750px */
+  
+  /* 徽标尺寸 */
+  --hoho-badge-dot: 0.213rem;          /* 8px @ 750px */
+  --hoho-badge-sm: 0.427rem;           /* 16px @ 750px */
+  --hoho-badge-md: 0.48rem;            /* 18px @ 750px */
+  --hoho-badge-lg: 0.533rem;           /* 20px @ 750px */
+  
+  /* ========================================
+     断点系统 (CSS 变量形式)
+     ======================================== */
+  
+  --hoho-breakpoint-sm: 640px;
+  --hoho-breakpoint-md: 768px;
+  --hoho-breakpoint-lg: 1024px;
+  --hoho-breakpoint-xl: 1280px;
+  --hoho-breakpoint-2xl: 1536px;
 }
 
-/* ===== 暗色模式 ===== */
+/* ========================================
+   暗色模式
+   ======================================== */
 
 html.dark {
   /* 品牌色增强对比度 */
   --hoho-color-primary: #60a5fa;
+  --hoho-color-primary-light: #93c5fd;
+  --hoho-color-primary-dark: #3b82f6;
+  --hoho-color-primary-bg: rgba(96, 165, 250, 0.15);
+  
   --hoho-color-success: #34d399;
+  --hoho-color-success-light: #6ee7b7;
+  --hoho-color-success-dark: #10b981;
+  --hoho-color-success-bg: rgba(52, 211, 153, 0.15);
+  
   --hoho-color-warning: #fbbf24;
+  --hoho-color-warning-light: #fcd34d;
+  --hoho-color-warning-dark: #f59e0b;
+  --hoho-color-warning-bg: rgba(251, 191, 36, 0.15);
+  
   --hoho-color-danger: #f87171;
+  --hoho-color-danger-light: #fca5a5;
+  --hoho-color-danger-dark: #ef4444;
+  --hoho-color-danger-bg: rgba(248, 113, 113, 0.15);
+  
   --hoho-color-info: #22d3ee;
+  --hoho-color-info-light: #67e8f9;
+  --hoho-color-info-dark: #06b6d4;
+  --hoho-color-info-bg: rgba(34, 211, 238, 0.15);
+  
+  --hoho-color-secondary: #9ca3af;
+  --hoho-color-secondary-light: #d1d5db;
+  --hoho-color-secondary-dark: #6b7280;
   
   /* 背景色 */
   --hoho-bg-primary: #1f2937;
   --hoho-bg-secondary: #111827;
   --hoho-bg-tertiary: #374151;
+  --hoho-bg-inverse: #ffffff;
   --hoho-bg-mask: rgba(0, 0, 0, 0.7);
+  --hoho-bg-mask-light: rgba(0, 0, 0, 0.5);
+  --hoho-bg-mask-dark: rgba(0, 0, 0, 0.85);
   --hoho-bg-toast: rgba(31, 41, 55, 0.95);
   --hoho-bg-overlay: rgba(0, 0, 0, 0.8);
+  --hoho-bg-disabled: #374151;
   
   /* 文字颜色 */
   --hoho-text-primary: #f9fafb;
   --hoho-text-secondary: #e5e7eb;
   --hoho-text-tertiary: #d1d5db;
   --hoho-text-placeholder: #6b7280;
+  --hoho-text-disabled: #4b5563;
   --hoho-text-inverse: #111827;
+  --hoho-text-link: #60a5fa;
+  --hoho-text-link-hover: #93c5fd;
   
   /* 边框颜色 */
   --hoho-border-primary: #374151;
   --hoho-border-secondary: #4b5563;
+  --hoho-border-light: #1f2937;
+  --hoho-border-dark: #6b7280;
+  --hoho-border-focus: #60a5fa;
+  
+  /* 分割线颜色 */
+  --hoho-divider: #374151;
   
   /* 阴影 - 暗色模式增强 */
   --hoho-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --hoho-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --hoho-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --hoho-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --hoho-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --hoho-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --hoho-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  --hoho-shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* 焦点阴影 */
+  --hoho-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.4);
+  --hoho-shadow-focus-danger: 0 0 0 3px rgba(248, 113, 113, 0.4);
+  --hoho-shadow-focus-success: 0 0 0 3px rgba(52, 211, 153, 0.4);
 }
 
-/* ===== 移动端适配 ===== */
+/* ========================================
+   移动端适配
+   ======================================== */
 
 @media screen and (max-width: 767px) {
   :root {
     /* 移动端增大圆角 */
-    --hoho-radius-md: 0.213rem;   /* 8px */
-    --hoho-radius-lg: 0.32rem;    /* 12px */
+    --hoho-radius-sm: 0.16rem;      /* 6px */
+    --hoho-radius-md: 0.213rem;     /* 8px */
+    --hoho-radius-lg: 0.32rem;      /* 12px */
+    --hoho-radius-xl: 0.533rem;     /* 20px */
     
     /* 移动端增大最小点击区域 */
-    --hoho-touch-target: 1.28rem; /* 48px (Android 标准) */
+    --hoho-touch-target: 1.28rem;   /* 48px (Android 标准) */
   }
 }
 
-/* ===== 小屏手机适配 (<= 375px) ===== */
-
+/* 小屏手机适配 (<= 375px) */
 @media screen and (max-width: 375px) {
   :root {
-    /* 进一步增大点击区域 */
-    --hoho-touch-target: 1.333rem; /* 50px */
+    --hoho-touch-target: 1.333rem;  /* 50px */
   }
 }
 
-/* ===== 全局基础样式 ===== */
+/* ========================================
+   全局基础样式
+   ======================================== */
 
 /* 禁用移动端默认点击高亮 */
 * {
@@ -211,13 +531,16 @@ html.dark {
 body {
   color: var(--hoho-text-primary);
   background-color: var(--hoho-bg-primary);
+  font-family: var(--hoho-font-family);
   font-size: var(--hoho-font-md);
   line-height: var(--hoho-line-height-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== 工具类 ===== */
+/* ========================================
+   工具类
+   ======================================== */
 
 /* 文字省略 */
 .hoho-ellipsis {
@@ -250,6 +573,13 @@ body {
   padding-bottom: var(--hoho-safe-area-bottom);
 }
 
+.hoho-safe-area-all {
+  padding-top: var(--hoho-safe-area-top);
+  padding-bottom: var(--hoho-safe-area-bottom);
+  padding-left: var(--hoho-safe-area-left);
+  padding-right: var(--hoho-safe-area-right);
+}
+
 /* 清除按钮默认样式 */
 .hoho-reset-button {
   -webkit-appearance: none;
@@ -261,6 +591,13 @@ body {
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+/* 禁用状态 */
+.hoho-disabled {
+  opacity: var(--hoho-opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* 1px 边框解决方案 */
@@ -289,6 +626,35 @@ body {
   border-bottom-width: 1px;
 }
 
+.hoho-hairline--left::after {
+  border-left-width: 1px;
+}
+
+.hoho-hairline--right::after {
+  border-right-width: 1px;
+}
+
 .hoho-hairline--surround::after {
   border-width: 1px;
 }
+
+/* 触摸反馈 */
+.hoho-touchable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hoho-touchable:active {
+  opacity: var(--hoho-opacity-active);
+}
+
+/* 文字颜色工具类 */
+.hoho-text-primary { color: var(--hoho-text-primary); }
+.hoho-text-secondary { color: var(--hoho-text-secondary); }
+.hoho-text-tertiary { color: var(--hoho-text-tertiary); }
+.hoho-text-link { color: var(--hoho-text-link); }
+
+/* 背景色工具类 */
+.hoho-bg-primary { background-color: var(--hoho-bg-primary); }
+.hoho-bg-secondary { background-color: var(--hoho-bg-secondary); }
+.hoho-bg-tertiary { background-color: var(--hoho-bg-tertiary); }
