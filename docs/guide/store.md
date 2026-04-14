@@ -9,6 +9,63 @@ Hoha UI 提供内置的全局状态管理，支持组件间数据共享，同时
 2. **共享配置** - 主题、语言、API 地址等
 3. **业务数据** - 用户信息、购物车、权限等
 
+## 响应式验证
+
+<div class="demo-preview">
+  <div id="store-demo">
+    <p>用户: {{ userName }}</p>
+    <p>购物车数量: {{ cartCount }}</p>
+    <button class="demo-btn" @click="setUser">设置用户</button>
+    <button class="demo-btn" @click="addToCart">添加商品</button>
+    <button class="demo-btn" @click="toggleTheme">切换主题</button>
+    <p>当前主题: {{ themeMode }}</p>
+  </div>
+</div>
+
+<script setup>
+import { computed } from 'vue'
+import { useGlobalState, useTheme, setTheme, getTheme } from '@hohaya/hoho'
+
+const state = useGlobalState()
+const theme = useTheme()
+
+const userName = computed(() => state.user.value?.name || '未登录')
+const cartCount = computed(() => state.cartCount.value)
+const themeMode = computed(() => theme.value.mode)
+
+const setUser = () => {
+  state.setUser({ id: 1, name: 'Admin' })
+}
+
+const addToCart = () => {
+  state.addToCart({ id: Date.now(), name: '商品 ' + Date.now() })
+}
+
+const toggleTheme = () => {
+  setTheme({ mode: theme.value.mode === 'dark' ? 'light' : 'dark' })
+}
+</script>
+
+<style scoped>
+.demo-btn {
+  margin: 4px;
+  padding: 8px 16px;
+  background: var(--hoho-color-primary, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.demo-btn:hover {
+  opacity: 0.9;
+}
+</style>
+
+**测试步骤：**
+1. 点击"设置用户" → 用户名立即更新
+2. 点击"添加商品" → 购物车数量实时增加
+3. 点击"切换主题" → 主题模式切换
+
 ## 安装
 
 ```typescript
@@ -38,229 +95,87 @@ app.use(HohaUI, {
 app.mount('#app')
 ```
 
-## 在组件中使用
-
-### Composition API
-
-```vue
-<script setup>
-import { useGlobalState, useConfig, useTheme } from '@hohaya/hoha'
-
-const { 
-  user, setUser,
-  cart, addToCart, cartCount,
-  data, setData, getData,
-  activeTab, setActiveTab,
-  loading, setLoading 
-} = useGlobalState()
-
-const config = useConfig()
-const theme = useTheme()
-
-// 使用配置
-console.log(config.value.apiBaseURL)
-
-// 使用主题
-const toggleDark = () => {
-  setTheme({ mode: theme.value.mode === 'dark' ? 'light' : 'dark' })
-}
-
-// 业务数据
-const handleLogin = (userData) => {
-  setUser(userData)
-}
-
-const handleAddToCart = (item) => {
-  addToCart(item)
-}
-</script>
-```
-
-### Options API
-
-```vue
-<script>
-export default {
-  methods: {
-    getUser() {
-      return this.$hohaState.user.value
-    },
-    setConfig(key, value) {
-      this.$hohaConfig.value[key] = value
-    }
-  }
-}
-</script>
-```
-
 ## API
 
 ### useGlobalState()
 
-获取全局状态对象。
+获取全局状态对象，所有属性都是响应式的。
 
 ```typescript
 const state = useGlobalState()
 
-// 用户
+// 用户 - 响应式
 state.user.value          // 当前用户
-state.setUser(userData)    // 设置用户
+state.setUser(userData)    // 设置用户 → 触发更新
 
-// 购物车
+// 购物车 - 响应式
 state.cart.value           // 购物车列表
-state.addToCart(item)      // 添加商品
-state.removeFromCart(id)   // 移除商品
-state.clearCart()          // 清空购物车
-state.cartCount.value      // 商品数量
+state.addToCart(item)      // 添加商品 → 触发 cartCount 更新
+state.cartCount.value      // 计算属性，自动响应
 
-// 通用存储
+// 通用存储 - 响应式
 state.data.value           // 数据存储对象
-state.setData(key, value)  // 存储数据
-state.getData(key)         // 获取数据
-state.removeData(key)      // 移除数据
-
-// 导航
-state.activeTab.value      // 当前标签
-state.setActiveTab(tab)    // 设置标签
-
-// 加载
-state.loading.value        // 加载状态
-state.setLoading(bool)     // 设置状态
+state.setData(key, value)  // 存储数据 → 触发更新
 ```
 
-### useConfig()
+### useConfig() / useTheme()
 
-获取配置对象。
+配置和主题也是响应式的：
 
 ```typescript
 const config = useConfig()
-
-config.value.appName       // 应用名称
-config.value.apiBaseURL    // API 地址
-config.value.apiTimeout    // 超时时间
-config.value.enableDebug   // 调试模式
-```
-
-### setConfig(config)
-
-更新配置。
-
-```typescript
-import { setConfig } from '@hohaya/hoha'
-
-setConfig({
-  apiBaseURL: 'https://api.example.com/v2',
-  enableDebug: true
-})
-```
-
-### useTheme()
-
-获取主题配置。
-
-```typescript
 const theme = useTheme()
 
-theme.value.mode           // 'light' | 'dark' | 'auto'
-theme.value.primaryColor   // 主色
-```
+// 监听配置变化
+watch(() => config.value.apiBaseURL, (newVal) => {
+  console.log('API 地址变化:', newVal)
+})
 
-### setTheme(theme)
-
-更新主题。
-
-```typescript
-import { setTheme } from '@hohaya/hoho'
-
-setTheme({
-  mode: 'dark',
-  primaryColor: '#60a5fa'
+// 监听主题变化
+watch(() => theme.value.mode, (newVal) => {
+  console.log('主题变化:', newVal)
 })
 ```
 
-### toggleDarkMode()
-
-切换暗色模式。
-
-```typescript
-import { toggleDarkMode } from '@hohaya/hoha'
-
-toggleDarkMode()  // light ↔ dark
-```
-
-## 宿主项目使用
-
-在宿主项目中直接使用这些 API：
-
-```typescript
-// 任何文件中
-import { useGlobalState, setConfig, setTheme } from '@hohaya/hoha'
-
-// 获取全局状态
-const state = useGlobalState()
-console.log(state.user.value)
-
-// 设置配置
-setConfig({ apiBaseURL: '/api' })
-
-// 设置主题
-setTheme({ mode: 'dark' })
-```
-
-## 与 Vuex/Pinia 共存
-
-Hoha UI 的全局状态与 Vuex/Pinia 完全独立，可以共存：
-
-```typescript
-// store/user.ts (Pinia)
-import { defineStore } from 'pinia'
-import { useGlobalState } from '@hohaya/hoha'
-
-export const useUserStore = defineStore('user', {
-  state: () => ({
-    // Hoha UI 全局状态
-    hohaState: useGlobalState()
-  }),
-  
-  actions: {
-    login(userData) {
-      // 同步到 Hoha UI
-      this.hohaState.setUser(userData)
-    }
-  }
-})
-```
-
-## 完整示例
+## 与宿主项目联动
 
 ```vue
 <template>
   <div>
-    <!-- 显示用户信息 -->
-    <div v-if="user">
-      欢迎, {{ user.name }}
-    </div>
+    <!-- 组件 A 修改数据 -->
+    <button @click="login">登录</button>
     
-    <!-- 购物车 -->
-    <div>
-      购物车 ({{ cartCount }})
-    </div>
-    
-    <!-- 主题切换 -->
-    <button @click="toggleDarkMode">
-      {{ theme.mode === 'dark' ? '浅色' : '深色' }}
-    </button>
+    <!-- 组件 B 自动响应 -->
+    <div v-if="user">欢迎, {{ user.name }}</div>
   </div>
 </template>
 
 <script setup>
-import { 
-  useGlobalState, 
-  useTheme, 
-  toggleDarkMode 
-} from '@hohaya/hoho'
+import { useGlobalState } from '@hohaya/hoho'
 
-const { user, cartCount } = useGlobalState()
-const theme = useTheme()
+const { user, setUser } = useGlobalState()
+
+const login = () => {
+  setUser({ id: 1, name: 'Admin' })  // 所有使用 user 的组件自动更新
+}
 </script>
 ```
+
+## 原理
+
+基于 Vue 3 响应式系统：
+
+```typescript
+// 使用 ref 包装基础类型
+const user = ref<any>(null)
+
+// 使用 computed 派生计算
+const cartCount = computed(() => cart.value.length)
+
+// watch 监听变化
+watch(user, (newUser) => {
+  console.log('用户变化:', newUser)
+})
+```
+
+Vue 2 项目通过 `@vue/composition-api` 同样支持响应式。
