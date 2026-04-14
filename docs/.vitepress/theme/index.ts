@@ -1,6 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import DemoBlock from '../components/DemoBlock.vue'
 import './custom.css'
 // 引入组件库样式
 import '../../../packages/components/src/styles/index.css'
@@ -24,9 +23,6 @@ import { message, toast } from '../../../packages/components/src/index'
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
-    // 注册 DemoBlock 组件
-    app.component('DemoBlock', DemoBlock)
-    
     // 注册所有 UI 组件
     app.component('HoButton', HoButton)
     app.component('HoInput', HoInput)
