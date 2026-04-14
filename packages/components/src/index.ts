@@ -33,6 +33,24 @@ export {
 } from './locale/index.ts'
 export type { HohaLocale, LocaleMessages } from './locale/index.ts'
 
+// Global State / Store
+export {
+  getGlobalState,
+  useGlobalState,
+  provideGlobalState,
+  getConfig,
+  setConfig,
+  useConfig,
+  provideConfig,
+  getTheme,
+  setTheme,
+  toggleDarkMode,
+  useTheme,
+  provideTheme,
+  HohaStore
+} from './store/index.ts'
+export type { GlobalState, HohaConfig, ThemeConfig, ThemeMode, StoreOptions } from './store/index.ts'
+
 // Types
 export type { MessageType, MessageOptions, MessageInstance } from './message/index.ts'
 export type { ToastType, ToastPosition, ToastOptions, ToastInstance } from './toast/index.ts'
@@ -55,15 +73,23 @@ import HoCellGroup from './cell-group/index.vue'
 import { message as messageApi } from './message/index.ts'
 import { toast as toastApi } from './toast/index.ts'
 import { createI18n, setLocale } from './locale/index.ts'
+import { HohaStore, setConfig, setTheme, getGlobalState } from './store/index.ts'
 
 const components = [HoButton, HoInput, HoIcon, HoModal, HoCarousel, HoCarouselItem, HoTabs, HoNavBar, HoTabBar, HoTabBarItem, HoImage, HoCell, HoCellGroup]
 
 export interface HohaUIOptions {
+  // 国际化
   locale?: string
   i18n?: {
     locale?: string
     fallbackLocale?: string
     messages?: Record<string, any>
+  }
+  // 全局状态
+  store?: {
+    config?: Record<string, any>
+    theme?: Record<string, any>
+    initialState?: Record<string, any>
   }
 }
 
@@ -92,6 +118,14 @@ export default {
     if (options.i18n) {
       const i18n = createI18n(options.i18n)
       app.use(i18n)
+    }
+    
+    // Setup store (全局状态)
+    if (options.store) {
+      app.use(HohaStore, options.store)
+    } else {
+      // 默认也初始化，保证组件能正常使用
+      app.use(HohaStore)
     }
   }
 }
