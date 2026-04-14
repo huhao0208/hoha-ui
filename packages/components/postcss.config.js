@@ -7,7 +7,7 @@ module.exports = {
       propList: ['*', '!border*'],
       selectorBlackList: [],
       replace: true,
-      mediaQuery: false,
+      mediaQuery: true,
       minPixelValue: 2
     },
     // 自动添加浏览器前缀
