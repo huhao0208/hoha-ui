@@ -34,8 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject } from 'vue'
-import type { PropType, Component } from 'vue'
+import { defineComponent, computed, inject, ref, type PropType, type Component } from 'vue'
 import HoIcon from '../icon/index.vue'
 import { TABBAR_KEY, type TabBarProvider } from '../tabbar/index.vue'
 
@@ -49,7 +48,7 @@ export default defineComponent({
   name: 'HoTabBarItem',
   components: { HoIcon },
   props: {
-    name: { type: [Number, String] as PropType<number | string>, default: '' },
+    name: { type: [Number, String] as PropType<number | string>, default: undefined },
     icon: { type: String, default: '' },
     dot: { type: Boolean, default: false },
     badge: { type: [Number, String] as PropType<number | string>, default: '' },
@@ -60,7 +59,15 @@ export default defineComponent({
   emits: ['click'],
   setup(props, { emit }) {
     const tabbar = inject<TabBarProvider>(TABBAR_KEY)
-    const itemName = computed(() => props.name)
+    
+    // 获取自动分配的索引
+    const autoIndex = ref(tabbar?.getNextIndex() ?? 0)
+    
+    // name 未设置时使用自动索引
+    const itemName = computed(() => {
+      if (props.name !== undefined) return props.name
+      return autoIndex.value
+    })
 
     const isActive = computed(() => tabbar?.active.value === itemName.value)
     

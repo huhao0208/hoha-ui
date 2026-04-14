@@ -17,6 +17,7 @@ export const TABBAR_KEY = Symbol('tabbar')
 export interface TabBarProvider {
   active: Ref<number | string>
   setActive: (value: number | string) => void
+  getNextIndex: () => number
 }
 
 export default defineComponent({
@@ -45,7 +46,11 @@ export default defineComponent({
       }
     }
 
-    provide<TabBarProvider>(TABBAR_KEY, { active, setActive })
+    // 索引计数器
+    let itemIndex = 0
+    const getNextIndex = () => itemIndex++
+
+    provide<TabBarProvider>(TABBAR_KEY, { active, setActive, getNextIndex })
 
     const tabBarClasses = computed(() => [
       'ho-tabbar',
