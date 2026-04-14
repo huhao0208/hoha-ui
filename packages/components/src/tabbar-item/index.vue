@@ -34,7 +34,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject, type PropType, type Component } from 'vue'
+import { defineComponent, computed, inject } from 'vue'
+import type { PropType, Component } from 'vue'
 import HoIcon from '../icon/index.vue'
 import { TABBAR_KEY, type TabBarProvider } from '../tabbar/index.vue'
 

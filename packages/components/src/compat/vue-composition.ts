@@ -10,28 +10,23 @@ let vueVersion: string = '3'
 
 // 尝试检测 Vue 版本
 try {
-  // 在运行时环境检测 Vue 版本
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const vuePkg = require('vue/package.json')
   vueVersion = vuePkg.version || '3'
   isVue2 = vueVersion.startsWith('2')
   isVue3 = !isVue2
 } catch {
-  // 如果无法检测，默认假设 Vue 3
   isVue2 = false
   isVue3 = true
 }
 
-// 导出版本信息
 export { isVue2, isVue3, vueVersion }
 
 // Composition API 导出
-// Vue 3 原生支持，Vue 2 使用 @vue/composition-api
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let compositionApi: any
 
 if (isVue2) {
-  // Vue 2: 使用 @vue/composition-api
   try {
     compositionApi = require('@vue/composition-api')
   } catch (e) {
@@ -39,7 +34,6 @@ if (isVue2) {
     throw e
   }
 } else {
-  // Vue 3: 直接使用 vue
   compositionApi = require('vue')
 }
 
@@ -67,20 +61,77 @@ export const nextTick = compositionApi.nextTick
 export const defineComponent = compositionApi.defineComponent
 export const getCurrentInstance = compositionApi.getCurrentInstance
 
-// Vue 3 特有的 API（Vue 2 可能不支持）
+// Vue 3 特有的 API
 export const shallowRef = compositionApi.shallowRef
 export const shallowReactive = compositionApi.shallowReactive
 export const markRaw = compositionApi.markRaw
 export const toRaw = compositionApi.toRaw
 
-// Vue 2/3 都有的生命周期
+// 生命周期
 export const onActivated = compositionApi.onActivated
 export const onDeactivated = compositionApi.onDeactivated
 export const onErrorCaptured = compositionApi.onErrorCaptured
 
+// h 函数 (渲染函数)
+export const h = compositionApi.h
+
+/**
+ * createApp - Vue 2/3 兼容
+ * Vue 3: 使用 createApp
+ * Vue 2: 使用 new Vue()
+ */
+let _createApp: any
+if (isVue2) {
+  // Vue 2: 返回一个兼容的 app 对象
+  _createApp = (component: any, props?: any) => {
+    const Vue = require('vue')
+    const rootEl = document.createElement('div')
+    
+    const AppComponent = Vue.extend(component)
+    const instance = new AppComponent({ propsData: props })
+    instance.$mount(rootEl)
+    
+    return {
+      mount: (el: Element | string) => {
+        const target = typeof el === 'string' ? document.querySelector(el) : el
+        if (target) {
+          target.appendChild(instance.$el)
+        }
+        return instance
+      },
+      unmount: () => {
+        instance.$destroy()
+        if (instance.$el && instance.$el.parentNode) {
+          instance.$el.parentNode.removeChild(instance.$el)
+        }
+      },
+      use: (plugin: any, options?: any) => {
+        instance.$options.plugins = instance.$options.plugins || []
+        // @ts-ignore
+        Vue.use(plugin, options)
+        return instance
+      },
+      component: (name: string, comp: any) => {
+        Vue.component(name, comp)
+        return instance
+      },
+      provide: (key: string | symbol, value: any) => {
+        // Vue 2 的 provide 在组件定义时设置
+        return instance
+      },
+      config: {
+        globalProperties: instance
+      },
+      _instance: instance
+    }
+  }
+} else {
+  _createApp = compositionApi.createApp
+}
+export const createApp = _createApp
+
 /**
  * 创建跨版本的响应式引用
- * 对 Vue 2 和 Vue 3 都有效
  */
 export function createRef<T>(value: T) {
   return ref(value)
@@ -88,7 +139,6 @@ export function createRef<T>(value: T) {
 
 /**
  * 创建跨版本的响应式对象
- * 对 Vue 2 和 Vue 3 都有效
  */
 export function createReactive<T extends object>(target: T): T {
   return reactive(target)

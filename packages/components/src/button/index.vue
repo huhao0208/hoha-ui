@@ -72,12 +72,9 @@ export default defineComponent({
   font-weight: var(--hoho-font-medium, 500);
   transition: var(--hoho-duration-normal, 0.25s) var(--hoho-ease, ease);
   font-family: inherit;
-  
-  /* 最小点击区域 - iOS 标准 */
   min-height: var(--hoho-touch-target, 44px);
   min-width: var(--hoho-touch-target, 44px);
 
-  /* 小号 */
   &--small {
     padding: var(--hoho-spacing-xs, 5px) var(--hoho-spacing-sm, 10px);
     font-size: var(--hoho-font-sm, 13px);
@@ -86,7 +83,6 @@ export default defineComponent({
     min-width: 32px;
   }
 
-  /* 中号 */
   &--medium {
     padding: var(--hoho-spacing-sm, 10px) var(--hoho-spacing-md, 15px);
     font-size: var(--hoho-font-md, 15px);
@@ -94,7 +90,6 @@ export default defineComponent({
     min-height: var(--hoho-touch-target, 44px);
   }
 
-  /* 大号 */
   &--large {
     padding: var(--hoho-spacing-md, 15px) var(--hoho-spacing-lg, 20px);
     font-size: var(--hoho-font-lg, 17px);
@@ -102,7 +97,6 @@ export default defineComponent({
     min-height: 52px;
   }
 
-  /* 类型颜色 - 使用设计规范变量 */
   &--primary {
     background: var(--hoho-color-primary);
     color: white;
@@ -151,7 +145,6 @@ export default defineComponent({
     }
   }
 
-  /* 状态 */
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -161,7 +154,6 @@ export default defineComponent({
     cursor: wait;
   }
 
-  /* loading 动画 */
   &__loading {
     width: 1em;
     height: 1em;
@@ -173,36 +165,17 @@ export default defineComponent({
   }
 }
 
-/* 移动端适配 */
 @media screen and (max-width: 767px) {
   .ho-button {
     min-height: 48px;
     min-width: 48px;
-    
-    &--small {
-      min-height: 36px;
-      min-width: 36px;
-      padding: 8px 16px;
-      font-size: var(--hoho-font-sm, 14px);
-    }
-    
-    &--medium {
-      min-height: 48px;
-      padding: 12px 20px;
-      font-size: var(--hoho-font-md, 16px);
-    }
-    
-    &--large {
-      min-height: 56px;
-      padding: 16px 32px;
-      font-size: var(--hoho-font-lg, 18px);
-    }
+    &--small { min-height: 36px; min-width: 36px; padding: 8px 16px; }
+    &--medium { min-height: 48px; padding: 12px 20px; }
+    &--large { min-height: 56px; padding: 16px 32px; }
   }
 }
 
 @keyframes ho-button-loading {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 </style>

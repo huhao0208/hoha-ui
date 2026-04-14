@@ -45,6 +45,10 @@ export {
   markRaw,
   toRaw,
   
+  // 渲染相关
+  h,
+  createApp,
+  
   // 辅助函数
   createRef,
   createReactive
@@ -59,7 +63,6 @@ export {
   warnVue3Only,
   registerGlobalProperty,
   registerComponent,
-  // 类型导出
   type PluginInstallOptions,
   type Vue2Constructor,
   type Vue3App,
