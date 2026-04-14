@@ -1,8 +1,8 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
 import './custom.css'
-// 引入组件库样式
 import '../../../packages/components/src/styles/index.css'
+import DemoPreview from '../components/DemoPreview.vue'
 
 // 导入所有组件
 import HoButton from '../../../packages/components/src/button/index.vue'
@@ -42,5 +42,8 @@ export default {
     // 注册全局 API
     app.config.globalProperties.$message = message
     app.config.globalProperties.$toast = toast
+    
+    // 注册 DemoPreview 组件
+    app.component('DemoPreview', DemoPreview)
   }
 } satisfies Theme

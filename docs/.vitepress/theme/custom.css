@@ -1,10 +1,9 @@
 /* 文档布局样式 */
 
-/* Demo Preview - 支持 rem 调节 */
+/* Demo Preview 默认样式（兼容旧文档） */
 .demo-preview {
-  position: relative;
   padding: 16px;
-  margin-bottom: 8px;
+  margin: 16px 0;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: #fff;
@@ -16,39 +15,4 @@
 
 html.dark .demo-preview {
   background: #1f2937;
-}
-
-/* rem 控制器 - 默认隐藏 */
-.demo-preview::after {
-  content: '';
-  display: none;
-}
-
-/* 鼠标悬停时显示控制器 */
-.demo-preview:hover .rem-control {
-  opacity: 1;
-}
-
-.rem-control {
-  position: absolute;
-  bottom: 8px;
-  right: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--vp-c-text-3);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.rem-control input[type="range"] {
-  width: 60px;
-  height: 4px;
-  accent-color: var(--vp-c-brand-1);
-}
-
-.rem-control span {
-  min-width: 40px;
-  font-family: monospace;
 }
