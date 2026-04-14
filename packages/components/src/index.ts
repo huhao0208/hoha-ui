@@ -16,6 +16,23 @@ export { default as HoCellGroup } from './cell-group/index.vue'
 export { message, default as HoMessage } from './message/index.ts'
 export { toast, default as HoToast } from './toast/index.ts'
 
+// Locale / i18n
+export { 
+  t, 
+  setLocale, 
+  addLocale, 
+  getLocale, 
+  getAvailableLocales,
+  useLocale,
+  createI18n,
+  locales,
+  zhCN,
+  enUS,
+  zhTW,
+  jaJP
+} from './locale/index.ts'
+export type { HohaLocale, LocaleMessages } from './locale/index.ts'
+
 // Types
 export type { MessageType, MessageOptions, MessageInstance } from './message/index.ts'
 export type { ToastType, ToastPosition, ToastOptions, ToastInstance } from './toast/index.ts'
@@ -37,11 +54,21 @@ import HoCell from './cell/index.vue'
 import HoCellGroup from './cell-group/index.vue'
 import { message as messageApi } from './message/index.ts'
 import { toast as toastApi } from './toast/index.ts'
+import { createI18n, setLocale } from './locale/index.ts'
 
 const components = [HoButton, HoInput, HoIcon, HoModal, HoCarousel, HoCarouselItem, HoTabs, HoNavBar, HoTabBar, HoTabBarItem, HoImage, HoCell, HoCellGroup]
 
+export interface HohaUIOptions {
+  locale?: string
+  i18n?: {
+    locale?: string
+    fallbackLocale?: string
+    messages?: Record<string, any>
+  }
+}
+
 export default {
-  install(app: App) {
+  install(app: App, options: HohaUIOptions = {}) {
     // Register components
     components.forEach((component) => {
       if (component && component.name) {
@@ -56,5 +83,15 @@ export default {
     // Provide for Composition API
     app.provide('$message', messageApi)
     app.provide('$toast', toastApi)
+    
+    // Setup i18n
+    if (options.locale) {
+      setLocale(options.locale)
+    }
+    
+    if (options.i18n) {
+      const i18n = createI18n(options.i18n)
+      app.use(i18n)
+    }
   }
 }
