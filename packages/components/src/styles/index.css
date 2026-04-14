@@ -112,136 +112,7 @@ html.dark {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Button 按钮样式 */
-.ho-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  transition: var(--hoho-transition);
-  font-family: inherit;
-  /* 移动端最小点击区域 44px */
-  min-height: 44px;
-  min-width: 44px;
-}
-
-.ho-button--small {
-  padding: 6px 14px;
-  font-size: 13px;
-  border-radius: var(--hoho-radius-sm);
-  min-height: 32px;
-  min-width: 32px;
-}
-
-.ho-button--medium {
-  padding: 10px 18px;
-  font-size: 15px;
-  border-radius: var(--hoho-radius-md);
-  min-height: 44px;
-}
-
-.ho-button--large {
-  padding: 14px 28px;
-  font-size: 17px;
-  border-radius: var(--hoho-radius-lg);
-  min-height: 52px;
-}
-
-/* 移动端按钮增大触摸区域 */
-@media screen and (max-width: 768px) {
-  .ho-button {
-    min-height: 48px;
-    min-width: 48px;
-    padding: 12px 20px;
-    font-size: 16px;
-  }
-  
-  .ho-button--small {
-    min-height: 36px;
-    min-width: 36px;
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-  
-  .ho-button--large {
-    min-height: 56px;
-    padding: 16px 32px;
-    font-size: 18px;
-  }
-}
-
-.ho-button--primary {
-  background: var(--hoho-color-primary);
-  color: white;
-}
-.ho-button--primary:hover:not(.ho-button--disabled) {
-  background: #2563eb;
-}
-
-.ho-button--secondary {
-  background: var(--hoho-color-secondary);
-  color: white;
-}
-.ho-button--secondary:hover:not(.ho-button--disabled) {
-  background: #4b5563;
-}
-
-.ho-button--success {
-  background: var(--hoho-color-success);
-  color: white;
-}
-.ho-button--success:hover:not(.ho-button--disabled) {
-  background: #059669;
-}
-
-.ho-button--warning {
-  background: var(--hoho-color-warning);
-  color: white;
-}
-.ho-button--warning:hover:not(.ho-button--disabled) {
-  background: #d97706;
-}
-
-.ho-button--danger {
-  background: var(--hoho-color-danger);
-  color: white;
-}
-.ho-button--danger:hover:not(.ho-button--disabled) {
-  background: #dc2626;
-}
-
-.ho-button--info {
-  background: var(--hoho-color-info);
-  color: white;
-}
-.ho-button--info:hover:not(.ho-button--disabled) {
-  background: #0891b2;
-}
-
-.ho-button--disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.ho-button--loading {
-  cursor: wait;
-}
-
-.ho-button__loading {
-  width: 14px;
-  height: 14px;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: hoho-spin 0.8s linear infinite;
-  margin-right: 6px;
-}
-
-@keyframes hoho-spin {
-  to { transform: rotate(360deg); }
-}
+/* Button 样式由组件内部定义，此处仅保留通用属性 */
 
 /* Input 输入框样式 */
 .ho-input {
@@ -674,33 +545,7 @@ html.dark .ho-input__suffix {
   color: var(--hoho-text-tertiary);
 }
 
-/* Button 暗色模式 */
-html.dark .ho-button--primary {
-  background: var(--hoho-color-primary);
-}
-html.dark .ho-button--primary:hover:not(.ho-button--disabled) {
-  background: #3b82f6;
-}
-
-html.dark .ho-button--secondary {
-  background: var(--hoho-bg-tertiary);
-  color: var(--hoho-text-primary);
-}
-html.dark .ho-button--secondary:hover:not(.ho-button--disabled) {
-  background: #4b5563;
-}
-
-html.dark .ho-button--success {
-  background: var(--hoho-color-success);
-}
-html.dark .ho-button--success:hover:not(.ho-button--disabled) {
-  background: #10b981;
-}
-
-html.dark .ho-button--warning {
-  background: var(--hoho-color-warning);
-  color: #111827;
-}
+/* Button 暗色模式由组件内部定义 */
 html.dark .ho-button--warning:hover:not(.ho-button--disabled) {
   background: #f59e0b;
   color: #111827;
@@ -799,19 +644,7 @@ html.dark .ho-toast__spinner div {
   }
 }
 
-/* 移动端暗色模式 Button 适配 */
-@media screen and (max-width: 768px) {
-  /* 暗色模式下按钮触摸反馈增强 */
-  html.dark .ho-button:active:not(.ho-button--disabled) {
-    filter: brightness(1.1);
-  }
-  
-  /* 暗色模式下禁用按钮样式 */
-  html.dark .ho-button--disabled {
-    opacity: 0.4;
-    background: var(--hoho-bg-tertiary);
-  }
-}
+/* 移动端暗色模式 Button 由组件内部定义 */
 
 /* 移动端暗色模式 Message 适配 */
 @media screen and (max-width: 768px) {
