@@ -7,29 +7,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const wrapperRef = ref<HTMLElement | null>(null)
+let resizeObserver: ResizeObserver | null = null
+
+// 基于 375px 设计稿设置 rem
+function setRootFontSize() {
+  if (!wrapperRef.value) return
+  // 375px 设计稿 → 18.75px 根字体
+  const fontSize = 18.75
+  wrapperRef.value.style.fontSize = fontSize + 'px'
+}
 
 onMounted(() => {
-  // 设置预览区域的 rem 基准为 37.5px（基于 375px 设计稿）
-  if (wrapperRef.value) {
-    wrapperRef.value.style.fontSize = '37.5px'
+  setRootFontSize()
+})
+
+onUnmounted(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
   }
 })
 </script>
 
 <style scoped>
 .demo-preview-wrapper {
-  /* 所有尺寸使用 rem - 基于 37.5px */
-  padding: 0.43rem; /* 16px */
-  margin: 0.43rem 0;
+  padding: 0.853rem; /* 16px / 18.75 = 0.853rem */
+  margin: 0.853rem 0;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 0.21rem; /* 8px */
+  border-radius: 0.427rem; /* 8px / 18.75 */
   background: #fff;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.21rem; /* 8px */
+  gap: 0.427rem;
   align-items: center;
 }
 
