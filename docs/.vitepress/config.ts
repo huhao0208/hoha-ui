@@ -171,11 +171,7 @@ export default defineConfig({
       dark: 'github-dark'
     },
     // 行号
-    lineNumbers: true,
-    // 注册 demo 插件
-    config: (md) => {
-      md.use(demoPlugin)
-    }
+    lineNumbers: true
   },
 
   // Head 配置

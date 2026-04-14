@@ -42,26 +42,5 @@ export default {
     // 注册全局 API
     app.config.globalProperties.$message = message
     app.config.globalProperties.$toast = toast
-  },
-  setup() {
-    // H5 预览 rem 控制器
-    if (typeof window !== 'undefined') {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.addEventListener('input', (e) => {
-          const target = e.target as HTMLInputElement
-          if (target.classList.contains('h5-rem-slider')) {
-            const container = target.closest('.h5-preview-container')
-            const iframe = container?.querySelector('.h5-device__screen') as HTMLIFrameElement
-            const valueEl = container?.querySelector('.h5-rem-value')
-            const fontSize = parseFloat(target.value)
-            
-            if (valueEl) valueEl.textContent = fontSize + 'px'
-            if (iframe?.contentWindow) {
-              iframe.contentWindow.postMessage({ type: 'setFontSize', fontSize }, '*')
-            }
-          }
-        })
-      })
-    }
   }
 } satisfies Theme

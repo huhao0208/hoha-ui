@@ -1,126 +1,54 @@
-/* ========================================
-   文档布局样式
-   ======================================== */
+/* 文档布局样式 */
 
-/* ========================================
-   H5 设备模拟器 - iframe 隔离 + rem 适配
-   ======================================== */
-
-.h5-preview-container {
-  margin: 24px 0;
-}
-
-.h5-device {
-  width: 375px;
-  background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
-  border-radius: 44px;
-  padding: 12px;
-  margin: 0 auto;
+/* Demo Preview - 支持 rem 调节 */
+.demo-preview {
   position: relative;
-  box-shadow: 
-    0 0 0 3px #333,
-    0 0 0 6px #1a1a1a,
-    0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-.h5-device__notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 28px;
-  background: #1a1a1a;
-  border-radius: 0 0 20px 20px;
-  z-index: 10;
-}
-
-.h5-device__notch::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 6px;
-  background: #333;
-  border-radius: 3px;
-}
-
-.h5-device__screen {
-  width: 100%;
-  height: 600px;
-  border: none;
-  border-radius: 32px;
-  background: #fff;
-  display: block;
-  margin-top: 16px;
-}
-
-.h5-controls {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
-  padding: 12px;
-  background: var(--vp-c-bg-soft);
+  padding: 16px;
+  margin-bottom: 8px;
+  border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
 }
 
-.h5-controls label {
+html.dark .demo-preview {
+  background: #1f2937;
+}
+
+/* rem 控制器 - 默认隐藏 */
+.demo-preview::after {
+  content: '';
+  display: none;
+}
+
+/* 鼠标悬停时显示控制器 */
+.demo-preview:hover .rem-control {
+  opacity: 1;
+}
+
+.rem-control {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--vp-c-text-2);
+  gap: 6px;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.h5-rem-slider {
-  width: 120px;
+.rem-control input[type="range"] {
+  width: 60px;
+  height: 4px;
   accent-color: var(--vp-c-brand-1);
 }
 
-.h5-rem-value {
-  min-width: 50px;
+.rem-control span {
+  min-width: 40px;
   font-family: monospace;
-}
-
-.h5-code {
-  margin-top: 16px;
-  background: var(--vp-code-block-bg);
-  border-radius: 8px;
-}
-
-.h5-code summary {
-  padding: 12px 16px;
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--vp-c-text-2);
-}
-
-.h5-code summary:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.h5-code pre {
-  margin: 0;
-  padding: 16px;
-  border-top: 1px solid var(--vp-c-divider);
-}
-
-/* 暗色模式 */
-html.dark .h5-device {
-  background: linear-gradient(145deg, #3d3d3d, #2a2a2a);
-  box-shadow: 
-    0 0 0 3px #444,
-    0 0 0 6px #2a2a2a,
-    0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
-html.dark .h5-device__notch { background: #2a2a2a; }
-html.dark .h5-device__notch::after { background: #444; }
-
-/* 控制脚本 */
-.h5-preview-container script {
-  display: none;
 }
