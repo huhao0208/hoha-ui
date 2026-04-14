@@ -108,8 +108,33 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
 | 属性名 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| type | 按钮类型 | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'primary'` |
-| size | 按钮尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| type | 按钮类型 | `string` | `'primary'` |
+
+**type 可选值**：
+
+| 值 | 说明 |
+| --- | --- | 
+| `primary` | 主要按钮（蓝色） |
+| `secondary` | 次要按钮（灰色） |
+| `success` | 成功按钮（绿色） |
+| `warning` | 警告按钮（橙色） |
+| `danger` | 危险按钮（红色） |
+| `info` | 信息按钮（青色） |
+
+| 属性名 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| size | 按钮尺寸 | `string` | `'medium'` |
+
+**size 可选值**：
+
+| 值 | 说明 |
+| --- | --- |
+| `small` | 小型按钮 |
+| `medium` | 中型按钮 |
+| `large` | 大型按钮 |
+
+| 属性名 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
 | disabled | 是否禁用 | `boolean` | `false` |
 | loading | 是否加载中 | `boolean` | `false` |
 
@@ -117,7 +142,7 @@ Button 组件提供三种尺寸：`small`、`medium` 和 `large`。
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| click | 点击按钮时触发 | `(event: MouseEvent) => void` |
+| click | 点击按钮时触发 | `(event: MouseEvent)` |
 
 ### Slots
 

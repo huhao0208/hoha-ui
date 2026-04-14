@@ -80,20 +80,22 @@ const v3 = ref('')
 
 | 属性名 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| v-model | 绑定值 | `string \| number` | `''` |
+| v-model | 绑定值 | `string` / `number` | `''` |
 | type | 输入框类型 | `string` | `'text'` |
 | placeholder | 占位文本 | `string` | `''` |
 | disabled | 是否禁用 | `boolean` | `false` |
 | readonly | 是否只读 | `boolean` | `false` |
-| size | 输入框尺寸 | `'small' \| 'medium' \| 'large'` | `'medium'` |
+| size | 输入框尺寸 | `string` | `'medium'` |
+
+**size 可选值**：`'small'` | `'medium'` | `'large'`
 
 ### Events
 
 | 事件名 | 说明 | 回调参数 |
 | --- | --- | --- |
-| input | 输入时触发 | `(value: string) => void` |
-| focus | 获得焦点时触发 | `(event: FocusEvent) => void` |
-| blur | 失去焦点时触发 | `(event: FocusEvent) => void` |
+| input | 输入时触发 | `(value: string)` |
+| focus | 获得焦点时触发 | `(event: FocusEvent)` |
+| blur | 失去焦点时触发 | `(event: FocusEvent)` |
 
 ### Slots
 
