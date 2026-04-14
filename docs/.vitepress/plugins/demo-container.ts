@@ -12,9 +12,6 @@ export function demoContainer(md: MarkdownRenderer) {
     // 只处理 vue 代码块
     if (token.info === 'vue') {
       const code = token.content.trim()
-      const escapedCode = code
-        .replace(/`/g, '\\`')
-        .replace(/\$/g, '\\$')
       
       return `
 <div class="demo-preview">
