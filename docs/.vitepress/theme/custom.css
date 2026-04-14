@@ -1,16 +1,5 @@
 /* 文档布局样式 */
 
-/* rem 适配 - 基于 375px 设计稿 */
-html {
-  font-size: 37.5px;
-}
-
-/* 重置 VitePress 默认样式，保持文档正常显示 */
-.vp-doc,
-.vp-doc * {
-  font-size: revert;
-}
-
 /* Demo Preview 默认样式（兼容旧文档） */
 .demo-preview {
   padding: 16px;
