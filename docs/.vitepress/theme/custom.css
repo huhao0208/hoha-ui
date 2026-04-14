@@ -2,20 +2,116 @@
    文档布局样式
    ======================================== */
 
+/* ========================================
+   H5 设备模拟器样式
+   ======================================== */
+
+/* demo-preview 作为 H5 设备模拟器 */
 .demo-preview {
-  padding: 24px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg);
-  margin: 16px 0;
+  /* H5 设备外壳 */
+  background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+  border-radius: 44px;
+  padding: 12px;
+  box-shadow: 
+    0 0 0 3px #333,
+    0 0 0 6px #1a1a1a,
+    0 20px 50px rgba(0, 0, 0, 0.4);
+  margin: 24px auto;
+  width: 375px;
+  min-height: 300px;
+  position: relative;
+  border: none;
+  
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
 }
 
+/* 刘海 */
+.demo-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 28px;
+  background: #1a1a1a;
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+
+/* 听筒 */
+.demo-preview::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  z-index: 11;
+}
+
+/* 内容容器 - 屏幕 */
+.demo-preview > *:first-child {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 32px;
+  padding: 16px;
+  margin-top: 16px;
+  flex: 1;
+  min-height: 200px;
+  
+  /* H5 样式 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  
+  /* rem 基准 */
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* 多个直接子元素时，第一个包含所有 */
+.demo-preview {
+  container-type: inline-size;
+}
+
+/* 暗色模式 */
 html.dark .demo-preview {
-  background: var(--vp-c-bg-soft);
+  background: linear-gradient(145deg, #3d3d3d, #2a2a2a);
+  box-shadow: 
+    0 0 0 3px #444,
+    0 0 0 6px #2a2a2a,
+    0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+html.dark .demo-preview::before {
+  background: #2a2a2a;
+}
+
+html.dark .demo-preview::after {
+  background: #444;
+}
+
+html.dark .demo-preview > *:first-child {
+  background: #121212;
+  color: #e5e5e5;
+}
+
+/* 响应式 - 小屏幕 */
+@container (max-width: 400px) {
+  .demo-preview {
+    width: 100%;
+    min-width: 320px;
+  }
 }
 
 /* 代码块样式 */

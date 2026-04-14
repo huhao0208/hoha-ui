@@ -157,6 +157,7 @@ import {
   vModelText,
   vShow,
   version,
+  vue_runtime_esm_bundler_exports,
   warn,
   watch,
   watchEffect,
@@ -172,6 +173,29 @@ import {
   withScopeId
 } from "./chunk-LYWZH3VE.js";
 import "./chunk-PZ5AY32C.js";
+
+// ../node_modules/.pnpm/vue-demi@0.14.10_@vue+composition-api@1.7.2_vue@3.5.32_typescript@5.9.3___vue@3.5.32_typescript@5.9.3_/node_modules/vue-demi/lib/index.mjs
+var isVue2 = false;
+var isVue3 = true;
+var Vue2 = void 0;
+function install() {
+}
+function set(target, key, val) {
+  if (Array.isArray(target)) {
+    target.length = Math.max(target.length, key);
+    target.splice(key, 1, val);
+    return val;
+  }
+  target[key] = val;
+  return val;
+}
+function del(target, key) {
+  if (Array.isArray(target)) {
+    target.splice(key, 1);
+    return;
+  }
+  delete target[key];
+}
 export {
   BaseTransition,
   BaseTransitionPropsValidators,
@@ -191,6 +215,8 @@ export {
   Transition,
   TransitionGroup,
   TriggerOpTypes,
+  vue_runtime_esm_bundler_exports as Vue,
+  Vue2,
   VueElement,
   assertNumber,
   callWithAsyncErrorHandling,
@@ -225,6 +251,7 @@ export {
   defineProps,
   defineSSRCustomElement,
   defineSlots,
+  del,
   devtools,
   effect,
   effectScope,
@@ -244,6 +271,7 @@ export {
   initCustomFormatter,
   initDirectivesForSSR,
   inject,
+  install,
   isMemoSame,
   isProxy,
   isReactive,
@@ -252,6 +280,8 @@ export {
   isRuntimeOnly,
   isShallow,
   isVNode,
+  isVue2,
+  isVue3,
   markRaw,
   mergeDefaults,
   mergeModels,
@@ -294,6 +324,7 @@ export {
   resolveDynamicComponent,
   resolveFilter,
   resolveTransitionHooks,
+  set,
   setBlockTracking,
   setDevtoolsHook,
   setTransitionHooks,
@@ -345,4 +376,4 @@ export {
   withModifiers,
   withScopeId
 };
-//# sourceMappingURL=vue.js.map
+//# sourceMappingURL=vue-demi.js.map

@@ -1,8 +1,12 @@
 <template>
   <div class="demo-block">
-    <!-- 预览区域 -->
+    <!-- 预览区域 - H5 模拟器 -->
     <div class="demo-block__preview">
-      <slot />
+      <div class="h5-device">
+        <div class="h5-device__screen">
+          <slot />
+        </div>
+      </div>
     </div>
     
     <!-- 操作栏 -->
@@ -13,6 +17,9 @@
       </button>
       <button class="demo-block__btn" @click="copyCode">
         {{ copied ? '已复制!' : '复制代码' }}
+      </button>
+      <button class="demo-block__btn" @click="toggleDevice">
+        {{ deviceType === 'mobile' ? '平板' : '手机' }}
       </button>
     </div>
     
@@ -27,7 +34,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { shiki } from '@shikijs/markdown-it'
 
 const props = defineProps<{
   code?: string
@@ -35,10 +41,10 @@ const props = defineProps<{
 
 const showCode = ref(false)
 const copied = ref(false)
+const deviceType = ref<'mobile' | 'tablet'>('mobile')
 
 const highlightedCode = computed(() => {
   if (!props.code) return ''
-  // 简单的代码高亮（VitePress 会处理）
   return `<code class="language-vue">${escapeHtml(props.code)}</code>`
 })
 
@@ -53,6 +59,10 @@ function escapeHtml(str: string) {
 
 function toggleCode() {
   showCode.value = !showCode.value
+}
+
+function toggleDevice() {
+  deviceType.value = deviceType.value === 'mobile' ? 'tablet' : 'mobile'
 }
 
 async function copyCode() {
@@ -82,6 +92,59 @@ async function copyCode() {
   padding: 24px;
   background: var(--vp-c-bg);
   border-bottom: 1px solid var(--vp-c-divider);
+  display: flex;
+  justify-content: center;
+}
+
+/* H5 设备模拟器 */
+.h5-device {
+  background: #1a1a1a;
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow: 
+    0 0 0 2px #333,
+    0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* 顶部刘海 */
+.h5-device::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: #1a1a1a;
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+
+.h5-device__screen {
+  width: 375px;
+  height: 667px;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  overflow-y: auto;
+  
+  /* H5 根字体大小 - 模拟移动端 */
+  font-size: 16px;
+  
+  /* 应用 rem 适配 */
+  --hoho-design-width: 375;
+}
+
+/* 滚动条样式 */
+.h5-device__screen::-webkit-scrollbar {
+  width: 4px;
+}
+
+.h5-device__screen::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
 }
 
 .demo-block__actions {
@@ -138,11 +201,27 @@ async function copyCode() {
 }
 
 /* 暗色模式 */
+html.dark .h5-device__screen {
+  background: #121212;
+}
+
 html.dark .demo-block__preview {
   background: var(--vp-c-bg);
 }
 
 html.dark .demo-block__code {
   background: #1e1e1e;
+}
+
+/* 响应式 - 小屏幕时缩小设备 */
+@media (max-width: 480px) {
+  .h5-device {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+  
+  .demo-block__preview {
+    padding: 12px;
+  }
 }
 </style>
