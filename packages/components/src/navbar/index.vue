@@ -12,18 +12,16 @@
       <!-- 左侧区域 -->
       <div class="ho-navbar__left" @click="handleClickLeft">
         <slot name="left">
-          <!-- 返回箭头 -->
           <span v-if="leftArrow" class="ho-navbar__arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </span>
-          <!-- 左侧文字 -->
           <span v-if="leftText" class="ho-navbar__text">{{ leftText }}</span>
         </slot>
       </div>
       
-      <!-- 标题区域（居中） -->
+      <!-- 标题区域 -->
       <div class="ho-navbar__title">
         <slot name="title">
           <span class="ho-navbar__title-text">{{ title }}</span>
@@ -33,7 +31,6 @@
       <!-- 右侧区域 -->
       <div class="ho-navbar__right" @click="handleClickRight">
         <slot name="right">
-          <!-- 右侧文字 -->
           <span v-if="rightText" class="ho-navbar__text">{{ rightText }}</span>
         </slot>
       </div>
@@ -48,132 +45,52 @@ import type { PropType, CSSProperties } from 'vue'
 export default defineComponent({
   name: 'HoNavBar',
   props: {
-    // 标题
-    title: {
-      type: String,
-      default: ''
-    },
-    // 左侧文字
-    leftText: {
-      type: String,
-      default: ''
-    },
-    // 右侧文字
-    rightText: {
-      type: String,
-      default: ''
-    },
-    // 是否显示左侧箭头
-    leftArrow: {
-      type: Boolean,
-      default: false
-    },
-    // 是否固定在顶部
-    fixed: {
-      type: Boolean,
-      default: false
-    },
-    // 固定时是否生成占位元素
-    placeholder: {
-      type: Boolean,
-      default: false
-    },
-    // 是否显示下边框
-    border: {
-      type: Boolean,
-      default: true
-    },
-    // 是否显示安全区域
-    safeAreaInsetTop: {
-      type: Boolean,
-      default: true
-    },
-    // 导航栏高度
-    height: {
-      type: [Number, String],
-      default: 46
-    },
-    // 背景色
-    background: {
-      type: String,
-      default: ''
-    },
-    // 文字颜色
-    textColor: {
-      type: String,
-      default: ''
-    },
-    // z-index
-    zIndex: {
-      type: [Number, String],
-      default: 100
-    }
+    title: { type: String, default: '' },
+    leftText: { type: String, default: '' },
+    rightText: { type: String, default: '' },
+    leftArrow: { type: Boolean, default: false },
+    fixed: { type: Boolean, default: false },
+    placeholder: { type: Boolean, default: false },
+    border: { type: Boolean, default: true },
+    safeAreaInsetTop: { type: Boolean, default: true },
+    height: { type: [Number, String], default: 46 },
+    background: { type: String, default: '' },
+    textColor: { type: String, default: '' },
+    zIndex: { type: [Number, String], default: 100 }
   },
   emits: ['click-left', 'click-right'],
   setup(props, { emit }) {
     const navBarClasses = computed(() => [
       'ho-navbar',
-      {
-        'ho-navbar--fixed': props.fixed,
-        'ho-navbar--border': props.border
-      }
+      { 'ho-navbar--fixed': props.fixed, 'ho-navbar--border': props.border }
     ])
 
-    const heightValue = computed(() => {
-      if (typeof props.height === 'number') {
-        return `${props.height}px`
-      }
-      return props.height
-    })
+    const heightValue = computed(() => 
+      typeof props.height === 'number' ? `${props.height}px` : props.height
+    )
 
     const innerStyle = computed<CSSProperties>(() => {
       const style: CSSProperties = {
         height: heightValue.value,
         zIndex: Number(props.zIndex)
       }
-      
-      if (props.background) {
-        style.background = props.background
-      }
-      
-      if (props.textColor) {
-        style.color = props.textColor
-      }
-      
+      if (props.background) style.background = props.background
+      if (props.textColor) style.color = props.textColor
       if (props.fixed && props.safeAreaInsetTop) {
         style.paddingTop = 'var(--hoho-safe-area-top)'
       }
-      
       return style
     })
 
-    const placeholderStyle = computed<CSSProperties>(() => {
-      const style: CSSProperties = {
-        height: heightValue.value
-      }
-      
-      if (props.safeAreaInsetTop) {
-        style.paddingTop = 'var(--hoho-safe-area-top)'
-      }
-      
-      return style
-    })
+    const placeholderStyle = computed<CSSProperties>(() => ({
+      height: heightValue.value,
+      paddingTop: props.safeAreaInsetTop ? 'var(--hoho-safe-area-top)' : undefined
+    }))
 
-    const handleClickLeft = (e: MouseEvent) => {
-      emit('click-left', e)
-    }
+    const handleClickLeft = (e: MouseEvent) => emit('click-left', e)
+    const handleClickRight = (e: MouseEvent) => emit('click-right', e)
 
-    const handleClickRight = (e: MouseEvent) => {
-      emit('click-right', e)
-    }
-
-    return {
-      navBarClasses,
-      innerStyle,
-      placeholderStyle,
-      handleClickLeft,
-      handleClickRight
-    }
+    return { navBarClasses, innerStyle, placeholderStyle, handleClickLeft, handleClickRight }
   }
 })
 </script>
@@ -211,49 +128,49 @@ export default defineComponent({
     background: var(--hoho-bg-primary, #ffffff);
     color: var(--hoho-text-primary, #111827);
     box-sizing: content-box;
+    /* 使用设计规范高度 */
+    height: var(--hoho-navbar-height, 46px);
   }
   
   &__left,
   &__right {
     display: flex;
     align-items: center;
-    min-width: 60px;
+    min-width: var(--hoho-touch-target, 44px);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     
-    &:active {
-      opacity: 0.7;
-    }
+    &:active { opacity: 0.7; }
   }
   
   &__left {
     justify-content: flex-start;
-    padding-left: 12px;
+    padding-left: var(--hoho-spacing-sm, 10px);
   }
   
   &__right {
     justify-content: flex-end;
-    padding-right: 12px;
+    padding-right: var(--hoho-spacing-sm, 10px);
   }
   
   &__arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    margin-right: 4px;
+    width: var(--hoho-font-xl, 24px);
+    height: var(--hoho-font-xl, 24px);
+    margin-right: var(--hoho-spacing-xs, 4px);
     
     svg {
-      width: 20px;
-      height: 20px;
+      width: var(--hoho-font-lg, 20px);
+      height: var(--hoho-font-lg, 20px);
     }
   }
   
   &__text {
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: var(--hoho-font-md, 14px);
+    line-height: var(--hoho-line-height-normal, 1.4);
     white-space: nowrap;
   }
   
@@ -261,56 +178,17 @@ export default defineComponent({
     flex: 1;
     text-align: center;
     overflow: hidden;
-    padding: 0 8px;
+    padding: 0 var(--hoho-spacing-xs, 8px);
   }
   
   &__title-text {
     display: block;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.4;
+    font-size: var(--hoho-font-lg, 17px);
+    font-weight: var(--hoho-font-semibold, 600);
+    line-height: var(--hoho-line-height-normal, 1.4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-}
-
-/* 移动端适配 */
-@media screen and (max-width: 768px) {
-  .ho-navbar {
-    &__left,
-    &__right {
-      min-width: 44px;
-      min-height: 44px;
-      padding: 0 12px;
-    }
-    
-    &__left {
-      padding-left: 8px;
-    }
-    
-    &__right {
-      padding-right: 8px;
-    }
-    
-    &__arrow {
-      width: 28px;
-      height: 28px;
-      
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
-    
-    &__text {
-      font-size: 15px;
-    }
-    
-    &__title-text {
-      font-size: 17px;
-      font-weight: 600;
-    }
   }
 }
 
@@ -324,28 +202,21 @@ html.dark {
   .ho-navbar--border .ho-navbar__inner {
     border-bottom-color: var(--hoho-border-primary, #374151);
   }
-  
-  .ho-navbar__left:active,
-  .ho-navbar__right:active {
-    opacity: 0.8;
-  }
 }
 
-/* 小屏幕适配 (<=375px) */
-@media screen and (max-width: 375px) {
+/* 移动端适配 */
+@media screen and (max-width: 767px) {
   .ho-navbar {
-    &__left,
-    &__right {
-      min-width: 40px;
-      padding: 0 8px;
+    &__left, &__right {
+      min-width: 48px;
+      min-height: 48px;
+      padding: 0 var(--hoho-spacing-sm, 12px);
     }
     
-    &__title-text {
-      font-size: 16px;
-    }
-    
-    &__text {
-      font-size: 14px;
+    &__arrow {
+      width: 28px;
+      height: 28px;
+      svg { width: 24px; height: 24px; }
     }
   }
 }

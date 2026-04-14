@@ -10,9 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, provide, ref, watch, type Ref } from 'vue'
+import { defineComponent, computed, provide, type Ref } from 'vue'
 
-// 定义注入的键
 export const TABBAR_KEY = Symbol('tabbar')
 
 export interface TabBarProvider {
@@ -23,38 +22,14 @@ export interface TabBarProvider {
 export default defineComponent({
   name: 'HoTabBar',
   props: {
-    modelValue: {
-      type: [Number, String],
-      default: 0
-    },
-    fixed: {
-      type: Boolean,
-      default: false
-    },
-    placeholder: {
-      type: Boolean,
-      default: false
-    },
-    border: {
-      type: Boolean,
-      default: true
-    },
-    safeAreaInsetBottom: {
-      type: Boolean,
-      default: true
-    },
-    zIndex: {
-      type: [Number, String],
-      default: 100
-    },
-    activeColor: {
-      type: String,
-      default: ''
-    },
-    inactiveColor: {
-      type: String,
-      default: ''
-    }
+    modelValue: { type: [Number, String], default: 0 },
+    fixed: { type: Boolean, default: false },
+    placeholder: { type: Boolean, default: false },
+    border: { type: Boolean, default: true },
+    safeAreaInsetBottom: { type: Boolean, default: true },
+    zIndex: { type: [Number, String], default: 100 },
+    activeColor: { type: String, default: '' },
+    inactiveColor: { type: String, default: '' }
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
@@ -70,11 +45,7 @@ export default defineComponent({
       }
     }
 
-    // 提供给子组件
-    provide<TabBarProvider>(TABBAR_KEY, {
-      active,
-      setActive
-    })
+    provide<TabBarProvider>(TABBAR_KEY, { active, setActive })
 
     const tabBarClasses = computed(() => [
       'ho-tabbar',
@@ -87,14 +58,11 @@ export default defineComponent({
 
     const placeholderStyle = computed(() => ({
       height: props.safeAreaInsetBottom
-        ? `calc(50px + var(--hoho-safe-area-bottom))`
-        : '50px'
+        ? 'calc(var(--hoho-tabbar-height, 50px) + var(--hoho-safe-area-bottom))'
+        : 'var(--hoho-tabbar-height, 50px)'
     }))
 
-    return {
-      tabBarClasses,
-      placeholderStyle
-    }
+    return { tabBarClasses, placeholderStyle }
   }
 })
 </script>
@@ -104,8 +72,8 @@ export default defineComponent({
   display: flex;
   align-items: center;
   width: 100%;
-  height: 50px;
-  background: var(--hoho-bg-primary);
+  height: var(--hoho-tabbar-height, 50px);
+  background: var(--hoho-bg-primary, #ffffff);
   box-sizing: border-box;
 
   &--fixed {
@@ -113,11 +81,11 @@ export default defineComponent({
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: var(--hoho-z-fixed, 100);
   }
 
   &--border {
-    border-top: 1px solid var(--hoho-border-secondary);
+    border-top: 1px solid var(--hoho-border-secondary, #e5e7eb);
   }
 
   &--safe-area {
@@ -130,19 +98,19 @@ export default defineComponent({
   }
 }
 
-/* 移动端适配 */
-@media screen and (max-width: 768px) {
-  .ho-tabbar {
-    height: 50px;
-  }
-}
-
 /* 暗色模式 */
 html.dark .ho-tabbar {
-  background: var(--hoho-bg-primary);
+  background: var(--hoho-bg-primary, #1f2937);
 }
 
 html.dark .ho-tabbar--border {
-  border-top-color: var(--hoho-border-primary);
+  border-top-color: var(--hoho-border-primary, #374151);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 767px) {
+  .ho-tabbar {
+    height: 50px;
+  }
 }
 </style>

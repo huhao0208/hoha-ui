@@ -4,10 +4,7 @@
     :disabled="disabled || loading"
     @click="handleClick"
   >
-    <span
-      v-if="loading"
-      class="ho-button__loading"
-    />
+    <span v-if="loading" class="ho-button__loading" />
     <slot />
   </button>
 </template>
@@ -72,75 +69,89 @@ export default defineComponent({
   justify-content: center;
   border: none;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: var(--hoho-font-medium, 500);
+  transition: var(--hoho-duration-normal, 0.25s) var(--hoho-ease, ease);
+  font-family: inherit;
+  
+  /* 最小点击区域 - iOS 标准 */
+  min-height: var(--hoho-touch-target, 44px);
+  min-width: var(--hoho-touch-target, 44px);
 
+  /* 小号 */
   &--small {
-    padding: 4px 12px;
-    font-size: 12px;
-    border-radius: 4px;
+    padding: var(--hoho-spacing-xs, 5px) var(--hoho-spacing-sm, 10px);
+    font-size: var(--hoho-font-sm, 13px);
+    border-radius: var(--hoho-radius-sm, 4px);
+    min-height: 32px;
+    min-width: 32px;
   }
 
+  /* 中号 */
   &--medium {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 6px;
+    padding: var(--hoho-spacing-sm, 10px) var(--hoho-spacing-md, 15px);
+    font-size: var(--hoho-font-md, 15px);
+    border-radius: var(--hoho-radius-md, 6px);
+    min-height: var(--hoho-touch-target, 44px);
   }
 
+  /* 大号 */
   &--large {
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 8px;
+    padding: var(--hoho-spacing-md, 15px) var(--hoho-spacing-lg, 20px);
+    font-size: var(--hoho-font-lg, 17px);
+    border-radius: var(--hoho-radius-lg, 8px);
+    min-height: 52px;
   }
 
+  /* 类型颜色 - 使用设计规范变量 */
   &--primary {
-    background: #3b82f6;
+    background: var(--hoho-color-primary);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #2563eb;
+      background: color-mix(in srgb, var(--hoho-color-primary) 85%, black);
     }
   }
 
   &--secondary {
-    background: #6b7280;
+    background: var(--hoho-color-secondary);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #4b5563;
+      background: color-mix(in srgb, var(--hoho-color-secondary) 85%, black);
     }
   }
 
   &--success {
-    background: #10b981;
+    background: var(--hoho-color-success);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #059669;
+      background: color-mix(in srgb, var(--hoho-color-success) 85%, black);
     }
   }
 
   &--warning {
-    background: #f59e0b;
+    background: var(--hoho-color-warning);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #d97706;
+      background: color-mix(in srgb, var(--hoho-color-warning) 85%, black);
     }
   }
 
   &--danger {
-    background: #ef4444;
+    background: var(--hoho-color-danger);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #dc2626;
+      background: color-mix(in srgb, var(--hoho-color-danger) 85%, black);
     }
   }
 
   &--info {
-    background: #06b6d4;
+    background: var(--hoho-color-info);
     color: white;
     &:hover:not(.ho-button--disabled) {
-      background: #0891b2;
+      background: color-mix(in srgb, var(--hoho-color-info) 85%, black);
     }
   }
 
+  /* 状态 */
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -150,14 +161,42 @@ export default defineComponent({
     cursor: wait;
   }
 
+  /* loading 动画 */
   &__loading {
-    width: 14px;
-    height: 14px;
+    width: 1em;
+    height: 1em;
     border: 2px solid currentColor;
     border-top-color: transparent;
     border-radius: 50%;
     animation: ho-button-loading 0.8s linear infinite;
     margin-right: 6px;
+  }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 767px) {
+  .ho-button {
+    min-height: 48px;
+    min-width: 48px;
+    
+    &--small {
+      min-height: 36px;
+      min-width: 36px;
+      padding: 8px 16px;
+      font-size: var(--hoho-font-sm, 14px);
+    }
+    
+    &--medium {
+      min-height: 48px;
+      padding: 12px 20px;
+      font-size: var(--hoho-font-md, 16px);
+    }
+    
+    &--large {
+      min-height: 56px;
+      padding: 16px 32px;
+      font-size: var(--hoho-font-lg, 18px);
+    }
   }
 }
 

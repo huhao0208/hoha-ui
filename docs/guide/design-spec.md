@@ -6,6 +6,43 @@
 - **根字体大小**: 37.5px（750 / 20 = 37.5）
 - **单位转换**: 1rem = 37.5px（设计稿）
 
+### 自定义 rem 配置
+
+如果你的项目使用不同的设计稿尺寸，可以自定义配置：
+
+```js
+// 375px 设计稿（1倍图）
+import { initFlexible } from '@hohaya/hoho/lib/flexible'
+initFlexible({ designWidth: 375, rootFontSize: 16 })
+
+// 1080px 设计稿
+initFlexible({ designWidth: 1080, rootFontSize: 54 })
+
+// 完整配置选项
+initFlexible({
+  designWidth: 750,       // 设计稿宽度
+  rootFontSize: 37.5,     // 根字体大小
+  maxRootFontSize: 54,    // 最大根字体限制
+  limitWidth: true        // 是否限制最大宽度
+})
+```
+
+### PostCSS 配置
+
+修改 `postcss.config.js` 中的 `rootValue`：
+
+```js
+module.exports = {
+  plugins: {
+    'postcss-pxtorem': {
+      rootValue: 37.5,  // 与 rootFontSize 保持一致
+      propList: ['*', '!border*'],
+      minPixelValue: 2
+    }
+  }
+}
+```
+
 ## 颜色系统
 
 ### 品牌色
