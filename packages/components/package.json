@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "@hohaya/hoho-utils": "workspace:*",
-    "@vue/composition-api": "^1.7.0"
+    "@vue/composition-api": "^1.7.0",
+    "vue-demi": "^0.14.10"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

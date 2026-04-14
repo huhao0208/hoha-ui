@@ -103,6 +103,9 @@ importers:
       '@vue/composition-api':
         specifier: ^1.7.0
         version: 1.7.2(vue@3.5.32(typescript@5.9.3))
+      vue-demi:
+        specifier: ^0.14.10
+        version: 0.14.10(@vue/composition-api@1.7.2(vue@3.5.32(typescript@5.9.3)))(vue@3.5.32(typescript@5.9.3))
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -182,6 +185,18 @@ importers:
       typescript:
         specifier: ^5.3.0
         version: 5.9.3
+
+  packages/ui:
+    dependencies:
+      '@hohaya/hoho':
+        specifier: workspace:*
+        version: link:../components
+      '@hohaya/hoho-utils':
+        specifier: workspace:*
+        version: link:../utils
+      vue:
+        specifier: ^2.6.0 || ^3.0.0
+        version: 3.5.32(typescript@5.9.3)
 
   packages/utils:
     devDependencies:
@@ -3323,6 +3338,17 @@ packages:
       happy-dom:
         optional: true
       jsdom:
+        optional: true
+
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
         optional: true
 
   vue-eslint-parser@9.4.3:
@@ -6792,6 +6818,12 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  vue-demi@0.14.10(@vue/composition-api@1.7.2(vue@3.5.32(typescript@5.9.3)))(vue@3.5.32(typescript@5.9.3)):
+    dependencies:
+      vue: 3.5.32(typescript@5.9.3)
+    optionalDependencies:
+      '@vue/composition-api': 1.7.2(vue@3.5.32(typescript@5.9.3))
 
   vue-eslint-parser@9.4.3(eslint@8.57.1):
     dependencies:

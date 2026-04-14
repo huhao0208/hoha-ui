@@ -6,9 +6,13 @@
  * 1. 组件间通信（如 NavBar 与 TabBar 联动）
  * 2. 全局配置共享（主题、语言等）
  * 3. 业务数据共享（用户信息、购物车等）
+ * 
+ * Vue 2/3 兼容：通过 vue-demi 自动适配
  */
 
-import { ref, reactive, computed, provide, inject, type Ref, type ComputedRef, watch } from 'vue'
+// 使用 vue-demi 实现 Vue 2/3 兼容
+import { ref, reactive, computed, provide, inject, watch } from 'vue-demi'
+import type { Ref, ComputedRef } from 'vue-demi'
 
 // 注入键
 const GLOBAL_STATE_KEY = Symbol('hoha-global-state')
