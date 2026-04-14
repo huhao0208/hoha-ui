@@ -164,33 +164,33 @@ export default defineComponent({
 
   &__badge {
     position: absolute;
-    top: -8px;
-    right: -12px;
-    min-width: 16px;
-    height: 16px;
-    padding: 0 4px;
-    font-size: 11px;
+    top: -4px;
+    right: -8px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    font-size: 10px;
     font-weight: var(--hoho-font-medium, 500);
-    line-height: 16px;
+    line-height: 14px;
     text-align: center;
     color: #fff;
     background: var(--hoho-color-danger, #ef4444);
-    border-radius: var(--hoho-radius-full, 8px);
+    border-radius: var(--hoho-radius-full, 7px);
     box-sizing: border-box;
     z-index: 1;
 
     &--large {
-      padding: 0 5px;
-      min-width: 18px;
+      padding: 0 4px;
+      min-width: 16px;
     }
   }
 
   &__dot {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
+    top: -1px;
+    right: 0;
+    width: 6px;
+    height: 6px;
     background: var(--hoho-color-danger, #ef4444);
     border-radius: 50%;
     z-index: 1;
