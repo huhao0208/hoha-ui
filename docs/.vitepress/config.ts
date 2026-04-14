@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 import path from 'path'
-import { demoContainer } from './plugins/demo-container'
+import { demoPlugin } from './plugins/demo-plugin'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -171,7 +171,11 @@ export default defineConfig({
       dark: 'github-dark'
     },
     // 行号
-    lineNumbers: true
+    lineNumbers: true,
+    // 注册 demo 插件
+    config: (md) => {
+      md.use(demoPlugin)
+    }
   },
 
   // Head 配置
