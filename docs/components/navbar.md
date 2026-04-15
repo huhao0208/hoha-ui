@@ -6,9 +6,9 @@
 
 通过 `title` 属性设置导航栏标题。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoNavBar title="标题" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -25,9 +25,9 @@
 
 设置 `left-arrow` 显示返回箭头，通过 `left-text` 设置左侧文字。点击左侧区域触发 `click-left` 事件。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoNavBar title="标题" left-arrow left-text="返回" @click-left="onClickLeft" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -56,9 +56,9 @@ const onClickLeft = () => {
 
 通过 `right-text` 设置右侧文字，或使用 `right` 插槽自定义内容。点击右侧区域触发 `click-right` 事件。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoNavBar title="标题" right-text="按钮" @click-right="onClickRight" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -85,7 +85,7 @@ const onClickRight = () => {
 
 可以通过 `background` 设置背景色，`text-color` 设置文字颜色。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoNavBar 
     title="自定义样式" 
     background="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
@@ -93,7 +93,7 @@ const onClickRight = () => {
     left-arrow 
     left-text="返回" 
   />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -116,9 +116,9 @@ const onClickRight = () => {
 
 设置 `fixed` 使导航栏固定在顶部，配合 `placeholder` 在文档流中占位。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoNavBar title="固定导航栏" fixed placeholder />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

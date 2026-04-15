@@ -6,7 +6,7 @@
 
 通过 `tabs` 属性传入标签数据，使用 `v-model` 绑定当前激活的标签索引或 ID。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-tabs 
   v-model="activeTab" 
@@ -17,7 +17,7 @@
   ]" 
 />
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -45,7 +45,7 @@ const tabs = [
 
 设置 `swipeable` 属性开启手势滑动切换。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-tabs 
   v-model="activeTab2" 
@@ -58,7 +58,7 @@ const tabs = [
   swipeable 
 />
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -75,7 +75,7 @@ const tabs = [
 
 通过 `badge` 属性设置数字徽标，通过 `dot` 属性显示红点。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-tabs 
   v-model="activeTab3" 
@@ -87,7 +87,7 @@ const tabs = [
   ]" 
 />
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -113,7 +113,7 @@ const tabs = [
 
 设置 `disabled` 属性禁用某个标签。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-tabs 
   v-model="activeTab4" 
@@ -124,7 +124,7 @@ const tabs = [
   ]" 
 />
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -149,7 +149,7 @@ const tabs = [
 
 设置 `sticky` 属性使标签栏在滚动时固定在顶部。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-tabs 
   v-model="activeTab5" 
@@ -161,7 +161,7 @@ const tabs = [
   sticky 
 />
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

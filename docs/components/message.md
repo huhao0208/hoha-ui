@@ -6,12 +6,12 @@
 
 点击按钮显示不同类型的消息。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoButton @click="showSuccess">成功消息</HoButton>
   <HoButton type="danger" @click="showError">错误消息</HoButton>
   <HoButton type="warning" @click="showWarning">警告消息</HoButton>
   <HoButton type="info" @click="showInfo">信息消息</HoButton>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -31,9 +31,9 @@
 
 设置 duration 为 0 可以手动关闭。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoButton type="primary" @click="showPersistent">持久消息</HoButton>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

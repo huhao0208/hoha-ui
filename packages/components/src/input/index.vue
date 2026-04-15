@@ -110,11 +110,10 @@ export default defineComponent({
   align-items: center;
   background: var(--hoho-bg-primary, #fff);
   border: 1px solid var(--hoho-border-primary, #d1d5db);
-  border-radius: var(--hoho-radius-md, 6px);
+  border-radius: var(--hoho-radius-md, 0.375rem);
   transition: var(--hoho-duration-fast, 0.15s) var(--hoho-ease, ease);
   
-  /* 最小点击区域 */
-  min-height: var(--hoho-touch-target, 44px);
+  min-height: 2.75rem;
 
   &:hover:not(.ho-input--disabled) {
     border-color: var(--hoho-text-tertiary, #6b7280);
@@ -122,7 +121,7 @@ export default defineComponent({
 
   &--focused {
     border-color: var(--hoho-color-primary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--hoho-color-primary) 10%, transparent);
+    box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--hoho-color-primary) 10%, transparent);
   }
 
   &--disabled {
@@ -131,28 +130,27 @@ export default defineComponent({
     opacity: 0.6;
   }
 
-  /* 尺寸 - 使用设计规范 */
   &--small {
-    padding: var(--hoho-spacing-xs, 5px) var(--hoho-spacing-sm, 10px);
-    min-height: 32px;
+    padding: 0.3125rem 0.625rem;
+    min-height: 2rem;
     .ho-input__inner {
-      font-size: var(--hoho-font-sm, 13px);
+      font-size: 0.8125rem;
     }
   }
 
   &--medium {
-    padding: var(--hoho-spacing-sm, 10px) var(--hoho-spacing-md, 15px);
-    min-height: var(--hoho-touch-target, 44px);
+    padding: 0.625rem 0.9375rem;
+    min-height: 2.75rem;
     .ho-input__inner {
-      font-size: var(--hoho-font-md, 15px);
+      font-size: 0.9375rem;
     }
   }
 
   &--large {
-    padding: var(--hoho-spacing-md, 15px) var(--hoho-spacing-lg, 20px);
-    min-height: 52px;
+    padding: 0.9375rem 1.25rem;
+    min-height: 3.25rem;
     .ho-input__inner {
-      font-size: var(--hoho-font-lg, 17px);
+      font-size: 1.0625rem;
     }
   }
 
@@ -164,7 +162,7 @@ export default defineComponent({
     color: var(--hoho-text-primary, #111827);
     width: 100%;
     font-family: inherit;
-    font-weight: var(--hoho-font-normal, 400);
+    font-weight: 400;
 
     &::placeholder {
       color: var(--hoho-text-placeholder, #9ca3af);
@@ -184,15 +182,14 @@ export default defineComponent({
   }
 
   &__prefix {
-    margin-right: var(--hoho-spacing-sm, 10px);
+    margin-right: 0.625rem;
   }
 
   &__suffix {
-    margin-left: var(--hoho-spacing-sm, 10px);
+    margin-left: 0.625rem;
   }
 }
 
-/* 暗色模式 */
 html.dark .ho-input {
   background: var(--hoho-bg-secondary, #111827);
   border-color: var(--hoho-border-primary, #374151);
@@ -206,21 +203,20 @@ html.dark .ho-input {
   }
 }
 
-/* 移动端适配 */
 @media screen and (max-width: 767px) {
   .ho-input {
-    min-height: 48px;
+    min-height: 3rem;
     
     &--small {
-      min-height: 36px;
+      min-height: 2.25rem;
     }
     
     &--medium {
-      min-height: 48px;
+      min-height: 3rem;
     }
     
     &--large {
-      min-height: 56px;
+      min-height: 3.5rem;
     }
   }
 }

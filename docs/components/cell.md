@@ -6,7 +6,7 @@
 
 `HoCell` 可以单独使用，也可以配合 `HoCellGroup` 使用。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group>
   <ho-cell title="单元格" value="内容" />
@@ -14,7 +14,7 @@
   <ho-cell title="单元格" value="内容" />
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -35,7 +35,7 @@
 
 通过 `icon` 属性设置左侧图标，也可以通过 `icon` 插槽自定义图标。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group>
   <ho-cell title="单元格" icon="user" />
@@ -43,7 +43,7 @@
   <ho-cell title="单元格" icon="location" />
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -64,7 +64,7 @@
 
 通过 `label` 属性设置标题下方的描述信息。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group>
   <ho-cell 
@@ -79,7 +79,7 @@
   />
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -102,7 +102,7 @@
 
 设置 `is-link` 属性显示右侧箭头，通过 `arrow-direction` 设置箭头方向。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group>
   <ho-cell title="单元格" is-link />
@@ -111,7 +111,7 @@
   <ho-cell title="单元格" is-link value="内容" />
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -133,7 +133,7 @@
 
 使用 `HoCellGroup` 对单元格进行分组，支持设置标题和边框。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group title="分组一">
   <ho-cell title="单元格" value="内容" />
@@ -145,7 +145,7 @@
   <ho-cell title="单元格" value="内容" />
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -170,7 +170,7 @@
 
 可以通过插槽自定义单元格的各个部分。
 
-<div class="demo-preview">
+<DemoPreview>
 
 <ho-cell-group>
   <ho-cell title="自定义图标">
@@ -190,7 +190,7 @@
   </ho-cell>
 </ho-cell-group>
 
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

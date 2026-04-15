@@ -4,12 +4,12 @@
 
 ## 基础用法
 
-<div class="demo-preview">
+<DemoPreview>
   <HoButton type="primary" @click="showText">文字提示</HoButton>
   <HoButton type="success" @click="showSuccess">成功提示</HoButton>
   <HoButton type="danger" @click="showFail">失败提示</HoButton>
   <HoButton type="warning" @click="showLoading">加载提示</HoButton>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -27,11 +27,11 @@
 
 ## 自定义位置
 
-<div class="demo-preview">
+<DemoPreview>
   <HoButton @click="showTop">顶部</HoButton>
   <HoButton @click="showMiddle">中间</HoButton>
   <HoButton @click="showBottom">底部</HoButton>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

@@ -6,13 +6,13 @@
 
 通过 `v-model` 绑定当前选中项的索引或标识符，使用 `HoTabBarItem` 定义导航项。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoTabBar v-model="active" :fixed="false">
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:magnify">搜索</HoTabBarItem>
     <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
   </HoTabBar>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -39,14 +39,14 @@ const active = ref(0)
 
 通过 `badge` 属性设置数字徽标，通过 `dot` 属性显示红点。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoTabBar v-model="active2" :fixed="false">
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:message" :badge="5">消息</HoTabBarItem>
     <HoTabBarItem icon="mdi:bell" dot>通知</HoTabBarItem>
     <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
   </HoTabBar>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -68,13 +68,13 @@ const active = ref(0)
 
 通过 `active-color` 和 `inactive-color` 设置选中/未选中的颜色。
 
-<div class="demo-preview">
+<DemoPreview>
   <HoTabBar v-model="active5" :fixed="false" active-color="#ee0a24" inactive-color="#999">
     <HoTabBarItem icon="mdi:home">首页</HoTabBarItem>
     <HoTabBarItem icon="mdi:apps">分类</HoTabBarItem>
     <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
   </HoTabBar>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -100,7 +100,7 @@ const active = ref(0)
 
 设置 `fixed` 使导航栏固定在底部，配合 `placeholder` 在文档流中占位。
 
-<div class="demo-preview" style="min-height: 120px;">
+<DemoPreview style="min-height: 120px;">
   <p style="color: var(--vp-c-text-2); font-size: 14px; margin-bottom: 8px;">
     下方 TabBar 固定在页面底部（此预览框仅作示意）
   </p>
@@ -110,7 +110,7 @@ const active = ref(0)
     <HoTabBarItem icon="mdi:cart">购物车</HoTabBarItem>
     <HoTabBarItem icon="mdi:account">我的</HoTabBarItem>
   </HoTabBar>
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>

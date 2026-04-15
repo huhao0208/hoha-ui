@@ -4,9 +4,9 @@
 
 ## 基础用法
 
-<div class="demo-preview">
+<DemoPreview>
   <HoInput v-model="value1" placeholder="请输入内容" style="max-width: 300px;" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -26,9 +26,9 @@ const value = ref('')
 
 ## 禁用状态
 
-<div class="demo-preview">
+<DemoPreview>
   <HoInput v-model="value2" placeholder="禁用状态" disabled style="max-width: 300px;" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -48,11 +48,11 @@ const value = ref('')
 
 ## 不同尺寸
 
-<div class="demo-preview" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+<DemoPreview style="flex-direction: column; align-items: flex-start; gap: 12px;">
   <HoInput v-model="value3" size="small" placeholder="小型输入框" style="max-width: 300px;" />
   <HoInput v-model="value4" size="medium" placeholder="中型输入框" style="max-width: 300px;" />
   <HoInput v-model="value5" size="large" placeholder="大型输入框" style="max-width: 300px;" />
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
