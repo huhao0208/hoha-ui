@@ -642,9 +642,9 @@ export default defineComponent({
   &__container {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 12.5rem; /* 200px / 16 = 12.5rem */
     overflow: hidden;
-    border-radius: var(--hoho-radius-lg);
+    border-radius: var(--hoho-radius-lg, 0.5rem);
   }
   
   &__track {
@@ -704,9 +704,9 @@ export default defineComponent({
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 8px;
+    gap: 0.5rem; /* 8px */
     z-index: 10;
-    padding: 8px 12px;
+    padding: 0.5rem 0.75rem; /* 8px 12px */
     
     &--top {
       top: 16px;
@@ -722,8 +722,8 @@ export default defineComponent({
   }
   
   &__indicator {
-    width: 8px;
-    height: 8px;
+    width: 0.5rem; /* 8px */
+    height: 0.5rem; /* 8px */
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -756,8 +756,8 @@ export default defineComponent({
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 2.5rem; /* 40px */
+    height: 2.5rem; /* 40px */
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.4);
     border: none;
@@ -774,11 +774,11 @@ export default defineComponent({
     }
     
     &--left {
-      left: 16px;
+      left: 1rem; /* 16px */
     }
     
     &--right {
-      right: 16px;
+      right: 1rem; /* 16px */
     }
   }
   
@@ -816,8 +816,8 @@ export default defineComponent({
     }
     
     &__indicators {
-      padding: 6px 10px;
-      gap: 6px;
+      padding: 0.375rem 0.625rem; /* 6px 10px */
+      gap: 0.375rem; /* 6px */
       
       &:not(&--top) {
         bottom: calc(16px + var(--hoho-safe-area-bottom));
@@ -825,10 +825,10 @@ export default defineComponent({
     }
     
     &__indicator {
-      width: 10px;
-      height: 10px;
-      min-width: 24px;
-      min-height: 24px;
+      width: 0.625rem; /* 10px */
+      height: 0.625rem; /* 10px */
+      min-width: 1.5rem; /* 24px */
+      min-height: 1.5rem; /* 24px */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -855,15 +855,15 @@ export default defineComponent({
     }
     
     &__arrow {
-      width: 44px;
-      height: 44px;
+      width: 2.75rem; /* 44px */
+      height: 2.75rem; /* 44px */
       
       &--left {
-        left: 12px;
+        left: 0.75rem; /* 12px */
       }
       
       &--right {
-        right: 12px;
+        right: 0.75rem; /* 12px */
       }
       
       svg {
