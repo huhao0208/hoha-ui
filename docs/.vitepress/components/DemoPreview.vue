@@ -10,41 +10,51 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const wrapperRef = ref<HTMLElement | null>(null)
-let resizeObserver: ResizeObserver | null = null
-
-// 基于 375px 设计稿设置 rem
-function setRootFontSize() {
-  if (!wrapperRef.value) return
-  // 375px 设计稿 → 18.75px 根字体
-  const fontSize = 18.75
-  wrapperRef.value.style.fontSize = fontSize + 'px'
-}
 
 onMounted(() => {
-  setRootFontSize()
+  // 移动端适配已通过 CSS 处理
 })
 
 onUnmounted(() => {
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-  }
+  // cleanup
 })
 </script>
 
 <style scoped>
 .demo-preview-wrapper {
-  padding: 0.853rem; /* 16px / 18.75 = 0.853rem */
-  margin: 0.853rem 0;
+  padding: 16px;
+  margin: 16px 0;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 0.427rem; /* 8px / 18.75 */
+  border-radius: 8px;
   background: #fff;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.427rem;
+  gap: 8px;
   align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 html.dark .demo-preview-wrapper {
   background: #1f2937;
+}
+
+/* 手机端适配 */
+@media screen and (max-width: 767px) {
+  .demo-preview-wrapper {
+    padding: 12px;
+    margin: 12px 0;
+    gap: 6px;
+    border-radius: 6px;
+  }
+}
+
+/* 更小屏幕 */
+@media screen and (max-width: 375px) {
+  .demo-preview-wrapper {
+    padding: 8px;
+    margin: 8px 0;
+    gap: 4px;
+  }
 }
 </style>

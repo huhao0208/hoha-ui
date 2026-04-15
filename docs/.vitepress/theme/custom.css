@@ -11,8 +11,30 @@
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 html.dark .demo-preview {
   background: #1f2937;
+}
+
+/* 手机端适配 */
+@media screen and (max-width: 767px) {
+  .demo-preview,
+  .demo-preview-wrapper {
+    padding: 12px;
+    margin: 12px 0;
+    gap: 6px;
+    border-radius: 6px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .demo-preview,
+  .demo-preview-wrapper {
+    padding: 8px;
+    margin: 8px 0;
+    gap: 4px;
+  }
 }
