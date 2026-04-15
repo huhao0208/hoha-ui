@@ -551,9 +551,8 @@ export default defineComponent({
       isDragging.value = false
       
       const touchDuration = Date.now() - touchStartTime
-      const diff = isVertical.value
-        ? dragStart.value.y - (dragStart.value as any).y // 简化，实际应该用 dragEnd
-        : dragOffset.value
+      // 使用 dragOffset 作为滑动距离（已经在 handleTouchMove 中正确计算）
+      const diff = dragOffset.value
       
       const velocity = Math.abs(diff) / touchDuration
       
@@ -662,7 +661,7 @@ export default defineComponent({
   &__container {
     position: relative;
     width: 100%;
-    height: 12.5rem;
+    height: 100%;
     overflow: hidden;
     border-radius: var(--hoho-radius-lg, 0.5rem);
   }
@@ -685,6 +684,7 @@ export default defineComponent({
   &__item {
     flex-shrink: 0;
     width: 100%;
+    height: 100%;
     
     .ho-carousel--3d & {
       position: absolute;
