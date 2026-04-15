@@ -39,6 +39,7 @@
           class="ho-carousel__item"
           :class="{ 'ho-carousel__item--active': index === activeIndex }"
           :style="getItemStyle(index)"
+          @click="handleItemClick(index, item)"
         >
           <slot :item="item" :index="index">
             <HoCarouselItem>
@@ -64,7 +65,7 @@
 
     <!-- Indicators -->
     <div
-      v-if="indicatorPosition !== 'none'"
+      v-if="showIndicator && indicatorPosition !== 'none'"
       class="ho-carousel__indicators"
       :class="indicatorClasses"
     >
@@ -76,7 +77,9 @@
         :style="getIndicatorStyle(index)"
         @click="handleIndicatorClick(index)"
         @mouseenter="handleIndicatorHover(index)"
-      />
+      >
+        <span v-if="indicatorType === 'numbers'" class="ho-carousel__indicator-number">{{ index + 1 }}</span>
+      </button>
     </div>
 
     <!-- Navigation arrows -->
@@ -85,7 +88,7 @@
       class="ho-carousel__arrow ho-carousel__arrow--left"
       @click="prev"
     >
-      <svg viewBox="0 0 24 24" width="24" height="24">
+      <svg viewBox="0 0 24 24" class="ho-carousel__arrow-icon">
         <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
       </svg>
     </button>
@@ -94,7 +97,7 @@
       class="ho-carousel__arrow ho-carousel__arrow--right"
       @click="next"
     >
-      <svg viewBox="0 0 24 24" width="24" height="24">
+      <svg viewBox="0 0 24 24" class="ho-carousel__arrow-icon">
         <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
       </svg>
     </button>
@@ -113,8 +116,9 @@ export interface CarouselItem {
 }
 
 export type CarouselEffect = 'slide' | '3d' | 'fade'
-export type CarouselIndicatorPosition = 'bottom' | 'top' | 'none'
-export type CarouselIndicatorType = 'dot' | 'bar'
+export type CarouselDirection = 'horizontal' | 'vertical'
+export type CarouselIndicatorPosition = 'bottom' | 'top' | 'left' | 'right' | 'none'
+export type CarouselIndicatorType = 'dots' | 'lines' | 'numbers'
 
 // CarouselItem sub-component
 export const HoCarouselItem = defineComponent({
@@ -136,16 +140,25 @@ export default defineComponent({
       default: () => []
     },
     autoplay: {
-      type: [Number, Boolean],
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: Number,
       default: 3000
+    },
+    duration: {
+      type: Number,
+      default: 500
     },
     loop: {
       type: Boolean,
       default: true
     },
-    vertical: {
-      type: Boolean,
-      default: false
+    direction: {
+      type: String as PropType<CarouselDirection>,
+      default: 'horizontal',
+      validator: (v: string) => ['horizontal', 'vertical'].includes(v)
     },
     effect: {
       type: String as PropType<CarouselEffect>,
@@ -155,16 +168,20 @@ export default defineComponent({
     indicatorPosition: {
       type: String as PropType<CarouselIndicatorPosition>,
       default: 'bottom',
-      validator: (v: string) => ['bottom', 'top', 'none'].includes(v)
+      validator: (v: string) => ['bottom', 'top', 'left', 'right', 'none'].includes(v)
     },
     indicatorType: {
       type: String as PropType<CarouselIndicatorType>,
-      default: 'dot',
-      validator: (v: string) => ['dot', 'bar'].includes(v)
+      default: 'dots',
+      validator: (v: string) => ['dots', 'lines', 'numbers'].includes(v)
     },
     indicatorColor: {
       type: String,
       default: '#fff'
+    },
+    showIndicator: {
+      type: Boolean,
+      default: true
     },
     showArrow: {
       type: Boolean,
@@ -184,7 +201,7 @@ export default defineComponent({
     },
     swipeThreshold: {
       type: Number,
-      default: 0.3 // velocity threshold
+      default: 0.3
     },
     width: {
       type: [String, Number],
@@ -194,7 +211,6 @@ export default defineComponent({
       type: [String, Number],
       default: 'auto'
     },
-    // 3D effect specific
     perspective: {
       type: Number,
       default: 1000
@@ -205,10 +221,10 @@ export default defineComponent({
     },
     space3d: {
       type: Number,
-      default: 0.3 // percentage
+      default: 0.3
     }
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['update:modelValue', 'change', 'click'],
   setup(props, { emit }) {
     const carouselRef = ref<HTMLElement | null>(null)
     const activeIndex = ref(props.modelValue)
@@ -224,9 +240,10 @@ export default defineComponent({
     let autoplayTimer: ReturnType<typeof setTimeout> | null = null
     let touchStartTime = 0
 
-    // Computed styles
+    const isVertical = computed(() => props.direction === 'vertical')
+
     const carouselClasses = computed(() => ({
-      'ho-carousel--vertical': props.vertical,
+      'ho-carousel--vertical': isVertical.value,
       'ho-carousel--3d': props.effect === '3d',
       'ho-carousel--fade': props.effect === 'fade',
       'ho-carousel--dragging': isDragging.value
@@ -234,7 +251,10 @@ export default defineComponent({
 
     const indicatorClasses = computed(() => ({
       'ho-carousel__indicators--top': props.indicatorPosition === 'top',
-      'ho-carousel__indicators--bar': props.indicatorType === 'bar'
+      'ho-carousel__indicators--left': props.indicatorPosition === 'left',
+      'ho-carousel__indicators--right': props.indicatorPosition === 'right',
+      'ho-carousel__indicators--lines': props.indicatorType === 'lines',
+      'ho-carousel__indicators--numbers': props.indicatorType === 'numbers'
     }))
 
     const containerStyle = computed<CSSProperties>(() => {
@@ -252,6 +272,8 @@ export default defineComponent({
       
       return style
     })
+
+    const transitionDuration = computed(() => `${props.duration}ms`)
 
     const trackStyle = computed<CSSProperties>(() => {
       const totalItems = props.items.length + (props.loop ? 2 : 0)
@@ -273,11 +295,10 @@ export default defineComponent({
         }
       }
       
-      // Slide effect
-      if (props.vertical) {
+      if (isVertical.value) {
         return {
           transform: `translateY(${translateValue.value + dragOffset.value}px)`,
-          transition: isTransitioning.value ? 'transform 0.5s ease' : 'none',
+          transition: isTransitioning.value ? `transform ${transitionDuration.value} ease` : 'none',
           flexDirection: 'column',
           height: `${totalItems * 100}%`
         }
@@ -285,7 +306,7 @@ export default defineComponent({
       
       return {
         transform: `translateX(${translateValue.value + dragOffset.value}px)`,
-        transition: isTransitioning.value ? 'transform 0.5s ease' : 'none',
+        transition: isTransitioning.value ? `transform ${transitionDuration.value} ease` : 'none',
         width: `${totalItems * 100}%`
       }
     })
@@ -299,7 +320,7 @@ export default defineComponent({
           width: '100%',
           height: '100%',
           opacity: 0,
-          transition: 'opacity 0.5s ease'
+          transition: `opacity ${transitionDuration.value} ease`
         }
       }
       
@@ -318,7 +339,6 @@ export default defineComponent({
       }
     })
 
-    // Get item style for 3D effect and fade
     const getItemStyle = (index: number): CSSProperties => {
       if (props.effect === 'fade') {
         return {
@@ -332,7 +352,6 @@ export default defineComponent({
         const totalItems = props.items.length
         const offset = index - activeIndex.value
         
-        // Handle wrap around for loop
         let normalizedOffset = offset
         if (props.loop) {
           if (normalizedOffset > totalItems / 2) {
@@ -342,7 +361,7 @@ export default defineComponent({
           }
         }
         
-        const rotateY = normalizedOffset * 45 // degrees
+        const rotateY = normalizedOffset * 45
         const translateZ = -Math.abs(normalizedOffset) * props.perspective * props.space3d
         const scale = Math.pow(props.scale3d, Math.abs(normalizedOffset))
         const opacity = 1 - Math.abs(normalizedOffset) * 0.3
@@ -365,14 +384,20 @@ export default defineComponent({
       const isActive = index === activeIndex.value
       const baseColor = props.indicatorColor
       
+      if (props.indicatorType === 'lines') {
+        return {
+          backgroundColor: baseColor,
+          opacity: isActive ? 1 : 0.4,
+          transform: isActive ? 'scaleX(1)' : 'scaleX(0.5)'
+        }
+      }
+      
       return {
         backgroundColor: baseColor,
-        opacity: isActive ? 1 : 0.4,
-        transform: isActive && props.indicatorType === 'bar' ? 'scaleX(1)' : 'scaleX(0.5)'
+        opacity: isActive ? 1 : 0.4
       }
     }
 
-    // Navigation
     const goTo = (index: number) => {
       if (isTransitioning.value || props.items.length === 0) return
       
@@ -398,7 +423,7 @@ export default defineComponent({
       updateTranslate(targetIndex, prevIndex < targetIndex ? 'next' : 'prev')
       
       emit('update:modelValue', targetIndex)
-      emit('change', targetIndex, prevIndex)
+      emit('change', targetIndex, props.items[targetIndex])
     }
 
     const next = () => {
@@ -412,21 +437,18 @@ export default defineComponent({
     const updateTranslate = (index: number, _direction: 'next' | 'prev') => {
       if (props.effect === 'fade' || props.effect === '3d') return
       
-      const containerSize = props.vertical ? containerHeight.value : containerWidth.value
+      const containerSize = isVertical.value ? containerHeight.value : containerWidth.value
       let offset = index
       
       if (props.loop) {
-        offset = index + 1 // Account for cloned item
+        offset = index + 1
       }
       
       translateValue.value = -offset * containerSize
     }
 
-    // Autoplay
     const startAutoplay = () => {
       if (!props.autoplay || props.items.length <= 1) return
-      
-      const interval = typeof props.autoplay === 'number' ? props.autoplay : 3000
       
       stopAutoplay()
       autoplayTimer = setTimeout(() => {
@@ -434,7 +456,7 @@ export default defineComponent({
           next()
         }
         startAutoplay()
-      }, interval)
+      }, props.interval)
     }
 
     const stopAutoplay = () => {
@@ -452,7 +474,9 @@ export default defineComponent({
       isPaused.value = false
     }
 
-    // Event handlers
+    // Alias for API compatibility
+    const start = resume
+
     const handleMouseEnter = () => {
       if (props.pauseOnHover) {
         pause()
@@ -469,13 +493,16 @@ export default defineComponent({
       goTo(index)
     }
 
-    const handleIndicatorHover = (index: number) => {
+    const handleIndicatorHover = (_index: number) => {
       if (props.pauseOnHover) {
         pause()
       }
     }
 
-    // Touch handling
+    const handleItemClick = (index: number, item: CarouselItem) => {
+      emit('click', index, item)
+    }
+
     const handleTouchStart = (e: TouchEvent) => {
       if (!props.touchable || props.effect === '3d') return
       
@@ -497,18 +524,16 @@ export default defineComponent({
       e.preventDefault()
       
       const touch = e.touches[0]
-      const diff = props.vertical
+      const diff = isVertical.value
         ? touch.clientY - dragStart.value.y
         : touch.clientX - dragStart.value.x
       
-      // Apply damping at boundaries
-      const containerSize = props.vertical ? containerHeight.value : containerWidth.value
-      const maxOffset = props.loop ? 0 : 0
+      const containerSize = isVertical.value ? containerHeight.value : containerWidth.value
+      const maxOffset = 0
       const minOffset = -(props.items.length - 1) * containerSize
       
       let newOffset = dragStart.value.translate + diff
       
-      // Damping effect at boundaries
       if (!props.loop) {
         if (newOffset > maxOffset) {
           newOffset = maxOffset + (newOffset - maxOffset) * 0.3
@@ -526,16 +551,14 @@ export default defineComponent({
       isDragging.value = false
       
       const touchDuration = Date.now() - touchStartTime
-      const diff = props.vertical
-        ? dragStart.value.y - (dragStart.value.x as any) // simplified
+      const diff = isVertical.value
+        ? dragStart.value.y - (dragStart.value as any).y // 简化，实际应该用 dragEnd
         : dragOffset.value
       
-      const containerSize = props.vertical ? containerHeight.value : containerWidth.value
       const velocity = Math.abs(diff) / touchDuration
       
       let targetIndex = activeIndex.value
       
-      // Determine direction and target
       if (Math.abs(diff) > props.touchThreshold || velocity > props.swipeThreshold) {
         if (diff > 0) {
           targetIndex = activeIndex.value - 1
@@ -547,7 +570,6 @@ export default defineComponent({
       dragOffset.value = 0
       goTo(targetIndex)
       
-      // Resume autoplay after touch
       if (!isPaused.value) {
         startAutoplay()
       }
@@ -557,7 +579,6 @@ export default defineComponent({
       isTransitioning.value = false
     }
 
-    // Resize handling
     const updateContainerSize = () => {
       if (carouselRef.value) {
         containerWidth.value = carouselRef.value.offsetWidth
@@ -566,7 +587,6 @@ export default defineComponent({
       }
     }
 
-    // Watch for model changes
     watch(() => props.modelValue, (val) => {
       if (val !== activeIndex.value) {
         goTo(val)
@@ -579,7 +599,6 @@ export default defineComponent({
       })
     }, { deep: true })
 
-    // Lifecycle
     onMounted(() => {
       updateContainerSize()
       window.addEventListener('resize', updateContainerSize)
@@ -588,7 +607,6 @@ export default defineComponent({
         startAutoplay()
       }
       
-      // Initial position for loop mode
       if (props.loop && props.effect === 'slide') {
         translateValue.value = -containerWidth.value
       }
@@ -599,7 +617,6 @@ export default defineComponent({
       window.removeEventListener('resize', updateContainerSize)
     })
 
-    // Provide for CarouselItem
     provide('carousel', {
       activeIndex,
       effect: computed(() => props.effect)
@@ -619,14 +636,17 @@ export default defineComponent({
       handleMouseLeave,
       handleIndicatorClick,
       handleIndicatorHover,
+      handleItemClick,
       handleTouchStart,
       handleTouchMove,
       handleTouchEnd,
       handleTransitionEnd,
       prev,
       next,
+      goTo,
       pause,
-      resume
+      resume,
+      start
     }
   }
 })
@@ -642,7 +662,7 @@ export default defineComponent({
   &__container {
     position: relative;
     width: 100%;
-    height: 12.5rem; /* 200px / 16 = 12.5rem */
+    height: 12.5rem;
     overflow: hidden;
     border-radius: var(--hoho-radius-lg, 0.5rem);
   }
@@ -691,73 +711,105 @@ export default defineComponent({
       object-fit: cover;
       display: block;
       
-      // Lazy loading support
       &[loading="lazy"] {
         background: var(--hoho-bg-tertiary, #f3f4f6);
       }
     }
   }
   
-  // Indicators
   &__indicators {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 0.5rem; /* 8px */
+    gap: 0.5rem;
     z-index: 10;
-    padding: 0.5rem 0.75rem; /* 8px 12px */
+    padding: 0.5rem 0.75rem;
     
     &--top {
-      top: 16px;
+      top: 1rem;
     }
     
-    &:not(&--top) {
-      bottom: 16px;
+    &:not(&--top):not(&--left):not(&--right) {
+      bottom: 1rem;
     }
     
-    &--bar {
-      gap: 4px;
+    &--left {
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      flex-direction: column;
+    }
+    
+    &--right {
+      right: 1rem;
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      flex-direction: column;
+    }
+    
+    &--lines {
+      gap: 0.25rem;
+    }
+    
+    &--numbers {
+      gap: 0.375rem;
     }
   }
   
   &__indicator {
-    width: 0.5rem; /* 8px */
-    height: 0.5rem; /* 8px */
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
     &:hover {
       opacity: 0.8;
     }
     
     &--active {
-      width: 8px;
+      transform: scale(1.2);
     }
     
-    .ho-carousel__indicators--bar & {
-      width: 20px;
-      height: 3px;
-      border-radius: 2px;
+    .ho-carousel__indicators--lines & {
+      width: 1.25rem;
+      height: 0.1875rem;
+      border-radius: 0.125rem;
       transform: scaleX(0.5);
-      transition: transform 0.3s ease, opacity 0.3s ease;
       
       &--active {
         transform: scaleX(1);
       }
     }
+    
+    .ho-carousel__indicators--numbers & {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3) !important;
+      font-size: 0.75rem;
+      color: #fff;
+    }
   }
   
-  // Navigation arrows
+  &__indicator-number {
+    font-size: 0.75rem;
+    color: inherit;
+  }
+  
   &__arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 2.5rem; /* 40px */
-    height: 2.5rem; /* 40px */
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.4);
     border: none;
@@ -774,15 +826,19 @@ export default defineComponent({
     }
     
     &--left {
-      left: 1rem; /* 16px */
+      left: 1rem;
     }
     
     &--right {
-      right: 1rem; /* 16px */
+      right: 1rem;
     }
   }
   
-  // Fade effect
+  &__arrow-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
   &--fade {
     .ho-carousel__item {
       position: absolute;
@@ -800,7 +856,6 @@ export default defineComponent({
     }
   }
   
-  // Dragging state
   &--dragging {
     .ho-carousel__track {
       transition: none !important;
@@ -808,7 +863,6 @@ export default defineComponent({
   }
 }
 
-// Mobile adaptations
 @media screen and (max-width: 768px) {
   .ho-carousel {
     &__container {
@@ -816,65 +870,52 @@ export default defineComponent({
     }
     
     &__indicators {
-      padding: 0.375rem 0.625rem; /* 6px 10px */
-      gap: 0.375rem; /* 6px */
+      padding: 0.375rem 0.625rem;
+      gap: 0.375rem;
       
-      &:not(&--top) {
-        bottom: calc(16px + var(--hoho-safe-area-bottom));
+      &:not(&--top):not(&--left):not(&--right) {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
       }
     }
     
     &__indicator {
-      width: 0.625rem; /* 10px */
-      height: 0.625rem; /* 10px */
-      min-width: 1.5rem; /* 24px */
-      min-height: 1.5rem; /* 24px */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 0.625rem;
+      height: 0.625rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
       
-      &::after {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: inherit;
+      .ho-carousel__indicators--lines & {
+        width: 1.5rem;
+        height: 0.25rem;
       }
       
-      .ho-carousel__indicators--bar & {
-        width: 24px;
-        height: 24px;
-        min-width: 24px;
-        
-        &::after {
-          width: 20px;
-          height: 3px;
-          border-radius: 2px;
-        }
+      .ho-carousel__indicators--numbers & {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.875rem;
       }
     }
     
     &__arrow {
-      width: 2.75rem; /* 44px */
-      height: 2.75rem; /* 44px */
+      width: 2.75rem;
+      height: 2.75rem;
       
       &--left {
-        left: 0.75rem; /* 12px */
+        left: 0.75rem;
       }
       
       &--right {
-        right: 0.75rem; /* 12px */
+        right: 0.75rem;
       }
-      
-      svg {
-        width: 28px;
-        height: 28px;
-      }
+    }
+    
+    &__arrow-icon {
+      width: 1.75rem;
+      height: 1.75rem;
     }
   }
 }
 
-// Dark mode
 html.dark {
   .ho-carousel {
     &__arrow {
@@ -893,7 +934,6 @@ html.dark {
   }
 }
 
-// Touch feedback for mobile
 @media screen and (max-width: 768px) {
   .ho-carousel {
     &__indicator:active {

@@ -6,15 +6,13 @@
 
 通过 `items` 属性传入轮播数据，支持图片数组或自定义内容。
 
-<div class="demo-preview">
-
+<DemoPreview>
 <ho-carousel :items="[
   { image: 'https://picsum.photos/400/200?random=1' },
   { image: 'https://picsum.photos/400/200?random=2' },
   { image: 'https://picsum.photos/400/200?random=3' }
 ]" />
-
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -39,8 +37,7 @@ const items = [
 
 设置 `autoplay` 属性开启自动播放，通过 `interval` 控制切换间隔（默认 3000ms）。
 
-<div class="demo-preview">
-
+<DemoPreview>
 <ho-carousel 
   :items="[
     { image: 'https://picsum.photos/400/200?random=4' },
@@ -50,8 +47,7 @@ const items = [
   autoplay 
   :interval="2000" 
 />
-
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -72,8 +68,7 @@ const items = [
 
 设置 `effect="3d"` 启用 3D 立体切换效果。
 
-<div class="demo-preview">
-
+<DemoPreview>
 <ho-carousel 
   :items="[
     { image: 'https://picsum.photos/400/200?random=7' },
@@ -82,8 +77,7 @@ const items = [
   ]" 
   effect="3d" 
 />
-
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -103,8 +97,7 @@ const items = [
 
 设置 `direction="vertical"` 实现垂直方向的轮播。
 
-<div class="demo-preview">
-
+<DemoPreview>
 <ho-carousel 
   :items="[
     { image: 'https://picsum.photos/400/200?random=10' },
@@ -114,8 +107,7 @@ const items = [
   direction="vertical" 
   height="200px" 
 />
-
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -134,10 +126,9 @@ const items = [
 
 ## 指示器样式
 
-通过 `indicator-type` 设置指示器样式，支持 `dots`（圆点）、`lines`（线条）、`numbers`（数字）。通过 `indicator-position` 设置指示器位置。
+通过 `indicator-type` 设置指示器样式，支持 `dots`（圆点）、`lines`（线条）、`numbers`（数字）。
 
-<div class="demo-preview">
-
+<DemoPreview>
 <ho-carousel 
   :items="[
     { image: 'https://picsum.photos/400/200?random=13' },
@@ -146,8 +137,7 @@ const items = [
   ]" 
   indicator-type="lines" 
 />
-
-</div>
+</DemoPreview>
 
 <details>
 <summary>显示代码</summary>
@@ -157,6 +147,35 @@ const items = [
   <ho-carousel 
     :items="items" 
     indicator-type="lines" 
+  />
+</template>
+```
+
+</details>
+
+## 数字指示器
+
+设置 `indicator-type="numbers"` 显示数字指示器。
+
+<DemoPreview>
+<ho-carousel 
+  :items="[
+    { image: 'https://picsum.photos/400/200?random=16' },
+    { image: 'https://picsum.photos/400/200?random=17' },
+    { image: 'https://picsum.photos/400/200?random=18' }
+  ]" 
+  indicator-type="numbers" 
+/>
+</DemoPreview>
+
+<details>
+<summary>显示代码</summary>
+
+```vue
+<template>
+  <ho-carousel 
+    :items="items" 
+    indicator-type="numbers" 
   />
 </template>
 ```
@@ -178,7 +197,7 @@ const items = [
 | direction | 轮播方向，可选值为 `horizontal` `vertical` | `string` | `horizontal` |
 | height | 轮播高度 | `string` | `auto` |
 | indicator-type | 指示器样式，可选值为 `dots` `lines` `numbers` | `string` | `dots` |
-| indicator-position | 指示器位置，可选值为 `bottom` `top` `left` `right` | `string` | `bottom` |
+| indicator-position | 指示器位置，可选值为 `bottom` `top` `left` `right` `none` | `string` | `bottom` |
 | show-indicator | 是否显示指示器 | `boolean` | `true` |
 | touchable | 是否可以通过手势滑动 | `boolean` | `true` |
 | pause-on-hover | 鼠标悬停时暂停自动播放 | `boolean` | `true` |
@@ -203,7 +222,6 @@ const items = [
 | 名称 | 说明 |
 | --- | --- |
 | default | 自定义轮播项内容，参数为 `{ item, index }` |
-| indicator | 自定义指示器 |
 
 ### Methods
 
@@ -215,4 +233,5 @@ const items = [
 | next | 切换到下一张 | - |
 | goTo | 切换到指定索引 | `(index: number)` |
 | pause | 暂停自动播放 | - |
-| start | 开始自动播放 | - |
+| resume | 恢复自动播放 | - |
+| start | 开始自动播放（同 resume） | - |
