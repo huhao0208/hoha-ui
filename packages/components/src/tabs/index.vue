@@ -261,8 +261,8 @@ export default defineComponent({
   &__tab {
     flex: 1;
     min-width: 0;
-    padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-2, 8px);
-    font-size: var(--hoho-font-md, 14px);
+    padding: var(--hoho-spacing-3, 0.75rem) var(--hoho-spacing-2, 0.5rem);
+    font-size: var(--hoho-font-md, 0.875rem);
     color: var(--hoho-text-secondary, #4b5563);
     text-align: center;
     cursor: pointer;
@@ -289,25 +289,25 @@ export default defineComponent({
   &__badge {
     position: absolute;
     top: 0;
-    right: -10px;
-    min-width: var(--hoho-badge-sm, 16px);
-    height: var(--hoho-badge-sm, 16px);
-    padding: 0 4px;
+    right: -0.625rem;
+    min-width: var(--hoho-badge-sm, 1rem);
+    height: var(--hoho-badge-sm, 1rem);
+    padding: 0 0.25rem;
     font-size: 11px;
     font-weight: var(--hoho-font-medium, 500);
-    line-height: var(--hoho-badge-sm, 16px);
+    line-height: var(--hoho-badge-sm, 1rem);
     color: #fff;
     background: var(--hoho-color-danger, #ef4444);
-    border-radius: var(--hoho-radius-full, 8px);
+    border-radius: var(--hoho-radius-full, 0.5rem);
     box-sizing: border-box;
   }
   
   &__dot {
     position: absolute;
-    top: 2px;
-    right: -4px;
-    width: var(--hoho-badge-dot, 8px);
-    height: var(--hoho-badge-dot, 8px);
+    top: 0.125rem;
+    right: -0.25rem;
+    width: var(--hoho-badge-dot, 0.5rem);
+    height: var(--hoho-badge-dot, 0.5rem);
     background: var(--hoho-color-danger, #ef4444);
     border-radius: 50%;
   }
@@ -316,7 +316,7 @@ export default defineComponent({
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 2px;
+    height: 0.125rem;
     background: var(--hoho-color-primary, #3b82f6);
     transition: transform var(--hoho-duration-normal, 250ms) var(--hoho-ease, ease);
   }
@@ -346,10 +346,10 @@ html.dark .ho-tabs__nav {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-tabs__tab {
-    padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-1, 4px);
-    font-size: var(--hoho-font-sm, 14px);
+    padding: var(--hoho-spacing-3, 0.75rem) var(--hoho-spacing-1, 0.25rem);
+    font-size: var(--hoho-font-sm, 0.875rem);
   }
 }
 </style>

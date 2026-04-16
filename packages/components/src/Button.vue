@@ -68,12 +68,12 @@ export default defineComponent({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -151,18 +151,18 @@ export default defineComponent({
   }
 
   &--small {
-    padding: 6px 12px;
-    font-size: 12px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
   }
 
   &--medium {
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
   }
 
   &--large {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
   }
 
   &.is-disabled,
@@ -178,12 +178,12 @@ export default defineComponent({
 
   &__loading {
     display: inline-flex;
-    margin-right: 6px;
+    margin-right: 0.375rem;
   }
 
   &__spinner {
-    width: 14px;
-    height: 14px;
+    width: 0.875rem;
+    height: 0.875rem;
     animation: rotate 2s linear infinite;
 
     .path {

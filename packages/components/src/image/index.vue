@@ -514,9 +514,9 @@ export default defineComponent({
 }
 
 .ho-image__loading-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--hoho-border-secondary);
+  width: 2rem;
+  height: 2rem;
+  border: 0.1875rem solid var(--hoho-border-secondary);
   border-top-color: var(--hoho-color-primary);
   border-radius: 50%;
   animation: hoho-image-spin 0.8s linear infinite;
@@ -528,12 +528,12 @@ export default defineComponent({
 
 .ho-image__error {
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .ho-image__error-icon {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   color: var(--hoho-text-placeholder);
 }
 
@@ -543,7 +543,7 @@ export default defineComponent({
 }
 
 .ho-image__error-text {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--hoho-text-placeholder);
 }
 
@@ -573,10 +573,10 @@ export default defineComponent({
 
 .ho-image__preview-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -592,8 +592,8 @@ export default defineComponent({
 }
 
 .ho-image__preview-close svg {
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   color: white;
 }
 
@@ -620,21 +620,21 @@ export default defineComponent({
 
 .ho-image__preview-controls {
   position: absolute;
-  bottom: 20px;
+  bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
   background: rgba(0, 0, 0, 0.6);
-  padding: 8px 16px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 1.25rem;
+  backdrop-filter: blur(0.625rem);
 }
 
 .ho-image__preview-btn {
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -655,44 +655,44 @@ export default defineComponent({
 }
 
 .ho-image__preview-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .ho-image__preview-scale {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: white;
-  min-width: 48px;
+  min-width: 3rem;
   text-align: center;
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .ho-image__loading-spinner {
-    width: 40px;
-    height: 40px;
-    border-width: 4px;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 0.25rem;
   }
 
   .ho-image__error-icon {
-    width: 56px;
-    height: 56px;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
   .ho-image__error-text {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .ho-image__preview-close {
-    top: calc(16px + var(--hoho-safe-area-top));
-    right: 16px;
-    width: 48px;
-    height: 48px;
+    top: calc(1rem + var(--hoho-safe-area-top));
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   .ho-image__preview-close svg {
-    width: 28px;
-    height: 28px;
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   .ho-image__preview-img {
@@ -701,24 +701,24 @@ export default defineComponent({
   }
 
   .ho-image__preview-controls {
-    bottom: calc(20px + var(--hoho-safe-area-bottom));
-    padding: 12px 20px;
-    gap: 20px;
+    bottom: calc(1.25rem + var(--hoho-safe-area-bottom));
+    padding: 0.75rem 1.25rem;
+    gap: 1.25rem;
   }
 
   .ho-image__preview-btn {
-    width: 44px;
-    height: 44px;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .ho-image__preview-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .ho-image__preview-scale {
-    font-size: 16px;
-    min-width: 56px;
+    font-size: 1rem;
+    min-width: 3.5rem;
   }
 }
 

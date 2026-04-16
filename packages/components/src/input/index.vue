@@ -203,7 +203,7 @@ html.dark .ho-input {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-input {
     min-height: 3rem;
     

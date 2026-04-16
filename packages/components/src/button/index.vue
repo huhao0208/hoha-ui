@@ -161,7 +161,7 @@ export default defineComponent({
   &__loading {
     width: 1em;
     height: 1em;
-    border: 2px solid currentColor;
+    border: 0.125rem solid currentColor;
     border-top-color: transparent;
     border-radius: 50%;
     animation: ho-button-loading 0.8s linear infinite;

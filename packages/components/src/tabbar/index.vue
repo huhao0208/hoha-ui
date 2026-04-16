@@ -63,8 +63,8 @@ export default defineComponent({
 
     const placeholderStyle = computed(() => ({
       height: props.safeAreaInsetBottom
-        ? 'calc(var(--hoho-tabbar-height, 50px) + var(--hoho-safe-area-bottom))'
-        : 'var(--hoho-tabbar-height, 50px)'
+        ? 'calc(var(--hoho-tabbar-height, 3.125rem) + var(--hoho-safe-area-bottom))'
+        : 'var(--hoho-tabbar-height, 3.125rem)'
     }))
 
     return { tabBarClasses, placeholderStyle }
@@ -77,7 +77,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   width: 100%;
-  height: var(--hoho-tabbar-height, 50px);
+  height: var(--hoho-tabbar-height, 3.125rem);
   background: var(--hoho-bg-primary, #ffffff);
   box-sizing: border-box;
 
@@ -113,9 +113,9 @@ html.dark .ho-tabbar--border {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-tabbar {
-    height: 50px;
+    height: 3.125rem;
   }
 }
 </style>

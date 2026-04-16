@@ -224,7 +224,7 @@ export default defineComponent({
 
   &__dialog {
     background: var(--hoho-bg-primary, white);
-    border-radius: 12px;
+    border-radius: 0.75rem;
     box-shadow: var(--hoho-shadow-lg, 0 20px 60px rgba(0, 0, 0, 0.15));
     max-height: 90vh;
     display: flex;
@@ -236,14 +236,14 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--hoho-border-secondary, #e5e7eb);
     cursor: move;
     user-select: none;
   }
 
   &__title {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--hoho-text-primary, #1f2937);
   }
@@ -252,13 +252,13 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 1.75rem;
+    height: 1.75rem;
     border: none;
     background: transparent;
     color: var(--hoho-text-tertiary, #9ca3af);
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0.375rem;
     transition: all 0.2s;
 
     &:hover {
@@ -268,23 +268,23 @@ export default defineComponent({
   }
 
   &__body {
-    padding: 20px;
+    padding: 1.25rem;
     overflow-y: auto;
     flex: 1;
     color: var(--hoho-text-primary, #1f2937);
   }
 
   &__footer {
-    padding: 16px 20px;
+    padding: 1rem 1.25rem;
     border-top: 1px solid var(--hoho-border-secondary, #e5e7eb);
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
+    gap: 0.75rem;
   }
 }
 
 // Mobile adaptations
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .ho-modal {
     align-items: center;
     justify-content: center;
@@ -293,39 +293,39 @@ export default defineComponent({
       width: 90% !important;
       max-width: 90% !important;
       max-height: 85vh;
-      border-radius: 12px;
+      border-radius: 0.75rem;
       padding-bottom: env(safe-area-inset-bottom, 0);
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
     }
 
     &__header {
-      padding: 16px 20px;
+      padding: 1rem 1.25rem;
     }
 
     &__close {
-      width: 44px;
-      height: 44px;
-      margin: -8px -12px -8px 0;
-      padding: 10px;
+      width: 2.75rem;
+      height: 2.75rem;
+      margin: -0.5rem -0.75rem -0.5rem 0;
+      padding: 0.625rem;
       
       svg {
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
       }
     }
 
     &__body {
-      padding: 16px 20px;
-      max-height: calc(85vh - 60px - 80px);
+      padding: 1rem 1.25rem;
+      max-height: calc(85vh - 3.75rem - 5rem);
     }
 
     &__footer {
-      padding: 12px 20px;
-      padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+      padding: 0.75rem 1.25rem;
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
       
       &:deep(.ho-button) {
         flex: 1;
-        min-height: 44px;
+        min-height: 2.75rem;
       }
     }
   }
@@ -350,29 +350,29 @@ export default defineComponent({
 }
 
 // Small screen optimization
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 23.4375rem) {
   .ho-modal {
     &__dialog {
       max-height: 90vh;
     }
 
     &__header {
-      padding: 12px 16px;
+      padding: 0.75rem 1rem;
     }
 
     &__body {
-      padding: 12px 16px;
+      padding: 0.75rem 1rem;
     }
 
     &__footer {
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+      padding: 0.625rem 1rem;
+      padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0.625rem));
     }
   }
 }
 
 // Desktop transitions
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 48.0625rem) {
   .ho-modal-enter-active,
   .ho-modal-leave-active {
     transition: opacity 0.25s ease;
@@ -412,7 +412,7 @@ html.dark {
 }
 
 // Mobile + Dark mode combination
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   html.dark .ho-modal {
     background: rgba(0, 0, 0, 0.75);
     

@@ -83,8 +83,8 @@ export default defineComponent({
 .ho-cell {
   display: flex;
   align-items: center;
-  padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-4, 16px);
-  font-size: var(--hoho-font-md, 14px);
+  padding: var(--hoho-spacing-3, 0.75rem) var(--hoho-spacing-4, 1rem);
+  font-size: var(--hoho-font-md, 0.875rem);
   line-height: var(--hoho-line-height-normal, 1.5);
   background: var(--hoho-bg-primary, #fff);
   position: relative;
@@ -106,7 +106,7 @@ export default defineComponent({
     content: '';
     position: absolute;
     bottom: 0;
-    left: var(--hoho-spacing-4, 16px);
+    left: var(--hoho-spacing-4, 1rem);
     right: 0;
     height: 1px;
     background: var(--hoho-divider, #e5e7eb);
@@ -115,7 +115,7 @@ export default defineComponent({
   
   &__icon {
     flex-shrink: 0;
-    margin-right: var(--hoho-spacing-3, 12px);
+    margin-right: var(--hoho-spacing-3, 0.75rem);
     color: var(--hoho-text-tertiary, #6b7280);
   }
   
@@ -126,28 +126,28 @@ export default defineComponent({
   
   &__title {
     color: var(--hoho-text-primary, #111827);
-    font-size: var(--hoho-font-md, 14px);
+    font-size: var(--hoho-font-md, 0.875rem);
     line-height: var(--hoho-line-height-normal, 1.5);
   }
   
   &__label {
-    margin-top: var(--hoho-spacing-1, 4px);
+    margin-top: var(--hoho-spacing-1, 0.25rem);
     color: var(--hoho-text-tertiary, #6b7280);
-    font-size: var(--hoho-font-sm, 12px);
+    font-size: var(--hoho-font-sm, 0.75rem);
     line-height: var(--hoho-line-height-normal, 1.5);
   }
   
   &__value {
     flex-shrink: 0;
     color: var(--hoho-text-secondary, #4b5563);
-    font-size: var(--hoho-font-md, 14px);
-    margin-right: var(--hoho-spacing-2, 8px);
+    font-size: var(--hoho-font-md, 0.875rem);
+    margin-right: var(--hoho-spacing-2, 0.5rem);
   }
   
   &__arrow {
     flex-shrink: 0;
     color: var(--hoho-text-placeholder, #9ca3af);
-    margin-left: var(--hoho-spacing-1, 4px);
+    margin-left: var(--hoho-spacing-1, 0.25rem);
   }
 }
 
@@ -165,10 +165,10 @@ html.dark .ho-cell {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-cell {
-    padding: var(--hoho-spacing-3, 12px) var(--hoho-spacing-3, 12px);
-    min-height: var(--hoho-touch-target, 44px);
+    padding: var(--hoho-spacing-3, 0.75rem) var(--hoho-spacing-3, 0.75rem);
+    min-height: var(--hoho-touch-target, 2.75rem);
   }
 }
 </style>

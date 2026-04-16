@@ -139,8 +139,8 @@ export default defineComponent({
   transition: var(--hoho-duration-fast, 0.15s) var(--hoho-ease, ease);
   position: relative;
   /* 移动端最小点击区域 */
-  min-height: var(--hoho-touch-target, 44px);
-  padding: var(--hoho-spacing-xs, 6px) 0;
+  min-height: var(--hoho-touch-target, 2.75rem);
+  padding: var(--hoho-spacing-xs, 0.375rem) 0;
 
   &--active {
     color: var(--hoho-color-primary, #3b82f6);
@@ -151,12 +151,12 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--hoho-spacing-xs, 4px);
-    font-size: var(--hoho-font-xl, 22px);
+    margin-bottom: var(--hoho-spacing-xs, 0.25rem);
+    font-size: var(--hoho-font-xl, 1.375rem);
   }
 
   &__text {
-    font-size: var(--hoho-font-xs, 10px);
+    font-size: var(--hoho-font-xs, 0.625rem);
     line-height: var(--hoho-line-height-tight, 1.2);
     text-align: center;
     white-space: nowrap;
@@ -164,24 +164,24 @@ export default defineComponent({
 
   &__badge {
     position: absolute;
-    top: -4px;
-    right: -8px;
-    min-width: 14px;
-    height: 14px;
-    padding: 0 3px;
-    font-size: 10px;
+    top: -0.25rem;
+    right: -0.5rem;
+    min-width: 0.875rem;
+    height: 0.875rem;
+    padding: 0 0.1875rem;
+    font-size: 0.625rem;
     font-weight: var(--hoho-font-medium, 500);
-    line-height: 14px;
+    line-height: 0.875rem;
     text-align: center;
     color: #fff;
     background: var(--hoho-color-danger, #ef4444);
-    border-radius: var(--hoho-radius-full, 7px);
+    border-radius: var(--hoho-radius-full, 0.4375rem);
     box-sizing: border-box;
     z-index: 1;
 
     &--large {
-      padding: 0 4px;
-      min-width: 16px;
+      padding: 0 0.25rem;
+      min-width: 1rem;
     }
   }
 
@@ -189,8 +189,8 @@ export default defineComponent({
     position: absolute;
     top: -1px;
     right: 0;
-    width: 6px;
-    height: 6px;
+    width: 0.375rem;
+    height: 0.375rem;
     background: var(--hoho-color-danger, #ef4444);
     border-radius: 50%;
     z-index: 1;
@@ -204,18 +204,18 @@ export default defineComponent({
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-tabbar-item {
-    padding: 6px 0;
-    min-height: 50px;
+    padding: 0.375rem 0;
+    min-height: 3.125rem;
 
     &__icon {
-      margin-bottom: 2px;
-      font-size: var(--hoho-font-2xl, 24px);
+      margin-bottom: 0.125rem;
+      font-size: var(--hoho-font-2xl, 1.5rem);
     }
 
     &__text {
-      font-size: var(--hoho-font-xs, 10px);
+      font-size: var(--hoho-font-xs, 0.625rem);
     }
   }
 }

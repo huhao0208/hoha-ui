@@ -863,7 +863,7 @@ export default defineComponent({
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .ho-carousel {
     &__container {
       -webkit-overflow-scrolling: touch;
@@ -934,7 +934,7 @@ html.dark {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48rem) {
   .ho-carousel {
     &__indicator:active {
       transform: scale(0.9);

@@ -129,14 +129,14 @@ export default defineComponent({
     color: var(--hoho-text-primary, #111827);
     box-sizing: content-box;
     /* 使用设计规范高度 */
-    height: var(--hoho-navbar-height, 46px);
+    height: var(--hoho-navbar-height, 2.875rem);
   }
   
   &__left,
   &__right {
     display: flex;
     align-items: center;
-    min-width: var(--hoho-touch-target, 44px);
+    min-width: var(--hoho-touch-target, 2.75rem);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -146,30 +146,30 @@ export default defineComponent({
   
   &__left {
     justify-content: flex-start;
-    padding-left: var(--hoho-spacing-sm, 10px);
+    padding-left: var(--hoho-spacing-sm, 0.625rem);
   }
   
   &__right {
     justify-content: flex-end;
-    padding-right: var(--hoho-spacing-sm, 10px);
+    padding-right: var(--hoho-spacing-sm, 0.625rem);
   }
   
   &__arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: var(--hoho-font-xl, 24px);
-    height: var(--hoho-font-xl, 24px);
-    margin-right: var(--hoho-spacing-xs, 4px);
+    width: var(--hoho-font-xl, 1.5rem);
+    height: var(--hoho-font-xl, 1.5rem);
+    margin-right: var(--hoho-spacing-xs, 0.25rem);
     
     svg {
-      width: var(--hoho-font-lg, 20px);
-      height: var(--hoho-font-lg, 20px);
+      width: var(--hoho-font-lg, 1.25rem);
+      height: var(--hoho-font-lg, 1.25rem);
     }
   }
   
   &__text {
-    font-size: var(--hoho-font-md, 14px);
+    font-size: var(--hoho-font-md, 0.875rem);
     line-height: var(--hoho-line-height-normal, 1.4);
     white-space: nowrap;
   }
@@ -178,12 +178,12 @@ export default defineComponent({
     flex: 1;
     text-align: center;
     overflow: hidden;
-    padding: 0 var(--hoho-spacing-xs, 8px);
+    padding: 0 var(--hoho-spacing-xs, 0.5rem);
   }
   
   &__title-text {
     display: block;
-    font-size: var(--hoho-font-lg, 17px);
+    font-size: var(--hoho-font-lg, 1.0625rem);
     font-weight: var(--hoho-font-semibold, 600);
     line-height: var(--hoho-line-height-normal, 1.4);
     white-space: nowrap;
@@ -205,18 +205,18 @@ html.dark {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .ho-navbar {
     &__left, &__right {
-      min-width: 48px;
-      min-height: 48px;
-      padding: 0 var(--hoho-spacing-sm, 12px);
+      min-width: 3rem;
+      min-height: 3rem;
+      padding: 0 var(--hoho-spacing-sm, 0.75rem);
     }
     
     &__arrow {
-      width: 28px;
-      height: 28px;
-      svg { width: 24px; height: 24px; }
+      width: 1.75rem;
+      height: 1.75rem;
+      svg { width: 1.5rem; height: 1.5rem; }
     }
   }
 }

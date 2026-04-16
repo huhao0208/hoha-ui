@@ -29,13 +29,13 @@ export default defineComponent({
   background: var(--hoho-bg-primary, #fff);
   
   &--border {
-    border-radius: var(--hoho-radius-lg, 8px);
+    border-radius: var(--hoho-radius-lg, 0.5rem);
     overflow: hidden;
   }
   
   &--inset {
-    margin: var(--hoho-spacing-3, 12px);
-    border-radius: var(--hoho-radius-lg, 8px);
+    margin: var(--hoho-spacing-3, 0.75rem);
+    border-radius: var(--hoho-radius-lg, 0.5rem);
     overflow: hidden;
   }
 }
