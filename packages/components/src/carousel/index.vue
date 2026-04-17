@@ -25,9 +25,15 @@
           class="ho-carousel__item ho-carousel__item--clone"
           :style="itemStyle"
         >
-          <slot :item="items[items.length - 1]" :index="-1">
+          <slot
+            :item="items[items.length - 1]"
+            :index="-1"
+          >
             <HoCarouselItem>
-              <img v-if="items[items.length - 1]?.image" :src="items[items.length - 1].image" />
+              <img
+                v-if="items[items.length - 1]?.image"
+                :src="items[items.length - 1].image"
+              >
             </HoCarouselItem>
           </slot>
         </div>
@@ -41,9 +47,16 @@
           :style="getItemStyle(index)"
           @click="handleItemClick(index, item)"
         >
-          <slot :item="item" :index="index">
+          <slot
+            :item="item"
+            :index="index"
+          >
             <HoCarouselItem>
-              <img v-if="item.image" :src="item.image" :alt="item.alt || ''" />
+              <img
+                v-if="item.image"
+                :src="item.image"
+                :alt="item.alt || ''"
+              >
             </HoCarouselItem>
           </slot>
         </div>
@@ -54,9 +67,15 @@
           class="ho-carousel__item ho-carousel__item--clone"
           :style="itemStyle"
         >
-          <slot :item="items[0]" :index="items.length">
+          <slot
+            :item="items[0]"
+            :index="items.length"
+          >
             <HoCarouselItem>
-              <img v-if="items[0]?.image" :src="items[0].image" />
+              <img
+                v-if="items[0]?.image"
+                :src="items[0].image"
+              >
             </HoCarouselItem>
           </slot>
         </div>
@@ -78,7 +97,10 @@
         @click="handleIndicatorClick(index)"
         @mouseenter="handleIndicatorHover(index)"
       >
-        <span v-if="indicatorType === 'numbers'" class="ho-carousel__indicator-number">{{ index + 1 }}</span>
+        <span
+          v-if="indicatorType === 'numbers'"
+          class="ho-carousel__indicator-number"
+        >{{ index + 1 }}</span>
       </button>
     </div>
 
@@ -88,8 +110,14 @@
       class="ho-carousel__arrow ho-carousel__arrow--left"
       @click="prev"
     >
-      <svg viewBox="0 0 24 24" class="ho-carousel__arrow-icon">
-        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      <svg
+        viewBox="0 0 24 24"
+        class="ho-carousel__arrow-icon"
+      >
+        <path
+          fill="currentColor"
+          d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+        />
       </svg>
     </button>
     <button
@@ -97,8 +125,14 @@
       class="ho-carousel__arrow ho-carousel__arrow--right"
       @click="next"
     >
-      <svg viewBox="0 0 24 24" class="ho-carousel__arrow-icon">
-        <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+      <svg
+        viewBox="0 0 24 24"
+        class="ho-carousel__arrow-icon"
+      >
+        <path
+          fill="currentColor"
+          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+        />
       </svg>
     </button>
   </div>

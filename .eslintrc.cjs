@@ -17,9 +17,15 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['@typescript-eslint'],
+  ignorePatterns: [
+    'dist/',
+    'node_modules/',
+    '*.d.ts'
+  ],
   rules: {
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'no-mixed-spaces-and-tabs': 'off'
   }
 }

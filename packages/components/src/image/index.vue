@@ -23,8 +23,17 @@
     >
       <slot name="error">
         <div class="ho-image__error-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+            />
             <path d="M8 8l8 8M16 8l-8 8" />
           </svg>
         </div>
@@ -56,7 +65,12 @@
         class="ho-image__preview-close"
         @click.stop="handlePreviewClose"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M18 6L6 18M6 6l12 12" />
         </svg>
       </div>
@@ -87,8 +101,17 @@
           class="ho-image__preview-btn"
           @click.stop="handleZoomOut"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="8"
+            />
             <path d="M21 21l-4.35-4.35M8 11h6" />
           </svg>
         </button>
@@ -97,8 +120,17 @@
           class="ho-image__preview-btn"
           @click.stop="handleZoomIn"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="8"
+            />
             <path d="M21 21l-4.35-4.35M11 8v6M8 11h6" />
           </svg>
         </button>

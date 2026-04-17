@@ -4,7 +4,10 @@
     :disabled="disabled || loading"
     @click="handleClick"
   >
-    <span v-if="loading" class="ho-button__loading" />
+    <span
+      v-if="loading"
+      class="ho-button__loading"
+    />
     <slot />
   </button>
 </template>

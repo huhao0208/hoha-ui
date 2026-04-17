@@ -11,8 +11,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, computed } from 'vue'
+import { defineComponent, inject, computed } from 'vue'
 import type { PropType } from 'vue'
+
+interface TabsContext {
+  activeIndex: { value: string | number }
+  setActive: (name: string | number) => void
+}
 
 export default defineComponent({
   name: 'HoTab',
@@ -39,7 +44,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const tabsContext = inject<any>('tabs')
+    const tabsContext = inject<TabsContext>('tabs')
     
     const active = computed(() => {
       if (!tabsContext) return false

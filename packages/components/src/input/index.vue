@@ -3,7 +3,10 @@
     class="ho-input"
     :class="inputClasses"
   >
-    <span v-if="$slots.prefix" class="ho-input__prefix">
+    <span
+      v-if="$slots.prefix"
+      class="ho-input__prefix"
+    >
       <slot name="prefix" />
     </span>
     <input
@@ -18,7 +21,10 @@
       @focus="handleFocus"
       @blur="handleBlur"
     >
-    <span v-if="$slots.suffix" class="ho-input__suffix">
+    <span
+      v-if="$slots.suffix"
+      class="ho-input__suffix"
+    >
       <slot name="suffix" />
     </span>
   </div>

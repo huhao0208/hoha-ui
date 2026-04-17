@@ -1,26 +1,56 @@
 <template>
-  <div :class="cellClasses" @click="handleClick">
-    <div v-if="icon || $slots.icon" class="ho-cell__icon">
+  <div
+    :class="cellClasses"
+    @click="handleClick"
+  >
+    <div
+      v-if="icon || $slots.icon"
+      class="ho-cell__icon"
+    >
       <slot name="icon">
-        <HoIcon :name="icon" :size="iconSize" />
+        <HoIcon
+          :name="icon"
+          :size="iconSize"
+        />
       </slot>
     </div>
 
     <div class="ho-cell__content">
-      <div v-if="title || $slots.title" class="ho-cell__title">
-        <slot name="title">{{ title }}</slot>
+      <div
+        v-if="title || $slots.title"
+        class="ho-cell__title"
+      >
+        <slot name="title">
+          {{ title }}
+        </slot>
       </div>
-      <div v-if="label || $slots.label" class="ho-cell__label">
-        <slot name="label">{{ label }}</slot>
+      <div
+        v-if="label || $slots.label"
+        class="ho-cell__label"
+      >
+        <slot name="label">
+          {{ label }}
+        </slot>
       </div>
     </div>
 
-    <div v-if="hasValue" class="ho-cell__value">
-      <slot name="value">{{ value }}</slot>
+    <div
+      v-if="hasValue"
+      class="ho-cell__value"
+    >
+      <slot name="value">
+        {{ value }}
+      </slot>
     </div>
 
-    <div v-if="isLink || arrowDirection" class="ho-cell__arrow">
-      <HoIcon :name="arrowIcon" :size="14" />
+    <div
+      v-if="isLink || arrowDirection"
+      class="ho-cell__arrow"
+    >
+      <HoIcon
+        :name="arrowIcon"
+        :size="14"
+      />
     </div>
   </div>
 </template>

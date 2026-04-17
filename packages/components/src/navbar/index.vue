@@ -8,16 +8,33 @@
     />
     
     <!-- 导航栏主体 -->
-    <div class="ho-navbar__inner" :style="innerStyle">
+    <div
+      class="ho-navbar__inner"
+      :style="innerStyle"
+    >
       <!-- 左侧区域 -->
-      <div class="ho-navbar__left" @click="handleClickLeft">
+      <div
+        class="ho-navbar__left"
+        @click="handleClickLeft"
+      >
         <slot name="left">
-          <span v-if="leftArrow" class="ho-navbar__arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <span
+            v-if="leftArrow"
+            class="ho-navbar__arrow"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </span>
-          <span v-if="leftText" class="ho-navbar__text">{{ leftText }}</span>
+          <span
+            v-if="leftText"
+            class="ho-navbar__text"
+          >{{ leftText }}</span>
         </slot>
       </div>
       
@@ -29,9 +46,15 @@
       </div>
       
       <!-- 右侧区域 -->
-      <div class="ho-navbar__right" @click="handleClickRight">
+      <div
+        class="ho-navbar__right"
+        @click="handleClickRight"
+      >
         <slot name="right">
-          <span v-if="rightText" class="ho-navbar__text">{{ rightText }}</span>
+          <span
+            v-if="rightText"
+            class="ho-navbar__text"
+          >{{ rightText }}</span>
         </slot>
       </div>
     </div>

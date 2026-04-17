@@ -1,5 +1,8 @@
 <template>
-  <div class="ho-tabs" :class="{ 'ho-tabs--sticky': sticky }">
+  <div
+    class="ho-tabs"
+    :class="{ 'ho-tabs--sticky': sticky }"
+  >
     <!-- 标签导航 -->
     <div
       ref="navRef"
@@ -24,12 +27,22 @@
           @click="handleTabClick(index, tab)"
         >
           <span class="ho-tabs__tab-title">{{ tab.title }}</span>
-          <span v-if="tab.badge !== undefined && tab.badge !== null" class="ho-tabs__badge">
+          <span
+            v-if="tab.badge !== undefined && tab.badge !== null"
+            class="ho-tabs__badge"
+          >
             {{ tab.badge > 99 ? '99+' : tab.badge }}
           </span>
-          <span v-else-if="tab.dot" class="ho-tabs__dot" />
+          <span
+            v-else-if="tab.dot"
+            class="ho-tabs__dot"
+          />
         </div>
-        <div v-if="animated" class="ho-tabs__indicator" :style="indicatorStyle" />
+        <div
+          v-if="animated"
+          class="ho-tabs__indicator"
+          :style="indicatorStyle"
+        />
       </div>
     </div>
 
@@ -48,7 +61,13 @@
         class="ho-tabs__pane"
         :class="{ 'ho-tabs__pane--active': activeIndex === index }"
       >
-        <slot :name="tab.id || index" :tab="tab" :index="index">{{ tab.content }}</slot>
+        <slot
+          :name="tab.id || index"
+          :tab="tab"
+          :index="index"
+        >
+          {{ tab.content }}
+        </slot>
       </div>
     </div>
   </div>

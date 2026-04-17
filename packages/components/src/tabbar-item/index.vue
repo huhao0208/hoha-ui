@@ -7,13 +7,21 @@
     @click="handleClick"
   >
     <!-- 徽标 -->
-    <div v-if="showBadge" class="ho-tabbar-item__badge" :class="badgeClasses">
+    <div
+      v-if="showBadge"
+      class="ho-tabbar-item__badge"
+      :class="badgeClasses"
+    >
       {{ badgeContent }}
     </div>
 
     <!-- 图标区域 -->
     <div class="ho-tabbar-item__icon">
-      <slot v-if="$slots.icon" name="icon" :active="isActive" />
+      <slot
+        v-if="$slots.icon"
+        name="icon"
+        :active="isActive"
+      />
       <ho-icon
         v-else-if="icon"
         :name="icon"
@@ -23,7 +31,10 @@
       <slot v-else />
 
       <!-- 红点徽标 -->
-      <div v-if="dot && !badge" class="ho-tabbar-item__dot" />
+      <div
+        v-if="dot && !badge"
+        class="ho-tabbar-item__dot"
+      />
     </div>
 
     <!-- 文字 -->
@@ -41,6 +52,7 @@ import { TABBAR_KEY, type TabBarProvider } from '../tabbar/index.vue'
 // 动态导入 RouterLink
 let RouterLink: Component | null = null
 try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   RouterLink = require('vue-router').RouterLink
 } catch { /* ignore */ }
 
