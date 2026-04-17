@@ -1,49 +1,77 @@
 <template>
   <div class="demo-container">
+    <!-- Button 组件 -->
     <section class="demo-section">
       <h2>Button 组件</h2>
       <div class="component-showcase">
-        <div class="placeholder">
-          <span class="placeholder-text">Button 组件占位符</span>
-          <span class="placeholder-status">待开发</span>
+        <div class="button-row">
+          <HoButton>默认按钮</HoButton>
+          <HoButton type="primary">主要按钮</HoButton>
+          <HoButton type="success">成功按钮</HoButton>
+          <HoButton type="warning">警告按钮</HoButton>
+          <HoButton type="danger">危险按钮</HoButton>
         </div>
-        <p class="description">
-          基础的按钮组件，支持多种类型和尺寸
-        </p>
+        <div class="button-row">
+          <HoButton size="small" type="primary">小型按钮</HoButton>
+          <HoButton size="medium" type="primary">中型按钮</HoButton>
+          <HoButton size="large" type="primary">大型按钮</HoButton>
+        </div>
+        <div class="button-row">
+          <HoButton type="primary" disabled>禁用按钮</HoButton>
+          <HoButton type="primary" loading>加载中</HoButton>
+        </div>
       </div>
     </section>
-    
+
+    <!-- Input 组件 -->
     <section class="demo-section">
       <h2>Input 组件</h2>
       <div class="component-showcase">
-        <div class="placeholder">
-          <span class="placeholder-text">Input 组件占位符</span>
-          <span class="placeholder-status">待开发</span>
+        <div class="input-row">
+          <HoInput v-model="inputValue" placeholder="请输入内容" />
+          <HoInput v-model="inputValue" type="password" placeholder="密码输入" />
         </div>
-        <p class="description">
-          输入框组件，支持多种输入类型和状态
-        </p>
       </div>
     </section>
-    
+
+    <!-- Carousel 组件 -->
     <section class="demo-section">
-      <h2>Icon 组件</h2>
+      <h2>Carousel 组件</h2>
       <div class="component-showcase">
-        <div class="placeholder">
-          <span class="placeholder-text">Icon 组件占位符</span>
-          <span class="placeholder-status">待开发</span>
-        </div>
-        <p class="description">
-          图标组件，支持多种图标库
-        </p>
+        <HoCarousel 
+          :items="carouselItems" 
+          height="200px"
+          autoplay
+        />
+      </div>
+    </section>
+
+    <!-- Carousel 3D -->
+    <section class="demo-section">
+      <h2>Carousel 3D 模式</h2>
+      <div class="component-showcase">
+        <HoCarousel 
+          :items="carouselItems" 
+          effect="3d"
+          height="200px"
+        />
       </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-// 组件占位符 - 实际组件开发完成后替换为真实组件
-// import { Button, Input, Icon } from '@hohaya/hoho'
+import { ref } from 'vue'
+import HoButton from '@hohaya/hoho/button'
+import HoInput from '@hohaya/hoho/input'
+import HoCarousel from '@hohaya/hoho/carousel'
+
+const inputValue = ref('')
+const carouselItems = [
+  { image: 'https://picsum.photos/400/200?random=1' },
+  { image: 'https://picsum.photos/400/200?random=2' },
+  { image: 'https://picsum.photos/400/200?random=3' }
+]
 </script>
 
 <style lang="less" scoped>
@@ -65,36 +93,17 @@
     }
     
     .component-showcase {
-      .placeholder {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 8px;
-        padding: 60px 40px;
-        text-align: center;
-        margin-bottom: 20px;
-        border: 2px dashed #999;
-        
-        .placeholder-text {
-          display: block;
-          font-size: 1.2rem;
-          color: #555;
-          margin-bottom: 10px;
-        }
-        
-        .placeholder-status {
-          display: inline-block;
-          background: #ff9800;
-          color: white;
-          padding: 6px 16px;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          font-weight: 500;
-        }
+      .button-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
       }
       
-      .description {
-        color: #666;
-        line-height: 1.6;
-        margin: 0;
+      .input-row {
+        display: flex;
+        gap: 16px;
+        max-width: 300px;
       }
     }
   }

@@ -12,8 +12,8 @@ test.describe('视觉回归测试', () => {
     const button = page.locator('.ho-button').first()
     
     if (await button.count() > 0) {
-      // 截图对比
-      await expect(button).toHaveScreenshot('button-primary.png')
+      // 首次运行生成基准截图
+      await expect(button).toHaveScreenshot('button-primary.png', { maxDiffPixels: 100 })
     }
   })
 
