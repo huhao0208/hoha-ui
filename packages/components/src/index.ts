@@ -16,6 +16,17 @@ export { default as HoCellGroup } from './cell-group/index.vue'
 export { message, default as HoMessage } from './message/index.ts'
 export { toast, default as HoToast } from './toast/index.ts'
 
+// Design Config (响应式配置)
+export {
+  setDesignConfig,
+  getDesignConfig,
+  resetDesignConfig,
+  toResponsiveUnit,
+  createResponsiveStyles,
+  sizePresets
+} from './config/index.ts'
+export type { DesignConfig } from './config/index.ts'
+
 // Locale / i18n
 export { 
   t, 

@@ -1,0 +1,43 @@
+@import './config/design.css';
+
+/* CSS 变量方式实现响应式 */
+.ho-button {
+  --ho-btn-height: var(--ho-base-height, 36px);
+  --ho-btn-padding: var(--ho-base-padding, 24px);
+  --ho-btn-font-size: var(--ho-base-font-size, 14px);
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: var(--ho-btn-height);
+  padding: 0 var(--ho-btn-padding);
+  font-size: var(--ho-btn-font-size);
+
+  &--small {
+    --ho-btn-height: var(--ho-small-height, 28px);
+    --ho-btn-padding: var(--ho-small-padding, 16px);
+    --ho-btn-font-size: var(--ho-small-font-size, 12px);
+    border-radius: var(--ho-small-radius, 4px);
+    min-width: var(--ho-small-height, 28px);
+  }
+
+  &--medium {
+    --ho-btn-height: var(--ho-medium-height, 36px);
+    --ho-btn-padding: var(--ho-medium-padding, 24px);
+    --ho-btn-font-size: var(--ho-medium-font-size, 14px);
+    border-radius: var(--ho-medium-radius, 6px);
+  }
+
+  &--large {
+    --ho-btn-height: var(--ho-large-height, 44px);
+    --ho-btn-padding: var(--ho-large-padding, 32px);
+    --ho-btn-font-size: var(--ho-large-font-size, 16px);
+    border-radius: var(--ho-large-radius, 8px);
+  }
