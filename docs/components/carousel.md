@@ -109,12 +109,17 @@ const items = [
   :items="[
     { image: 'https://picsum.photos/400/200?random=7' },
     { image: 'https://picsum.photos/400/200?random=8' },
-    { image: 'https://picsum.photos/400/200?random=9' }
+    { image: 'https://picsum.photos/400/200?random=9' },
+    { image: 'https://picsum.photos/400/200?random=10' },
+    { image: 'https://picsum.photos/400/200?random=11' }
   ]" 
   effect="3d"
-  height="200px"
+  height="220px"
+  fit="cover"
 />
 </DemoPreview>
+
+<p style="font-size: 12px; color: #666; margin-top: 8px;">💡 点击左右两侧的图片可以切换</p>
 
 <details>
 <summary>显示代码</summary>

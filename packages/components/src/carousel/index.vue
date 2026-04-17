@@ -811,8 +811,8 @@ export default defineComponent({
   }
   
   &__indicator {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -822,15 +822,18 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     
     &:hover {
       opacity: 0.8;
+      transform: scale(1.1);
     }
     
     &--active {
-      width: 24px;
+      width: 28px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     }
     
     .ho-carousel__indicators--lines & {
