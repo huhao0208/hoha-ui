@@ -7,17 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { setDesignConfig } from '@hohaya/hoho/config'
-
-// 固定使用 375px 设计稿
-onMounted(() => {
-  setDesignConfig({
-    baseWidth: 375,
-    unit: 'px',
-    responsive: false
-  })
-})
+// 纯展示组件，无需逻辑
+// CSS 变量已在样式中定义固定尺寸
 </script>
 
 <style scoped>
