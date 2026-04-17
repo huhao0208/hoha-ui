@@ -19,21 +19,29 @@ import type { PropType } from 'vue'
 type ButtonType = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info'
 type ButtonSize = 'small' | 'medium' | 'large'
 
+/**
+ * Button 按钮
+ * @description 常用的操作按钮组件
+ */
 export default defineComponent({
   name: 'HoButton',
   props: {
+    /** 按钮类型 */
     type: {
       type: String as PropType<ButtonType>,
       default: 'primary'
     },
+    /** 按钮尺寸 */
     size: {
       type: String as PropType<ButtonSize>,
       default: 'medium'
     },
+    /** 是否禁用 */
     disabled: {
       type: Boolean,
       default: false
     },
+    /** 是否加载中 */
     loading: {
       type: Boolean,
       default: false

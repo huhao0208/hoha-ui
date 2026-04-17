@@ -25,7 +25,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@hohaya/hoho": "workspace:*",
+    "@hohaya/ui": "workspace:*",
     "@hohaya/hoho-utils": "workspace:*"
   },
   "peerDependencies": {

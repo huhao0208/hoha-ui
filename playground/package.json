@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hohaya/hoho": "workspace:*",
+    "@hohaya/ui": "workspace:*",
     "@hohaya/hoho-utils": "workspace:*",
     "vue": "^3.4.0"
   },
