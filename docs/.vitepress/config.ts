@@ -40,6 +40,7 @@ export default defineConfig({
           text: '设计规范',
           items: [
             { text: '设计规范', link: '/guide/design-spec' },
+            { text: '响应式配置', link: '/guide/responsive' },
             { text: '主题定制', link: '/guide/theming' },
             { text: '国际化', link: '/guide/i18n' }
           ]
