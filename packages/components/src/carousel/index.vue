@@ -450,7 +450,11 @@ export default defineComponent({
       
       if (targetIndex === activeIndex.value && index !== activeIndex.value) return
       
-      isTransitioning.value = true
+      // 3D 和 fade 模式不需要 isTransitioning
+      if (props.effect !== 'fade' && props.effect !== '3d') {
+        isTransitioning.value = true
+      }
+      
       const prevIndex = activeIndex.value
       activeIndex.value = targetIndex
       
@@ -732,6 +736,7 @@ export default defineComponent({
       height: 100%;
       transform-style: preserve-3d;
       backface-visibility: hidden;
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
     
     &--clone {
