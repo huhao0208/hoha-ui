@@ -36,11 +36,6 @@
               :style="{ objectFit: fit }"
               loading="lazy"
             >
-            <slot
-              v-else
-              :item="item.original"
-              :index="item.originalIndex"
-            />
           </div>
         </div>
       </div>
