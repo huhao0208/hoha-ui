@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-preview-wrapper" ref="wrapperRef">
+  <div class="demo-preview-wrapper">
     <div class="demo-preview-content">
       <slot></slot>
     </div>
@@ -7,54 +7,83 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const wrapperRef = ref<HTMLElement | null>(null)
-
-onMounted(() => {
-  // 移动端适配已通过 CSS 处理
-})
-
-onUnmounted(() => {
-  // cleanup
-})
+// 纯展示组件，无需逻辑
 </script>
 
 <style scoped>
 .demo-preview-wrapper {
-  padding: 16px;
-  margin: 16px 0;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: #fff;
+  margin: 24px 0;
+  border: 1px solid var(--vp-c-divider, #e2e8f0);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--vp-c-bg, #ffffff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.demo-preview-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--vp-c-brand-1, #3b82f6);
+}
+
+.demo-preview-content {
+  padding: 32px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
   align-items: center;
-  max-width: 100%;
-  box-sizing: border-box;
+  justify-content: flex-start;
+  min-height: 80px;
 }
 
+/* 深色模式 */
 html.dark .demo-preview-wrapper {
-  background: #1f2937;
+  background: var(--vp-c-bg, #1e1e1e);
+  border-color: var(--vp-c-divider, #333);
 }
 
-/* 手机端适配 */
-@media screen and (max-width: 767px) {
+html.dark .demo-preview-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 平板端适配 */
+@media screen and (max-width: 768px) {
+  .demo-preview-content {
+    padding: 24px;
+    gap: 12px;
+    min-height: 60px;
+  }
+  
   .demo-preview-wrapper {
-    padding: 12px;
-    margin: 12px 0;
-    gap: 6px;
-    border-radius: 6px;
+    margin: 20px 0;
+    border-radius: 10px;
   }
 }
 
-/* 更小屏幕 */
-@media screen and (max-width: 375px) {
+/* 手机端适配 */
+@media screen and (max-width: 480px) {
+  .demo-preview-content {
+    padding: 16px;
+    gap: 8px;
+    min-height: 48px;
+  }
+  
   .demo-preview-wrapper {
-    padding: 8px;
-    margin: 8px 0;
-    gap: 4px;
+    margin: 16px 0;
+    border-radius: 8px;
+  }
+}
+
+/* 小屏幕 */
+@media screen and (max-width: 375px) {
+  .demo-preview-content {
+    padding: 12px;
+    gap: 6px;
+  }
+  
+  .demo-preview-wrapper {
+    margin: 12px 0;
+    border-radius: 6px;
   }
 }
 </style>
