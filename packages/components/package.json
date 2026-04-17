@@ -1,81 +1,110 @@
 {
-  "name": "@hohaya/hoho",
+  "name": "@hohaya/ui",
   "version": "0.0.1",
-  "description": "Vue 2/3 component library",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
+  "description": "Hoha UI Component Library - Vue 2/3 组件库",
+  "main": "dist/lib/index.js",
+  "module": "dist/esm/index.mjs",
   "types": "dist/index.d.ts",
-  "style": "dist/style.css",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js",
-      "browser": "./dist/index.umd.js",
-      "style": "./dist/style.css"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/lib/index.js",
+      "types": "./dist/index.d.ts"
     },
-    "./style": "./dist/style.css",
-    "./compat": {
-      "types": "./src/compat/index.ts",
-      "import": "./src/compat/index.ts",
-      "require": "./src/compat/index.ts"
+    "./button": {
+      "import": "./dist/esm/button/index.vue.mjs",
+      "require": "./dist/lib/button/index.vue.js"
     },
-    "./src/compat": {
-      "types": "./src/compat/index.ts",
-      "import": "./src/compat/index.ts",
-      "require": "./src/compat/index.ts"
+    "./input": {
+      "import": "./dist/esm/input/index.vue.mjs",
+      "require": "./dist/lib/input/index.vue.js"
     },
-    "./dist/*": "./dist/*",
-    "./src/*": "./src/*"
+    "./modal": {
+      "import": "./dist/esm/modal/index.vue.mjs",
+      "require": "./dist/lib/modal/index.vue.js"
+    },
+    "./icon": {
+      "import": "./dist/esm/icon/index.vue.mjs",
+      "require": "./dist/lib/icon/index.vue.js"
+    },
+    "./image": {
+      "import": "./dist/esm/image/index.vue.mjs",
+      "require": "./dist/lib/image/index.vue.js"
+    },
+    "./carousel": {
+      "import": "./dist/esm/carousel/index.vue.mjs",
+      "require": "./dist/lib/carousel/index.vue.js"
+    },
+    "./tabs": {
+      "import": "./dist/esm/tabs/index.vue.mjs",
+      "require": "./dist/lib/tabs/index.vue.js"
+    },
+    "./navbar": {
+      "import": "./dist/esm/navbar/index.vue.mjs",
+      "require": "./dist/lib/navbar/index.vue.js"
+    },
+    "./tabbar": {
+      "import": "./dist/esm/tabbar/index.vue.mjs",
+      "require": "./dist/lib/tabbar/index.vue.js"
+    },
+    "./tabbar-item": {
+      "import": "./dist/esm/tabbar-item/index.vue.mjs",
+      "require": "./dist/lib/tabbar-item/index.vue.js"
+    },
+    "./cell": {
+      "import": "./dist/esm/cell/index.vue.mjs",
+      "require": "./dist/lib/cell/index.vue.js"
+    },
+    "./cell-group": {
+      "import": "./dist/esm/cell-group/index.vue.mjs",
+      "require": "./dist/lib/cell-group/index.vue.js"
+    },
+    "./message": {
+      "import": "./dist/esm/message/index.mjs",
+      "require": "./dist/lib/message/index.js"
+    },
+    "./toast": {
+      "import": "./dist/esm/toast/index.mjs",
+      "require": "./dist/lib/toast/index.js"
+    },
+    "./style.css": "./dist/style.css"
   },
+  "sideEffects": [
+    "*.css",
+    "*.less",
+    "*.vue"
+  ],
   "files": [
     "dist",
-    "src"
+    "README.md"
   ],
   "keywords": [
     "vue",
+    "vue3",
+    "vue2",
     "components",
     "ui",
-    "vue2",
-    "vue3"
+    "hoha"
   ],
   "author": "hoha",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
   "peerDependencies": {
-    "vue": "^2.6.0 || ^3.0.0"
+    "vue": "^2.7.0 || ^3.0.0"
   },
   "dependencies": {
     "@hohaya/hoho-utils": "workspace:*",
-    "@vue/composition-api": "^1.7.0",
-    "vue-demi": "^0.14.10"
+    "@hohaya/shared": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-typescript": "^7.28.5",
-    "@rollup/plugin-commonjs": "^29.0.2",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^1.0.0",
-    "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^20.11.0",
-    "@vitejs/plugin-vue": "^5.0.0",
+    "@babel/core": "^7.24.0",
+    "@babel/preset-typescript": "^7.24.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
     "less": "^4.2.0",
-    "rollup": "^4.9.0",
-    "rollup-plugin-dts": "^6.4.1",
-    "rollup-plugin-less": "^1.1.3",
+    "rollup": "^4.12.0",
     "rollup-plugin-vue": "^6.0.0",
-    "vite": "^5.0.0",
+    "typescript": "^5.4.0",
     "vitest": "^1.3.0",
     "vue": "^3.4.0"
-  },
-  "scripts": {
-    "dev": "vite build --watch",
-    "prebuild": "tsc --declaration --declarationMap --emitDeclarationOnly --outDir temp src/index.ts 2>/dev/null || true && echo 'TypeScript declarations generated'",
-    "build": "rollup -c rollup.config.mjs",
-    "postbuild": "if [ -f temp/index.d.ts ]; then cp temp/index.d.ts dist/; fi && rm -rf temp",
-    "test": "vitest"
   }
 }

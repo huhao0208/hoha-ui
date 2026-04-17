@@ -8,28 +8,27 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: 'dist/index.esm.js',
       format: 'esm',
       sourcemap: true,
-      exports: 'named'
+      exports: 'named',
+      preserveModules: true,
+      preserveModulesRoot: 'src',
+      dir: 'dist/esm',
+      entryFileNames: '[name].mjs',
+      chunkFileNames: 'chunks/[name]-[hash].mjs'
     },
     {
-      file: 'dist/index.cjs.js',
       format: 'cjs',
       sourcemap: true,
-      exports: 'named'
-    },
-    {
-      file: 'dist/index.umd.js',
-      format: 'umd',
-      name: 'HohaComponents',
-      sourcemap: true,
-      globals: {
-        vue: 'Vue'
-      }
+      exports: 'named',
+      preserveModules: true,
+      preserveModulesRoot: 'src',
+      dir: 'dist/lib',
+      entryFileNames: '[name].js',
+      chunkFileNames: 'chunks/[name]-[hash].js'
     }
   ],
-  external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared'],
+  external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared', 'vue-router'],
   plugins: [
     {
       name: 'typescript-transform',
