@@ -11,6 +11,9 @@ importers:
       '@iconify/vue':
         specifier: ^5.0.0
         version: 5.0.0(vue@3.5.32(typescript@5.9.3))
+      vue-demi:
+        specifier: ^0.14.10
+        version: 0.14.10(vue@3.5.32(typescript@5.9.3))
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -80,7 +83,7 @@ importers:
         version: link:../packages/utils
       '@hohaya/ui':
         specifier: workspace:*
-        version: link:../packages/ui
+        version: link:../packages/components
       vue:
         specifier: ^3.4.0
         version: 3.5.32(typescript@5.9.3)
@@ -181,7 +184,7 @@ importers:
         version: link:../utils
       '@hohaya/ui':
         specifier: workspace:*
-        version: 'link:'
+        version: link:../components
       vue:
         specifier: ^2.6.0 || ^3.0.0
         version: 3.5.32(typescript@5.9.3)
@@ -223,7 +226,7 @@ importers:
         version: link:../packages/utils
       '@hohaya/ui':
         specifier: workspace:*
-        version: link:../packages/ui
+        version: link:../packages/components
       vue:
         specifier: ^3.4.0
         version: 3.5.32(typescript@5.9.3)
@@ -3521,6 +3524,17 @@ packages:
   void-elements@3.1.0:
     resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
     engines: {node: '>=0.10.0'}
+
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   vue-docgen-api@4.79.2:
     resolution: {integrity: sha512-n9ENAcs+40awPZMsas7STqjkZiVlIjxIKgiJr5rSohDP0/JCrD9VtlzNojafsA1MChm/hz2h3PDtUedx3lbgfA==}
@@ -7236,6 +7250,10 @@ snapshots:
       - terser
 
   void-elements@3.1.0: {}
+
+  vue-demi@0.14.10(vue@3.5.32(typescript@5.9.3)):
+    dependencies:
+      vue: 3.5.32(typescript@5.9.3)
 
   vue-docgen-api@4.79.2(vue@3.5.32(typescript@5.9.3)):
     dependencies:
