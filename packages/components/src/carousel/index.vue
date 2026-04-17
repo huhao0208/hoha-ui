@@ -839,27 +839,6 @@ export default defineComponent({
       }
     }
   }
-    
-    .ho-carousel__indicators--lines & {
-      width: 1.25rem;
-      height: 0.1875rem;
-      border-radius: 0.125rem;
-      transform: scaleX(0.5);
-      
-      &--active {
-        transform: scaleX(1);
-      }
-    }
-    
-    .ho-carousel__indicators--numbers & {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.3) !important;
-      font-size: 0.75rem;
-      color: #fff;
-    }
-  }
   
   &__indicator-number {
     font-size: 0.75rem;
