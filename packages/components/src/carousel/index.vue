@@ -3,6 +3,11 @@
     ref="carouselRef"
     class="ho-carousel"
     :class="carouselClasses"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
   >
     <!-- Main content wrapper -->
     <div
@@ -13,30 +18,69 @@
         class="ho-carousel__track"
         :style="trackStyle"
         @transitionend="handleTransitionEnd"
-        @touchstart="handleTouchStart"
-        @touchmove="handleTouchMove"
-        @touchend="handleTouchEnd"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
       >
+        <!-- Clone items for infinite loop -->
+        <div
+          v-if="loop && items.length > 0"
+          class="ho-carousel__item ho-carousel__item--clone"
+          :style="itemStyle"
+        >
+          <slot
+            :item="items[items.length - 1]"
+            :index="-1"
+          >
+            <HoCarouselItem>
+              <img
+                v-if="items[items.length - 1]?.image"
+                :src="items[items.length - 1].image"
+                :style="{ objectFit: fit }"
+              >
+            </HoCarouselItem>
+          </slot>
+        </div>
+
         <!-- Main items -->
         <div
-          v-for="(item, index) in displayItems"
-          :key="item._id"
+          v-for="(item, index) in items"
+          :key="item.id || index"
           class="ho-carousel__item"
-          :class="{ 'ho-carousel__item--active': index === displayActiveIndex }"
+          :class="{ 'ho-carousel__item--active': index === activeIndex }"
           :style="getItemStyle(index)"
           @click="handleItemClick(index, item)"
         >
-          <div class="ho-carousel__item-content">
-            <img
-              v-if="item.image"
-              :src="item.image"
-              :alt="item.alt || ''"
-              :style="{ objectFit: fit }"
-              loading="lazy"
-            >
-          </div>
+          <slot
+            :item="item"
+            :index="index"
+          >
+            <HoCarouselItem>
+              <img
+                v-if="item.image"
+                :src="item.image"
+                :alt="item.alt || ''"
+                :style="{ objectFit: fit }"
+              >
+            </HoCarouselItem>
+          </slot>
+        </div>
+
+        <!-- Clone items for infinite loop -->
+        <div
+          v-if="loop && items.length > 0"
+          class="ho-carousel__item ho-carousel__item--clone"
+          :style="itemStyle"
+        >
+          <slot
+            :item="items[0]"
+            :index="items.length"
+          >
+            <HoCarouselItem>
+              <img
+                v-if="items[0]?.image"
+                :src="items[0].image"
+                :style="{ objectFit: fit }"
+              >
+            </HoCarouselItem>
+          </slot>
         </div>
       </div>
     </div>
@@ -48,13 +92,18 @@
       :class="indicatorClasses"
     >
       <button
-        v-for="index in items.length"
+        v-for="(item, index) in items"
         :key="index"
         class="ho-carousel__indicator"
-        :class="{ 'ho-carousel__indicator--active': index - 1 === activeIndex }"
-        @click="handleIndicatorClick(index - 1)"
+        :class="{ 'ho-carousel__indicator--active': index === activeIndex }"
+        :style="getIndicatorStyle(index)"
+        @click="handleIndicatorClick(index)"
+        @mouseenter="handleIndicatorHover(index)"
       >
-        <span v-if="indicatorType === 'numbers'">{{ index }}</span>
+        <span
+          v-if="indicatorType === 'numbers'"
+          class="ho-carousel__indicator-number"
+        >{{ index + 1 }}</span>
       </button>
     </div>
 
@@ -62,26 +111,38 @@
     <button
       v-if="showArrow"
       class="ho-carousel__arrow ho-carousel__arrow--left"
-      @click.stop="prev"
+      @click="prev"
     >
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      <svg
+        viewBox="0 0 24 24"
+        class="ho-carousel__arrow-icon"
+      >
+        <path
+          fill="currentColor"
+          d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+        />
       </svg>
     </button>
     <button
       v-if="showArrow"
       class="ho-carousel__arrow ho-carousel__arrow--right"
-      @click.stop="next"
+      @click="next"
     >
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+      <svg
+        viewBox="0 0 24 24"
+        class="ho-carousel__arrow-icon"
+      >
+        <path
+          fill="currentColor"
+          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+        />
       </svg>
     </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { defineComponent, computed, ref, watch, onMounted, onUnmounted, provide, nextTick, h } from 'vue'
 import type { CSSProperties, PropType } from 'vue'
 
 export interface CarouselItem {
@@ -96,33 +157,114 @@ export type CarouselDirection = 'horizontal' | 'vertical'
 export type CarouselIndicatorPosition = 'bottom' | 'top' | 'left' | 'right' | 'none'
 export type CarouselIndicatorType = 'dots' | 'lines' | 'numbers'
 
+// CarouselItem sub-component
+export const HoCarouselItem = defineComponent({
+  name: 'HoCarouselItem',
+  setup(_, { slots }) {
+    return () => h('div', { class: 'ho-carousel__item-content' }, slots.default?.())
+  }
+})
+
 export default defineComponent({
   name: 'HoCarousel',
   props: {
-    modelValue: { type: Number, default: 0 },
-    items: { type: Array as PropType<CarouselItem[]>, default: () => [] },
-    autoplay: { type: Boolean, default: false },
-    interval: { type: Number, default: 3000 },
-    duration: { type: Number, default: 500 },
-    loop: { type: Boolean, default: true },
-    direction: { type: String as PropType<CarouselDirection>, default: 'horizontal' },
-    effect: { type: String as PropType<CarouselEffect>, default: 'slide' },
-    indicatorPosition: { type: String as PropType<CarouselIndicatorPosition>, default: 'bottom' },
-    indicatorType: { type: String as PropType<CarouselIndicatorType>, default: 'dots' },
-    indicatorColor: { type: String, default: '#fff' },
-    showIndicator: { type: Boolean, default: true },
-    showArrow: { type: Boolean, default: false },
-    pauseOnHover: { type: Boolean, default: true },
-    touchable: { type: Boolean, default: true },
-    touchThreshold: { type: Number, default: 50 },
-    width: { type: [String, Number], default: '100%' },
-    height: { type: [String, Number], default: 'auto' },
-    perspective: { type: Number, default: 1000 },
-    scale3d: { type: Number, default: 0.85 },
-    space3d: { type: Number, default: 0.3 },
-    fit: { 
+    modelValue: {
+      type: Number,
+      default: 0
+    },
+    items: {
+      type: Array as PropType<CarouselItem[]>,
+      default: () => []
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: Number,
+      default: 3000
+    },
+    duration: {
+      type: Number,
+      default: 500
+    },
+    loop: {
+      type: Boolean,
+      default: true
+    },
+    direction: {
+      type: String as PropType<CarouselDirection>,
+      default: 'horizontal',
+      validator: (v: string) => ['horizontal', 'vertical'].includes(v)
+    },
+    effect: {
+      type: String as PropType<CarouselEffect>,
+      default: 'slide',
+      validator: (v: string) => ['slide', '3d', 'fade'].includes(v)
+    },
+    indicatorPosition: {
+      type: String as PropType<CarouselIndicatorPosition>,
+      default: 'bottom',
+      validator: (v: string) => ['bottom', 'top', 'left', 'right', 'none'].includes(v)
+    },
+    indicatorType: {
+      type: String as PropType<CarouselIndicatorType>,
+      default: 'dots',
+      validator: (v: string) => ['dots', 'lines', 'numbers'].includes(v)
+    },
+    indicatorColor: {
+      type: String,
+      default: '#fff'
+    },
+    showIndicator: {
+      type: Boolean,
+      default: true
+    },
+    showArrow: {
+      type: Boolean,
+      default: false
+    },
+    pauseOnHover: {
+      type: Boolean,
+      default: true
+    },
+    touchable: {
+      type: Boolean,
+      default: true
+    },
+    touchThreshold: {
+      type: Number,
+      default: 50
+    },
+    swipeThreshold: {
+      type: Number,
+      default: 0.3
+    },
+    width: {
+      type: [String, Number],
+      default: '100%'
+    },
+    height: {
+      type: [String, Number],
+      default: 'auto'
+    },
+    perspective: {
+      type: Number,
+      default: 1000
+    },
+    scale3d: {
+      type: Number,
+      default: 0.85
+    },
+    space3d: {
+      type: Number,
+      default: 0.3
+    },
+    /** 图片缩放模式 */
+    fit: {
       type: String as PropType<'cover' | 'contain' | 'fill' | 'none' | 'scale-down'>,
-      default: 'cover'
+      default: 'cover',
+      validator: (v: string) => ['cover', 'contain', 'fill', 'none', 'scale-down'].includes(v)
     }
   },
   emits: ['update:modelValue', 'change', 'click'],
@@ -133,250 +275,352 @@ export default defineComponent({
     const isTransitioning = ref(false)
     const isPaused = ref(false)
     const isDragging = ref(false)
-    const dragStartValue = ref(0)
+    const dragStart = ref({ x: 0, y: 0, translate: 0 })
     const dragOffset = ref(0)
-    const containerSize = ref(0)
+    const containerWidth = ref(0)
+    const containerHeight = ref(0)
     
-    let autoplayTimer: ReturnType<typeof setInterval> | null = null
-    let touchStartX = 0
-    let touchStartY = 0
+    let autoplayTimer: ReturnType<typeof setTimeout> | null = null
     let touchStartTime = 0
 
     const isVertical = computed(() => props.direction === 'vertical')
-    const is3D = computed(() => props.effect === '3d')
-    const isFade = computed(() => props.effect === 'fade')
-
-    // 为循环模式添加克隆项
-    const displayItems = computed(() => {
-      if (!props.loop || props.items.length === 0) {
-        return props.items.map((item, i) => ({ ...item, _id: i, original: item, originalIndex: i }))
-      }
-      
-      const items = props.items.map((item, i) => ({ ...item, _id: i, original: item, originalIndex: i }))
-      const lastItem = { ...props.items[props.items.length - 1], _id: 'clone-last', original: props.items[props.items.length - 1], originalIndex: props.items.length - 1 }
-      const firstItem = { ...props.items[0], _id: 'clone-first', original: props.items[0], originalIndex: 0 }
-      
-      return [lastItem, ...items, firstItem]
-    })
-
-    const displayActiveIndex = computed(() => {
-      if (!props.loop || props.items.length === 0) return activeIndex.value
-      return activeIndex.value + 1
-    })
 
     const carouselClasses = computed(() => ({
       'ho-carousel--vertical': isVertical.value,
-      'ho-carousel--3d': is3D.value,
-      'ho-carousel--fade': isFade.value,
+      'ho-carousel--3d': props.effect === '3d',
+      'ho-carousel--fade': props.effect === 'fade',
       'ho-carousel--dragging': isDragging.value
     }))
 
     const indicatorClasses = computed(() => ({
       'ho-carousel__indicators--top': props.indicatorPosition === 'top',
       'ho-carousel__indicators--left': props.indicatorPosition === 'left',
-      'ho-carousel__indicators--right': props.indicatorPosition === 'right',
+      'ho-carousel__indicators--right': props.indicatorPosition === 'right' || (isVertical.value && props.indicatorPosition === 'bottom'),
       'ho-carousel__indicators--lines': props.indicatorType === 'lines',
       'ho-carousel__indicators--numbers': props.indicatorType === 'numbers'
     }))
 
-    const containerStyle = computed<CSSProperties>(() => ({
-      width: typeof props.width === 'number' ? `${props.width}px` : props.width,
-      height: typeof props.height === 'number' ? `${props.height}px` : props.height,
-      perspective: is3D.value ? `${props.perspective}px` : undefined
-    }))
-
-    const trackStyle = computed<CSSProperties>(() => {
-      if (isFade.value) {
-        return { position: 'relative', width: '100%', height: '100%' }
+    const containerStyle = computed<CSSProperties>(() => {
+      const width = typeof props.width === 'number' ? `${props.width}px` : props.width
+      const height = typeof props.height === 'number' ? `${props.height}px` : props.height
+      
+      const style: CSSProperties = {
+        width,
+        height: height === 'auto' ? undefined : height
       }
       
-      if (is3D.value) {
-        return { position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d' }
+      if (props.effect === '3d') {
+        style.perspective = `${props.perspective}px`
       }
+      
+      return style
+    })
 
-      const translate = translateValue.value + dragOffset.value
+    const transitionDuration = computed(() => `${props.duration}ms`)
+
+    const trackStyle = computed<CSSProperties>(() => {
+      const totalItems = props.items.length + (props.loop ? 2 : 0)
+      
+      if (props.effect === 'fade') {
+        return {
+          position: 'relative',
+          width: '100%',
+          height: '100%'
+        }
+      }
+      
+      if (props.effect === '3d') {
+        return {
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          transformStyle: 'preserve-3d'
+        }
+      }
+      
+      if (isVertical.value) {
+        return {
+          transform: `translateY(${translateValue.value + dragOffset.value}px)`,
+          transition: isTransitioning.value ? `transform ${transitionDuration.value} ease` : 'none',
+          flexDirection: 'column',
+          height: `${totalItems * 100}%`
+        }
+      }
+      
       return {
-        transform: `translate${isVertical.value ? 'Y' : 'X'}(${translate}px)`,
-        transition: isTransitioning.value ? `transform ${props.duration}ms ease` : 'none'
+        transform: `translateX(${translateValue.value + dragOffset.value}px)`,
+        transition: isTransitioning.value ? `transform ${transitionDuration.value} ease` : 'none',
+        width: `${totalItems * 100}%`
       }
     })
 
-    const getItemStyle = (index: number): CSSProperties => {
-      if (isFade.value) {
+    const itemStyle = computed<CSSProperties>(() => {
+      if (props.effect === 'fade') {
         return {
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          opacity: index === displayActiveIndex.value ? 1 : 0,
-          zIndex: index === displayActiveIndex.value ? 1 : 0,
-          transition: `opacity ${props.duration}ms ease`
+          opacity: 0,
+          transition: `opacity ${transitionDuration.value} ease`
         }
       }
-
-      if (is3D.value) {
-        const offset = index - displayActiveIndex.value
-        const totalItems = displayItems.value.length
-        const maxOffset = Math.floor(totalItems / 2)
-        
-        // 限制可见范围
-        const absOffset = Math.abs(offset)
-        if (absOffset > maxOffset) {
-          return { opacity: 0, pointerEvents: 'none' }
-        }
-
-        const rotateY = offset * 45
-        const translateZ = -absOffset * props.perspective * props.space3d
-        const scale = Math.pow(props.scale3d, absOffset)
-        const opacity = Math.max(1 - absOffset * 0.3, 0.3)
-        const zIndex = totalItems - absOffset
-
+      
+      if (props.effect === '3d') {
         return {
           position: 'absolute',
-          top: 0,
-          left: '50%',
           width: '100%',
           height: '100%',
-          transform: `translateX(-50%) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
-          opacity,
-          zIndex,
-          transition: `transform ${props.duration}ms ease, opacity ${props.duration}ms ease`,
-          cursor: offset !== 0 ? 'pointer' : 'default'
+          backfaceVisibility: 'hidden' as const
         }
       }
-
+      
       return {
         flex: '0 0 100%',
-        width: '100%',
-        height: '100%'
+        width: '100%'
+      }
+    })
+
+    const getItemStyle = (index: number): CSSProperties => {
+      if (props.effect === 'fade') {
+        return {
+          ...itemStyle.value,
+          opacity: index === activeIndex.value ? 1 : 0,
+          zIndex: index === activeIndex.value ? 1 : 0
+        }
+      }
+      
+      if (props.effect === '3d') {
+        const totalItems = props.items.length
+        const offset = index - activeIndex.value
+        
+        let normalizedOffset = offset
+        if (props.loop) {
+          if (normalizedOffset > totalItems / 2) {
+            normalizedOffset -= totalItems
+          } else if (normalizedOffset < -totalItems / 2) {
+            normalizedOffset += totalItems
+          }
+        }
+        
+        const rotateY = normalizedOffset * 45
+        const translateZ = -Math.abs(normalizedOffset) * props.perspective * props.space3d
+        const scale = Math.pow(props.scale3d, Math.abs(normalizedOffset))
+        const opacity = 1 - Math.abs(normalizedOffset) * 0.3
+        const zIndex = totalItems - Math.abs(normalizedOffset)
+        
+        return {
+          ...itemStyle.value,
+          transform: `translateX(-50%) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
+          left: '50%',
+          opacity: Math.max(opacity, 0.3),
+          zIndex,
+          cursor: 'pointer'
+        }
+      }
+      
+      return itemStyle.value
+    }
+
+    const getIndicatorStyle = (index: number): CSSProperties => {
+      const isActive = index === activeIndex.value
+      const baseColor = props.indicatorColor
+      
+      if (props.indicatorType === 'lines') {
+        return {
+          backgroundColor: baseColor,
+          opacity: isActive ? 1 : 0.4,
+          transform: isActive ? 'scaleX(1)' : 'scaleX(0.5)'
+        }
+      }
+      
+      return {
+        backgroundColor: baseColor,
+        opacity: isActive ? 1 : 0.4
       }
     }
 
     const goTo = (index: number) => {
       if (isTransitioning.value || props.items.length === 0) return
-
+      
       const totalItems = props.items.length
       let targetIndex = index
-
+      
       if (props.loop) {
-        if (index < 0) targetIndex = totalItems - 1
-        else if (index >= totalItems) targetIndex = 0
+        if (index < 0) {
+          targetIndex = totalItems - 1
+        } else if (index >= totalItems) {
+          targetIndex = 0
+        }
       } else {
         targetIndex = Math.max(0, Math.min(index, totalItems - 1))
       }
-
-      if (targetIndex === activeIndex.value) return
-
-      if (!is3D.value && !isFade.value) {
+      
+      if (targetIndex === activeIndex.value && index !== activeIndex.value) return
+      
+      // 3D 和 fade 模式不需要 isTransitioning
+      if (props.effect !== 'fade' && props.effect !== '3d') {
         isTransitioning.value = true
       }
-
+      
       const prevIndex = activeIndex.value
       activeIndex.value = targetIndex
-      updateTranslate(targetIndex)
-
+      
+      updateTranslate(targetIndex, prevIndex < targetIndex ? 'next' : 'prev')
+      
       emit('update:modelValue', targetIndex)
       emit('change', targetIndex, props.items[targetIndex])
     }
 
-    const next = () => goTo(activeIndex.value + 1)
-    const prev = () => goTo(activeIndex.value - 1)
+    const next = () => {
+      goTo(activeIndex.value + 1)
+    }
 
-    const updateTranslate = (index: number) => {
-      if (is3D.value || isFade.value) return
+    const prev = () => {
+      goTo(activeIndex.value - 1)
+    }
+
+    const updateTranslate = (index: number, _direction: 'next' | 'prev') => {
+      if (props.effect === 'fade' || props.effect === '3d') return
       
+      const containerSize = isVertical.value ? containerHeight.value : containerWidth.value
       let offset = index
-      if (props.loop) offset = index + 1
-      translateValue.value = -offset * containerSize.value
+      
+      if (props.loop) {
+        offset = index + 1
+      }
+      
+      translateValue.value = -offset * containerSize
     }
 
     const startAutoplay = () => {
       if (!props.autoplay || props.items.length <= 1) return
+      
       stopAutoplay()
-      autoplayTimer = setInterval(() => {
-        if (!isPaused.value && !isDragging.value) next()
+      autoplayTimer = setTimeout(() => {
+        if (!isPaused.value) {
+          next()
+        }
+        startAutoplay()
       }, props.interval)
     }
 
     const stopAutoplay = () => {
       if (autoplayTimer) {
-        clearInterval(autoplayTimer)
+        clearTimeout(autoplayTimer)
         autoplayTimer = null
       }
     }
 
+    const pause = () => {
+      isPaused.value = true
+    }
+
+    const resume = () => {
+      isPaused.value = false
+    }
+
+    // Alias for API compatibility
+    const start = resume
+
     const handleMouseEnter = () => {
-      if (props.pauseOnHover) isPaused.value = true
+      if (props.pauseOnHover) {
+        pause()
+      }
     }
 
     const handleMouseLeave = () => {
-      if (props.pauseOnHover) isPaused.value = false
+      if (props.pauseOnHover) {
+        resume()
+      }
     }
 
-    const handleIndicatorClick = (index: number) => goTo(index)
+    const handleIndicatorClick = (index: number) => {
+      goTo(index)
+    }
 
-    const handleItemClick = (index: number, item: any) => {
-      if (is3D.value && index !== displayActiveIndex.value) {
-        // 点击非当前项时切换
-        const targetIndex = props.loop ? index - 1 : index
-        if (targetIndex >= 0 && targetIndex < props.items.length) {
-          goTo(targetIndex)
-        }
+    const handleIndicatorHover = (_index: number) => {
+      if (props.pauseOnHover) {
+        pause()
       }
-      emit('click', item.originalIndex ?? index, item.original ?? item)
+    }
+
+    const handleItemClick = (index: number, item: CarouselItem) => {
+      // 3D 模式下点击切换到该项
+      if (props.effect === '3d' && index !== activeIndex.value) {
+        goTo(index)
+      }
+      emit('click', index, item)
     }
 
     const handleTouchStart = (e: TouchEvent) => {
-      if (!props.touchable || is3D.value || isFade.value) return
+      if (!props.touchable || props.effect === '3d') return
       
       const touch = e.touches[0]
       isDragging.value = true
-      touchStartX = touch.clientX
-      touchStartY = touch.clientY
       touchStartTime = Date.now()
-      dragStartValue.value = translateValue.value
+      dragStart.value = {
+        x: touch.clientX,
+        y: touch.clientY,
+        translate: translateValue.value
+      }
+      
       stopAutoplay()
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (!isDragging.value) return
+      if (!isDragging.value || !props.touchable) return
+      
+      e.preventDefault()
       
       const touch = e.touches[0]
       const diff = isVertical.value
-        ? touch.clientY - touchStartY
-        : touch.clientX - touchStartX
-
-      // 检测滑动方向
-      const absDiff = Math.abs(diff)
-      const otherDiff = Math.abs(isVertical.value ? touch.clientX - touchStartX : touch.clientY - touchStartY)
+        ? touch.clientY - dragStart.value.y
+        : touch.clientX - dragStart.value.x
       
-      // 如果不是主要滑动方向，忽略
-      if (absDiff < otherDiff) return
-
-      e.preventDefault()
-      dragOffset.value = diff
+      const containerSize = isVertical.value ? containerHeight.value : containerWidth.value
+      const maxOffset = 0
+      const minOffset = -(props.items.length - 1) * containerSize
+      
+      let newOffset = dragStart.value.translate + diff
+      
+      if (!props.loop) {
+        if (newOffset > maxOffset) {
+          newOffset = maxOffset + (newOffset - maxOffset) * 0.3
+        } else if (newOffset < minOffset) {
+          newOffset = minOffset + (newOffset - minOffset) * 0.3
+        }
+      }
+      
+      dragOffset.value = newOffset - dragStart.value.translate
     }
 
     const handleTouchEnd = () => {
       if (!isDragging.value) return
-
-      const duration = Date.now() - touchStartTime
-      const diff = dragOffset.value
-      const velocity = Math.abs(diff) / duration
-
-      let targetIndex = activeIndex.value
-
-      if (Math.abs(diff) > props.touchThreshold || velocity > 0.3) {
-        targetIndex = diff > 0 ? activeIndex.value - 1 : activeIndex.value + 1
-      }
-
-      dragOffset.value = 0
+      
       isDragging.value = false
       
+      const touchDuration = Date.now() - touchStartTime
+      // 使用 dragOffset 作为滑动距离（已经在 handleTouchMove 中正确计算）
+      const diff = dragOffset.value
+      
+      const velocity = Math.abs(diff) / touchDuration
+      
+      let targetIndex = activeIndex.value
+      
+      if (Math.abs(diff) > props.touchThreshold || velocity > props.swipeThreshold) {
+        if (diff > 0) {
+          targetIndex = activeIndex.value - 1
+        } else {
+          targetIndex = activeIndex.value + 1
+        }
+      }
+      
+      dragOffset.value = 0
       goTo(targetIndex)
       
-      if (!isPaused.value && props.autoplay) {
+      if (!isPaused.value) {
         startAutoplay()
       }
     }
@@ -387,30 +631,35 @@ export default defineComponent({
 
     const updateContainerSize = () => {
       if (carouselRef.value) {
-        containerSize.value = isVertical.value 
-          ? carouselRef.value.offsetHeight 
-          : carouselRef.value.offsetWidth
-        updateTranslate(activeIndex.value)
+        containerWidth.value = carouselRef.value.offsetWidth
+        containerHeight.value = carouselRef.value.offsetHeight
+        updateTranslate(activeIndex.value, 'next')
       }
     }
 
     watch(() => props.modelValue, (val) => {
-      if (val !== activeIndex.value) goTo(val)
+      if (val !== activeIndex.value) {
+        goTo(val)
+      }
     })
 
     watch(() => props.items, () => {
-      nextTick(updateContainerSize)
+      nextTick(() => {
+        updateContainerSize()
+      })
     }, { deep: true })
-
-    watch(() => props.autoplay, (val) => {
-      if (val) startAutoplay()
-      else stopAutoplay()
-    })
 
     onMounted(() => {
       updateContainerSize()
       window.addEventListener('resize', updateContainerSize)
-      if (props.autoplay) startAutoplay()
+      
+      if (props.autoplay) {
+        startAutoplay()
+      }
+      
+      if (props.loop && props.effect === 'slide') {
+        translateValue.value = -containerWidth.value
+      }
     })
 
     onUnmounted(() => {
@@ -418,26 +667,36 @@ export default defineComponent({
       window.removeEventListener('resize', updateContainerSize)
     })
 
+    provide('carousel', {
+      activeIndex,
+      effect: computed(() => props.effect)
+    })
+
     return {
       carouselRef,
       activeIndex,
-      displayActiveIndex,
-      displayItems,
       carouselClasses,
       indicatorClasses,
       containerStyle,
       trackStyle,
+      itemStyle,
       getItemStyle,
+      getIndicatorStyle,
       handleMouseEnter,
       handleMouseLeave,
       handleIndicatorClick,
+      handleIndicatorHover,
       handleItemClick,
       handleTouchStart,
       handleTouchMove,
       handleTouchEnd,
       handleTransitionEnd,
       prev,
-      next
+      next,
+      goTo,
+      pause,
+      resume,
+      start
     }
   }
 })
@@ -448,28 +707,28 @@ export default defineComponent({
   position: relative;
   width: 100%;
   overflow: hidden;
+  user-select: none;
   
   &__container {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--hoho-radius-lg, 0.5rem);
   }
   
   &__track {
     display: flex;
     width: 100%;
-    height: 100%;
     will-change: transform;
     
     .ho-carousel--vertical & {
       flex-direction: column;
     }
     
-    .ho-carousel--3d &,
-    .ho-carousel--fade & {
+    .ho-carousel--3d & {
       position: relative;
+      transform-style: preserve-3d;
     }
   }
   
@@ -478,11 +737,19 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     
-    .ho-carousel--3d &,
-    .ho-carousel--fade & {
+    .ho-carousel--3d & {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    
+    &--clone {
+      visibility: visible;
     }
   }
   
@@ -493,7 +760,12 @@ export default defineComponent({
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
       display: block;
+      
+      &[loading="lazy"] {
+        background: var(--hoho-bg-tertiary, #f3f4f6);
+      }
     }
   }
   
@@ -502,52 +774,66 @@ export default defineComponent({
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 8px;
+    gap: 6px;
     z-index: 10;
-    padding: 12px;
+    padding: 8px 12px;
     
-    &--top { top: 0; }
-    &:not(&--top):not(&--left):not(&--right) { bottom: 0; }
+    &--top {
+      top: 1rem;
+    }
+    
+    &:not(&--top):not(&--left):not(&--right) {
+      bottom: 1rem;
+    }
     
     &--left {
-      left: 0;
+      left: 1rem;
       top: 50%;
       transform: translateY(-50%);
       flex-direction: column;
     }
     
     &--right {
-      right: 0;
+      right: 1rem;
       left: auto;
       top: 50%;
       transform: translateY(-50%);
       flex-direction: column;
     }
+    
+    &--lines {
+      gap: 4px;
+    }
+    
+    &--numbers {
+      gap: 4px;
+    }
   }
   
   &__indicator {
-    width: 8px;
-    height: 8px;
-    min-width: 8px;
-    min-height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
     
     &:hover {
-      background: rgba(255, 255, 255, 0.7);
+      opacity: 0.8;
+      transform: scale(1.1);
     }
     
     &--active {
-      width: 24px;
-      border-radius: 4px;
+      width: 18px;
+      border-radius: 3px;
       background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     }
     
     .ho-carousel__indicators--lines & {
@@ -555,28 +841,37 @@ export default defineComponent({
       height: 3px;
       border-radius: 2px;
       
-      &--active { width: 24px; }
+      &--active {
+        width: 24px;
+      }
     }
     
     .ho-carousel__indicators--numbers & {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      background: transparent;
       
       &--active {
-        background: rgba(255, 255, 255, 0.9);
-        color: #333;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
       }
     }
+  }
+  
+  &__indicator-number {
+    font-size: 0.75rem;
+    color: inherit;
   }
   
   &__arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.4);
     border: none;
@@ -585,20 +880,136 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 10;
     
     &:hover {
       background: rgba(0, 0, 0, 0.6);
     }
     
-    &--left { left: 16px; }
-    &--right { right: 16px; }
+    &--left {
+      left: 1rem;
+    }
+    
+    &--right {
+      right: 1rem;
+    }
+  }
+  
+  &__arrow-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  &--fade {
+    .ho-carousel__item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      
+      &--active {
+        opacity: 1;
+        z-index: 1;
+      }
+    }
   }
   
   &--dragging {
     .ho-carousel__track {
       transition: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .ho-carousel {
+    &__container {
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    &__indicators {
+      padding: 0.375rem 0.625rem;
+      gap: 0.375rem;
+      
+      &:not(&--top):not(&--left):not(&--right) {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      }
+    }
+    
+    &__indicator {
+      width: 0.625rem;
+      height: 0.625rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
+      
+      .ho-carousel__indicators--lines & {
+        width: 1.5rem;
+        height: 0.25rem;
+      }
+      
+      .ho-carousel__indicators--numbers & {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.875rem;
+      }
+    }
+    
+    &__arrow {
+      width: 2.75rem;
+      height: 2.75rem;
+      
+      &--left {
+        left: 0.75rem;
+      }
+      
+      &--right {
+        right: 0.75rem;
+      }
+    }
+    
+    &__arrow-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+}
+
+html.dark {
+  .ho-carousel {
+    &__arrow {
+      background: rgba(0, 0, 0, 0.6);
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
+    
+    &__item-content {
+      img[loading="lazy"] {
+        background: var(--hoho-bg-tertiary);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 48rem) {
+  .ho-carousel {
+    &__indicator:active {
+      transform: scale(0.9);
+    }
+    
+    &__arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+  }
+  
+  html.dark .ho-carousel {
+    &__arrow:active {
+      background: rgba(0, 0, 0, 0.8);
     }
   }
 }
