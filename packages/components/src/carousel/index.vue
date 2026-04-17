@@ -286,7 +286,7 @@ export default defineComponent({
     const indicatorClasses = computed(() => ({
       'ho-carousel__indicators--top': props.indicatorPosition === 'top',
       'ho-carousel__indicators--left': props.indicatorPosition === 'left',
-      'ho-carousel__indicators--right': props.indicatorPosition === 'right',
+      'ho-carousel__indicators--right': props.indicatorPosition === 'right' || (isVertical.value && props.indicatorPosition === 'bottom'),
       'ho-carousel__indicators--lines': props.indicatorType === 'lines',
       'ho-carousel__indicators--numbers': props.indicatorType === 'numbers'
     }))
@@ -756,9 +756,9 @@ export default defineComponent({
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 0.5rem;
+    gap: 6px;
     z-index: 10;
-    padding: 0.5rem 0.75rem;
+    padding: 8px 12px;
     
     &--top {
       top: 1rem;
@@ -784,17 +784,17 @@ export default defineComponent({
     }
     
     &--lines {
-      gap: 0.25rem;
+      gap: 4px;
     }
     
     &--numbers {
-      gap: 0.375rem;
+      gap: 4px;
     }
   }
   
   &__indicator {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -803,14 +803,42 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
     
     &:hover {
       opacity: 0.8;
     }
     
     &--active {
-      transform: scale(1.2);
+      width: 24px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.9);
     }
+    
+    .ho-carousel__indicators--lines & {
+      width: 16px;
+      height: 3px;
+      border-radius: 2px;
+      
+      &--active {
+        width: 24px;
+      }
+    }
+    
+    .ho-carousel__indicators--numbers & {
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      background: transparent;
+      
+      &--active {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
     
     .ho-carousel__indicators--lines & {
       width: 1.25rem;
