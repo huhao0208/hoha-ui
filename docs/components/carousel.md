@@ -11,7 +11,7 @@
   { image: 'https://picsum.photos/400/200?random=1' },
   { image: 'https://picsum.photos/400/200?random=2' },
   { image: 'https://picsum.photos/400/200?random=3' }
-]" height="200px" />
+]" height="200px" fit="contain" />
 </DemoPreview>
 
 <details>
@@ -19,7 +19,7 @@
 
 ```vue
 <template>
-  <ho-carousel :items="items" height="200px" />
+  <ho-carousel :items="items" height="200px" fit="contain" />
 </template>
 
 <script setup>
@@ -29,6 +29,40 @@ const items = [
   { image: 'https://picsum.photos/400/200?random=3' }
 ]
 </script>
+```
+
+</details>
+
+## 图片缩放模式
+
+通过 `fit` 属性控制图片缩放方式，支持以下值：
+
+- `cover`（默认）：保持比例填充，可能裁剪
+- `contain`：保持比例完整显示，可能留白
+- `fill`：拉伸填满，可能变形
+- `none`：原始尺寸
+- `scale-down`：取 none 和 contain 中较小的
+
+<DemoPreview>
+<div style="display: flex; flex-direction: column; gap: 16px;">
+  <div>
+    <p style="margin-bottom: 8px; font-size: 14px; color: #666;">cover（默认）</p>
+    <ho-carousel :items="[{ image: 'https://picsum.photos/800/400?random=10' }]" height="150px" fit="cover" />
+  </div>
+  <div>
+    <p style="margin-bottom: 8px; font-size: 14px; color: #666;">contain</p>
+    <ho-carousel :items="[{ image: 'https://picsum.photos/800/400?random=11' }]" height="150px" fit="contain" />
+  </div>
+</div>
+</DemoPreview>
+
+<details>
+<summary>显示代码</summary>
+
+```vue
+<template>
+  <ho-carousel :items="items" height="150px" fit="contain" />
+</template>
 ```
 
 </details>

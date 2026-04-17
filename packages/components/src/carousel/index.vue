@@ -33,6 +33,7 @@
               <img
                 v-if="items[items.length - 1]?.image"
                 :src="items[items.length - 1].image"
+                :style="{ objectFit: fit }"
               >
             </HoCarouselItem>
           </slot>
@@ -56,6 +57,7 @@
                 v-if="item.image"
                 :src="item.image"
                 :alt="item.alt || ''"
+                :style="{ objectFit: fit }"
               >
             </HoCarouselItem>
           </slot>
@@ -75,6 +77,7 @@
               <img
                 v-if="items[0]?.image"
                 :src="items[0].image"
+                :style="{ objectFit: fit }"
               >
             </HoCarouselItem>
           </slot>
@@ -256,6 +259,12 @@ export default defineComponent({
     space3d: {
       type: Number,
       default: 0.3
+    },
+    /** 图片缩放模式 */
+    fit: {
+      type: String as PropType<'cover' | 'contain' | 'fill' | 'none' | 'scale-down'>,
+      default: 'cover',
+      validator: (v: string) => ['cover', 'contain', 'fill', 'none', 'scale-down'].includes(v)
     }
   },
   emits: ['update:modelValue', 'change', 'click'],
