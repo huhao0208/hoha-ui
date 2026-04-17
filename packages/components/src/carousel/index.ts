@@ -9,6 +9,9 @@ export * from './index.vue'
 // Export types
 export type { CarouselItem, CarouselEffect, CarouselIndicatorPosition, CarouselIndicatorType }
 
+// Placeholder for backward compatibility
+export const HoCarouselItem = HoCarousel
+
 // Install function
 export default {
   install(app: App) {
