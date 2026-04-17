@@ -407,7 +407,7 @@ export default defineComponent({
           left: '50%',
           opacity: Math.max(opacity, 0.3),
           zIndex,
-          pointerEvents: normalizedOffset === 0 ? 'auto' : 'none'
+          cursor: 'pointer'
         }
       }
       
@@ -534,6 +534,10 @@ export default defineComponent({
     }
 
     const handleItemClick = (index: number, item: CarouselItem) => {
+      // 3D 模式下点击切换到该项
+      if (props.effect === '3d' && index !== activeIndex.value) {
+        goTo(index)
+      }
       emit('click', index, item)
     }
 
