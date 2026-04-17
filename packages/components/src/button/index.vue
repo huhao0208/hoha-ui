@@ -87,28 +87,28 @@ export default defineComponent({
   white-space: nowrap;
 
   &--small {
-    /* 32px */
-    padding: 0 0.625rem;
-    font-size: 0.8125rem;
+    /* 28px */
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
     border-radius: 0.25rem;
-    height: 2rem;
-    min-width: 2rem;
+    height: 1.75rem;
+    min-width: 1.75rem;
   }
 
   &--medium {
-    /* 44px */
-    padding: 0 0.9375rem;
-    font-size: 0.9375rem;
+    /* 36px */
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
     border-radius: 0.375rem;
-    height: 2.75rem;
+    height: 2.25rem;
   }
 
   &--large {
-    /* 52px */
-    padding: 0 1.25rem;
-    font-size: 1.0625rem;
+    /* 44px */
+    padding: 0 1rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
-    height: 3.25rem;
+    height: 2.75rem;
   }
 
   &--primary {

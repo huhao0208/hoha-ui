@@ -58,26 +58,25 @@ test.describe('Button 组件', () => {
     const mediumBtn = page.locator('.ho-button--medium').first()
     const largeBtn = page.locator('.ho-button--large').first()
     
-    // small: 32px (2rem)
+    // small: 28px (1.75rem)
     if (await smallBtn.count() > 0) {
       const box = await smallBtn.boundingBox()
-      // 允许 2px 误差
-      expect(box.height).toBeGreaterThanOrEqual(30)
-      expect(box.height).toBeLessThanOrEqual(34)
+      expect(box.height).toBeGreaterThanOrEqual(26)
+      expect(box.height).toBeLessThanOrEqual(30)
     }
     
-    // medium: 44px (2.75rem)
+    // medium: 36px (2.25rem)
     if (await mediumBtn.count() > 0) {
       const box = await mediumBtn.boundingBox()
-      expect(box.height).toBeGreaterThanOrEqual(42)
-      expect(box.height).toBeLessThanOrEqual(46)
+      expect(box.height).toBeGreaterThanOrEqual(34)
+      expect(box.height).toBeLessThanOrEqual(38)
     }
     
-    // large: 52px (3.25rem)
+    // large: 44px (2.75rem)
     if (await largeBtn.count() > 0) {
       const box = await largeBtn.boundingBox()
-      expect(box.height).toBeGreaterThanOrEqual(50)
-      expect(box.height).toBeLessThanOrEqual(54)
+      expect(box.height).toBeGreaterThanOrEqual(42)
+      expect(box.height).toBeLessThanOrEqual(46)
     }
   })
 })
