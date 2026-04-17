@@ -83,33 +83,32 @@ export default defineComponent({
   font-weight: 500;
   transition: 0.25s ease;
   font-family: inherit;
-  /* 基于 375px 设计稿：44px / 16 = 2.75rem */
-  min-height: 2.75rem;
-  min-width: 2.75rem;
+  box-sizing: border-box;
+  white-space: nowrap;
 
   &--small {
-    /* 32px / 16 = 2rem */
-    padding: 0.3125rem 0.625rem; /* 5px 10px */
-    font-size: 0.8125rem; /* 13px */
-    border-radius: 0.25rem; /* 4px */
-    min-height: 2rem;
+    /* 32px */
+    padding: 0 0.625rem;
+    font-size: 0.8125rem;
+    border-radius: 0.25rem;
+    height: 2rem;
     min-width: 2rem;
   }
 
   &--medium {
-    /* 44px / 16 = 2.75rem */
-    padding: 0.625rem 0.9375rem; /* 10px 15px */
-    font-size: 0.9375rem; /* 15px */
-    border-radius: 0.375rem; /* 6px */
-    min-height: 2.75rem;
+    /* 44px */
+    padding: 0 0.9375rem;
+    font-size: 0.9375rem;
+    border-radius: 0.375rem;
+    height: 2.75rem;
   }
 
   &--large {
-    /* 52px / 16 = 3.25rem */
-    padding: 0.9375rem 1.25rem; /* 15px 20px */
-    font-size: 1.0625rem; /* 17px */
-    border-radius: 0.5rem; /* 8px */
-    min-height: 3.25rem;
+    /* 52px */
+    padding: 0 1.25rem;
+    font-size: 1.0625rem;
+    border-radius: 0.5rem;
+    height: 3.25rem;
   }
 
   &--primary {

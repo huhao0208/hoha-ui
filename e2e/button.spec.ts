@@ -34,4 +34,50 @@ test.describe('Button 组件', () => {
       await expect(loadingSpinner).toBeVisible()
     }
   })
+
+  test('不同尺寸按钮高度应该不同', async ({ page }) => {
+    const smallBtn = page.locator('.ho-button--small').first()
+    const mediumBtn = page.locator('.ho-button--medium').first()
+    const largeBtn = page.locator('.ho-button--large').first()
+    
+    if (await smallBtn.count() > 0 && await largeBtn.count() > 0) {
+      const smallBox = await smallBtn.boundingBox()
+      const largeBox = await largeBtn.boundingBox()
+      
+      // small 应该比 large 小
+      expect(smallBox.height).toBeLessThan(largeBox.height)
+      
+      // 验证尺寸差异明显（至少差 10px）
+      const heightDiff = largeBox.height - smallBox.height
+      expect(heightDiff).toBeGreaterThan(10)
+    }
+  })
+
+  test('按钮尺寸应该符合设计规范', async ({ page }) => {
+    const smallBtn = page.locator('.ho-button--small').first()
+    const mediumBtn = page.locator('.ho-button--medium').first()
+    const largeBtn = page.locator('.ho-button--large').first()
+    
+    // small: 32px (2rem)
+    if (await smallBtn.count() > 0) {
+      const box = await smallBtn.boundingBox()
+      // 允许 2px 误差
+      expect(box.height).toBeGreaterThanOrEqual(30)
+      expect(box.height).toBeLessThanOrEqual(34)
+    }
+    
+    // medium: 44px (2.75rem)
+    if (await mediumBtn.count() > 0) {
+      const box = await mediumBtn.boundingBox()
+      expect(box.height).toBeGreaterThanOrEqual(42)
+      expect(box.height).toBeLessThanOrEqual(46)
+    }
+    
+    // large: 52px (3.25rem)
+    if (await largeBtn.count() > 0) {
+      const box = await largeBtn.boundingBox()
+      expect(box.height).toBeGreaterThanOrEqual(50)
+      expect(box.height).toBeLessThanOrEqual(54)
+    }
+  })
 })

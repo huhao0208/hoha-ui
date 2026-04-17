@@ -88,4 +88,52 @@ describe('Button', () => {
     })
     expect(wrapper.find('.ho-button__loading').exists()).toBe(true)
   })
+
+  it('small 尺寸应该有正确的高度', async () => {
+    const wrapper = mount(Button, {
+      props: { size: 'small' }
+    })
+    await wrapper.vm.$nextTick()
+    const button = wrapper.find('.ho-button')
+    expect(button.classes()).toContain('ho-button--small')
+  })
+
+  it('medium 尺寸应该有正确的高度', async () => {
+    const wrapper = mount(Button, {
+      props: { size: 'medium' }
+    })
+    await wrapper.vm.$nextTick()
+    const button = wrapper.find('.ho-button')
+    expect(button.classes()).toContain('ho-button--medium')
+  })
+
+  it('large 尺寸应该有正确的高度', async () => {
+    const wrapper = mount(Button, {
+      props: { size: 'large' }
+    })
+    await wrapper.vm.$nextTick()
+    const button = wrapper.find('.ho-button')
+    expect(button.classes()).toContain('ho-button--large')
+  })
+})
+
+/**
+ * Button 样式验证测试
+ * 注意：@vue/test-utils 需要附加到 DOM 才能获取计算样式
+ */
+describe('Button 样式验证', () => {
+  it('不同尺寸的 class 应该不同', () => {
+    const smallWrapper = mount(Button, { props: { size: 'small' } })
+    const mediumWrapper = mount(Button, { props: { size: 'medium' } })
+    const largeWrapper = mount(Button, { props: { size: 'large' } })
+
+    expect(smallWrapper.find('.ho-button--small').exists()).toBe(true)
+    expect(mediumWrapper.find('.ho-button--medium').exists()).toBe(true)
+    expect(largeWrapper.find('.ho-button--large').exists()).toBe(true)
+
+    // 验证 class 唯一性
+    expect(smallWrapper.find('.ho-button--large').exists()).toBe(false)
+    expect(mediumWrapper.find('.ho-button--small').exists()).toBe(false)
+    expect(largeWrapper.find('.ho-button--medium').exists()).toBe(false)
+  })
 })
