@@ -133,7 +133,7 @@ export default defineComponent({
     const isTransitioning = ref(false)
     const isPaused = ref(false)
     const isDragging = ref(false)
-    const dragStart = ref(0)
+    const dragStartValue = ref(0)
     const dragOffset = ref(0)
     const containerSize = ref(0)
     
@@ -335,7 +335,7 @@ export default defineComponent({
       touchStartX = touch.clientX
       touchStartY = touch.clientY
       touchStartTime = Date.now()
-      dragStart = translateValue.value
+      dragStartValue.value = translateValue.value
       stopAutoplay()
     }
 
