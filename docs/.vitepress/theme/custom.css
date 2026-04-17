@@ -1,5 +1,43 @@
 /* 文档自定义样式 */
 
+/* ===== 重置文档页面的 rem 基准 ===== */
+/* 组件库基于移动端设计（1rem = 设计稿/16），文档页面需要重置 */
+:root {
+  font-size: 16px;
+}
+
+html {
+  font-size: 16px;
+}
+
+/* 限制文档中组件的尺寸 */
+.demo-preview-wrapper,
+.demo-preview {
+  font-size: 14px;
+}
+
+/* 组件按钮在文档中的尺寸限制 */
+.demo-preview-wrapper .ho-button,
+.demo-preview .ho-button {
+  min-height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.demo-preview-wrapper .ho-button--small,
+.demo-preview .ho-button--small {
+  min-height: 28px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.demo-preview-wrapper .ho-button--large,
+.demo-preview .ho-button--large {
+  min-height: 44px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
 /* ===== Demo Preview 组件样式 ===== */
 .demo-preview {
   margin: 24px 0;
