@@ -811,8 +811,8 @@ export default defineComponent({
   }
   
   &__indicator {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -830,10 +830,10 @@ export default defineComponent({
     }
     
     &--active {
-      width: 28px;
-      border-radius: 4px;
+      width: 18px;
+      border-radius: 3px;
       background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     }
     
     .ho-carousel__indicators--lines & {
