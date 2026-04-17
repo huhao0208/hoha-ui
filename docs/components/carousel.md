@@ -11,7 +11,7 @@
   { image: 'https://picsum.photos/400/200?random=1' },
   { image: 'https://picsum.photos/400/200?random=2' },
   { image: 'https://picsum.photos/400/200?random=3' }
-]" />
+]" height="200px" />
 </DemoPreview>
 
 <details>
@@ -19,7 +19,7 @@
 
 ```vue
 <template>
-  <ho-carousel :items="items" />
+  <ho-carousel :items="items" height="200px" />
 </template>
 
 <script setup>
@@ -45,7 +45,8 @@ const items = [
     { image: 'https://picsum.photos/400/200?random=6' }
   ]" 
   autoplay 
-  :interval="2000" 
+  :interval="2000"
+  height="200px"
 />
 </DemoPreview>
 
@@ -57,7 +58,8 @@ const items = [
   <ho-carousel 
     :items="items" 
     autoplay 
-    :interval="2000" 
+    :interval="2000"
+    height="200px"
   />
 </template>
 ```
@@ -75,7 +77,8 @@ const items = [
     { image: 'https://picsum.photos/400/200?random=8' },
     { image: 'https://picsum.photos/400/200?random=9' }
   ]" 
-  effect="3d" 
+  effect="3d"
+  height="200px"
 />
 </DemoPreview>
 
@@ -86,7 +89,8 @@ const items = [
 <template>
   <ho-carousel 
     :items="items" 
-    effect="3d" 
+    effect="3d"
+    height="200px"
   />
 </template>
 ```
@@ -135,7 +139,8 @@ const items = [
     { image: 'https://picsum.photos/400/200?random=14' },
     { image: 'https://picsum.photos/400/200?random=15' }
   ]" 
-  indicator-type="lines" 
+  indicator-type="lines"
+  height="200px"
 />
 </DemoPreview>
 
@@ -146,7 +151,8 @@ const items = [
 <template>
   <ho-carousel 
     :items="items" 
-    indicator-type="lines" 
+    indicator-type="lines"
+    height="200px"
   />
 </template>
 ```
@@ -164,7 +170,8 @@ const items = [
     { image: 'https://picsum.photos/400/200?random=17' },
     { image: 'https://picsum.photos/400/200?random=18' }
   ]" 
-  indicator-type="numbers" 
+  indicator-type="numbers"
+  height="200px"
 />
 </DemoPreview>
 
@@ -175,7 +182,8 @@ const items = [
 <template>
   <ho-carousel 
     :items="items" 
-    indicator-type="numbers" 
+    indicator-type="numbers"
+    height="200px"
   />
 </template>
 ```
