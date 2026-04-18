@@ -351,19 +351,18 @@ export default defineComponent({
     const handleLoopBoundary = () => {
       if (!props.loop || isFade.value || is3D.value) return
       
-      const totalSlides = displaySlides.value.length
-      const realSlides = props.items.length
+      const totalReal = props.items.length
       const slideWidth = containerWidth.value
+      const currentTranslate = translateX.value
       
-      // displayIndex = 0 表示在 lastClone（最后一张的克隆）
-      // 向右滑动到达，瞬移到最后一张真实项
-      if (displayIndex.value === 0) {
+      // 检查是否在克隆项上（基于 translateX）
+      // 在 lastClone (index 0)
+      if (currentTranslate > -slideWidth * 0.5) {
         isPlaying.value = false
-        translateX.value = -realSlides * slideWidth
+        translateX.value = -totalReal * slideWidth
       }
-      // displayIndex = totalSlides - 1 表示在 firstClone（第一张的克隆）
-      // 向左滑动到达，瞬移到第一张真实项
-      else if (displayIndex.value === totalSlides - 1) {
+      // 在 firstClone (index totalReal + 1)
+      else if (currentTranslate < -(totalReal + 0.5) * slideWidth) {
         isPlaying.value = false
         translateX.value = -slideWidth
       }
