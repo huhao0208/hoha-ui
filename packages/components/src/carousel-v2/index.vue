@@ -293,10 +293,6 @@ export default defineComponent({
       }
     }
 
-    const updateTranslate = () => {
-      translateX.value = -displayIndex.value * containerWidth.value
-    }
-
     const goTo = (index: number) => {
       if (!props.items.length) return
 
