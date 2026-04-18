@@ -337,20 +337,19 @@ export default defineComponent({
       
       const totalSlides = displaySlides.value.length
       const realSlides = props.items.length
-      const currentTranslate = translateX.value
       const slideWidth = containerWidth.value
       
-      // 当前在第 0 个位置（最后一个克隆项）
-      // 瞬移到最后一个真实项
+      // displayIndex = 0 表示在 lastClone（最后一张的克隆）
+      // 向右滑动到达，瞬移到最后一张真实项
       if (displayIndex.value === 0) {
         isPlaying.value = false
-        translateX.value = -slideWidth
+        translateX.value = -realSlides * slideWidth
       }
-      // 当前在最后一个位置（第一个克隆项）
-      // 瞬移到最后一个真实项
+      // displayIndex = totalSlides - 1 表示在 firstClone（第一张的克隆）
+      // 向左滑动到达，瞬移到第一张真实项
       else if (displayIndex.value === totalSlides - 1) {
         isPlaying.value = false
-        translateX.value = -realSlides * slideWidth
+        translateX.value = -slideWidth
       }
     }
 
