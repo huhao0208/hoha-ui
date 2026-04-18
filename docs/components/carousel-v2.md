@@ -7,9 +7,9 @@
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=1', alt: '图片1' },
-    { image: 'https://picsum.photos/400/200?random=2', alt: '图片2' },
-    { image: 'https://picsum.photos/400/200?random=3', alt: '图片3' }
+    { image: 'https://picsum.photos/seed/a1/600/300', alt: '图片A' },
+    { image: 'https://picsum.photos/seed/b2/600/300', alt: '图片B' },
+    { image: 'https://picsum.photos/seed/c3/600/300', alt: '图片C' }
   ]"
   height="200px"
 />
@@ -39,9 +39,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/800/400?random=4', alt: '风景1' },
-    { image: 'https://picsum.photos/800/400?random=5', alt: '风景2' },
-    { image: 'https://picsum.photos/800/400?random=6', alt: '风景3' }
+    { image: 'https://picsum.photos/seed/d4/600/300', alt: '风景D' },
+    { image: 'https://picsum.photos/seed/e5/600/300', alt: '风景E' },
+    { image: 'https://picsum.photos/seed/f6/600/300', alt: '风景F' }
   ]"
   height="200px"
   autoplay
@@ -63,9 +63,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/600/300?random=7', alt: '建筑1' },
-    { image: 'https://picsum.photos/600/300?random=8', alt: '建筑2' },
-    { image: 'https://picsum.photos/600/300?random=9', alt: '建筑3' }
+    { image: 'https://picsum.photos/seed/g7/600/300', alt: '建筑G' },
+    { image: 'https://picsum.photos/seed/h8/600/300', alt: '建筑H' },
+    { image: 'https://picsum.photos/seed/i9/600/300', alt: '建筑I' }
   ]"
   height="200px"
   show-arrow
@@ -77,9 +77,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/600/300?random=11', alt: '动物1' },
-    { image: 'https://picsum.photos/600/300?random=12', alt: '动物2' },
-    { image: 'https://picsum.photos/600/300?random=13', alt: '动物3' }
+    { image: 'https://picsum.photos/seed/j10/600/300', alt: '动物J' },
+    { image: 'https://picsum.photos/seed/k11/600/300', alt: '动物K' },
+    { image: 'https://picsum.photos/seed/l12/600/300', alt: '动物L' }
   ]"
   height="200px"
   effect="fade"
@@ -91,11 +91,11 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/600/300?random=14', alt: '人物1' },
-    { image: 'https://picsum.photos/600/300?random=15', alt: '人物2' },
-    { image: 'https://picsum.photos/600/300?random=16', alt: '人物3' },
-    { image: 'https://picsum.photos/600/300?random=17', alt: '人物4' },
-    { image: 'https://picsum.photos/600/300?random=18', alt: '人物5' }
+    { image: 'https://picsum.photos/seed/m13/600/300', alt: '人物M' },
+    { image: 'https://picsum.photos/seed/n14/600/300', alt: '人物N' },
+    { image: 'https://picsum.photos/seed/o15/600/300', alt: '人物O' },
+    { image: 'https://picsum.photos/seed/p16/600/300', alt: '人物P' },
+    { image: 'https://picsum.photos/seed/q17/600/300', alt: '人物Q' }
   ]"
   height="220px"
   effect="3d"
