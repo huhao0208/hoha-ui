@@ -308,7 +308,11 @@ export default defineComponent({
       if (target === currentIndex.value) return
       
       currentIndex.value = target
-      isPlaying.value = true
+      
+      if (!isFade.value && !is3D.value) {
+        isPlaying.value = true
+      }
+      
       updateTranslate()
       
       emit('update:modelValue', target)
@@ -327,17 +331,22 @@ export default defineComponent({
       translateX.value = -index * containerWidth.value
     }
 
-    // 处理循环边界跳转
+    // 处理循环边界无缝跳转
     const handleLoopBoundary = () => {
       if (!props.loop || isFade.value || is3D.value) return
       
-      // 从最后一张跳到第一张
-      if (currentIndex.value === 0 && translateX.value > -containerWidth.value) {
+      const lastIndex = props.items.length
+      
+      // 检查是否在克隆项上
+      // 当前在第一个克隆项（最后一张的克隆）
+      if (currentIndex.value === 0 && Math.abs(translateX.value - (-containerWidth.value)) < 5) {
+        // 瞬移到最后一张
         isPlaying.value = false
-        translateX.value = -props.items.length * containerWidth.value
+        translateX.value = -lastIndex * containerWidth.value
       }
-      // 从第一张跳到最后一张
-      else if (currentIndex.value === props.items.length - 1 && translateX.value < -(props.items.length) * containerWidth.value) {
+      // 当前在最后一个克隆项（第一张的克隆）
+      else if (currentIndex.value === props.items.length - 1 && Math.abs(translateX.value - (-lastIndex * containerWidth.value)) < 5) {
+        // 瞬移到第一张
         isPlaying.value = false
         translateX.value = -containerWidth.value
       }
