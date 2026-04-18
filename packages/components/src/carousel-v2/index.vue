@@ -202,7 +202,8 @@ export default defineComponent({
     const containerStyle = computed<CSSProperties>(() => ({
       width: typeof props.width === 'number' ? `${props.width}px` : props.width,
       height: typeof props.height === 'number' ? `${props.height}px` : props.height,
-      perspective: is3D.value ? `${props.perspective}px` : undefined
+      perspective: is3D.value ? `${props.perspective}px` : undefined,
+      transformStyle: is3D.value ? 'preserve-3d' : undefined
     }))
 
     const trackStyle = computed<CSSProperties>(() => {
@@ -249,6 +250,7 @@ export default defineComponent({
         const offset = index - displayIndex.value
         const absOffset = Math.abs(offset)
         
+        // 显示前后各2张
         if (absOffset > 2) {
           return { opacity: 0, pointerEvents: 'none' as const }
         }
@@ -268,7 +270,9 @@ export default defineComponent({
           opacity,
           zIndex: displaySlides.value.length - absOffset,
           transition: `transform ${props.duration}ms ease, opacity ${props.duration}ms ease`,
-          cursor: offset !== 0 ? 'pointer' : 'default'
+          cursor: offset !== 0 ? 'pointer' : 'default',
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden'
         }
       }
 
@@ -318,6 +322,31 @@ export default defineComponent({
     const next = () => goTo(currentIndex.value + 1)
     const prev = () => goTo(currentIndex.value - 1)
 
+    const updateTranslate = () => {
+      if (isFade.value || is3D.value) return
+      
+      let index = currentIndex.value
+      if (props.loop) index += 1
+      
+      translateX.value = -index * containerWidth.value
+    }
+
+    // 处理循环边界跳转
+    const handleLoopBoundary = () => {
+      if (!props.loop || isFade.value || is3D.value) return
+      
+      // 从最后一张跳到第一张
+      if (currentIndex.value === 0 && translateX.value > -containerWidth.value) {
+        isPlaying.value = false
+        translateX.value = -props.items.length * containerWidth.value
+      }
+      // 从第一张跳到最后一张
+      else if (currentIndex.value === props.items.length - 1 && translateX.value < -(props.items.length) * containerWidth.value) {
+        isPlaying.value = false
+        translateX.value = -containerWidth.value
+      }
+    }
+
     // === 自动播放 ===
     
     const startAutoplay = () => {
@@ -340,6 +369,7 @@ export default defineComponent({
     
     const onTransitionEnd = () => {
       isPlaying.value = false
+      handleLoopBoundary()
     }
 
     // 触摸事件
@@ -433,6 +463,7 @@ export default defineComponent({
       next,
       prev,
       onTransitionEnd,
+      handleLoopBoundary,
       onTouchStart,
       onTouchMove,
       onTouchEnd,
@@ -453,6 +484,10 @@ export default defineComponent({
     width: 100%;
     overflow: hidden;
     border-radius: 8px;
+    
+    .is-3d & {
+      transform-style: preserve-3d;
+    }
   }
 
   &__track {
