@@ -355,16 +355,20 @@ export default defineComponent({
       const slideWidth = containerWidth.value
       const currentTranslate = translateX.value
       
-      // 检查是否在克隆项上（基于 translateX）
-      // 在 lastClone (index 0)
+      // 结构: [3(克隆), 1, 2, 3, 1(克隆)]
+      // 索引: [0,      1, 2, 3, 4      ]
+      
+      // 在开头克隆项（索引0，最后一张的克隆）
+      // translateX ≈ 0
       if (currentTranslate > -slideWidth * 0.5) {
         isPlaying.value = false
-        translateX.value = -totalReal * slideWidth
+        translateX.value = -totalReal * slideWidth  // 瞬移到真实的最后一张
       }
-      // 在 firstClone (index totalReal + 1)
+      // 在结尾克隆项（索引 totalReal+1，第一张的克隆）
+      // translateX ≈ -(totalReal+1)*slideWidth
       else if (currentTranslate < -(totalReal + 0.5) * slideWidth) {
         isPlaying.value = false
-        translateX.value = -slideWidth
+        translateX.value = -slideWidth  // 瞬移到真实的第一张
       }
     }
 
