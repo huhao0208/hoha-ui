@@ -344,13 +344,13 @@ export default defineComponent({
       // 瞬移到最后一个真实项
       if (displayIndex.value === 0) {
         isPlaying.value = false
-        translateX.value = -realSlides * slideWidth
+        translateX.value = -slideWidth
       }
       // 当前在最后一个位置（第一个克隆项）
-      // 瞬移到第一个真实项
+      // 瞬移到最后一个真实项
       else if (displayIndex.value === totalSlides - 1) {
         isPlaying.value = false
-        translateX.value = -slideWidth
+        translateX.value = -realSlides * slideWidth
       }
     }
 
