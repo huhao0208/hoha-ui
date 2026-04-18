@@ -68,7 +68,8 @@ export default defineConfig({
         {
           text: '展示组件',
           items: [
-            { text: 'Carousel 轮播', link: '/components/carousel' }
+            { text: 'Carousel 轮播', link: '/components/carousel' },
+            { text: 'CarouselV2 轮播V2', link: '/components/carousel-v2' }
           ]
         },
         {

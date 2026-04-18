@@ -10,6 +10,7 @@ import HoInput from '../../../packages/components/src/input/index.vue'
 import HoIcon from '../../../packages/components/src/icon/index.vue'
 import HoModal from '../../../packages/components/src/modal/index.vue'
 import HoCarousel, { HoCarouselItem } from '../../../packages/components/src/carousel/index.vue'
+import HoCarouselV2 from '../../../packages/components/src/carousel-v2'
 import HoTabs from '../../../packages/components/src/tabs/index.vue'
 import HoTab from '../../../packages/components/src/tab/index.vue'
 import HoNavBar from '../../../packages/components/src/navbar/index.vue'
@@ -30,6 +31,7 @@ export default {
     app.component('HoModal', HoModal)
     app.component('HoCarousel', HoCarousel)
     app.component('HoCarouselItem', HoCarouselItem)
+    app.component('HoCarouselV2', HoCarouselV2)
     app.component('HoTabs', HoTabs)
     app.component('HoTab', HoTab)
     app.component('HoNavBar', HoNavBar)
