@@ -7,9 +7,9 @@
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/seed/a1/600/300', alt: '图片A' },
-    { image: 'https://picsum.photos/seed/b2/600/300', alt: '图片B' },
-    { image: 'https://picsum.photos/seed/c3/600/300', alt: '图片C' }
+    { image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop', alt: '山峰' },
+    { image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=300&fit=crop', alt: '森林' },
+    { image: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&h=300&fit=crop', alt: '湖泊' }
   ]"
   height="200px"
 />
@@ -39,9 +39,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/seed/d4/600/300', alt: '风景D' },
-    { image: 'https://picsum.photos/seed/e5/600/300', alt: '风景E' },
-    { image: 'https://picsum.photos/seed/f6/600/300', alt: '风景F' }
+    { image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=300&fit=crop', alt: '人像1' },
+    { image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=300&fit=crop', alt: '人像2' },
+    { image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&h=300&fit=crop', alt: '人像3' }
   ]"
   height="200px"
   autoplay
@@ -63,9 +63,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/seed/g7/600/300', alt: '建筑G' },
-    { image: 'https://picsum.photos/seed/h8/600/300', alt: '建筑H' },
-    { image: 'https://picsum.photos/seed/i9/600/300', alt: '建筑I' }
+    { image: 'https://images.unsplash.com/photo-1518792518502-7d36c3c5a0f2?w=600&h=300&fit=crop', alt: '建筑1' },
+    { image: 'https://images.unsplash.com/photo-1486325212027-c807663b288b?w=600&h=300&fit=crop', alt: '建筑2' },
+    { image: 'https://images.unsplash.com/photo-1545555606-3e6200af4bde?w=600&h=300&fit=crop', alt: '建筑3' }
   ]"
   height="200px"
   show-arrow
@@ -77,9 +77,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/seed/j10/600/300', alt: '动物J' },
-    { image: 'https://picsum.photos/seed/k11/600/300', alt: '动物K' },
-    { image: 'https://picsum.photos/seed/l12/600/300', alt: '动物L' }
+    { image: 'https://images.unsplash.com/photo-1474515830253-0e5c0e5a3b5d?w=600&h=300&fit=crop', alt: '动物1' },
+    { image: 'https://images.unsplash.com/photo-1518712977554-0c0b4c0a3b5e?w=600&h=300&fit=crop', alt: '动物2' },
+    { image: 'https://images.unsplash.com/photo-1538072465307-5c5f9c7d5e5f?w=600&h=300&fit=crop', alt: '动物3' }
   ]"
   height="200px"
   effect="fade"
@@ -91,11 +91,11 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/seed/m13/600/300', alt: '人物M' },
-    { image: 'https://picsum.photos/seed/n14/600/300', alt: '人物N' },
-    { image: 'https://picsum.photos/seed/o15/600/300', alt: '人物O' },
-    { image: 'https://picsum.photos/seed/p16/600/300', alt: '人物P' },
-    { image: 'https://picsum.photos/seed/q17/600/300', alt: '人物Q' }
+    { image: 'https://images.unsplash.com/photo-1502082550-68a6d4b6e6e6?w=600&h=300&fit=crop', alt: '科技1' },
+    { image: 'https://images.unsplash.com/photo-1518776142930-14eb0d1933a9?w=600&h=300&fit=crop', alt: '科技2' },
+    { image: 'https://images.unsplash.com/photo-1531294020314-2c3f3b3b3b3f?w=600&h=300&fit=crop', alt: '科技3' },
+    { image: 'https://images.unsplash.com/photo-1550751822-3c3c3c3c3c3c?w=600&h=300&fit=crop', alt: '科技4' },
+    { image: 'https://images.unsplash.com/photo-1600857544200-b3f3c3c3c3c3?w=600&h=300&fit=crop', alt: '科技5' }
   ]"
   height="220px"
   effect="3d"
