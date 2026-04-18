@@ -7,9 +7,9 @@
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=1' },
-    { image: 'https://picsum.photos/400/200?random=2' },
-    { image: 'https://picsum.photos/400/200?random=3' }
+    { image: 'https://picsum.photos/400/200?random=1', alt: '图片1' },
+    { image: 'https://picsum.photos/400/200?random=2', alt: '图片2' },
+    { image: 'https://picsum.photos/400/200?random=3', alt: '图片3' }
   ]"
   height="200px"
 />
@@ -39,9 +39,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=4' },
-    { image: 'https://picsum.photos/400/200?random=5' },
-    { image: 'https://picsum.photos/400/200?random=6' }
+    { image: 'https://picsum.photos/800/400?random=4', alt: '风景1' },
+    { image: 'https://picsum.photos/800/400?random=5', alt: '风景2' },
+    { image: 'https://picsum.photos/800/400?random=6', alt: '风景3' }
   ]"
   height="200px"
   autoplay
@@ -63,9 +63,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=7' },
-    { image: 'https://picsum.photos/400/200?random=8' },
-    { image: 'https://picsum.photos/400/200?random=9' }
+    { image: 'https://picsum.photos/600/300?random=7', alt: '建筑1' },
+    { image: 'https://picsum.photos/600/300?random=8', alt: '建筑2' },
+    { image: 'https://picsum.photos/600/300?random=9', alt: '建筑3' }
   ]"
   height="200px"
   show-arrow
@@ -77,9 +77,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=11' },
-    { image: 'https://picsum.photos/400/200?random=12' },
-    { image: 'https://picsum.photos/400/200?random=13' }
+    { image: 'https://picsum.photos/600/300?random=11', alt: '动物1' },
+    { image: 'https://picsum.photos/600/300?random=12', alt: '动物2' },
+    { image: 'https://picsum.photos/600/300?random=13', alt: '动物3' }
   ]"
   height="200px"
   effect="fade"
@@ -91,11 +91,11 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://picsum.photos/400/200?random=14' },
-    { image: 'https://picsum.photos/400/200?random=15' },
-    { image: 'https://picsum.photos/400/200?random=16' },
-    { image: 'https://picsum.photos/400/200?random=17' },
-    { image: 'https://picsum.photos/400/200?random=18' }
+    { image: 'https://picsum.photos/600/300?random=14', alt: '人物1' },
+    { image: 'https://picsum.photos/600/300?random=15', alt: '人物2' },
+    { image: 'https://picsum.photos/600/300?random=16', alt: '人物3' },
+    { image: 'https://picsum.photos/600/300?random=17', alt: '人物4' },
+    { image: 'https://picsum.photos/600/300?random=18', alt: '人物5' }
   ]"
   height="220px"
   effect="3d"
