@@ -296,27 +296,43 @@ export default defineComponent({
     const goTo = (index: number) => {
       if (!props.items.length) return
 
-      let target = index
+      const totalReal = props.items.length
       
       if (props.loop) {
-        if (index < 0) target = props.items.length - 1
-        else if (index >= props.items.length) target = 0
-      } else {
-        target = Math.max(0, Math.min(index, props.items.length - 1))
-      }
-
-      if (target === currentIndex.value) return
-      
-      currentIndex.value = target
-      
-      if (!isFade.value && !is3D.value) {
+        // 计算滑动的目标位置（考虑克隆）
+        let targetTranslateIndex = index + 1
+        
+        // 向右滑过第一张
+        if (index < 0) {
+          targetTranslateIndex = 0 // lastClone
+        }
+        // 向左滑过最后一张
+        else if (index >= totalReal) {
+          targetTranslateIndex = totalReal + 1 // firstClone
+        }
+        
         isPlaying.value = true
+        translateX.value = -targetTranslateIndex * containerWidth.value
+        
+        // 更新 currentIndex
+        if (index < 0) {
+          currentIndex.value = totalReal - 1
+        } else if (index >= totalReal) {
+          currentIndex.value = 0
+        } else {
+          currentIndex.value = index
+        }
+      } else {
+        const target = Math.max(0, Math.min(index, totalReal - 1))
+        if (target === currentIndex.value) return
+        
+        currentIndex.value = target
+        isPlaying.value = true
+        updateTranslate()
       }
       
-      updateTranslate()
-      
-      emit('update:modelValue', target)
-      emit('change', target, props.items[target])
+      emit('update:modelValue', currentIndex.value)
+      emit('change', currentIndex.value, props.items[currentIndex.value])
     }
 
     const next = () => goTo(currentIndex.value + 1)
