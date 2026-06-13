@@ -7,9 +7,9 @@
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop', alt: '山峰' },
-    { image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=300&fit=crop', alt: '森林' },
-    { image: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&h=300&fit=crop', alt: '湖泊' }
+    { image: 'https://picsum.photos/600/300?random=1', alt: '山峰' },
+    { image: 'https://picsum.photos/600/300?random=2', alt: '森林' },
+    { image: 'https://picsum.photos/600/300?random=3', alt: '湖泊' }
   ]"
   height="200px"
 />
@@ -25,9 +25,9 @@
 
 <script setup>
 const items = [
-  { image: 'https://picsum.photos/400/200?random=1' },
-  { image: 'https://picsum.photos/400/200?random=2' },
-  { image: 'https://picsum.photos/400/200?random=3' }
+  { image: 'https://picsum.photos/600/300?random=1' },
+  { image: 'https://picsum.photos/600/300?random=2' },
+  { image: 'https://picsum.photos/600/300?random=3' }
 ]
 </script>
 ```
@@ -39,9 +39,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=300&fit=crop', alt: '人像1' },
-    { image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=300&fit=crop', alt: '人像2' },
-    { image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&h=300&fit=crop', alt: '人像3' }
+    { image: 'https://picsum.photos/600/300?random=4', alt: '人像1' },
+    { image: 'https://picsum.photos/600/300?random=5', alt: '人像2' },
+    { image: 'https://picsum.photos/600/300?random=6', alt: '人像3' }
   ]"
   height="200px"
   autoplay
@@ -63,9 +63,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://images.unsplash.com/photo-1518792518502-7d36c3c5a0f2?w=600&h=300&fit=crop', alt: '建筑1' },
-    { image: 'https://images.unsplash.com/photo-1486325212027-c807663b288b?w=600&h=300&fit=crop', alt: '建筑2' },
-    { image: 'https://images.unsplash.com/photo-1545555606-3e6200af4bde?w=600&h=300&fit=crop', alt: '建筑3' }
+    { image: 'https://picsum.photos/600/300?random=7', alt: '建筑1' },
+    { image: 'https://picsum.photos/600/300?random=8', alt: '建筑2' },
+    { image: 'https://picsum.photos/600/300?random=9', alt: '建筑3' }
   ]"
   height="200px"
   show-arrow
@@ -77,9 +77,9 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://images.unsplash.com/photo-1474515830253-0e5c0e5a3b5d?w=600&h=300&fit=crop', alt: '动物1' },
-    { image: 'https://images.unsplash.com/photo-1518712977554-0c0b4c0a3b5e?w=600&h=300&fit=crop', alt: '动物2' },
-    { image: 'https://images.unsplash.com/photo-1538072465307-5c5f9c7d5e5f?w=600&h=300&fit=crop', alt: '动物3' }
+    { image: 'https://picsum.photos/600/300?random=10', alt: '动物1' },
+    { image: 'https://picsum.photos/600/300?random=11', alt: '动物2' },
+    { image: 'https://picsum.photos/600/300?random=12', alt: '动物3' }
   ]"
   height="200px"
   effect="fade"
@@ -91,11 +91,11 @@ const items = [
 <DemoPreview>
 <ho-carousel-v2 
   :items="[
-    { image: 'https://images.unsplash.com/photo-1502082550-68a6d4b6e6e6?w=600&h=300&fit=crop', alt: '科技1' },
-    { image: 'https://images.unsplash.com/photo-1518776142930-14eb0d1933a9?w=600&h=300&fit=crop', alt: '科技2' },
-    { image: 'https://images.unsplash.com/photo-1531294020314-2c3f3b3b3b3f?w=600&h=300&fit=crop', alt: '科技3' },
-    { image: 'https://images.unsplash.com/photo-1550751822-3c3c3c3c3c3c?w=600&h=300&fit=crop', alt: '科技4' },
-    { image: 'https://images.unsplash.com/photo-1600857544200-b3f3c3c3c3c3?w=600&h=300&fit=crop', alt: '科技5' }
+    { image: 'https://picsum.photos/600/300?random=13', alt: '科技1' },
+    { image: 'https://picsum.photos/600/300?random=14', alt: '科技2' },
+    { image: 'https://picsum.photos/600/300?random=15', alt: '科技3' },
+    { image: 'https://picsum.photos/600/300?random=16', alt: '科技4' },
+    { image: 'https://picsum.photos/600/300?random=17', alt: '科技5' }
   ]"
   height="220px"
   effect="3d"
@@ -149,4 +149,4 @@ const items = [
 - `contain` - 保持比例完整显示
 - `fill` - 拉伸填满
 - `none` - 原始尺寸
-- `scale-down` - 取 none 和 contain 中较小者
+- `scale-down` - 取 none 和 contain 中较小的
