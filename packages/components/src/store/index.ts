@@ -211,14 +211,14 @@ export function setConfig(config: Partial<HohaConfig>) {
  * 使用配置
  */
 export function useConfig(): Ref<HohaConfig> {
-  const injected = inject<Ref<HohoConfig> | null>(CONFIG_KEY, null)
+  const injected = inject<Ref<HohaConfig> | null>(CONFIG_KEY, null)
   return injected || getConfig()
 }
 
 /**
  * 提供配置
  */
-export function provideConfig(config?: Partial<HohaConfig>): Ref<HohoConfig> {
+export function provideConfig(config?: Partial<HohaConfig>): Ref<HohaConfig> {
   if (config) {
     setConfig(config)
   }

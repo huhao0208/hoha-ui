@@ -15,8 +15,8 @@ import { defineComponent, inject, computed } from 'vue'
 import type { PropType } from 'vue'
 
 interface TabsContext {
-  activeIndex: { value: string | number }
-  setActive: (name: string | number) => void
+  activeIndex: { value: number }
+  switchTab: (index: number) => void
 }
 
 export default defineComponent({

@@ -91,12 +91,23 @@ export default defineComponent({
   setup(props, { emit }) {
     const computedVisible = computed(() => props.modelValue || props.visible)
     
+    // Track which prop was last updated to avoid circular updates
+    let lastUpdatedFrom: 'modelValue' | 'visible' | null = null
+    
     // Watch for external visible changes
     watch(() => props.modelValue, (val) => {
-      emit('update:visible', val)
+      if (lastUpdatedFrom !== 'visible') {
+        lastUpdatedFrom = 'modelValue'
+        emit('update:visible', val)
+      }
+      lastUpdatedFrom = null
     })
     watch(() => props.visible, (val) => {
-      emit('update:modelValue', val)
+      if (lastUpdatedFrom !== 'modelValue') {
+        lastUpdatedFrom = 'visible'
+        emit('update:modelValue', val)
+      }
+      lastUpdatedFrom = null
     })
     
     const modalRef = ref<HTMLElement | null>(null)

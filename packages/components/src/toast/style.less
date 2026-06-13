@@ -99,12 +99,15 @@
       opacity: 0.2;
       animation: ho-toast-spinner 1.2s linear infinite;
 
-      @for $i from 1 through 12 {
+      // 12 segments with different rotation and delay
+      .generate-spinner-segments(@i: 1) when (@i <= 12) {
         &:nth-child(@{i}) {
-          transform: rotate(@{i * 30}deg);
-          animation-delay: -@{i * 0.1}s;
+          transform: rotate(@i * 30deg);
+          animation-delay: -(0.1s * @i);
         }
+        .generate-spinner-segments(@i + 1);
       }
+      .generate-spinner-segments();
     }
   }
 
