@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
         run: pnpm docs:build
 
       - name: Test
-        run: pnpm test || true
+        run: pnpm test:run
 
   deploy-docs:
     needs: build
@@ -63,7 +63,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
