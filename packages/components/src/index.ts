@@ -1,39 +1,87 @@
-// Components entry point
-export { default as HoButton } from './button/index.vue'
-export { default as HoInput } from './input/index.vue'
-export { default as HoIcon } from './icon/index.vue'
-export { default as HoModal } from './modal/index.vue'
-export { default as HoCarousel, HoCarouselItem } from './carousel/index.vue'
-export { default as HoCarouselV2 } from './carousel-v2'
-export { default as HoTabs } from './tabs/index.vue'
-export { default as HoNavBar } from './navbar/index.vue'
-export { default as HoTabBar } from './tabbar/index.vue'
-export { default as HoTabBarItem } from './tabbar-item/index.vue'
-export { default as HoImage } from './image/index.vue'
-export { default as HoCell } from './cell/index.vue'
-export { default as HoCellGroup } from './cell-group/index.vue'
+/**
+ * @hohaya/hoho — 组件库入口
+ *
+ * 修复：
+ *  1. 去除重复 import（每个模块只 import 一次，合并 export 区与 install 区的重复引用）
+ *  2. 补全 HoCarouselV2 和 HoTab 的全局注册（原 install 数组缺失这两项）
+ *  3. HohaStore 改为 opt-in（只有用户显式传入 options.store 时才初始化，
+ *     避免强制 provide/inject 污染宿主应用命名空间）
+ *  4. 移除 import 路径中的 .ts 扩展名（TypeScript/bundler 不识别 .ts 扩展的静态 import）
+ *  5. message / toast 为函数式 API，不注册为全局组件（不放入 components 数组）
+ */
 
-// Functional components
-export { message, default as HoMessage } from './message/index.ts'
-export { toast, default as HoToast } from './toast/index.ts'
+import type { App } from 'vue'
 
-// Design Config (响应式配置)
+// ─── 组件 import（各模块只 import 一次）──────────────────────────────────────
+// 直接从 .vue 文件引入没有 barrel index 或 barrel 为纯转发的组件
+import HoButton from './button/index.vue'
+import HoInput from './input/index.vue'
+import HoIcon from './icon/index.vue'
+import HoModal from './modal/index.vue'
+import HoNavBar from './navbar/index.vue'
+import HoTabBar from './tabbar/index.vue'
+import HoTabBarItem from './tabbar-item/index.vue'
+import HoImage from './image/index.vue'
+import HoCell from './cell/index.vue'
+import HoCellGroup from './cell-group/index.vue'
+
+// carousel barrel：默认导出为 install 插件对象，组件本体通过具名导出获取
+import { HoCarousel, HoCarouselItem } from './carousel'
+
+// carousel-v2 / tabs / tab：barrel 默认导出即组件本体
+import HoCarouselV2 from './carousel-v2'
+import HoTabs from './tabs'
+import HoTab from './tab'
+
+// 函数式 API（非组件，通过 globalProperties 和 provide 挂载，不进入 app.component）
+import message from './message'
+import toast from './toast'
+
+// 国际化
+import { createI18n, setLocale } from './locale'
+
+// 全局状态
+import { HohaStore } from './store'
+
+// ─── 组件具名导出 ─────────────────────────────────────────────────────────────
+export {
+  HoButton,
+  HoInput,
+  HoIcon,
+  HoModal,
+  HoCarousel,
+  HoCarouselItem,
+  HoCarouselV2,
+  HoTabs,
+  HoTab,
+  HoNavBar,
+  HoTabBar,
+  HoTabBarItem,
+  HoImage,
+  HoCell,
+  HoCellGroup,
+}
+
+// ─── 函数式 API 导出 ──────────────────────────────────────────────────────────
+export { message, toast }
+
+// ─── Design Config ───────────────────────────────────────────────────────────
 export {
   setDesignConfig,
   getDesignConfig,
   resetDesignConfig,
   toResponsiveUnit,
   createResponsiveStyles,
-  sizePresets
-} from './config/index.ts'
-export type { DesignConfig } from './config/index.ts'
+  sizePresets,
+} from './config'
+export type { DesignConfig } from './config'
 
-// Locale / i18n
-export { 
-  t, 
-  setLocale, 
-  addLocale, 
-  getLocale, 
+// ─── Locale / i18n ───────────────────────────────────────────────────────────
+export {
+  t,
+  setLocale,
+  addLocale,
+  getLocale,
   getAvailableLocales,
   useLocale,
   createI18n,
@@ -41,11 +89,11 @@ export {
   zhCN,
   enUS,
   zhTW,
-  jaJP
-} from './locale/index.ts'
-export type { HohaLocale, LocaleMessages } from './locale/index.ts'
+  jaJP,
+} from './locale'
+export type { HohaLocale, LocaleMessages } from './locale'
 
-// Global State / Store
+// ─── Global State / Store ────────────────────────────────────────────────────
 export {
   getGlobalState,
   useGlobalState,
@@ -59,85 +107,107 @@ export {
   toggleDarkMode,
   useTheme,
   provideTheme,
-  HohaStore
-} from './store/index.ts'
-export type { GlobalState, HohaConfig, ThemeConfig, ThemeMode, StoreOptions } from './store/index.ts'
+  HohaStore,
+} from './store'
+export type {
+  GlobalState,
+  HohaConfig,
+  ThemeConfig,
+  ThemeMode,
+  StoreOptions,
+} from './store'
 
-// Types
-export type { MessageType, MessageOptions, MessageInstance } from './message/index.ts'
-export type { ToastType, ToastPosition, ToastOptions, ToastInstance } from './toast/index.ts'
-export type { CarouselItem, CarouselEffect, CarouselIndicatorPosition, CarouselIndicatorType } from './carousel/index.ts'
+// ─── 类型再导出 ───────────────────────────────────────────────────────────────
+export type { MessageType, MessageOptions, MessageInstance } from './message'
+export type { ToastType, ToastPosition, ToastOptions, ToastInstance } from './toast'
+export type {
+  CarouselItem,
+  CarouselEffect,
+  CarouselIndicatorPosition,
+  CarouselIndicatorType,
+} from './carousel'
 
-// Install function for Vue.use()
-import type { App } from 'vue'
-import HoButton from './button/index.vue'
-import HoInput from './input/index.vue'
-import HoIcon from './icon/index.vue'
-import HoModal from './modal/index.vue'
-import HoCarousel, { HoCarouselItem } from './carousel/index.vue'
-import HoTabs from './tabs/index.vue'
-import HoNavBar from './navbar/index.vue'
-import HoTabBar from './tabbar/index.vue'
-import HoTabBarItem from './tabbar-item/index.vue'
-import HoImage from './image/index.vue'
-import HoCell from './cell/index.vue'
-import HoCellGroup from './cell-group/index.vue'
-import { message as messageApi } from './message/index.ts'
-import { toast as toastApi } from './toast/index.ts'
-import { createI18n, setLocale } from './locale/index.ts'
-import { HohaStore, setConfig, setTheme, getGlobalState } from './store/index.ts'
-
-const components = [HoButton, HoInput, HoIcon, HoModal, HoCarousel, HoCarouselItem, HoTabs, HoNavBar, HoTabBar, HoTabBarItem, HoImage, HoCell, HoCellGroup]
-
+// ─── 插件选项类型 ─────────────────────────────────────────────────────────────
 export interface HohaUIOptions {
-  // 国际化
+  /** 语言/地区代码，如 'zh-CN' | 'en-US' */
   locale?: string
   i18n?: {
     locale?: string
     fallbackLocale?: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     messages?: Record<string, any>
   }
-  // 全局状态
-  store?: {
-    config?: Record<string, any>
-    theme?: Record<string, any>
-    initialState?: Record<string, any>
-  }
+  /**
+   * 全局状态管理（opt-in）
+   * 传入对象才会初始化 HohaStore；
+   * 不传或传 false 则不注入，避免污染宿主应用的 provide/inject 命名空间。
+   */
+  store?:
+    | {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        config?: Record<string, any>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        theme?: Record<string, any>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        initialState?: Record<string, any>
+      }
+    | false
 }
 
+// ─── 全局注册的组件数组 ───────────────────────────────────────────────────────
+const components = [
+  HoButton,
+  HoInput,
+  HoIcon,
+  HoModal,
+  HoCarousel,
+  HoCarouselItem,
+  HoCarouselV2, // 修复：原 install 数组缺少此项
+  HoTabs,
+  HoTab,         // 修复：原 install 数组缺少此项
+  HoNavBar,
+  HoTabBar,
+  HoTabBarItem,
+  HoImage,
+  HoCell,
+  HoCellGroup,
+]
+
+// ─── Vue 插件默认导出 ─────────────────────────────────────────────────────────
 export default {
   install(app: App, options: HohaUIOptions = {}) {
-    // Register components
+    // 注册全部组件
     components.forEach((component) => {
-      if (component && component.name) {
-        app.component(component.name, component)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const name = (component as any).name
+      if (name) {
+        app.component(name, component)
       }
     })
-    
-    // Register global APIs
-    app.config.globalProperties.$message = messageApi
-    app.config.globalProperties.$toast = toastApi
-    
-    // Provide for Composition API
-    app.provide('$message', messageApi)
-    app.provide('$toast', toastApi)
-    
-    // Setup i18n
+
+    // 全局属性（Options API）
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const globals = app.config.globalProperties as any
+    globals.$message = message
+    globals.$toast = toast
+
+    // Composition API 注入
+    app.provide('$message', message)
+    app.provide('$toast', toast)
+
+    // 国际化（可选）
     if (options.locale) {
       setLocale(options.locale)
     }
-    
     if (options.i18n) {
-      const i18n = createI18n(options.i18n)
-      app.use(i18n)
+      const i18nPlugin = createI18n(options.i18n)
+      app.use(i18nPlugin)
     }
-    
-    // Setup store (全局状态)
-    if (options.store) {
+
+    // 全局状态（opt-in）
+    // 修复：原实现始终执行 app.use(HohaStore)，强制注入会污染宿主应用
+    if (options.store !== undefined && options.store !== false) {
       app.use(HohaStore, options.store)
-    } else {
-      // 默认也初始化，保证组件能正常使用
-      app.use(HohaStore)
     }
-  }
+  },
 }

@@ -28,7 +28,8 @@ export default {
       chunkFileNames: 'chunks/[name]-[hash].js'
     }
   ],
-  external: ['vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared', 'vue-router'],
+  // 修复：@iconify/vue 移至 dependencies 后必须加入 external，避免被打包进 bundle
+  external: ['vue', '@iconify/vue', '@vue/composition-api', '@hohaya/hoho-utils', '@hohaya/shared', 'vue-router'],
   plugins: [
     {
       name: 'typescript-transform',

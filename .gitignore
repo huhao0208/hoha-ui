@@ -6,3 +6,10 @@ coverage
 .vscode
 .idea
 .playground
+
+# Playwright 报告和测试产物（不应提交到版本库）
+playwright-report/
+test-results/
+
+# 调试脚本（不应提交）
+test-build.sh

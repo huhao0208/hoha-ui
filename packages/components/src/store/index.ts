@@ -7,12 +7,12 @@
  * 2. 全局配置共享（主题、语言等）
  * 3. 业务数据共享（用户信息、购物车等）
  * 
- * Vue 2/3 兼容：通过 vue-demi 自动适配
+ * Vue 2/3 兼容：Vue 2.7+ / Vue 3 均可直接使用 Composition API
+ * 修复：移除 vue-demi 依赖（与自研 compat 层冲突），统一改为从 'vue' 直接导入
  */
 
-// 使用 vue-demi 实现 Vue 2/3 兼容
-import { ref, reactive, computed, provide, inject, watch } from 'vue-demi'
-import type { Ref, ComputedRef } from 'vue-demi'
+import { ref, reactive, computed, provide, inject } from 'vue'
+import type { Ref, ComputedRef } from 'vue'
 
 // 注入键
 const GLOBAL_STATE_KEY = Symbol('hoha-global-state')

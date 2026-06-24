@@ -1,43 +1,41 @@
 /**
  * Vue 2/3 Composition API 统一导出
- * 自动检测 Vue 版本并适配
+ *
+ * 修复: 使用静态 import 替代 require()，解决 ESM bundle 中
+ *       require 不可用的问题（原实现在 dist/esm/*.mjs 中会抛 ReferenceError）
+ *
+ * 版本支持:
+ *   - Vue 3.x    : 全部 API 直接可用
+ *   - Vue 2.7+   : 已内置 Composition API，从 'vue' 直接导入
+ *   - Vue 2.6 及以下: 需在应用入口手动安装并注册 @vue/composition-api；
+ *                    本层不再自动 require，由用户负责注册
  */
 
-// Vue 版本检测
-let isVue2 = false
-let isVue3 = true
-let vueVersion: string = '3'
-
-// 尝试检测 Vue 版本
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const vuePkg = require('vue/package.json')
-  vueVersion = vuePkg.version || '3'
-  isVue2 = vueVersion.startsWith('2')
-  isVue3 = !isVue2
-} catch {
-  isVue2 = false
-  isVue3 = true
-}
-
-export { isVue2, isVue3, vueVersion }
-
-// Composition API 导出
+// 通过 namespace 导入，保留运行时灵活性（兼容 Vue 2 缺少部分 API 的场景）
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-let compositionApi: any
+import * as _vue from 'vue'
+const compositionApi = _vue as any
 
+// ── 版本检测（使用 vue 自身导出的 version 字符串，不再依赖 require('vue/package.json')）──
+export const vueVersion: string = compositionApi.version ?? '3'
+export const isVue2: boolean = vueVersion.startsWith('2')
+export const isVue3: boolean = !isVue2
+
+// Vue 2.6 及以下用户提示
 if (isVue2) {
-  try {
-    compositionApi = require('@vue/composition-api')
-  } catch (e) {
-    console.error('[hoha-ui] Vue 2 detected but @vue/composition-api not found. Please install it.')
-    throw e
+  const minor = parseInt(vueVersion.split('.')[1] ?? '0', 10)
+  if (minor < 7) {
+    console.warn(
+      '[hoha-ui] 检测到 Vue 2.6 及以下版本。\n' +
+      '请在应用入口安装并注册 @vue/composition-api：\n' +
+      '  import VCA from "@vue/composition-api"\n' +
+      '  Vue.use(VCA)\n' +
+      '或升级至 Vue 2.7+ 以使用内置的 Composition API。'
+    )
   }
-} else {
-  compositionApi = require('vue')
 }
 
-// 统一导出 Composition API
+// ── Composition API 导出（Vue 2.7+ / Vue 3 均支持）──
 export const ref = compositionApi.ref
 export const reactive = compositionApi.reactive
 export const computed = compositionApi.computed
@@ -60,86 +58,38 @@ export const isReadonly = compositionApi.isReadonly
 export const nextTick = compositionApi.nextTick
 export const defineComponent = compositionApi.defineComponent
 export const getCurrentInstance = compositionApi.getCurrentInstance
-
-// Vue 3 特有的 API
 export const shallowRef = compositionApi.shallowRef
 export const shallowReactive = compositionApi.shallowReactive
 export const markRaw = compositionApi.markRaw
 export const toRaw = compositionApi.toRaw
-
-// 生命周期
 export const onActivated = compositionApi.onActivated
 export const onDeactivated = compositionApi.onDeactivated
 export const onErrorCaptured = compositionApi.onErrorCaptured
-
-// h 函数 (渲染函数)
 export const h = compositionApi.h
 
 /**
- * createApp - Vue 2/3 兼容
- * Vue 3: 使用 createApp
- * Vue 2: 使用 new Vue()
+ * createApp
+ * - Vue 3 / Vue 2.7+ with compat: 使用原生 createApp
+ * - Vue 2 (< 2.7): 提供降级错误提示，引导用户升级
  */
-let _createApp: any
-if (isVue2) {
-  // Vue 2: 返回一个兼容的 app 对象
-  _createApp = (component: any, props?: any) => {
-    const Vue = require('vue')
-    const rootEl = document.createElement('div')
-    
-    const AppComponent = Vue.extend(component)
-    const instance = new AppComponent({ propsData: props })
-    instance.$mount(rootEl)
-    
-    return {
-      mount: (el: Element | string) => {
-        const target = typeof el === 'string' ? document.querySelector(el) : el
-        if (target) {
-          target.appendChild(instance.$el)
-        }
-        return instance
-      },
-      unmount: () => {
-        instance.$destroy()
-        if (instance.$el && instance.$el.parentNode) {
-          instance.$el.parentNode.removeChild(instance.$el)
-        }
-      },
-      use: (plugin: any, options?: any) => {
-        instance.$options.plugins = instance.$options.plugins || []
-        // @ts-ignore
-        Vue.use(plugin, options)
-        return instance
-      },
-      component: (name: string, comp: any) => {
-        Vue.component(name, comp)
-        return instance
-      },
-      provide: (key: string | symbol, value: any) => {
-        // Vue 2 的 provide 在组件定义时设置
-        return instance
-      },
-      config: {
-        globalProperties: instance
-      },
-      _instance: instance
-    }
-  }
-} else {
-  _createApp = compositionApi.createApp
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createApp: any = compositionApi.createApp ?? function () {
+  throw new Error(
+    '[hoha-ui] createApp 在 Vue 2 中不可用。\n' +
+    '请升级至 Vue 2.7+ 或 Vue 3，或直接使用 new Vue() 创建实例。'
+  )
 }
-export const createApp = _createApp
 
 /**
- * 创建跨版本的响应式引用
+ * 便捷包装：创建跨版本响应式引用
  */
 export function createRef<T>(value: T) {
   return ref(value)
 }
 
 /**
- * 创建跨版本的响应式对象
+ * 便捷包装：创建跨版本响应式对象
  */
 export function createReactive<T extends object>(target: T): T {
-  return reactive(target)
+  return reactive(target) as T
 }

@@ -25,11 +25,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@hohaya/ui": "workspace:*",
+    "@hohaya/hoho": "workspace:*",
     "@hohaya/hoho-utils": "workspace:*"
   },
   "peerDependencies": {
-    "vue": "^2.6.0 || ^3.0.0"
+    "vue": "^2.7.0 || ^3.0.0"
   },
   "peerDependenciesMeta": {
     "vue": {

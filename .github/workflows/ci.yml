@@ -14,15 +14,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 修复：与 release.yml 统一使用 pnpm v10 + Node 20 LTS
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -41,7 +42,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-    
+
     permissions:
       contents: read
       pages: write
@@ -56,14 +57,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: 'pnpm'
 
       - name: Install dependencies

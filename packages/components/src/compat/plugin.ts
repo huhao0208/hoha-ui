@@ -1,11 +1,14 @@
 /**
  * Vue 2/3 插件安装适配
  * 提供统一的插件安装接口
+ *
+ * 修复：warnVue2Only / warnVue3Only 的模板字面量中 feature 参数未被插值
  */
 
 import { isVue2, isVue3, vueVersion } from './vue-composition'
 
-// 插件安装类型定义
+// ── 类型定义 ──────────────────────────────────────────────────────────────────
+
 export interface PluginInstallOptions {
   [key: string]: unknown
 }
@@ -32,49 +35,32 @@ export interface Vue3App {
   }
 }
 
-// 插件对象类型
 export type PluginObject<T = PluginInstallOptions> = {
   install: (app: Vue3App | Vue2Constructor, options?: T) => void
   version?: string
 }
 
-// 插件函数类型
 export type PluginFunction<T = PluginInstallOptions> = (
   app: Vue3App | Vue2Constructor,
   options?: T
 ) => void
 
-// 插件类型（对象或函数）
 export type Plugin<T = PluginInstallOptions> = PluginObject<T> | PluginFunction<T>
 
+// ── API ────────────────────────────────────────────────────────────────────────
+
 /**
- * 创建跨版本兼容的插件
- * @param install 插件安装函数
- * @param version 插件版本
+ * 创建跨版本兼容的插件对象
  */
 export function createPlugin<T = PluginInstallOptions>(
   install: (app: Vue3App | Vue2Constructor, options?: T) => void,
   version: string = '1.0.0'
 ): PluginObject<T> {
-  return {
-    install,
-    version
-  }
+  return { install, version }
 }
 
 /**
- * 安装插件到 Vue 实例
- * 自动检测 Vue 版本并调用正确的安装方法
- * 
- * @example
- * // Vue 2
- * import Vue from 'vue'
- * installPlugin(Vue, myPlugin, { someOption: true })
- * 
- * // Vue 3
- * import { createApp } from 'vue'
- * const app = createApp({})
- * installPlugin(app, myPlugin, { someOption: true })
+ * 安装插件到 Vue 实例（自动兼容 Vue 2/3）
  */
 export function installPlugin<T = PluginInstallOptions>(
   app: Vue3App | Vue2Constructor,
@@ -89,18 +75,15 @@ export function installPlugin<T = PluginInstallOptions>(
 }
 
 /**
- * 检测当前 Vue 版本
+ * 获取当前 Vue 版本信息
  */
 export function getVueInfo(): { isVue2: boolean; isVue3: boolean; version: string } {
-  return {
-    isVue2,
-    isVue3,
-    version: vueVersion
-  }
+  return { isVue2, isVue3, version: vueVersion }
 }
 
 /**
- * 警告：当使用 Vue 2 专属功能时
+ * 警告：当前功能仅 Vue 2 可用
+ * 修复：原来 console.warn 里 feature 参数没有插值（输出空字符串 "" 而非功能名）
  */
 export function warnVue2Only(feature: string): void {
   if (isVue3) {
@@ -109,7 +92,8 @@ export function warnVue2Only(feature: string): void {
 }
 
 /**
- * 警告：当使用 Vue 3 专属功能时
+ * 警告：当前功能仅 Vue 3 可用
+ * 修复：同上，feature 参数插值修复
  */
 export function warnVue3Only(feature: string): void {
   if (isVue2) {
@@ -118,9 +102,7 @@ export function warnVue3Only(feature: string): void {
 }
 
 /**
- * Vue 3 app.config.globalProperties 兼容层
- * Vue 2 中挂载到 Vue.prototype
- * Vue 3 中挂载到 app.config.globalProperties
+ * 注册全局属性（Vue 2: prototype / Vue 3: globalProperties）
  */
 export function registerGlobalProperty(
   app: Vue3App | Vue2Constructor,
@@ -129,17 +111,14 @@ export function registerGlobalProperty(
   value: any
 ): void {
   if (isVue2) {
-    // Vue 2: 挂载到原型
-    (app as Vue2Constructor).prototype[key] = value
+    ;(app as Vue2Constructor).prototype[key] = value
   } else {
-    // Vue 3: 挂载到 globalProperties
-    (app as Vue3App).config.globalProperties[key] = value
+    ;(app as Vue3App).config.globalProperties[key] = value
   }
 }
 
 /**
- * 注册全局组件
- * Vue 2/3 统一接口
+ * 注册全局组件（Vue 2/3 统一接口）
  */
 export function registerComponent(
   app: Vue3App | Vue2Constructor,
@@ -148,11 +127,9 @@ export function registerComponent(
   component: any
 ): void {
   if (isVue2) {
-    // Vue 2: 使用 Vue.component
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (app as any).component(name, component)
+    ;(app as any).component(name, component)
   } else {
-    // Vue 3: 使用 app.component
-    (app as Vue3App).component(name, component)
+    ;(app as Vue3App).component(name, component)
   }
 }

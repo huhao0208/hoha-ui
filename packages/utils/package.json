@@ -32,7 +32,7 @@
     "vitest": "^1.3.0"
   },
   "scripts": {
-    "prebuild": "tsc --declaration --declarationMap --outDir temp src/index.ts && echo 'TypeScript compiled'",
+    "prebuild": "tsc -p tsconfig.build.json && echo 'TypeScript types compiled'",
     "build": "rollup -c rollup.config.mjs && cp temp/index.d.ts dist/",
     "postbuild": "rm -rf temp",
     "test": "vitest"
